@@ -7,6 +7,7 @@
 #' chr_coverage(WT)
 #' 
 #' chr_coverage(rec8)
+#' @export
 
 chr_coverage <- function(wiggleData) {
   coverageTable <- as.data.frame(matrix(0, nrow = length(wiggleData), ncol = 2))

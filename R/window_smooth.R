@@ -9,6 +9,7 @@
 #' window_smooth(WT, 1, 200)
 #' 
 #' window_smooth(WT, 16, 100)
+#' @export
 
 window_smooth <- function(wiggleData, chrNumber, windowSize = 200) {
   # Check reference genome

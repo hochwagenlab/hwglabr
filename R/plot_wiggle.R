@@ -18,6 +18,7 @@
 #' plot_wiggle(WT_chr3, WT_chr5, 3, 5, genome = 'SK1', yMax = 5, color = 'red', protein = 'Red1', onScreen = TRUE)
 #' 
 #' plot_wiggle(chr1, chr10, 1, 10, genome = 'S288C', yMax = 5, color = 'black', protein = 'Rec8-HA', onScreen = FALSE)
+#' @export
 
 plot_wiggle <- function(wiggleDataA, wiggleDataB, chrA, chrB, genome = 'SK1',
                         yMax, color = 'grey50', protein, onScreen = TRUE) {

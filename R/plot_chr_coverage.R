@@ -18,6 +18,7 @@
 #' plot_chr_coverage(WT, rec8, protein = 'Red1', genome = 'SK1', meanNorm = TRUE, onScreen = TRUE, colorB = 'red')
 #' 
 #' plot_chr_coverage(WT, dot1, protein = 'Hop1', genome = 'S288C', meanNorm = FALSE, onScreen = FALSE)
+#' @export
 
 plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
                               genome = 'SK1', meanNorm = TRUE, yMax,

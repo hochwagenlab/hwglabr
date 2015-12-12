@@ -5,8 +5,9 @@
 #' @return An R list of 16 data frames, one for each chromosome.
 #' @examples
 #' readall_tab(/Path/to/wiggle/files/folder)
+#' @export
 
-# To load ChIP-seq tab-delimited wiggle files #
+
 readall_tab <- function(fileLocation) {
   ptm <- proc.time()
   filenames <- list.files(fileLocation, full = T)
