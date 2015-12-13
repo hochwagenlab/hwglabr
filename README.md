@@ -7,8 +7,7 @@ lab members.
 This is a starting point for the development of a more
 complete and useful package.
 
-Installation
-------------
+### Installation
 ------------
 
 You can install the package directly from the source code on GitHub. For that you will need Hadley Wickham's `devtools` R package:
@@ -23,8 +22,7 @@ install_github("luisvalesilva/hwglabr")
 library(hwglabr)
 ```
 
-Listing included functions
---------------------------
+### Listing included functions
 --------------------------
 
 In order to get the names of all included packages directly from within R just use the function **`ls()`**:
