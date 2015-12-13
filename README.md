@@ -10,15 +10,15 @@ complete and useful package.
 Installation
 ------------
 
+You can install the package directly from the source code on GitHub. For that you will need Hadley Wickham's `devtools` R package:
 ``` r
-# Install Hadley Whickam's `devtools` R package
 install.packages("devtools")
 library(devtools)
+```
 
-# Install `hwglabr` from the source code on GitHub
+Once you have `devtools` you can install and load `hwglabr`:
+``` r
 install_github("luisvalesilva/hwglabr")
-
-# Load and use :-)
 library(hwglabr)
 ```
 
