@@ -7,6 +7,7 @@ lab members.
 This is a starting point for the development of a more
 complete and useful package.
 
+
 -----------
 #### Listing included functions
 
