@@ -22,7 +22,7 @@ library(hwglabr)
 
 ### Listing included functions
 
-In order to get the names of all included packages directly from within R just use the function **`r ls()`**:
+In order to get the names of all included packages directly from within R just use the function **`ls()`**:
 
 ``` r
 library(hwglabr)
