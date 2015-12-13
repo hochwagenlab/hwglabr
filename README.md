@@ -13,6 +13,7 @@ complete and useful package.
 #### Listing included functions
 
 To get the names of all included packages use R function **`ls()`**:
+
 `library(hwglabr)`
 
 `ls('package:hwglabr')`
