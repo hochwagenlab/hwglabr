@@ -12,12 +12,11 @@ complete and useful package.
 You can install the package directly from the source code on GitHub. For that you will need Hadley Wickham's `devtools` R package:
 ``` r
 install.packages("devtools")
-library(devtools)
 ```
 
 Once you have `devtools` you can install and load `hwglabr`:
 ``` r
-install_github("luisvalesilva/hwglabr")
+devtools::install_github("luisvalesilva/hwglabr")
 library(hwglabr)
 ```
 
