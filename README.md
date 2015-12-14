@@ -1,11 +1,9 @@
 # hwglabr
 ### Hochwagen lab R package
 
-Compilation of functions written and used frequently by Hochwagen
-lab members.
+Compilation of functions used frequently by Hochwagen lab members.
 
-This is a starting point for the development of a more
-complete and useful package.
+This is a starting point for the development of a more complete and useful package.
 
 #### Installation
 
