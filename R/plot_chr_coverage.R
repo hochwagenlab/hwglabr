@@ -28,19 +28,22 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
 
   if (meanNorm) {
     ### Calculate coverage/chr relative to whole-genome average coverage
-    # (i.e., normalize to whole-genome average)  
-    meanRelCov <- function(covData) {
+    # (i.e., normalize to whole-genome average)
+    
+    cat('Normalizing coverage/chr to genome average for',
+        deparse(substitute(coverageDataA)), '\n')
+    result <- as.data.frame(matrix(data = NA, nrow = 16, ncol = 2))
+    result[, 1]  <-  coverageDataA[, 1]
+    result[, 2]  <-  coverageDataA[, 2] / mean(coverageDataA[, 2])
+    
+    if (!missing(coverageDataB)) {
       cat('Normalizing coverage/chr to genome average for',
-          deparse(substitute(covData)))
-      result <- as.data.frame(matrix(data = NA, nrow = 16, ncol = 2))  
-      result[, 1]  <-  covData[, 1]
-      result[, 2]  <-  covData[, 2] / mean(covData[, 2])
-      return(result)
+          deparse(substitute(coverageDataB)), '\n')
+      result <- as.data.frame(matrix(data = NA, nrow = 16, ncol = 2))
+      result[, 1]  <-  coverageDataB[, 1]
+      result[, 2]  <-  coverageDataB[, 2] / mean(coverageDataB[, 2])
     }
   }
-  
-  coverageDataA <- meanRelCov(coverageDataA)
-  if (!missing(coverageDataB)) coverageDataB <- meanRelCov(coverageDataB)
   
   ### Plot
   ##############################################################################
@@ -86,7 +89,7 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
   data("S288Ccen", envir = parent.env(environment()))
   ##############################################################################
   
-  cat('Plotting... ')
+  cat('Plotting... \n')
   if (genome == 'SK1') {
     Cen <- SK1cen
   } else {
@@ -138,17 +141,17 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
   }
   
   if (missing(coverageDataB)) {
-    legend(600, yMax, deparse(substitute(coverageData)), pch = 19,
+    legend(600, yMax, deparse(substitute(coverageDataA)), pch = 19,
            bty = 'n', pt.cex = 2, cex = 1.5,
            col = colorA, text.col = colorA)
   } else {
     legend(600, yMax,
-           c(deparse(substitute(coverageData)), deparse(substitute(coverageDataB))),
+           c(deparse(substitute(coverageDataA)), deparse(substitute(coverageDataB))),
            pch = 19, bty = 'n', pt.cex = 2, cex = 1.5,
            col = c(colorA, colorB), text.col = c(colorA, colorB)) 
   }
   
   if (!onScreen) dev.off()
   
-  cat('...\nCompleted in ', round((proc.time()[3] - ptm[3]), 2), ' sec.')
+  cat('... Completed in ', round((proc.time()[3] - ptm[3]), 2), ' sec.')
 }

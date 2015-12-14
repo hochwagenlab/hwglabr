@@ -21,11 +21,10 @@ chr_coverage <- function(wiggleData) {
   check_SK1 <- any(grep('chr01.', names(wiggleData), fixed = TRUE))
   
   if (check_S288C) {
-    cat('Ref. genome - S288C')
-    cat('Calculating mean coverage/chr (mapped to S288C genome)')
+    cat('Ref. genome - S288C\n(Chrs numbered using roman numerals)')
     chrom <- chrom_S288C    
   } else if (check_SK1) {
-    cat('Calculating mean coverage/chr (mapped to SK1 genome)')
+    cat('Ref. genome - SK1\n(Chrs numbered using arabic numerals)')
     chrom <- chrom_SK1
   } else stop('Did not recognize reference genome.')
   

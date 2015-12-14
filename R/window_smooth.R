@@ -23,10 +23,10 @@ window_smooth <- function(wiggleData, chrNumber, windowSize = 200) {
   
   if (check_S288C) {
     chrNumber <- paste0('chr', chrom_S288C[chrNumber])
-    cat("Smoothing ", chrNumber, ' (mapped to S288C)')
+    cat("Smoothing ", chrNumber, ' - mapped to S288C\n(Chrs numbered using roman numerals)')
   } else if (check_SK1) {
     chrNumber <- paste0('chr', chrom_SK1[chrNumber])
-    cat("Smoothing ", chrNumber, ' (mapped to SK1)')
+    cat("Smoothing ", chrNumber, ' - mapped to SK1\nChrs numbered using arabic numerals)')
   } else stop('Did not recognize reference genome.')
   
   listIndex <- grep(paste0(chrNumber, '.'), names(wiggleData), fixed = TRUE)
