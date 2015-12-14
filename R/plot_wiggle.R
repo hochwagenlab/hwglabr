@@ -1,6 +1,8 @@
 #' Wiggle data line plot
 #'
 #' This function allows you to plot wiggle data for one or two selected chromosomes.
+#' It takes as input the output of 'window_smooth' (R data frame with two columns:
+#' genome position and smoothed signal).
 #' @param wiggleDataA A data frame of wiggle data with two columns: genome position and signal. No default.
 #' @param wiggleDataB Optional data frame of wiggle data with two columns: genome position and signal. No default.
 #' @param chrA A number representing the chromosome of 'wiggleDataA'. No default.
@@ -58,11 +60,10 @@ plot_wiggle <- function(wiggleDataA, wiggleDataB, chrA, chrB, genome = 'SK1',
   # S288Ccen$Mid <- floor(S288Ccen$Start +  (S288Ccen$End - S288Ccen$Start) / 2)
   # S288Ccen$LenChr <- S288C_gff[S288C_gff[, 3] == 'chromosome', 5][1:16]
   # setwd('/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/Scripts/Rpackages/hwglabr')
-  # devtools::use_data(S288Ccen, internal = TRUE)
+  # devtools::use_data(S288Ccen, internal = FALSE)
   
-  # Load the internal data:
-  data(sysdata, envir = environment())
-  
+  # Load the data:
+  data("S288Ccen", envir = parent.env(environment()))
   ##############################################################################
   
   cat('Plotting... ')

@@ -30,7 +30,7 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
     ### Calculate coverage/chr relative to whole-genome average coverage
     # (i.e., normalize to whole-genome average)  
     meanRelCov <- function(covData) {
-      cat('Calculating coverage/chr normalized to genome average for',
+      cat('Normalizing coverage/chr to genome average for',
           deparse(substitute(covData)))
       result <- as.data.frame(matrix(data = NA, nrow = 16, ncol = 2))  
       result[, 1]  <-  covData[, 1]
@@ -43,7 +43,6 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
   if (!missing(coverageDataB)) coverageDataB <- meanRelCov(coverageDataB)
   
   ### Plot
-  cat('Plotting... ')
   ##############################################################################
   # Information based on Keeney lab genome sequence and annotation
   # Not all this info is needed here; left it for future reference
@@ -81,10 +80,9 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
   # S288Ccen$Mid <- floor(S288Ccen$Start +  (S288Ccen$End - S288Ccen$Start) / 2)
   # S288Ccen$LenChr <- S288C_gff[S288C_gff[, 3] == 'chromosome', 5][1:16]
   # setwd('/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/Scripts/Rpackages/hwglabr')
-  # devtools::use_data(S288Ccen, internal = TRUE)
   # devtools::use_data(S288Ccen, internal = FALSE)
   
-  # Load the internal data:
+  # Load the data:
   data("S288Ccen", envir = parent.env(environment()))
   ##############################################################################
   
@@ -107,13 +105,13 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
   if (!missing(coverageDataB)) {
     # Get highest of the maxima of the two strains to set y axis maximum
     if(missing(yMax)) {
-      yMax_A <- ceiling(max(meanRelCovA[, 2]))
-      yMax_B <- ceiling(max(meanRelCovB[, 2]))
+      yMax_A <- ceiling(max(coverageDataA[, 2]))
+      yMax_B <- ceiling(max(coverageDataB[, 2]))
       yMax <- tail(sort(c(yMax_A, yMax_B)), 1)
     }
 
   } else {
-    if(missing(yMax)) yMax <- ceiling(max(meanRelCovA[, 2]))
+    if(missing(yMax)) yMax <- ceiling(max(coverageDataA[, 2]))
   }
   
   # Load package to use point transparency
@@ -124,7 +122,7 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
   library(scales)
   
   par(mfrow = c(1, 1), mar = c(8, 12, 4, 2), mgp = c(6, 2, 0))
-  plot(lengths[ordered, 2]/1000, meanRelCovA[ordered, 2],
+  plot(lengths[ordered, 2]/1000, coverageDataA[ordered, 2],
        xaxt = "n", yaxt = "n", xlim = c(0, 1500), ylim = c(-0.5, yMax),
        xlab = "Chromosome size (kb)", ylab = paste0(protein, '\nChIP/Input'),
        main = paste0('Mapped to ', genome, ' genome'),
@@ -135,7 +133,7 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
   abline(h = 1, lty = 3, lwd = 2)
   
   if (!missing(coverageDataB)) {
-    points(lengths[ordered, 2]/1000, meanRelCovB[ordered, 2],
+    points(lengths[ordered, 2]/1000, coverageDataB[ordered, 2],
            col = alpha(colorB, 0.7), pch = 19, cex = 3)
   }
   

@@ -34,6 +34,8 @@ One or two line plots, either on screen or as png files (in the working director
 }
 \description{
 This function allows you to plot wiggle data for one or two selected chromosomes.
+It takes as input the output of 'window_smooth' (R data frame with two columns:
+genome position and smoothed signal).
 }
 \examples{
 plot_wiggle(WT_chr3, WT_chr5, 3, 5, genome = 'SK1', yMax = 5, color = 'red', protein = 'Red1', onScreen = TRUE)
