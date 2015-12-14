@@ -32,10 +32,20 @@ writing the results to an image file in the working directory.
 
 The function requires two R packages: "flowCore" and "flowViz".
 You can install the packages by running:
+
 source("http://bioconductor.org/biocLite.R")
+
 biocLite("flowCore")
+
 biocLite("flowViz")
+
 (If the packages are missing you will see an error message with this information).
+}
+
+\section{Note}{
+
+If the number of the yeast line is found anywhere else in the name of any of
+the files in the working directory, this function WILL NOT work.
 }
 \examples{
 facs_density_plot(119)

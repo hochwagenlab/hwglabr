@@ -82,9 +82,10 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
   # S288Ccen$LenChr <- S288C_gff[S288C_gff[, 3] == 'chromosome', 5][1:16]
   # setwd('/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/Scripts/Rpackages/hwglabr')
   # devtools::use_data(S288Ccen, internal = TRUE)
+  # devtools::use_data(S288Ccen, internal = FALSE)
   
   # Load the internal data:
-  data(sysdata, envir = environment())
+  data("S288Ccen", envir = parent.env(environment()))
   ##############################################################################
   
   cat('Plotting... ')

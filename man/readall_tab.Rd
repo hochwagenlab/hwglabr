@@ -14,6 +14,7 @@ An R list of 16 data frames, one for each chromosome.
 }
 \description{
 This function allows you to load tab-separated wiggle data.
+Written by Tovah Markowitz (original function name: 'readAll.tab').
 }
 \examples{
 readall_tab(/Path/to/wiggle/files/folder)

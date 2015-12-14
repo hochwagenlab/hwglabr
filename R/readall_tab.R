@@ -1,6 +1,7 @@
 #' Load wiggle data
 #'
 #' This function allows you to load tab-separated wiggle data.
+#' Written by Tovah Markowitz (original function name: 'readAll.tab').
 #' @param fileLocation The path to the folder containing the wiggle data. No default.
 #' @return An R list of 16 data frames, one for each chromosome.
 #' @examples
