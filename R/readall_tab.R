@@ -25,7 +25,7 @@ readall_tab <- function(fileLocation, use_readr = FALSE) {
            "install.packages('readr')", call. = FALSE)
     }
     library(readr)    
-    alldata <- lapply(filenames, read_tsv, skip = 2)
+    alldata <- lapply(filenames, read_tsv, skip = 2, col_names = FALSE, progress = FALSE)
   } else {
     alldata <- lapply(filenames, read.table, skip = 2, sep = "\t") 
   }
