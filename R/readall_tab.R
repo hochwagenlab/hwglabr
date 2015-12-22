@@ -1,22 +1,34 @@
 #' Load wiggle data
 #'
 #' This function allows you to load tab-separated wiggle data.
-#' Written by Tovah Markowitz (original function name: 'readAll.tab').
+#' Adapted from function written by Tovah Markowitz (original function name: 'readAll.tab').
 #' @param fileLocation The path to the folder containing the wiggle data. No default.
+#' @param use_readr Boolean indicating whether to use the much faster 'read_tsv' from
+#' Hadley Wickham's 'readr' package instead of base R's 'read.table'. Defaults to FALSE.
 #' @return An R list of 16 data frames, one for each chromosome.
 #' @examples
-#' readall_tab(/Path/to/wiggle/files/folder)
+#' readall_tab("/Path/to/wiggles/folder/Red1_WT_reps_SacCer3_2mis_MACS_wiggle_norm/")
 #' @export
 
-
-readall_tab <- function(fileLocation) {
+readall_tab <- function(fileLocation, use_readr = FALSE) {
   ptm <- proc.time()
   filenames <- list.files(fileLocation, full = T)
   # check if 'all chromosomes' file exists
   if (length(filenames) == 17) {
     filenames <- filenames[2:17]
-  }  
-  alldata <- lapply(filenames, read.table, skip = 2, sep = "\t")
+  }
+  
+  if (use_readr) {
+    # Open the required package
+    if (!requireNamespace("readr", quietly = TRUE)) {
+      stop("R package 'readr' needed for this function to work. Please install it:\n",
+           "install.packages('readr')", call. = FALSE)
+    }
+    library(readr)    
+    alldata <- lapply(filenames, read_tsv, skip = 2)
+  } else {
+    alldata <- lapply(filenames, read.table, skip = 2, sep = "\t") 
+  }
   names(alldata) = filenames
     
   # Check reference genome
