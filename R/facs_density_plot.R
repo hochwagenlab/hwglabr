@@ -53,7 +53,7 @@ facs_density_plot <- function(yeastLine, gates, type) {
          call. = FALSE)
   }
   if (!requireNamespace("flowViz", quietly = TRUE)) {
-    stop("R package 'flowCore' needed for this function to work. Please install it:\n",
+    stop("R package 'flowViz' needed for this function to work. Please install it:\n",
          "source('http://bioconductor.org/biocLite.R')\n", "biocLite('flowViz')",
          call. = FALSE)
   }
