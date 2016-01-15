@@ -4,13 +4,16 @@
 \alias{readall_tab}
 \title{Load wiggle data}
 \usage{
-readall_tab(fileLocation, use_readr = FALSE)
+readall_tab(fileLocation, use_readr = FALSE, progress_bar = FALSE)
 }
 \arguments{
-\item{fileLocation}{The path to the folder containing the wiggle data. No default.}
+\item{fileLocation}{A string with the path to the folder containing the wiggle data. No default.}
 
 \item{use_readr}{Boolean indicating whether to use the much faster 'read_tsv' from
 Hadley Wickham's 'readr' package instead of base R's 'read.table'. Defaults to FALSE.}
+
+\item{progress_bar}{Boolean indicating whether to display a progress bar (using R package
+'pbapply'). Defaults to FALSE.}
 }
 \value{
 An R list of 16 data frames, one for each chromosome.
@@ -21,5 +24,6 @@ Adapted from function written by Tovah Markowitz (original function name: 'readA
 }
 \examples{
 readall_tab("/Path/to/wiggles/folder/Red1_WT_reps_SacCer3_2mis_MACS_wiggle_norm/")
+#' readall_tab("/Path/to/wiggles/", use_readr = TRUE, progress_bar = TRUE)
 }
 
