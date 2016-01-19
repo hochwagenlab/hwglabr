@@ -24,7 +24,7 @@ readall_tab <- function(fileLocation, use_readr = FALSE,
     cat('Copying data files to local folder "/temp"\n...')
     # Check if a directory 'temp' already exists
     if (file.exists('temp')) {
-      stop('A folder called "temp" already exists in the current working directory\n',
+      stop('A folder called "temp" already exists in the current working directory.\n',
            'Please remove it and repeat function call.', call. = FALSE)
     }
     # Create temporary directory in current working directory
