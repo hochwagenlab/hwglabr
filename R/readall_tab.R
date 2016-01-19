@@ -22,9 +22,14 @@ readall_tab <- function(fileLocation, use_readr = FALSE,
   ptm <- proc.time()
   if (local_copy) {
     cat('Copying data files to local folder "/temp"\n...')
+    # Check if a directory 'temp' already exists
+    if (file.exists('temp')) {
+      stop('A folder called "temp" already exists in the current working directory\n',
+           'Please remove it and repeat function call.', call. = FALSE)
+    }
     # Create temporary directory in current working directory
     # and make it the destination
-    dir.create(paste0(getwd(), '/temp'))
+    dir.create('temp')
     # Copy the files to the new temporary directory
     fileLocation <- '/Volumes/LabShare/HTGenomics/HiSeqOutputs/AveragedReplicates_S288C_SacCer3/Red1_WT_reps_S288C_MACS_wiggle_norm'
     file.copy(fileLocation, 'temp', recursive = TRUE)
@@ -32,7 +37,7 @@ readall_tab <- function(fileLocation, use_readr = FALSE,
     fileLocation <- paste0('temp/', list.files('temp'))
   }
   
-  cat('\nReading data:\n')
+  cat('\nReading data\n')
   
   filenames <- list.files(fileLocation, full = T)
   if (length(filenames) == 17) {
