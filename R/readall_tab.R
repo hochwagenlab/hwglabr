@@ -31,7 +31,6 @@ readall_tab <- function(fileLocation, use_readr = FALSE,
     # and make it the destination
     dir.create('temp')
     # Copy the files to the new temporary directory
-    fileLocation <- '/Volumes/LabShare/HTGenomics/HiSeqOutputs/AveragedReplicates_S288C_SacCer3/Red1_WT_reps_S288C_MACS_wiggle_norm'
     file.copy(fileLocation, 'temp', recursive = TRUE)
     # Update fileLocation to be the local directory
     fileLocation <- paste0('temp/', list.files('temp'))
