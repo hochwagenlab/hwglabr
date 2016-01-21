@@ -33,7 +33,7 @@ or written to .png files (onScreen = FALSE). Defaults to TRUE.}
 A dot plot of one or two samples, either on screen or as a png file (in the working directory).
 }
 \description{
-This function allows you to plot average chromosome signal for one or two selected chromosomes.
+This function allows you to plot average chromosome signal for one or two selected samples.
 It takes as input the output of 'chr_coverage' (16x2 R data frame).
 }
 \examples{
