@@ -5,7 +5,7 @@
 #' @param coverageDataA A 16x2 data frame of coverage: chromosome and average signal. No default.
 #' @param coverageDataB Optional 16x2 data frame of coverage: chromosome and average signal. No default.
 #' @param protein A string representing the ChIPped protein. No default.
-#' @param genome A string representing the genome used for mapping. Defaults to 'SK1'.
+#' @param genome A string representing the genome used for mapping. Defaults to 'S288C'.
 #' @param meanNorm Boolean indicating whether average coverage should be plotted as is
 #' (meanNorm = FALSE) or normalized to genome-wide averages (meanNorm = TRUE). Defaults to TRUE.
 #' @param yMax Optional number to be used as the max Y scale value in the plots. No default.
@@ -21,7 +21,7 @@
 #' @export
 
 plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
-                              genome = 'SK1', meanNorm = TRUE, yMax,
+                              genome = 'S288C', meanNorm = TRUE, yMax,
                               onScreen = TRUE,
                               colorA = 'grey50', colorB = 'green') {
   ptm <- proc.time()
@@ -133,7 +133,9 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
        cex = 3, cex.main = 2, cex.axis = 2, cex.lab = 2, bty = "n")
   axis(side = 1, at = c(0, 500, 1000, 1500), lwd = 4, cex.axis = 2, cex.lab = 2)
   axis(side = 2, at = c(0, 1, yMax), lwd = 4, cex.axis = 2, cex.lab = 2, las = 2)
-  abline(h = 1, lty = 3, lwd = 2)
+  if (!meanNorm) {
+    abline(h = 1, lty = 3, lwd = 2)
+    }
   
   if (!missing(coverageDataB)) {
     points(lengths[ordered, 2]/1000, coverageDataB[ordered, 2],
