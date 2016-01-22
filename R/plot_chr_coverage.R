@@ -5,7 +5,7 @@
 #' @param coverageDataA A 16x2 data frame of coverage: chromosome and average signal. No default.
 #' @param coverageDataB Optional 16x2 data frame of coverage: chromosome and average signal. No default.
 #' @param protein A string representing the ChIPped protein. No default.
-#' @param genome A string representing the genome used for mapping. Defaults to 'S288C'.
+#' @param genome A string representing the genome used for mapping. No default.
 #' @param meanNorm Boolean indicating whether average coverage should be plotted as is
 #' (meanNorm = FALSE) or normalized to genome-wide averages (meanNorm = TRUE). Defaults to TRUE.
 #' @param yMax Optional number to be used as the max Y scale value in the plots. No default.
@@ -20,41 +20,59 @@
 #' plot_chr_coverage(WT, dot1, protein = 'Hop1', genome = 'S288C', meanNorm = FALSE, onScreen = FALSE)
 #' @export
 
-plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
-                              genome = 'S288C', meanNorm = TRUE, yMax,
-                              onScreen = TRUE,
+plot_chr_coverage <- function(coverageDataA, coverageDataB, protein, genome,
+                              meanNorm = TRUE, yMax, onScreen = TRUE,
                               colorA = 'grey50', colorB = 'green') {
   ptm <- proc.time()
   
-  if (dim(coverageDataA) != c(16, 2)) {
-    stop('Wrong input data - not a 16x2 R data frame.\n',
-         'Please run chr_coverage on your data first.', call. = FALSE)
+  # Make sure the input is the 16x2 data frame returned by chr_cov
+  if (!is.data.frame(coverageDataA)) {
+    stop("Wrong input data - not an R data frame.\n",
+         "Please run 'chr_coverage' on your data first.", call. = FALSE)
+  } else {
+    if (nrow(coverageDataA) != 16) {
+      stop("Wrong input data dimensions.\n",
+           "Please run 'chr_coverage' on your data first.", call. = FALSE)
+    }
   }
   
   if (!missing(coverageDataB)) {
-    if (dim(coverageDataB) != c(16, 2)) {
-      stop('Wrong input data - not a 16x2 R data frame.\n',
-           'Please run chr_coverage on your data first.', call. = FALSE)
+    if (!is.data.frame(coverageDataB)) {
+      stop(deparse(substitute(coverageDataB)), " is of wrong format - not an R data frame.\n",
+           "Please run 'chr_coverage' on your data first.", call. = FALSE)
+    } else {
+      if (nrow(coverageDataB) != 16) {
+        stop(deparse(substitute(coverageDataB)), " has wrong dimensions.\n",
+             "Please run 'chr_coverage' on your data first.", call. = FALSE)
+      }
     }
   }
+
 
   if (meanNorm) {
     ### Calculate coverage/chr relative to whole-genome average coverage
     # (i.e., normalize to whole-genome average)
     cat('Normalizing coverage/chr to genome average for',
         deparse(substitute(coverageDataA)), '\n')
-    resultA <- as.data.frame(matrix(data = NA, nrow = 16, ncol = 2))
-    resultA[, 1]  <-  coverageDataA[, 1]
-    resultA[, 2]  <-  coverageDataA[, 2] / mean(coverageDataA[, 2])
-    coverageDataA <- resultA
+    dataA <- as.data.frame(matrix(data = NA, nrow = 16, ncol = 2))
+    dataA[, 1]  <-  coverageDataA[, 1]
+    dataA[, 2]  <-  coverageDataA[, 2] / mean(coverageDataA[, 2])
     
     if (!missing(coverageDataB)) {
       cat('Normalizing coverage/chr to genome average for',
           deparse(substitute(coverageDataB)), '\n')
-      resultB <- as.data.frame(matrix(data = NA, nrow = 16, ncol = 2))
-      resultB[, 1]  <-  coverageDataB[, 1]
-      resultB[, 2]  <-  coverageDataB[, 2] / mean(coverageDataB[, 2])
-      coverageDataB <- resultB
+      dataB <- as.data.frame(matrix(data = NA, nrow = 16, ncol = 2))
+      dataB[, 1]  <-  coverageDataB[, 1]
+      dataB[, 2]  <-  coverageDataB[, 2] / mean(coverageDataB[, 2])
+    }
+  } else {
+    # Not changing variable names here causes problems with deparse(substitute())
+    # in plot legend
+    if (!missing(coverageDataB)) {
+      dataA <- coverageDataA
+      dataB <- coverageDataB
+    } else {
+      dataA <- coverageDataA
     }
   }
   
@@ -121,24 +139,24 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
   if (!missing(coverageDataB)) {
     # Get highest of the maxima of the two strains to set y axis maximum
     if(missing(yMax)) {
-      yMax_A <- ceiling(max(coverageDataA[, 2]))
-      yMax_B <- ceiling(max(coverageDataB[, 2]))
+      yMax_A <- ceiling(max(dataA[, 2]))
+      yMax_B <- ceiling(max(dataB[, 2]))
       yMax <- tail(sort(c(yMax_A, yMax_B)), 1)
     }
 
   } else {
-    if(missing(yMax)) yMax <- ceiling(max(coverageDataA[, 2]))
+    if(missing(yMax)) yMax <- ceiling(max(dataA[, 2]))
   }
   
-  # Load package to use point transparency
+  # Load package to use data point transparency
   if (!requireNamespace("scales", quietly = TRUE)) {
-    stop("R package 'scales' needed for this function to work. Please install it.",
-         call. = FALSE)
+    stop("R package 'scales' needed for this function to work. Please install it.\n",
+         "install.packages('scales')", call. = FALSE)
   }
   library(scales)
   
   par(mfrow = c(1, 1), mar = c(8, 12, 4, 2), mgp = c(6, 2, 0))
-  plot(lengths[ordered, 2]/1000, coverageDataA[ordered, 2],
+  plot(lengths[ordered, 2]/1000, dataA[ordered, 2],
        xaxt = "n", yaxt = "n", xlim = c(0, 1550), ylim = c(-0.5, yMax),
        xlab = "Chromosome size (kb)", ylab = paste0(protein, '\nChIP/Input'),
        main = paste0('Mapped to ', genome, ' genome'),
@@ -148,10 +166,10 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
   axis(side = 2, at = c(0, 1, yMax), lwd = 4, cex.axis = 2, cex.lab = 2, las = 2)
   if (meanNorm) {
     abline(h = 1, lty = 3, lwd = 2)
-    }
+  }
   
   if (!missing(coverageDataB)) {
-    points(lengths[ordered, 2]/1000, coverageDataB[ordered, 2],
+    points(lengths[ordered, 2]/1000, dataB[ordered, 2],
            col = alpha(colorB, 0.7), pch = 19, cex = 3)
   }
   
@@ -163,7 +181,7 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
     legend(600, yMax,
            c(deparse(substitute(coverageDataA)), deparse(substitute(coverageDataB))),
            pch = 19, bty = 'n', pt.cex = 2, cex = 1.5,
-           col = c(colorA, colorB), text.col = c(colorA, colorB)) 
+           col = c(colorA, colorB), text.col = c(colorA, colorB))
   }
   
   if (!onScreen) dev.off()

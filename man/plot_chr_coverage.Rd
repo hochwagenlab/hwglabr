@@ -4,7 +4,7 @@
 \alias{plot_chr_coverage}
 \title{Average chromosome signal (coverage) dot plot}
 \usage{
-plot_chr_coverage(coverageDataA, coverageDataB, protein, genome = "S288C",
+plot_chr_coverage(coverageDataA, coverageDataB, protein, genome,
   meanNorm = TRUE, yMax, onScreen = TRUE, colorA = "grey50",
   colorB = "green")
 }
@@ -15,7 +15,7 @@ plot_chr_coverage(coverageDataA, coverageDataB, protein, genome = "S288C",
 
 \item{protein}{A string representing the ChIPped protein. No default.}
 
-\item{genome}{A string representing the genome used for mapping. Defaults to 'S288C'.}
+\item{genome}{A string representing the genome used for mapping. No default.}
 
 \item{meanNorm}{Boolean indicating whether average coverage should be plotted as is
 (meanNorm = FALSE) or normalized to genome-wide averages (meanNorm = TRUE). Defaults to TRUE.}
