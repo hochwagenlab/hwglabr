@@ -25,23 +25,36 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
                               onScreen = TRUE,
                               colorA = 'grey50', colorB = 'green') {
   ptm <- proc.time()
+  
+  if (dim(coverageDataA) != c(16, 2)) {
+    stop('Wrong input data - not a 16x2 R data frame.\n',
+         'Please run chr_coverage on your data first.', call. = FALSE)
+  }
+  
+  if (!missing(coverageDataB)) {
+    if (dim(coverageDataB) != c(16, 2)) {
+      stop('Wrong input data - not a 16x2 R data frame.\n',
+           'Please run chr_coverage on your data first.', call. = FALSE)
+    }
+  }
 
   if (meanNorm) {
     ### Calculate coverage/chr relative to whole-genome average coverage
     # (i.e., normalize to whole-genome average)
-    
     cat('Normalizing coverage/chr to genome average for',
         deparse(substitute(coverageDataA)), '\n')
-    result <- as.data.frame(matrix(data = NA, nrow = 16, ncol = 2))
-    result[, 1]  <-  coverageDataA[, 1]
-    result[, 2]  <-  coverageDataA[, 2] / mean(coverageDataA[, 2])
+    resultA <- as.data.frame(matrix(data = NA, nrow = 16, ncol = 2))
+    resultA[, 1]  <-  coverageDataA[, 1]
+    resultA[, 2]  <-  coverageDataA[, 2] / mean(coverageDataA[, 2])
+    coverageDataA <- resultA
     
     if (!missing(coverageDataB)) {
       cat('Normalizing coverage/chr to genome average for',
           deparse(substitute(coverageDataB)), '\n')
-      result <- as.data.frame(matrix(data = NA, nrow = 16, ncol = 2))
-      result[, 1]  <-  coverageDataB[, 1]
-      result[, 2]  <-  coverageDataB[, 2] / mean(coverageDataB[, 2])
+      resultB <- as.data.frame(matrix(data = NA, nrow = 16, ncol = 2))
+      resultB[, 1]  <-  coverageDataB[, 1]
+      resultB[, 2]  <-  coverageDataB[, 2] / mean(coverageDataB[, 2])
+      coverageDataB <- resultB
     }
   }
   
@@ -126,14 +139,14 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein,
   
   par(mfrow = c(1, 1), mar = c(8, 12, 4, 2), mgp = c(6, 2, 0))
   plot(lengths[ordered, 2]/1000, coverageDataA[ordered, 2],
-       xaxt = "n", yaxt = "n", xlim = c(0, 1500), ylim = c(-0.5, yMax),
+       xaxt = "n", yaxt = "n", xlim = c(0, 1550), ylim = c(-0.5, yMax),
        xlab = "Chromosome size (kb)", ylab = paste0(protein, '\nChIP/Input'),
        main = paste0('Mapped to ', genome, ' genome'),
        col = alpha(colorA, 0.7), pch = 19,
        cex = 3, cex.main = 2, cex.axis = 2, cex.lab = 2, bty = "n")
   axis(side = 1, at = c(0, 500, 1000, 1500), lwd = 4, cex.axis = 2, cex.lab = 2)
   axis(side = 2, at = c(0, 1, yMax), lwd = 4, cex.axis = 2, cex.lab = 2, las = 2)
-  if (!meanNorm) {
+  if (meanNorm) {
     abline(h = 1, lty = 3, lwd = 2)
     }
   
