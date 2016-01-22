@@ -41,7 +41,7 @@ FE2 <- function(FileName, cy0, strain)
   # devtools::use_data(SK1rosetta, internal = FALSE)
   
   # Load the internal data:
-  data("SK1rosetta", envir = parent.env(environment()))
+  data("SK1rosetta")
   ### ---------------------------------------------------------------------- ###
   plat <- SK1rosetta
   maData <- read.Agilent(fnames = FileName, name.Rf = "rMeanSignal",
