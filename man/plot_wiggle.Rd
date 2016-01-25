@@ -4,7 +4,7 @@
 \alias{plot_wiggle}
 \title{Wiggle data line plot}
 \usage{
-plot_wiggle(wiggleDataA, wiggleDataB, chrA, chrB, genome = "SK1", yMax,
+plot_wiggle(wiggleDataA, wiggleDataB, chrA, chrB, genome, yMax,
   color = "grey50", protein, onScreen = TRUE)
 }
 \arguments{
@@ -17,7 +17,7 @@ plot_wiggle(wiggleDataA, wiggleDataB, chrA, chrB, genome = "SK1", yMax,
 \item{chrB}{Optional number representing the chromosome of 'wiggleDataB'.
 Must be provided if 'wiggleDataB' is used. No default.}
 
-\item{genome}{A string representing the genome used for mapping. Defaults to 'SK1'.}
+\item{genome}{A string representing the genome used for mapping. No default.}
 
 \item{yMax}{Optional number to be used as the max Y scale value in the plots.
 Particularly useful to plot two chromosomes on the same Y scale. No default.}

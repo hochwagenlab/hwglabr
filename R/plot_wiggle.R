@@ -8,7 +8,7 @@
 #' @param chrA A number representing the chromosome of 'wiggleDataA'. No default.
 #' @param chrB Optional number representing the chromosome of 'wiggleDataB'.
 #' Must be provided if 'wiggleDataB' is used. No default.
-#' @param genome A string representing the genome used for mapping. Defaults to 'SK1'.
+#' @param genome A string representing the genome used for mapping. No default.
 #' @param yMax Optional number to be used as the max Y scale value in the plots.
 #' Particularly useful to plot two chromosomes on the same Y scale. No default.
 #' @param color Optional R color. Defaults to 'grey50'.
@@ -22,7 +22,7 @@
 #' plot_wiggle(chr1, chr10, 1, 10, genome = 'S288C', yMax = 5, color = 'black', protein = 'Rec8-HA', onScreen = FALSE)
 #' @export
 
-plot_wiggle <- function(wiggleDataA, wiggleDataB, chrA, chrB, genome = 'SK1',
+plot_wiggle <- function(wiggleDataA, wiggleDataB, chrA, chrB, genome,
                         yMax, color = 'grey50', protein, onScreen = TRUE) {
   ptm <- proc.time()
   
@@ -63,7 +63,7 @@ plot_wiggle <- function(wiggleDataA, wiggleDataB, chrA, chrB, genome = 'SK1',
   # devtools::use_data(S288Ccen, internal = FALSE)
   
   # Load the data:
-  data("S288Ccen", envir = parent.env(environment()))
+  data("S288Ccen")
   ##############################################################################
   
   cat('Plotting... ')
