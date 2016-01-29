@@ -13,17 +13,24 @@
 #' Particularly useful to plot two chromosomes on the same Y scale. No default.
 #' @param color Optional R color. Defaults to 'grey50'.
 #' @param protein A string representing the ChIPped protein. No default.
+#' @param legend_Xcoord A number representing the X coordinate to locate legend.
+#' Defaults to minimum X (left-aligned).
+#' @param legend_Ycoord A number representing the Y coordinate to locate legend.
+#' Defaults to maximum Y (top-aligned).
 #' @param onscreen Boolean indicating plots should be returned to the screen (onScreen = TRUE)
 #' or written to .png files (onScreen = FALSE). Defaults to TRUE.
 #' @return One or two line plots, either on screen or as png files (in the working directory).
 #' @examples
-#' plot_wiggle(WT_chr3, WT_chr5, 3, 5, genome = 'SK1', yMax = 5, color = 'red', protein = 'Red1', onScreen = TRUE)
+#' plot_wiggle(WT_chr3, WT_chr5, 3, 5, genome = 'SK1', yMax = 5, color = 'red',
+#' protein = 'Red1', onScreen = TRUE)
 #' 
-#' plot_wiggle(chr1, chr10, 1, 10, genome = 'S288C', yMax = 5, color = 'black', protein = 'Rec8-HA', onScreen = FALSE)
+#' plot_wiggle(chr1, chr10, 1, 10, genome = 'S288C', yMax = 5, color = 'black',
+#' protein = 'Rec8-HA', legend_Xcoord = 600, onScreen = FALSE)
 #' @export
 
-plot_wiggle <- function(wiggleDataA, wiggleDataB, chrA, chrB, genome,
-                        yMax, color = 'grey50', protein, onScreen = TRUE) {
+plot_wiggle <- function(wiggleDataA, wiggleDataB, chrA, chrB, genome, yMax,
+                        color = 'grey50', protein, legend_Xcoord, legend_Ycoord,
+                        onScreen = TRUE) {
   ptm <- proc.time()
   
   ##############################################################################
@@ -94,8 +101,14 @@ plot_wiggle <- function(wiggleDataA, wiggleDataB, chrA, chrB, genome,
   
   points(Cen[chrA, 4]/1000, -2.5, pch = 19, cex = 3.0)
   mtext(c('Cen'), 1, at = Cen[chrA, 4]/1000, cex = 1.5, padj = 1)
-  #abline(h = 0, lty = 3)
-  legend(-10, yMaxA, deparse(substitute(wiggleDataA)),
+  
+  if (missing(legend_Xcoord)) {
+    legend_Xcoord <- -10
+  }
+  if (missing(legend_Ycoord)) {
+    legend_Ycoord <- yMaxA
+  }
+  legend(legend_Xcoord, legend_Ycoord, deparse(substitute(wiggleDataA)),
          bty = 'n', cex = 3, text.col = color)
   
   if (!onScreen) {
@@ -125,8 +138,20 @@ plot_wiggle <- function(wiggleDataA, wiggleDataB, chrA, chrB, genome,
       
     points(Cen[chrB, 4]/1000, -2.5, pch = 19, cex = 3.0)
     mtext(c('Cen'), 1, at = Cen[chrB, 4]/1000, cex = 1.5, padj = 1)
-    #abline(h = 0, lty = 3)
-    legend(-10, yMaxB, deparse(substitute(wiggleDataB)),
+    
+    if (missing(legend_Xcoord)) {
+      legend_Xcoord <- -10
+    }
+    if (missing(legend_Ycoord)) {
+      legend_Ycoord <- yMaxB
+    }
+    legend(legend_Xcoord, legend_Ycoord, deparse(substitute(wiggleDataA)),
+           bty = 'n', cex = 3, text.col = color)
+    
+    if (!onScreen) {
+      dev.off()
+    }
+    legend(legend_Xcoord, legend_Ycoord, deparse(substitute(wiggleDataB)),
            bty = 'n', cex = 3, text.col = color)
     
     if (!onScreen) {

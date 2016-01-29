@@ -5,7 +5,7 @@
 \title{Wiggle data line plot}
 \usage{
 plot_wiggle(wiggleDataA, wiggleDataB, chrA, chrB, genome, yMax,
-  color = "grey50", protein, onScreen = TRUE)
+  color = "grey50", protein, legend_Xcoord, legend_Ycoord, onScreen = TRUE)
 }
 \arguments{
 \item{wiggleDataA}{A data frame of wiggle data with two columns: genome position and signal. No default.}
@@ -26,6 +26,12 @@ Particularly useful to plot two chromosomes on the same Y scale. No default.}
 
 \item{protein}{A string representing the ChIPped protein. No default.}
 
+\item{legend_Xcoord}{A number representing the X coordinate to locate legend.
+Defaults to minimum X (left-aligned).}
+
+\item{legend_Ycoord}{A number representing the Y coordinate to locate legend.
+Defaults to maximum Y (top-aligned).}
+
 \item{onscreen}{Boolean indicating plots should be returned to the screen (onScreen = TRUE)
 or written to .png files (onScreen = FALSE). Defaults to TRUE.}
 }
@@ -38,8 +44,10 @@ It takes as input the output of 'window_smooth' (R data frame with two columns:
 genome position and smoothed signal).
 }
 \examples{
-plot_wiggle(WT_chr3, WT_chr5, 3, 5, genome = 'SK1', yMax = 5, color = 'red', protein = 'Red1', onScreen = TRUE)
+plot_wiggle(WT_chr3, WT_chr5, 3, 5, genome = 'SK1', yMax = 5, color = 'red',
+protein = 'Red1', onScreen = TRUE)
 
-plot_wiggle(chr1, chr10, 1, 10, genome = 'S288C', yMax = 5, color = 'black', protein = 'Rec8-HA', onScreen = FALSE)
+plot_wiggle(chr1, chr10, 1, 10, genome = 'S288C', yMax = 5, color = 'black',
+protein = 'Rec8-HA', legend_Xcoord = 600, onScreen = FALSE)
 }
 
