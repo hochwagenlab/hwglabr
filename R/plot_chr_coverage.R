@@ -60,7 +60,6 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein, genome,
     }
   }
 
-
   if (meanNorm) {
     ### Calculate coverage/chr relative to whole-genome average coverage
     # (i.e., normalize to whole-genome average)
