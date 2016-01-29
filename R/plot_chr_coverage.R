@@ -28,22 +28,34 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein, genome,
   # Make sure the input is the 16x2 data frame returned by chr_cov
   if (!is.data.frame(coverageDataA)) {
     stop("Wrong input data - not an R data frame.\n",
-         "Please run 'chr_coverage' on your data first.", call. = FALSE)
+         "Please run 'chr_coverage' on your data first. Example:\n",
+         "WT_cov_dataframe <- chr_coverage(WT_wiggle)\n",
+         "plot_chr_coverage(WT_cov_dataframe, protein = 'Red1', genome = 'SK1',
+         meanNorm = TRUE, onScreen = TRUE)", call. = FALSE)
   } else {
     if (nrow(coverageDataA) != 16) {
       stop("Wrong input data dimensions.\n",
-           "Please run 'chr_coverage' on your data first.", call. = FALSE)
+           "Please run 'chr_coverage' on your data first. Example:\n",
+           "WT_cov_dataframe <- chr_coverage(WT_wiggle)\n",
+           "plot_chr_coverage(WT_cov_dataframe, protein = 'Red1', genome = 'SK1',
+           meanNorm = TRUE, onScreen = TRUE)", call. = FALSE)
     }
   }
   
   if (!missing(coverageDataB)) {
     if (!is.data.frame(coverageDataB)) {
       stop(deparse(substitute(coverageDataB)), " is of wrong format - not an R data frame.\n",
-           "Please run 'chr_coverage' on your data first.", call. = FALSE)
+           "Please run 'chr_coverage' on your data first. Example:\n",
+           "WT_cov_dataframe <- chr_coverage(WT_wiggle)\n",
+           "plot_chr_coverage(WT_cov_dataframe, protein = 'Red1', genome = 'SK1',
+           meanNorm = TRUE, onScreen = TRUE)", call. = FALSE)
     } else {
       if (nrow(coverageDataB) != 16) {
         stop(deparse(substitute(coverageDataB)), " has wrong dimensions.\n",
-             "Please run 'chr_coverage' on your data first.", call. = FALSE)
+             "Please run 'chr_coverage' on your data first. Example:\n",
+             "WT_cov_dataframe <- chr_coverage(WT_wiggle)\n",
+             "plot_chr_coverage(WT_cov_dataframe, protein = 'Red1', genome = 'SK1',
+             meanNorm = TRUE, onScreen = TRUE)", call. = FALSE)
       }
     }
   }
