@@ -4,18 +4,13 @@
 \alias{plot_wiggle}
 \title{Wiggle data line plot}
 \usage{
-plot_wiggle(wiggleDataA, wiggleDataB, chrA, chrB, genome, yMax,
-  color = "grey50", protein, legend_Xcoord, legend_Ycoord, onScreen = TRUE)
+plot_wiggle(wiggleData, chr, genome, yMax, color = "grey50", protein,
+  legend_Xcoord = -10, legend_Ycoord = yMax, onScreen = TRUE)
 }
 \arguments{
-\item{wiggleDataA}{A data frame of wiggle data with two columns: genome position and signal. No default.}
+\item{wiggleData}{A data frame of wiggle data with two columns: genome position and signal. No default.}
 
-\item{wiggleDataB}{Optional data frame of wiggle data with two columns: genome position and signal. No default.}
-
-\item{chrA}{A number representing the chromosome of 'wiggleDataA'. No default.}
-
-\item{chrB}{Optional number representing the chromosome of 'wiggleDataB'.
-Must be provided if 'wiggleDataB' is used. No default.}
+\item{chr}{A number representing the chromosome of 'wiggleData'. No default.}
 
 \item{genome}{A string representing the genome used for mapping. No default.}
 
@@ -36,18 +31,19 @@ Defaults to maximum Y (top-aligned).}
 or written to .png files (onScreen = FALSE). Defaults to TRUE.}
 }
 \value{
-One or two line plots, either on screen or as png files (in the working directory).
+A line plot, either on screen or as a png file (in the working directory).
 }
 \description{
-This function allows you to plot wiggle data for one or two selected chromosomes.
+This function allows you to plot wiggle data for a selected chromosome.
 It takes as input the output of 'window_smooth' (R data frame with two columns:
 genome position and smoothed signal).
 }
 \examples{
-plot_wiggle(WT_chr3, WT_chr5, 3, 5, genome = 'SK1', yMax = 5, color = 'red',
-protein = 'Red1', onScreen = TRUE)
+plot_wiggle(WT_chr15, 15, genome = 'SK1', protein = 'Red1')
 
-plot_wiggle(chr1, chr10, 1, 10, genome = 'S288C', yMax = 5, color = 'black',
+plot_wiggle(WT_chr3, 3, genome = 'SK1', yMax = 5, color = 'red', protein = 'Red1', onScreen = TRUE)
+
+plot_wiggle(chr1, 1, genome = 'S288C', yMax = 5, color = 'black',
 protein = 'Rec8-HA', legend_Xcoord = 600, onScreen = FALSE)
 }
 

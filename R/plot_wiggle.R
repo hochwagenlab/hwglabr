@@ -1,13 +1,10 @@
 #' Wiggle data line plot
 #'
-#' This function allows you to plot wiggle data for one or two selected chromosomes.
+#' This function allows you to plot wiggle data for a selected chromosome.
 #' It takes as input the output of 'window_smooth' (R data frame with two columns:
 #' genome position and smoothed signal).
-#' @param wiggleDataA A data frame of wiggle data with two columns: genome position and signal. No default.
-#' @param wiggleDataB Optional data frame of wiggle data with two columns: genome position and signal. No default.
-#' @param chrA A number representing the chromosome of 'wiggleDataA'. No default.
-#' @param chrB Optional number representing the chromosome of 'wiggleDataB'.
-#' Must be provided if 'wiggleDataB' is used. No default.
+#' @param wiggleData A data frame of wiggle data with two columns: genome position and signal. No default.
+#' @param chr A number representing the chromosome of 'wiggleData'. No default.
 #' @param genome A string representing the genome used for mapping. No default.
 #' @param yMax Optional number to be used as the max Y scale value in the plots.
 #' Particularly useful to plot two chromosomes on the same Y scale. No default.
@@ -19,19 +16,18 @@
 #' Defaults to maximum Y (top-aligned).
 #' @param onscreen Boolean indicating plots should be returned to the screen (onScreen = TRUE)
 #' or written to .png files (onScreen = FALSE). Defaults to TRUE.
-#' @return One or two line plots, either on screen or as png files (in the working directory).
+#' @return A line plot, either on screen or as a png file (in the working directory).
 #' @examples
-#' plot_wiggle(WT_chr3, WT_chr5, 3, 5, genome = 'SK1', yMax = 5, color = 'red',
-#' protein = 'Red1', onScreen = TRUE)
+#' plot_wiggle(WT_chr15, 15, genome = 'SK1', protein = 'Red1')
 #' 
-#' plot_wiggle(chr1, chr10, 1, 10, genome = 'S288C', yMax = 5, color = 'black',
+#' plot_wiggle(WT_chr3, 3, genome = 'SK1', yMax = 5, color = 'red', protein = 'Red1', onScreen = TRUE)
+#' 
+#' plot_wiggle(chr1, 1, genome = 'S288C', yMax = 5, color = 'black',
 #' protein = 'Rec8-HA', legend_Xcoord = 600, onScreen = FALSE)
 #' @export
 
-plot_wiggle <- function(wiggleDataA, wiggleDataB, chrA, chrB, genome, yMax,
-                        color = 'grey50', protein, legend_Xcoord, legend_Ycoord,
-                        onScreen = TRUE) {
-  ptm <- proc.time()
+plot_wiggle <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein,
+                        legend_Xcoord = -10, legend_Ycoord = yMax, onScreen = TRUE) {
   
   ##############################################################################
   # Information based on Keeney lab genome sequence and annotation
@@ -73,7 +69,7 @@ plot_wiggle <- function(wiggleDataA, wiggleDataB, chrA, chrB, genome, yMax,
   data("S288Ccen")
   ##############################################################################
   
-  cat('Plotting... ')
+  cat('Plotting... \n')
   if (genome == 'SK1') {
     Cen <- SK1cen
   } else {
@@ -82,82 +78,31 @@ plot_wiggle <- function(wiggleDataA, wiggleDataB, chrA, chrB, genome, yMax,
   
   # Plot(s)  
   if (!onScreen) {
-    png(filename = "RplotA.png", width = 1000, height = 480, unit = 'px')
+    png(filename = paste0(deparse(substitute(wiggleData)), "_chr", deparse(substitute(chr)),
+                          ".png"), width = 1000, height = 480, unit = 'px')
   }
   par(mfrow = c(1, 1), mar = c(8, 11, 2, 2), mgp = c(6, 2, 0))
-  xMaxA <- ceiling(max(wiggleDataA[, 1]) / 1000)
-  ifelse(missing(yMax), yMaxA <- ceiling(max(wiggleDataA[, 2])), yMaxA <- yMax)
+  xMax <- ceiling(max(wiggleData[, 1]) / 1000)
+  if (missing(yMax)) yMax <- ceiling(max(wiggleData[, 2]))
   
-  plot(wiggleDataA[, 1]/1000, wiggleDataA[, 2], type = 'l',
+  plot(wiggleData[, 1]/1000, wiggleData[, 2], type = 'l',
        lwd = 3, xaxt = 'n', yaxt = 'n',
-       xlim = c(0, xMaxA),
-       ylim = c(-2, yMaxA),
-       xlab = paste0('Chr', chrA, ' position (Kb)'),
+       xlim = c(0, xMax),
+       ylim = c(-2, yMax),
+       xlab = paste0('Chr', chr, ' position (Kb)'),
        ylab = paste0(protein, '\nChIP/Input'),
        main = paste0('Mapped to ', genome, ' genome'), col = color,
        cex = 2, cex.main = 2, cex.axis = 2, cex.lab = 2, bty = "n")
-  axis(1, at = c(0, xMaxA), lwd = 4, cex.axis = 2, cex = 2.5)
-  axis(2, at = c(0, yMaxA), lwd = 4, las = 2, cex.axis = 2, cex = 2.5)
+  axis(1, at = c(0, xMax), lwd = 4, cex.axis = 2, cex = 2.5)
+  axis(2, at = c(0, yMax), lwd = 4, las = 2, cex.axis = 2, cex = 2.5)
   
-  points(Cen[chrA, 4]/1000, -2.5, pch = 19, cex = 3.0)
-  mtext(c('Cen'), 1, at = Cen[chrA, 4]/1000, cex = 1.5, padj = 1)
-  
-  if (missing(legend_Xcoord)) {
-    legend_Xcoord <- -10
-  }
-  if (missing(legend_Ycoord)) {
-    legend_Ycoord <- yMaxA
-  }
-  legend(legend_Xcoord, legend_Ycoord, deparse(substitute(wiggleDataA)),
+  points(Cen[chr, 4]/1000, -2.5, pch = 19, cex = 3.0)
+  mtext(c('Cen'), 1, at = Cen[chr, 4]/1000, cex = 1.5, padj = 1)
+
+  legend(legend_Xcoord, legend_Ycoord, deparse(substitute(wiggleData)),
          bty = 'n', cex = 3, text.col = color)
   
   if (!onScreen) {
     dev.off()
   }
-
-  # Handling a second chromosome -----------------------------------------------
-  if(!missing(wiggleDataB)) {
-    if (!onScreen) {
-      png(filename = "RplotB.png", width = 1000, height = 480, unit = 'px')
-    }
-    par(mfrow = c(1, 1), mar = c(8, 11, 2, 2), mgp = c(6, 2, 0))
-    xMaxB <- ceiling(max(wiggleDataB[, 1]) / 1000)
-    ifelse(missing(yMax), yMaxB <- ceiling(max(wiggleDataB[, 2])), yMaxB <- yMax)
-    
-    plot(wiggleDataB[, 1]/1000, wiggleDataB[, 2], type = 'l',
-         lwd = 3, xaxt = 'n', yaxt = 'n',
-         xlim = c(0, xMaxB),
-         ylim = c(-2, yMaxB),
-         xlab = paste0('Chr', chrB, ' position (Kb)'),
-         ylab = paste0(protein, '\nChIP/Input'),
-         main = paste0('Mapped to ', genome, ' genome'), col = color,
-         cex = 2, cex.main = 2, cex.axis = 2, cex.lab = 2, bty = "n")
-
-    axis(1, at = c(0, xMaxB), lwd = 4, cex.axis = 2, cex = 2.5)
-    axis(2, at = c(0, yMaxB), lwd = 4, las = 2, cex.axis = 2, cex = 2.5)
-      
-    points(Cen[chrB, 4]/1000, -2.5, pch = 19, cex = 3.0)
-    mtext(c('Cen'), 1, at = Cen[chrB, 4]/1000, cex = 1.5, padj = 1)
-    
-    if (missing(legend_Xcoord)) {
-      legend_Xcoord <- -10
-    }
-    if (missing(legend_Ycoord)) {
-      legend_Ycoord <- yMaxB
-    }
-    legend(legend_Xcoord, legend_Ycoord, deparse(substitute(wiggleDataA)),
-           bty = 'n', cex = 3, text.col = color)
-    
-    if (!onScreen) {
-      dev.off()
-    }
-    legend(legend_Xcoord, legend_Ycoord, deparse(substitute(wiggleDataB)),
-           bty = 'n', cex = 3, text.col = color)
-    
-    if (!onScreen) {
-      dev.off()
-    }
-  }
-
-  cat('\n...\nCompleted in', round((proc.time()[3] - ptm[3]), 1), 'sec.', sep = ' ')
 }
