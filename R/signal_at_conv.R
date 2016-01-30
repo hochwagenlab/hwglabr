@@ -53,8 +53,16 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
                    "XI", "XII", "XIII", "XIV", "XV", "XVI")
   chrom_SK1 <- c('01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
                  '11', '12', '13', '14', '15', '16')
-  check_S288C <- any(grep('chrI.', names(inputData), fixed = TRUE))
-  check_SK1 <- any(grep('chr01.', names(inputData), fixed = TRUE))
+  
+  # Handle the case 'input_dataFrame = T'
+  if (input_dataFrame) {
+    chromData <- inputData[inputData[, 1] == chrom[i], ]
+    check_S288C <- any(inputData[, 1] == 'chrI' | inputData[, 1] == 'I')
+    check_SK1 <- any(inputData[, 1] == 'chr01' | inputData[, 1] == '01')
+  } else {
+    check_S288C <- any(grep('chrI.', names(inputData), fixed = TRUE))
+    check_SK1 <- any(grep('chr01.', names(inputData), fixed = TRUE))
+  }
   
   if (check_S288C) {
     cat('Detected ref. genome - S288C\n')
