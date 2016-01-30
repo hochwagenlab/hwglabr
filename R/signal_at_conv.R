@@ -102,7 +102,7 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
   cat('Collecting signal...\n')
   
   for(i in 1:length(chrom)) {
-    chrNum <- paste0('chr', chrom[i])
+    chrNum <- paste0('chr', chrom[i], ': ')
     # Get ChIP data list item corresponding to chrom to analyze
     # Either list of wiggles or dataFrame from .bed ('input_dataFrame = F / T')
     if (input_dataFrame) {
@@ -126,7 +126,7 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
       }
       
       if(j == nrow(intergenicPosChr)) {
-        cat(paste0(' ', j, ' intergenic regions\n'))
+        cat(paste0(j, ' intergenic regions\n'))
       }
       # Skip if gene coordinates not in ChIPseq data
       #      if(!intergenicPosChr[j, 'up'] %in% chromData[, 'position'] |
