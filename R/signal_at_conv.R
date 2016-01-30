@@ -56,9 +56,8 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
   
   # Handle the case 'input_dataFrame = T'
   if (input_dataFrame) {
-    chromData <- inputData[inputData[, 1] == chrom[i], ]
-    check_S288C <- any(inputData[, 1] == 'chrI' | inputData[, 1] == 'I')
-    check_SK1 <- any(inputData[, 1] == 'chr01' | inputData[, 1] == '01')
+    check_S288C <- any(inputData[, 1] == 'chrI')
+    check_SK1 <- any(inputData[, 1] == 'chr01')
   } else {
     check_S288C <- any(grep('chrI.', names(inputData), fixed = TRUE))
     check_SK1 <- any(grep('chr01.', names(inputData), fixed = TRUE))
@@ -77,7 +76,8 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
     data("SK1_conv")
     conv <- SK1_conv
     chrom <- chrom_SK1
-  } else stop('Did not recognize reference genome.')
+  } else stop("Did not recognize reference genome.
+              Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
   
   cat('Preparing convergent gene region info...\n')
   
@@ -122,11 +122,11 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
     
     for(j in 1:nrow(intergenicPosChr)) {
       if(j == 1) {
-        cat(paste0('\n', chrNum, ':\n'))
+        cat(chrNum)
       }
       
       if(j == nrow(intergenicPosChr)) {
-        cat(paste0('\n', j, ' intergenic regions\n'))
+        cat(paste0(' ', j, ' intergenic regions\n'))
       }
       # Skip if gene coordinates not in ChIPseq data
       #      if(!intergenicPosChr[j, 'up'] %in% chromData[, 'position'] |
