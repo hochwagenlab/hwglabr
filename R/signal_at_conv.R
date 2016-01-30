@@ -12,7 +12,7 @@
 #' @param input_dataFrame Boolean indicating whether input data is a data frame. This is the case when you
 #' have data loaded from a .bed format, for example, typically nucleosome signal, as opposed to the standard
 #' wiggle data in a list of 16 chromosomes. Defaults to FALSE.
-#' @return An R data frame with two columns: position (relative to midpoint of intergenic region) and mean signal.
+#' @return An R data frame with two columns: position (relative to midpoint of intergenic region) and signal.
 #' @examples
 #' signal_at_conv(WT)
 #' 
