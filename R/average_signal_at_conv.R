@@ -30,6 +30,30 @@ average_signal_at_conv <- function(inputData, saveFile = FALSE) {
     stop("R package 'dplyr' needed for this function to work. Please install it.\n",
          "install.packages('dplyr')", call. = FALSE)
   }
+  
+  # Check reference genome and load appropriate convergent gene regions 
+  chrom_S288C <- c("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
+                   "XI", "XII", "XIII", "XIV", "XV", "XVI")
+  chrom_SK1 <- c('01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
+                 '11', '12', '13', '14', '15', '16')
+  check_S288C <- any(inputData[, 1] == 'chrI')
+  check_SK1 <- any(grep('chr01.', names(inputData), fixed = TRUE))
+  
+  if (check_S288C) {
+    cat('Detected ref. genome - S288C\n')
+    # Load the data:
+    data("S288C_conv")
+    conv <- S288C_conv
+    chrom <- chrom_S288C
+    
+  } else if (check_SK1) {
+    print('Detected ref. genome - SK1')
+    # Load the data:
+    data("SK1_conv")
+    conv <- SK1_conv
+    chrom <- chrom_SK1
+  } else stop('Did not recognize reference genome.')
+  
   # Calculate averages for each relative position
   mean_signal <- inputData %>%
     group_by(position) %>%
