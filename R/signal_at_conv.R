@@ -154,6 +154,9 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
     finalChromData <- finalChromData[complete.cases(finalChromData), ]
     allData <- bind_rows(allData, finalChromData)
   }
+  
+  cat(paste0('Completed in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
+  
   if(saveFile) {
     cat(paste0('Saving file...\n'))
     if(check_S288C) {
@@ -166,5 +169,4 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
   } else {
     return(allData)
   }
-  cat(paste0('Completed in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
 }
