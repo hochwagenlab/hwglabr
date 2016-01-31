@@ -14,17 +14,19 @@ working directory). If 'saveFile = FALSE', output is returned to screen or an R 
 Defaults to FALSE.}
 }
 \value{
-An R data frame with two columns: genome position and mean signal.
+An R data frame with two columns: position (relative to midpoint of intergenic region) and
+mean signal.
 }
 \description{
 This function allows you to calculate the ChIP signal over the average intergenic region centered
-on midpoints of convergent genes. It takes as input a data frame containing the genomewide signal
+on midpoints of convergent genes. It takes as input a data frame containing the genome-wide signal
 centered on the midpoints of convergent gene regions (output of 'signal_at_conv()') and calculates
-the average for each relative position.
+the average for each relative position (e.g. between midpoint of intergenic convergent gene regions
++ and - 500 bp).
 }
 \examples{
 average_signal_at_conv(WT_conv)
 
-average_signal_at_conv(WT_conv, region_size = 1500, saveFile = TRUE, input_dataFrame = FALSE)
+average_signal_at_conv(WT_conv, saveFile = TRUE)
 }
 

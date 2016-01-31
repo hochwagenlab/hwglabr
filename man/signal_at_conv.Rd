@@ -22,7 +22,7 @@ wiggle data in a list of 16 chromosomes. Defaults to FALSE.}
 Defaults to 1000 bp (+/- 500 bp).}
 }
 \value{
-An R data frame with two columns: genome position and mean signal.
+An R data frame with two columns: position (relative to midpoint of intergenic region) and signal.
 }
 \description{
 This function allows you to pull out the ChIP signal centered on midpoints of convergent genes.

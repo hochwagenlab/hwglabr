@@ -102,7 +102,7 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
   cat('Collecting signal...\n')
   
   for(i in 1:length(chrom)) {
-    chrNum <- paste0('chr', chrom[i], ': ')
+    chrNum <- paste0('chr', chrom[i])
     # Get ChIP data list item corresponding to chrom to analyze
     # Either list of wiggles or dataFrame from .bed ('input_dataFrame = F / T')
     if (input_dataFrame) {
@@ -122,7 +122,7 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
     
     for(j in 1:nrow(intergenicPosChr)) {
       if(j == 1) {
-        cat(chrNum)
+        cat(paste0(chrNum, ': '))
       }
       
       if(j == nrow(intergenicPosChr)) {
