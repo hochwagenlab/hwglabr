@@ -2,7 +2,7 @@
 ### Hochwagen lab R package
 
 Compilation of functions used frequently by Hochwagen lab members.
-Currently a starting point for the development of a more complete and useful package.
+This is a work in progress for the development of a more complete and useful package.
 
 #### Installation
 
