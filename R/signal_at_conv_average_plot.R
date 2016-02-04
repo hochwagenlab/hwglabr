@@ -8,7 +8,8 @@
 #' To generate the input for this function starting from an R list of wiggle data
 #' for the 16 chromosomes you should run:
 #' 
-#' 1.  signal_at_conv() to pull out the signal at every convergent gene region
+#' 1.  signal_at_conv() to pull out the signal at every convergent gene region.
+#' 
 #' 2. 'signal_at_conv_average()' to calculate the average signal over all regions.
 #' @param inputDataA A data frame of average signal between convergent genes: relative
 #' position and average signal. No default.
