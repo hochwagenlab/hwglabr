@@ -12,12 +12,12 @@
 #' @return An R data frame with two columns: position (relative to midpoint of intergenic region) and
 #' mean signal.
 #' @examples
-#' average_signal_at_conv(WT_conv)
+#' signal_at_conv_average(WT_conv)
 #' 
-#' average_signal_at_conv(WT_conv, saveFile = TRUE)
+#' signal_at_conv_average(WT_conv, saveFile = TRUE)
 #' @export
 
-average_signal_at_conv <- function(inputData, saveFile = FALSE) {
+signal_at_conv_average <- function(inputData, saveFile = FALSE) {
   ptm  <- proc.time()
   
   # Make sure the input is a data frame

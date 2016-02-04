@@ -9,7 +9,7 @@
 #' for the 16 chromosomes you should run:
 #' 
 #' 1.  signal_at_conv() to pull out the signal at every convergent gene region
-#' 2. 'average_signal_at_conv()' to calculate the average signal over all regions.
+#' 2. 'signal_at_conv_average()' to calculate the average signal over all regions.
 #' @param inputDataA A data frame of average signal between convergent genes: relative
 #' position and average signal. No default.
 #' @param inputDataB Optional data in the same format for a second sample. No default.
@@ -27,14 +27,14 @@
 #' @return A dot plot of one or two samples, either on screen or as a png file
 #' (in the working directory).
 #' @examples
-#' plot_average_signal_at_conv(WT_conv_mean_signal, genome = 'S288C')
+#' signal_at_conv_average_plot(WT_conv_mean_signal, genome = 'S288C')
 #' 
-#' plot_average_signal_at_conv(WT_conv_mean_signal, dot1_conv_mean_signal, genome = 'SK1',
+#' signal_at_conv_average_plot(WT_conv_mean_signal, dot1_conv_mean_signal, genome = 'SK1',
 #'                             yMax = 3, onScreen = FALSE, legend_Xcoord = -500,
 #'                             legend_Ycoord = 1, colorA = 'red', colorB = 'green')
 #' @export
 
-plot_average_signal_at_conv <- function(inputDataA, inputDataB, genome,
+signal_at_conv_average_plot <- function(inputDataA, inputDataB, genome,
                                         yMax, onScreen = TRUE,
                                         legend_Xcoord = xMin + xMin * 0.2,
                                         legend_Ycoord = yMax + yMax * 0.05,
@@ -54,7 +54,7 @@ plot_average_signal_at_conv <- function(inputDataA, inputDataB, genome,
       stop(deparse(substitute(inputDataB)), " is of wrong format - not an R data frame.\n",
            "Please run 'chr_coverage' on your data first. Example:\n",
            "WT_signal_dataframe <- signal_at_conv(WT_wiggle)\n",
-           "WT_mean_signal <- average_signal_at_conv(WT_signal_dataframe)", call. = FALSE)
+           "WT_mean_signal <- signal_at_conv_average(WT_signal_dataframe)", call. = FALSE)
     }
   }
     

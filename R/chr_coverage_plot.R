@@ -15,12 +15,12 @@
 #' @param colorB Optional R color for sample B. Defaults to 'green'.
 #' @return A dot plot of one or two samples, either on screen or as a png file (in the working directory).
 #' @examples
-#' plot_chr_coverage(WT, rec8, protein = 'Red1', genome = 'SK1', meanNorm = TRUE, onScreen = TRUE, colorB = 'red')
+#' chr_coverage_plot(WT, rec8, protein = 'Red1', genome = 'SK1', meanNorm = TRUE, onScreen = TRUE, colorB = 'red')
 #' 
-#' plot_chr_coverage(WT, dot1, protein = 'Hop1', genome = 'S288C', meanNorm = FALSE, onScreen = FALSE)
+#' chr_coverage_plot(WT, dot1, protein = 'Hop1', genome = 'S288C', meanNorm = FALSE, onScreen = FALSE)
 #' @export
 
-plot_chr_coverage <- function(coverageDataA, coverageDataB, protein, genome,
+chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
                               meanNorm = TRUE, yMax, onScreen = TRUE,
                               colorA = 'grey50', colorB = 'green') {
   ptm <- proc.time()
@@ -30,14 +30,14 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein, genome,
     stop("Wrong input data - not an R data frame.\n",
          "Please run 'chr_coverage' on your data first. Example:\n",
          "WT_cov_dataframe <- chr_coverage(WT_wiggle)\n",
-         "plot_chr_coverage(WT_cov_dataframe, protein = 'Red1', genome = 'SK1',
+         "chr_coverage_plot(WT_cov_dataframe, protein = 'Red1', genome = 'SK1',
          meanNorm = TRUE, onScreen = TRUE)", call. = FALSE)
   } else {
     if (nrow(coverageDataA) != 16) {
       stop("Wrong input data dimensions.\n",
            "Please run 'chr_coverage' on your data first. Example:\n",
            "WT_cov_dataframe <- chr_coverage(WT_wiggle)\n",
-           "plot_chr_coverage(WT_cov_dataframe, protein = 'Red1', genome = 'SK1',
+           "chr_coverage_plot(WT_cov_dataframe, protein = 'Red1', genome = 'SK1',
            meanNorm = TRUE, onScreen = TRUE)", call. = FALSE)
     }
   }
@@ -47,14 +47,14 @@ plot_chr_coverage <- function(coverageDataA, coverageDataB, protein, genome,
       stop(deparse(substitute(coverageDataB)), " is of wrong format - not an R data frame.\n",
            "Please run 'chr_coverage' on your data first. Example:\n",
            "WT_cov_dataframe <- chr_coverage(WT_wiggle)\n",
-           "plot_chr_coverage(WT_cov_dataframe, protein = 'Red1', genome = 'SK1',
+           "chr_coverage_plot(WT_cov_dataframe, protein = 'Red1', genome = 'SK1',
            meanNorm = TRUE, onScreen = TRUE)", call. = FALSE)
     } else {
       if (nrow(coverageDataB) != 16) {
         stop(deparse(substitute(coverageDataB)), " has wrong dimensions.\n",
              "Please run 'chr_coverage' on your data first. Example:\n",
              "WT_cov_dataframe <- chr_coverage(WT_wiggle)\n",
-             "plot_chr_coverage(WT_cov_dataframe, protein = 'Red1', genome = 'SK1',
+             "chr_coverage_plot(WT_cov_dataframe, protein = 'Red1', genome = 'SK1',
              meanNorm = TRUE, onScreen = TRUE)", call. = FALSE)
       }
     }
