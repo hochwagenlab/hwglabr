@@ -53,7 +53,8 @@ signal_at_conv_average_plot <- function(inputDataA, inputDataB, genome,
   if (!missing(inputDataB)) {
     if (!is.data.frame(inputDataB)) {
       stop(deparse(substitute(inputDataB)), " is of wrong format - not an R data frame.\n",
-           "Please run 'chr_coverage' on your data first. Example:\n",
+           "Please run 'signal_at_conv()' and 'average_signal_at_conv()' on your data first.
+           Example:\n",
            "WT_signal_dataframe <- signal_at_conv(WT_wiggle)\n",
            "WT_mean_signal <- signal_at_conv_average(WT_signal_dataframe)", call. = FALSE)
     }
