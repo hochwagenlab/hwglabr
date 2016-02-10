@@ -32,7 +32,11 @@ chr_coverage <- function(wiggleData) {
     chrNum <- paste0('chr', chrom[i], '.')
     index <- grep(chrNum, names(wiggleData), fixed = TRUE)
     coverageTable[i, 1] <- paste0('chr', chrom[i])
-    coverageTable[i, 2] <- mean(wiggleData[[index]][, 2])
+    # mean() function does not work if dplyr was loaded when the wiggle data was loaded
+    # (because of dplyr's non standard evaluation: data is in tbl_df class)
+    # Workaround: write out division of sum of values by their number
+    # coverageTable[i, 2] <- mean(wiggleData[[index]][, 2])
+    coverageTable[i, 2] <- sum(wiggleData[[index]][, 2]) / nrow(wiggleData[[index]][, 2])
   }
   colnames(coverageTable) <- c("chr", "mean_coverage")
   return (coverageTable)
