@@ -34,9 +34,12 @@ chr_coverage <- function(wiggleData) {
     coverageTable[i, 1] <- paste0('chr', chrom[i])
     # mean() function does not work if dplyr was loaded when the wiggle data was loaded
     # (because of dplyr's non standard evaluation: data is in tbl_df class)
-    # Workaround: write out division of sum of values by their number
-    # coverageTable[i, 2] <- mean(wiggleData[[index]][, 2])
-    coverageTable[i, 2] <- sum(wiggleData[[index]][, 2]) / nrow(wiggleData[[index]][, 2])
+    # Workaround: write out division of sum of values by their number in case
+    # mean() is not working
+    coverageTable[i, 2] <- mean(wiggleData[[index]][, 2])
+    if(is.na(mean(wiggleData[[index]][, 2]))){
+      coverageTable[i, 2] <- sum(wiggleData[[index]][, 2]) / nrow(wiggleData[[index]][, 2]) 
+    }
   }
   colnames(coverageTable) <- c("chr", "mean_coverage")
   return (coverageTable)
