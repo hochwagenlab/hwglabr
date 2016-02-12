@@ -5,7 +5,7 @@
 #' or complete genome in one data frame (for example loaded from .bed files).
 #' @param inputData As a list of the 16 chr wiggle data (output of readall_tab) or a data frame (in
 #' which case you must set 'input_dataFrame = TRUE'). No default.
-#' @param regionSize Number indicating the size (in bp) of the region to calculate.
+#' @param region_size Number indicating the size (in bp) of the region to calculate.
 #' Defaults to 1000 bp (+/- 500 bp).
 #' @param saveFile Boolean indicating whether output should be written to a .txt file (in current working
 #' directory). If 'saveFile = FALSE', output is returned to screen or an R object (if assigned).

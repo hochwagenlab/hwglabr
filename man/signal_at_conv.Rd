@@ -11,6 +11,9 @@ signal_at_conv(inputData, region_size = 1000, saveFile = FALSE,
 \item{inputData}{As a list of the 16 chr wiggle data (output of readall_tab) or a data frame (in
 which case you must set 'input_dataFrame = TRUE'). No default.}
 
+\item{region_size}{Number indicating the size (in bp) of the region to calculate.
+Defaults to 1000 bp (+/- 500 bp).}
+
 \item{saveFile}{Boolean indicating whether output should be written to a .txt file (in current working
 directory). If 'saveFile = FALSE', output is returned to screen or an R object (if assigned).
 Defaults to FALSE.}
@@ -18,9 +21,6 @@ Defaults to FALSE.}
 \item{input_dataFrame}{Boolean indicating whether input data is a data frame. This is the case when you
 have data loaded from a .bed format, typically nucleosome signal, as opposed to the standard wiggle data
 in a list of 16 chromosomes. Defaults to FALSE.}
-
-\item{regionSize}{Number indicating the size (in bp) of the region to calculate.
-Defaults to 1000 bp (+/- 500 bp).}
 }
 \value{
 An R data frame with two columns: position (relative to midpoint of intergenic region) and signal.
