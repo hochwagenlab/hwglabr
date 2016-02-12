@@ -3,15 +3,16 @@
 #' This function allows you to pull out the ChIP signal centered on midpoints of convergent genes.
 #' It takes as input either the wiggle data as list of 16 chromosome (output of 'readall_tab()')
 #' or complete genome in one data frame (for example loaded from .bed files).
-#' @param inputData As a list of the 16 chr wiggle data (output of readall_tab). No default.
+#' @param inputData As a list of the 16 chr wiggle data (output of readall_tab) or a data frame (in
+#' which case you must set 'input_dataFrame = TRUE'). No default.
 #' @param regionSize Number indicating the size (in bp) of the region to calculate.
 #' Defaults to 1000 bp (+/- 500 bp).
 #' @param saveFile Boolean indicating whether output should be written to a .txt file (in current working
 #' directory). If 'saveFile = FALSE', output is returned to screen or an R object (if assigned).
 #' Defaults to FALSE.
 #' @param input_dataFrame Boolean indicating whether input data is a data frame. This is the case when you
-#' have data loaded from a .bed format, for example, typically nucleosome signal, as opposed to the standard
-#' wiggle data in a list of 16 chromosomes. Defaults to FALSE.
+#' have data loaded from a .bed format, typically nucleosome signal, as opposed to the standard wiggle data
+#' in a list of 16 chromosomes. Defaults to FALSE.
 #' @return An R data frame with two columns: position (relative to midpoint of intergenic region) and signal.
 #' @examples
 #' signal_at_conv(WT)
