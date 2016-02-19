@@ -4,9 +4,9 @@
 #' Adapted from function written by Tovah Markowitz (original function name: 'readAll.tab').
 #' @param fileLocation A string with the path to the folder containing the wiggle data. No default.
 #' @param use_readr Boolean indicating whether to use the much faster 'read_tsv' from
-#' Hadley Wickham's 'readr' package instead of base R's 'read.table'. Defaults to FALSE.
+#' Hadley Wickham's 'readr' package instead of base R's 'read.table'. Defaults to TRUE.
 #' @param progress_bar Boolean indicating whether to display a progress bar (using R package
-#'  'pbapply'). Defaults to FALSE.
+#'  'pbapply'). Defaults to TRUE.
 #' @param local_copy Boolean indicating whether to create local copy of target files before reading
 #' data. If 'TRUE' a local folder is automatically created and deleted after use. Use this argument
 #' to avoid reading files directly from shared locations (namely LabShare). Defaults to FALSE.
@@ -17,8 +17,8 @@
 #' readall_tab("/Path/to/wiggles/", use_readr = T, progress_bar = T, local_copy = T)
 #' @export
 
-readall_tab <- function(fileLocation, use_readr = FALSE,
-                        progress_bar = FALSE, local_copy = FALSE) {
+readall_tab <- function(fileLocation, use_readr = TRUE,
+                        progress_bar = TRUE, local_copy = FALSE) {
   ptm <- proc.time()
   if (local_copy) {
     cat('Copying data files to local folder "/temp"\n...')
