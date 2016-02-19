@@ -110,7 +110,7 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
       chromData <- inputData[inputData[, 1] == chrom[i], ]
     } else {
       # Get index of ChIP data list item corresponding to chrom to analyze
-      # Add '.' to make it unique (otherwise e.g. 'chrI' mainputData <- WTtches 'chrII' too)
+      # Add '.' to make it unique (otherwise e.g. 'chrI' matches 'chrII' too)
       listIndex <- grep(paste0(chrNum, '.'), names(inputData), fixed = TRUE)
       chromData <- inputData[[listIndex]]
       colnames(chromData) <- c('position', 'signal')
