@@ -10,7 +10,7 @@
 #' 
 #' 1.  "signal_at_conv()" to pull out the signal at every convergent gene region.
 #' 
-#' 2. "signal_at_conv_average()" to calculate the average signal over all regions.
+#' 2. "signal_average()" to calculate the average signal over all regions.
 #' @param inputDataA A data frame of average signal between convergent genes: relative
 #' position and average signal. No default.
 #' @param inputDataB Optional data in the same format for a second sample. No default.
@@ -44,19 +44,19 @@ signal_at_conv_average_plot <- function(inputDataA, inputDataB, genome,
   # Make sure the input is the 16x2 data frame returned by chr_cov
   if (!is.data.frame(inputDataA)) {
     stop("Wrong input data - not an R data frame.\n",
-         "Please run 'signal_at_conv()' and 'average_signal_at_conv()' on your data first.
+         "Please run 'signal_at_conv()' and 'signal_average()' on your data first.
          Example:\n",
          "WT_signal_dataframe <- signal_at_conv(WT_wiggle)\n",
-         "WT_mean_signal <- average_signal_at_conv(WT_signal_dataframe)", call. = FALSE)
+         "WT_mean_signal <- signal_average(WT_signal_dataframe)", call. = FALSE)
   }
   
   if (!missing(inputDataB)) {
     if (!is.data.frame(inputDataB)) {
       stop(deparse(substitute(inputDataB)), " is of wrong format - not an R data frame.\n",
-           "Please run 'signal_at_conv()' and 'average_signal_at_conv()' on your data first.
+           "Please run 'signal_at_conv()' and 'signal_average()' on your data first.
            Example:\n",
            "WT_signal_dataframe <- signal_at_conv(WT_wiggle)\n",
-           "WT_mean_signal <- signal_at_conv_average(WT_signal_dataframe)", call. = FALSE)
+           "WT_mean_signal <- signal_average(WT_signal_dataframe)", call. = FALSE)
     }
   }
     
