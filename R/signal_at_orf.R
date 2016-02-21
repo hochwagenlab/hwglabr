@@ -116,7 +116,7 @@ signal_at_orf <- function(inputData, gff, gffFile, saveFile = FALSE) {
       sig_gene[, 1] <- sig_gene[, 1] - start
       sig_gene[, 1] <- round(sig_gene[, 1] * (2000 / full_leng))
       
-      chr <- as.data.frame(rep(chrom[i], nrow(sig_gene)))
+      chr <- as.data.frame(rep(paste0('chr', chrom[i]), nrow(sig_gene)))
       colnames(chr) <- "chr"
       g <- as.data.frame(rep(gene, nrow(sig_gene)))
       colnames(g) <- "gene"
@@ -164,7 +164,7 @@ signal_at_orf <- function(inputData, gff, gffFile, saveFile = FALSE) {
       # Reverse the order of the position values
       sig_gene[, 1] <- 2000 - sig_gene[, 1]
       
-      chr <- as.data.frame(rep(chrom[i], nrow(sig_gene)))
+      chr <- as.data.frame(rep(paste0('chr', chrom[i]), nrow(sig_gene)))
       colnames(chr) <- "chr"
       g <- as.data.frame(rep(gene, nrow(sig_gene)))
       colnames(g) <- "gene"
