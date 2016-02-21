@@ -1,31 +1,34 @@
-#' Calculate average signal between convergent genes
+#' Calculate average signal by position
 #'
-#' This function allows you to calculate the ChIP signal over the average intergenic region centered
-#' on midpoints of convergent genes. It takes as input a data frame containing the genome-wide signal
-#' centered on the midpoints of convergent gene regions (output of 'signal_at_conv()') and calculates
-#' the average for each relative position (e.g. between midpoint of intergenic convergent gene regions
-#' + and - 500 bp).
-#' @param inputData As a data frame (output of 'signal_at_conv()'). No default.
+#' Given the ChIP-seq signal on a range of relative genomic positions (e.g. between convergent genes
+#' or on ORFs), this function allows you to calculate the average ChIP signal by position. It takes
+#' as input a data frame containing the genome-wide signal, for example the output of 'signal_at_conv()'
+#' or 'signal_at_orf()'.
+#' @param inputData As a data frame containing at least a column named 'position', containing the
+#' relative genomic position and a column named 'signal', contianing the corresponding signal.
+#' No default.
 #' @param saveFile Boolean indicating whether output should be written to a .txt file (in current
 #' working directory). If 'saveFile = FALSE', output is returned to screen or an R object (if assigned).
 #' Defaults to FALSE.
 #' @return An R data frame with two columns: position (relative to midpoint of intergenic region) and
 #' mean signal.
 #' @examples
-#' signal_at_conv_average(WT_conv)
+#' signal_average(WT_conv)
 #' 
-#' signal_at_conv_average(WT_conv, saveFile = TRUE)
+#' signal_average(WT_S288C_ORFsignal)
+#' 
+#' signal_average(WT_conv, saveFile = TRUE)
 #' @export
 
-signal_at_conv_average <- function(inputData, saveFile = FALSE) {
+signal_average <- function(inputData, saveFile = FALSE) {
   ptm  <- proc.time()
   
   # Make sure the input is a data frame
   if (!is.data.frame(inputData)) {
     stop("Wrong input data - not an R data frame.\n",
-         "Please run 'signal_at_conv()' on your data first. Example:\n",
+         "Please run 'signal_at_conv()' or 'signal_at_orf()' on your data first. Example:\n",
          "WT_signal_dataframe <- signal_at_conv(WT_wiggle)\n",
-         "WT_mean_signal <- average_signal_at_conv(WT_signal_dataframe)", call. = FALSE)
+         "WT_mean_signal <- signal_average(WT_signal_dataframe)", call. = FALSE)
     }
   
   # Check reference genome and load appropriate convergent gene regions 
@@ -66,13 +69,13 @@ signal_at_conv_average <- function(inputData, saveFile = FALSE) {
     cat(paste0('Saving file...\n'))
     if(check_S288C) {
       write.table(mean_signal, paste0(deparse(substitute(inputData)),
-                                  "_S288C_conv_mean.txt"), sep = "\t", quote = FALSE)  
+                                  "_S288C_mean.txt"), sep = "\t", quote = FALSE)  
     } else {
       write.table(mean_signal, paste0(deparse(substitute(inputData)),
-                                  "_SK1_conv_mean.txt"), sep = "\t", quote = FALSE)
+                                  "_SK1_mean.txt"), sep = "\t", quote = FALSE)
     }
   } else {
     return(mean_signal)
   }
-  cat(paste0('Completed in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
+  cat(paste0('Completed in ', round((proc.time()[3] - ptm[3]), 1), ' sec.\n'))
 }
