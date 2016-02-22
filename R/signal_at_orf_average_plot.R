@@ -27,6 +27,10 @@
 #' Defaults to maximum Y (top-aligned).
 #' @param colorA Optional R color for sample A. Defaults to 'grey50'.
 #' @param colorB Optional R color for sample B. Defaults to 'orange'.
+#' @param smoothBandwidth Optional integer as the bandwith for smoothing data (for better-looking
+#' line plots) using a Kernel Regression Smoother. Smoothing is performed using function 'ksmooth()'
+#' from 'stats' package. For info on bandwith argument and the 'ksmooth()' function in general run
+#' '?ksmooth'. Defaults to 0 (no smoothing).
 #' @return A line plot of one or two samples, either on screen or as a png file
 #' (in the working directory).
 #' @examples
@@ -34,14 +38,16 @@
 #' 
 #' signal_at_orf_average_plot(WT_orf_mean_signal, dot1_orf_mean_signal, genome = 'SK1',
 #'                            yMax = 3, onScreen = FALSE, legend_Xcoord = -500,
-#'                            legend_Ycoord = 1, colorA = 'red', colorB = 'green')
+#'                            legend_Ycoord = 1, colorA = 'red', colorB = 'green',
+#'                            smoothBandwidth = 50)
 #' @export
 
 signal_at_orf_average_plot <- function(inputDataA, inputDataB, genome,
                                        yMin, yMax, onScreen = TRUE,
                                        legend_Xcoord = -200,
                                        legend_Ycoord = yMax + yMax * 0.05,
-                                       colorA = 'grey50', colorB = 'orange') {
+                                       colorA = 'grey50', colorB = 'orange',
+                                       smoothBandwidth = 0) {
   
   # Make sure the input is the 16x2 data frame returned by chr_cov
   if (!is.data.frame(inputDataA)) {
@@ -107,10 +113,21 @@ signal_at_orf_average_plot <- function(inputDataA, inputDataB, genome,
   axis(2, at = c(0, yMax), lwd = 4, las = 2, cex.axis = 2.5, cex = 3.0)
   abline(v = c(500, 1500) , lty= 2, lwd = 2)
   
-  lines(dataA, col = colorA, lwd = 8)
+  # Kernel regression smoother
+  if (smoothBandwidth != 0) {
+    smooth_dataA <- ksmooth(as.data.frame(dataA)[,1],
+                            as.data.frame(dataA)[,2],
+                            bandwidth = smoothBandwidth)
+    lines(smooth_dataA[[1]], smooth_dataA[[2]], col = colorA, lwd = 8)
+  } else lines(dataA, col = colorA, lwd = 8)
   
   if (!missing(inputDataB)) {
-    lines(dataB, col = colorB, lwd = 8)
+    if (smoothBandwidth != 0) {
+      smooth_dataB <- ksmooth(as.data.frame(dataB)[,1],
+                              as.data.frame(dataB)[,2],
+                              bandwidth = smoothBandwidth)
+      lines(smooth_dataB[[1]], smooth_dataB[[2]], col = colorB, lwd = 8)
+    } else lines(dataB, col = colorB, lwd = 8)
   }
   
   if (missing(inputDataB)) {

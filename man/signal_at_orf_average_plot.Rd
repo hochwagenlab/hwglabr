@@ -6,7 +6,7 @@
 \usage{
 signal_at_orf_average_plot(inputDataA, inputDataB, genome, yMin, yMax,
   onScreen = TRUE, legend_Xcoord = -200, legend_Ycoord = yMax + yMax *
-  0.05, colorA = "grey50", colorB = "orange")
+  0.05, colorA = "grey50", colorB = "orange", smoothBandwidth = 0)
 }
 \arguments{
 \item{inputDataA}{A data frame of average signal on ORFs +/- 1/2 the length of the ORF:
@@ -33,6 +33,11 @@ Defaults to maximum Y (top-aligned).}
 \item{colorA}{Optional R color for sample A. Defaults to 'grey50'.}
 
 \item{colorB}{Optional R color for sample B. Defaults to 'orange'.}
+
+\item{smoothBandwidth}{Optional integer as the bandwith for smoothing data (for better-looking
+line plots) using a Kernel Regression Smoother. Smoothing is performed using function 'ksmooth()'
+from 'stats' package. For info on bandwith argument and the 'ksmooth()' function in general run
+'?ksmooth'. Defaults to 0 (no smoothing).}
 }
 \value{
 A line plot of one or two samples, either on screen or as a png file
@@ -58,6 +63,7 @@ signal_at_orf_average_plot(WT_orf_S288C_mean_signal, genome = 'S288C')
 
 signal_at_orf_average_plot(WT_orf_mean_signal, dot1_orf_mean_signal, genome = 'SK1',
                            yMax = 3, onScreen = FALSE, legend_Xcoord = -500,
-                           legend_Ycoord = 1, colorA = 'red', colorB = 'green')
+                           legend_Ycoord = 1, colorA = 'red', colorB = 'green',
+                           smoothBandwidth = 50)
 }
 
