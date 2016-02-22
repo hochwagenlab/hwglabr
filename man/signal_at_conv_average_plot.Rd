@@ -33,7 +33,7 @@ Defaults to maximum Y (top-aligned).}
 \item{colorB}{Optional R color for sample B. Defaults to 'green'.}
 }
 \value{
-A dot plot of one or two samples, either on screen or as a png file
+A line plot of one or two samples, either on screen or as a png file
 (in the working directory).
 }
 \description{

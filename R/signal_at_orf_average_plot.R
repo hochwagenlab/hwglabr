@@ -27,7 +27,7 @@
 #' Defaults to maximum Y (top-aligned).
 #' @param colorA Optional R color for sample A. Defaults to 'grey50'.
 #' @param colorB Optional R color for sample B. Defaults to 'green'.
-#' @return A dot plot of one or two samples, either on screen or as a png file
+#' @return A line plot of one or two samples, either on screen or as a png file
 #' (in the working directory).
 #' @examples
 #' signal_at_orf_average_plot(WT_orf_S288C_mean_signal, genome = 'S288C')
