@@ -2,7 +2,7 @@
 #'
 #' This function allows you to plot wiggle data for a selected chromosome.
 #' It takes as input either the raw wiggle data (for example one element of the 16 chromosome list)
-#' or the output of 'window_smooth' (R data frame with two columns: genome position and smoothed signal).
+#' or the output of 'wiggle_smooth()' (R data frame with two columns: genome position and smoothed signal).
 #' @param wiggleData A data frame of wiggle data with two columns: genome position and signal. No default.
 #' @param chr A number representing the chromosome of 'wiggleData'. No default.
 #' @param genome A string representing the genome used for mapping. No default.
@@ -18,15 +18,15 @@
 #' or written to .png files (onScreen = FALSE). Defaults to TRUE.
 #' @return A line plot, either on screen or as a png file (in the working directory).
 #' @examples
-#' plot_wiggle(WT[[1]], 1, genome = 'SK1', protein = 'Red1')
+#' wiggle_plot(WT[[1]], 1, genome = 'SK1', protein = 'Red1')
 #' 
-#' plot_wiggle(WT_chr3, 3, genome = 'SK1', yMax = 5, color = 'red', protein = 'Red1', onScreen = TRUE)
+#' wiggle_plot(WT_chr3, 3, genome = 'SK1', yMax = 5, color = 'red', protein = 'Red1', onScreen = TRUE)
 #' 
-#' plot_wiggle(chrXVI, 16, genome = 'S288C', yMax = 5, color = 'black',
+#' wiggle_plot(chrXVI, 16, genome = 'S288C', yMax = 5, color = 'black',
 #' protein = 'Rec8-HA', legend_Xcoord = 600, onScreen = FALSE)
 #' @export
 
-plot_wiggle <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein,
+wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein,
                         legend_Xcoord = -10, legend_Ycoord = yMax, onScreen = TRUE) {
   
   ##############################################################################
