@@ -21,7 +21,8 @@ directory). If 'saveFile = FALSE', output is returned to screen or an R object (
 Defaults to FALSE.}
 }
 \value{
-An R data frame with two columns: normalized position (relative to midpoint of intergenic region) and signal.
+A local data frame with four columns: chr (chromosome number), position (normalized genome
+between 0 and 2000 bp), signal (ChIP signal) and gene (systematic gene name).
 }
 \description{
 This function allows you to pull out the ChIP signal over all ORFs in the genome. It collects the

@@ -15,7 +15,8 @@
 #' @param saveFile Boolean indicating whether output should be written to a .txt file (in current working
 #' directory). If 'saveFile = FALSE', output is returned to screen or an R object (if assigned).
 #' Defaults to FALSE.
-#' @return An R data frame with two columns: normalized position (relative to midpoint of intergenic region) and signal.
+#' @return A local data frame with four columns: chr (chromosome number), position (normalized genome
+#' between 0 and 2000 bp), signal (ChIP signal) and gene (systematic gene name).
 #' @examples
 #' signal_at_orf(WT, gff = gff)
 #' 

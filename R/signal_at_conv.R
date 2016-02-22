@@ -13,8 +13,8 @@
 #' @param input_dataFrame Boolean indicating whether input data is a data frame. This is the case when you
 #' have data loaded from a .bed format, typically nucleosome signal, as opposed to the standard wiggle data
 #' in a list of 16 chromosomes. Defaults to FALSE.
-#' @return A local data frame (dplyr data frame) with three columns: chromosome, position (relative to midpoint
-#' of intergenic region) and signal.
+#' @return A local data frame (dplyr data frame) with three columns: chr (chromosome number), position
+#' (genome coordinate relative to midpoint of intergenic region) and signal (ChIP signal).
 #' @examples
 #' signal_at_conv(WT)
 #' 
