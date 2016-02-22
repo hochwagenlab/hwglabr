@@ -59,6 +59,7 @@ signal_average <- function(inputData, saveFile = FALSE) {
     stop("R package 'dplyr' needed for this function to work. Please install it.\n",
          "install.packages('dplyr')", call. = FALSE)
   }
+  library(dplyr)
   
   # Calculate averages for each relative position
   mean_signal <- inputData %>%
