@@ -16,8 +16,8 @@ working directory). If 'saveFile = FALSE', output is returned to screen or an R 
 Defaults to FALSE.}
 }
 \value{
-An R data frame with two columns: position (relative to midpoint of intergenic region) and
-mean signal.
+An R data frame with two columns: position (relative genome coordinate) and
+mean_signal (average signal at each relative coordinate).
 }
 \description{
 Given the ChIP-seq signal on a range of relative genomic positions (e.g. between convergent genes

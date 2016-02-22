@@ -10,8 +10,8 @@
 #' @param saveFile Boolean indicating whether output should be written to a .txt file (in current
 #' working directory). If 'saveFile = FALSE', output is returned to screen or an R object (if assigned).
 #' Defaults to FALSE.
-#' @return An R data frame with two columns: position (relative to midpoint of intergenic region) and
-#' mean signal.
+#' @return An R data frame with two columns: position (relative genome coordinate) and
+#' mean_signal (average signal at each relative coordinate).
 #' @examples
 #' signal_average(WT_conv)
 #' 
@@ -63,7 +63,7 @@ signal_average <- function(inputData, saveFile = FALSE) {
   # Calculate averages for each relative position
   mean_signal <- inputData %>%
     group_by(position) %>%
-    summarise(Mean_signal = mean(signal))
+    summarise(mean_signal = mean(signal))
   
   if(saveFile) {
     cat(paste0('Saving file...\n'))
