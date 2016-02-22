@@ -13,7 +13,8 @@
 #' @param input_dataFrame Boolean indicating whether input data is a data frame. This is the case when you
 #' have data loaded from a .bed format, typically nucleosome signal, as opposed to the standard wiggle data
 #' in a list of 16 chromosomes. Defaults to FALSE.
-#' @return An R data frame with two columns: position (relative to midpoint of intergenic region) and signal.
+#' @return A local data frame (dplyr data frame) with three columns: chromosome, position (relative to midpoint
+#' of intergenic region) and signal.
 #' @examples
 #' signal_at_conv(WT)
 #' 
@@ -101,7 +102,8 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
   library(dplyr)
   
   cat('Collecting signal...\n')
-  
+  cat('(Skip any regions whose coordinates are not found in wiggle data)\n')
+
   for(i in 1:length(chrom)) {
     chrNum <- paste0('chr', chrom[i])
     # Get ChIP data list item corresponding to chrom to analyze
@@ -121,19 +123,21 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
     # Get subset of intergenic regions on chr i
     intergenicPosChr <- intergenicPos[intergenicPos[, 'chr'] == chrNum, ]
     
+    # Count intergenic regions skipped due to missing coordinates in wiggle data
+    convGeneCount <- 0
     for(j in 1:nrow(intergenicPosChr)) {
       if(j == 1) {
-        cat(paste0(chrNum, ': '))
+        cat(paste0(chrNum, ':\n'))
       }
       
-      if(j == nrow(intergenicPosChr)) {
-        cat(paste0(j, ' intergenic regions\n'))
-      }
       # Skip if gene coordinates not in ChIPseq data
+      # Comparison below will not work if dplyr was loaded when the wiggle data was loaded
+      # (because of dplyr's non standard evaluation: data is in tbl_df class)
+      # Workaround: convert to data.frame first
       #      if(!intergenicPosChr[j, 'up'] %in% chromData[, 'position'] |
       #         !intergenicPosChr[j, 'dwn'] %in% chromData[, 'position']) {
-      if(!any(chromData[, 'position'] == intergenicPosChr[j, 'up']) |
-         !any(chromData[, 'position'] == intergenicPosChr[j, 'dwn'])) {
+      if(!any(as.data.frame(chromData)[, 'position'] == as.data.frame(intergenicPosChr)[j, 'up']) |
+         !any(as.data.frame(chromData)[, 'position'] == as.data.frame(intergenicPosChr)[j, 'dwn'])) {
         next
       }
       
@@ -149,14 +153,21 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
       
       # collect the data
       finalChromData <- bind_rows(finalChromData, data.frame(chrNum, position, signal))
+      # Increment non-skipped gene count
+      convGeneCount <- convGeneCount + 1
     }
+
+    # Print number of skipped regions
+    cat(paste0('... ', convGeneCount,
+               ' intergenic regions (skipped ', j - convGeneCount, ')\n'))
+
     colnames(finalChromData) <- c('chr', 'position', 'signal')
     # Trim out NAs
     finalChromData <- finalChromData[complete.cases(finalChromData), ]
     allData <- bind_rows(allData, finalChromData)
   }
   
-  cat(paste0('Completed in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
+  cat(paste0('\nCompleted in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
   
   if(saveFile) {
     cat(paste0('Saving file...\n'))

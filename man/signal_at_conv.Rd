@@ -23,7 +23,8 @@ have data loaded from a .bed format, typically nucleosome signal, as opposed to 
 in a list of 16 chromosomes. Defaults to FALSE.}
 }
 \value{
-An R data frame with two columns: position (relative to midpoint of intergenic region) and signal.
+A local data frame (dplyr data frame) with three columns: chromosome, position (relative to midpoint
+of intergenic region) and signal.
 }
 \description{
 This function allows you to pull out the ChIP signal centered on midpoints of convergent genes.
