@@ -1,17 +1,17 @@
-#' Sliding window smooth
+#' Sliding window smooth of wiggle data
 #'
-#' This function allows you to smooth data using a sliding window.
+#' This function allows you to smooth wiggle data using a sliding window.
 #' @param wiggleData As a list of the 16 chr wiggle data (output of readall_tab). No default.
 #' @param chrNumber A number representing the chromosome to smooth. No default.
 #' @param windowSize A number representing the smoothing window size (number of bp). Defaults to 200.
 #' @return An R data frame with two columns: genome position and smoothed signal.
 #' @examples
-#' window_smooth(WT, 1, 200)
+#' wiggle_smooth(WT, 1, 200)
 #' 
-#' window_smooth(WT, 16, 100)
+#' wiggle_smooth(WT, 16, 100)
 #' @export
 
-window_smooth <- function(wiggleData, chrNumber, windowSize = 200) {
+wiggle_smooth <- function(wiggleData, chrNumber, windowSize = 200) {
   # Check reference genome
   chrom_S288C <- c("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
                    "XI", "XII", "XIII", "XIV", "XV", "XVI")
