@@ -32,7 +32,7 @@ Defaults to maximum Y (top-aligned).}
 
 \item{colorA}{Optional R color for sample A. Defaults to 'grey50'.}
 
-\item{colorB}{Optional R color for sample B. Defaults to 'green'.}
+\item{colorB}{Optional R color for sample B. Defaults to 'orange'.}
 }
 \value{
 A line plot of one or two samples, either on screen or as a png file

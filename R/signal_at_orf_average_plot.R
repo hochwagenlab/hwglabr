@@ -26,7 +26,7 @@
 #' @param legend_Ycoord A number representing the Y coordinate to locate legend.
 #' Defaults to maximum Y (top-aligned).
 #' @param colorA Optional R color for sample A. Defaults to 'grey50'.
-#' @param colorB Optional R color for sample B. Defaults to 'green'.
+#' @param colorB Optional R color for sample B. Defaults to 'orange'.
 #' @return A line plot of one or two samples, either on screen or as a png file
 #' (in the working directory).
 #' @examples
