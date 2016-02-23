@@ -1,12 +1,21 @@
 Package: hwglabr
 Title: Collection of R functions used in the Hochwagen Lab.
 Version: 0.1
-Authors@R: person("Luis", "Vale-Silva", email = "luisvalesilva@gmail.com", role = c("aut", "cre"))
+Authors@R: c(
+  person("Luis", "Vale-Silva", email = "luisvalesilva@gmail.com", role = c("aut", "cre")),
+  person("Tovah", "Markowitz", email = "tem298@nyu.edu", role = "aut"),
+  person("Neem", "Patel", email = "njp301@nyu.edu ", role = "ctb")
+  )
 Description: Compilation of functions written and used frequently by Hochwagen
-    lab members. Currently, this means functions used to analyse data from
+    lab members. Currently, this means mostly functions used to analyse data from
     ChIP-seq experiments: wiggle data produced by the lab's Fastq2Peak ChIP-seq
     analysis pipeline. This is a starting point for the development of a more
     complete and useful package.
+Imports:
+    dplyr,
+    readr
+Suggests:
+    readr
 Depends:
     R (>= 3.1.1)
 License: MIT + file LICENSE
