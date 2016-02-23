@@ -20,10 +20,9 @@ library(hwglabr)
 #### Documentation
 
 There is a (mostly up to date) [documentation website](http://www.nyu.edu/projects/hochwagen/hwglabr/).
-Function documentation is accessible within R in the standard way, by typing the function name
-preceded by '?'.
 
-You get the names of all included functions directly from within R using **`ls()`**:
+Function documentation is accessible within R in the standard way, by typing `?function_name`. You can
+also get the names of all included functions directly from within R using **`ls()`**:
 
 ``` r
 library(hwglabr)
