@@ -9,7 +9,7 @@
 #' @param strain A string representing the output file name (the sample name,
 #' typically a yeast strain). No default.
 #' @return A flat file with four columns:
-#' #' \enumerate{
+#' \enumerate{
 #'   \item chr number
 #'   \item Probe start position (bp number)
 #'   \item Probe end position (bp number)
