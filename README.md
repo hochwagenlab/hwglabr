@@ -17,12 +17,15 @@ devtools::install_github("luisvalesilva/hwglabr")
 library(hwglabr)
 ```
 
-#### Listing included functions
+#### Documentation
 
-In order to get the names of all included functions directly from within R use the function **`ls()`**:
+There is a (mostly up to date) [documentation website](http://www.nyu.edu/projects/hochwagen/hwglabr/).
+Function documentation is accessible within R in the standard way, by typing the function name
+preceded by '?'.
+
+You get the names of all included functions directly from within R using **`ls()`**:
 
 ``` r
 library(hwglabr)
 ls('package:hwglabr')
 ```
-
