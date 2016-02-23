@@ -12,11 +12,11 @@ Description: Compilation of functions written and used frequently by Hochwagen
     analysis pipeline. This is a starting point for the development of a more
     complete and useful package.
 Imports:
-    dplyr,
-    marray
+    dplyr
 Suggests:
     readr,
-    pbapply
+    pbapply,
+    marray
 Depends:
     R (>= 3.1.1)
 License: MIT + file LICENSE
