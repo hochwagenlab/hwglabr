@@ -1,5 +1,5 @@
 Package: hwglabr
-Title: Collection of R functions used in the Hochwagen Lab.
+Title: Collection of R functions used in the Hochwagen Lab
 Version: 0.1
 Authors@R: c(
   person("Luis", "Vale-Silva", email = "luisvalesilva@gmail.com", role = c("aut", "cre")),
@@ -13,9 +13,10 @@ Description: Compilation of functions written and used frequently by Hochwagen
     complete and useful package.
 Imports:
     dplyr,
-    readr
+    marray
 Suggests:
-    readr
+    readr,
+    pbapply
 Depends:
     R (>= 3.1.1)
 License: MIT + file LICENSE
