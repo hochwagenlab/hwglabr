@@ -13,7 +13,7 @@
 #' @param only_complete Many wiggle files are missing data at random positions across the
 #' genome. Boolean indicates if you want to only keep regions where every base is 
 #' included within the wiggle file. Default is TRUE.
-#' @return An R (deplyr) data frame with four columms: chromosome name, position (relative 
+#' @return An R (dplyr) data frame with four columms: chromosome name, position (relative 
 #' to midpoint), signal, and bed line number within its individual chromosome
 #' @examples
 #' summit_plot(WT,red1_summit_bed)
