@@ -11,7 +11,6 @@ Description: Compilation of functions written and used frequently by Hochwagen
     ChIP-seq experiments: wiggle data produced by the lab's Fastq2Peak ChIP-seq
     analysis pipeline. This is a starting point for the development of a more
     complete and useful package.
-
 Suggests:
     dplyr,
     marray,
