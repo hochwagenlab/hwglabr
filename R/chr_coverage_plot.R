@@ -164,7 +164,6 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
     stop("R package 'scales' needed for this function to work. Please install it.\n",
          "install.packages('scales')", call. = FALSE)
   }
-  #library(scales)
   
   par(mfrow = c(1, 1), mar = c(8, 12, 4, 2), mgp = c(6, 2, 0))
   plot(lengths[ordered, 2]/1000, dataA[ordered, 2],

@@ -47,18 +47,16 @@ readall_tab <- function(fileLocation, use_readr = TRUE,
       stop("R package 'readr' required. Please install it:\n", 
            "install.packages('readr')", call. = FALSE)
     }
-    library(readr)
     if (progress_bar) {
       if (!requireNamespace("pbapply", quietly = TRUE)) {
         stop("R package 'pbapply' required. Please install it:\n", 
              "install.packages('pbapply')", call. = FALSE)
       }
-      library(pbapply)
-      alldata <- pblapply(filenames, read_tsv, skip = 2, 
-                          col_names = FALSE, progress = FALSE)
+      alldata <- pbapply::pblapply(filenames, readr::read_tsv, skip = 2,
+                                   col_names = FALSE, progress = FALSE)
     }
     else {
-      alldata <- lapply(filenames, read_tsv, skip = 2, 
+      alldata <- lapply(filenames, readr::read_tsv, skip = 2,
                         col_names = FALSE, progress = FALSE)
     }
   }
@@ -68,9 +66,8 @@ readall_tab <- function(fileLocation, use_readr = TRUE,
         stop("R package 'pbapply' required. Please install it:\n", 
              "install.packages('pbapply')", call. = FALSE)
       }
-      library(pbapply)
-      alldata <- pblapply(filenames, read.table, skip = 2, 
-                          sep = "\t")
+      alldata <- pbapply::pblapply(filenames, read.table, skip = 2,
+                                   sep = "\t")
     }
     else {
       alldata <- lapply(filenames, read.table, skip = 2, 

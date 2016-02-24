@@ -99,7 +99,6 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
     stop("R package 'dplyr' needed for this function to work. Please install it.\n",
          "install.packages('dplyr')", call. = FALSE)
   }
-  library(dplyr)
   
   cat('Collecting signal...\n')
   cat('(Skip any regions whose coordinates are not found in wiggle data)\n')
@@ -152,7 +151,7 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
                             chromData[, 'position'] <= dwnPosition, 'signal']
       
       # collect the data
-      finalChromData <- bind_rows(finalChromData, data.frame(chrNum, position, signal))
+      finalChromData <- dplyr::bind_rows(finalChromData, data.frame(chrNum, position, signal))
       # Increment non-skipped gene count
       convGeneCount <- convGeneCount + 1
     }
@@ -164,7 +163,7 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
     colnames(finalChromData) <- c('chr', 'position', 'signal')
     # Trim out NAs
     finalChromData <- finalChromData[complete.cases(finalChromData), ]
-    allData <- bind_rows(allData, finalChromData)
+    allData <- dplyr::bind_rows(allData, finalChromData)
   }
   
   cat(paste0('\nCompleted in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
