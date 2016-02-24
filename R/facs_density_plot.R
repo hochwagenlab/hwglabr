@@ -77,10 +77,10 @@ facs_density_plot <- function(yeastLine, gates, type) {
     # everything before the period [[1]][1]. The external string split accesses 
     # the third subset of the file name [[1]][3]. This assumes that the format of 
     # the file name is: date_yeastLine_timePoint.fcs
-    timePoint<-strsplit(strsplit( fileNames[z], "\\.") [[1]][1], "_")[[1]][2]
+    timePoint <- strsplit(strsplit(fileNames[z], "\\.") [[1]][1], "_")[[1]][2]
     
     # Read the FCS file
-    samples[[timePoint]] <- read.FCS(fileNames[z])
+    samples[[timePoint]] <- flowCore::read.FCS(fileNames[z])
   }
   
   # Create a FlowSet from the samples across time points and create a quick plot
@@ -88,7 +88,7 @@ facs_density_plot <- function(yeastLine, gates, type) {
   # about FlowCore, FlowViz, Lattice, and Trellis
   # Note: densityplot is a Lattice plot, not a standard R plot.
   
-  experiment <- as(samples,"flowSet")
+  experiment <- as(samples, "flowSet")
   print(densityplot(~`FL1-A`, experiment, overlap = 0.8))
   
   if (length(gates) != 0) {
