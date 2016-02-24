@@ -15,7 +15,8 @@ Suggests:
     dplyr,
     marray,
     pbapply,
-    readr
+    readr,
+    scales
 Depends:
     R (>= 3.1.1)
 License: MIT + file LICENSE
