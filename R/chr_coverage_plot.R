@@ -164,14 +164,14 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
     stop("R package 'scales' needed for this function to work. Please install it.\n",
          "install.packages('scales')", call. = FALSE)
   }
-  library(scales)
+  #library(scales)
   
   par(mfrow = c(1, 1), mar = c(8, 12, 4, 2), mgp = c(6, 2, 0))
   plot(lengths[ordered, 2]/1000, dataA[ordered, 2],
        xaxt = "n", yaxt = "n", xlim = c(0, 1550), ylim = c(-0.5, yMax),
        xlab = "Chromosome size (kb)", ylab = paste0(protein, '\nChIP/Input'),
        main = paste0('Mapped to ', genome, ' genome'),
-       col = alpha(colorA, 0.7), pch = 19,
+       col = scales::alpha(colorA, 0.7), pch = 19,
        cex = 3, cex.main = 2, cex.axis = 2, cex.lab = 2, bty = "n")
   axis(side = 1, at = c(0, 500, 1000, 1500), lwd = 4, cex.axis = 2, cex.lab = 2)
   axis(side = 2, at = c(0, 1, yMax), lwd = 4, cex.axis = 2, cex.lab = 2, las = 2)
@@ -181,7 +181,7 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
   
   if (!missing(coverageDataB)) {
     points(lengths[ordered, 2]/1000, dataB[ordered, 2],
-           col = alpha(colorB, 0.7), pch = 19, cex = 3)
+           col = scales::alpha(colorB, 0.7), pch = 19, cex = 3)
   }
   
   if (missing(coverageDataB)) {
