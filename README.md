@@ -31,7 +31,7 @@ help("function_name")
 You can also get the list of included functions directly from within R using one of the following:
 
 ``` r
-ls('package:hwglabr')   # List function names
+ls("package:hwglabr")   # List function names
 
 lsf.str("package:hwglabr")   # List function names and their arguments
 ```
