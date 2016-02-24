@@ -5,7 +5,7 @@
 \title{Wiggle data line plot}
 \usage{
 wiggle_plot(wiggleData, chr, genome, yMax, color = "grey50", protein,
-  legend_Xcoord = -10, legend_Ycoord = yMax, onScreen = TRUE)
+  legendXcoord = -10, legendYcoord = yMax, onScreen = TRUE)
 }
 \arguments{
 \item{wiggleData}{A data frame of wiggle data with two columns: genome position and signal. No default.}
@@ -21,10 +21,10 @@ Particularly useful to plot two chromosomes on the same Y scale. No default.}
 
 \item{protein}{A string representing the ChIPped protein. No default.}
 
-\item{legend_Xcoord}{A number representing the X coordinate to locate legend.
+\item{legendXcoord}{A number representing the X coordinate to locate legend.
 Defaults to minimum X (left-aligned).}
 
-\item{legend_Ycoord}{A number representing the Y coordinate to locate legend.
+\item{legendYcoord}{A number representing the Y coordinate to locate legend.
 Defaults to maximum Y (top-aligned).}
 
 \item{onscreen}{Boolean indicating plots should be returned to the screen (onScreen = TRUE)
@@ -44,6 +44,6 @@ wiggle_plot(WT[[1]], 1, genome = 'SK1', protein = 'Red1')
 wiggle_plot(WT_chr3, 3, genome = 'SK1', yMax = 5, color = 'red', protein = 'Red1', onScreen = TRUE)
 
 wiggle_plot(chrXVI, 16, genome = 'S288C', yMax = 5, color = 'black',
-protein = 'Rec8-HA', legend_Xcoord = 600, onScreen = FALSE)
+protein = 'Rec8-HA', legendXcoord = 600, onScreen = FALSE)
 }
 

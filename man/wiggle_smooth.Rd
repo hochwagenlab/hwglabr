@@ -4,14 +4,15 @@
 \alias{wiggle_smooth}
 \title{Sliding window smooth of wiggle data}
 \usage{
-wiggle_smooth(wiggleData, chrNumber, windowSize = 200)
+wiggle_smooth(wiggleData, chrNumber, bandwidth = 200, useKsmooth = FALSE)
 }
 \arguments{
 \item{wiggleData}{As a list of the 16 chr wiggle data (output of readall_tab). No default.}
 
 \item{chrNumber}{A number representing the chromosome to smooth. No default.}
 
-\item{windowSize}{A number representing the smoothing window size (number of bp). Defaults to 200.}
+\item{bandwidth}{A number representing the length of the smoothing window in bp
+(or the Gaussian kernel bandwith, if "useKsmooth = TRUE"). Defaults to 200.}
 }
 \value{
 An R data frame with two columns: genome position and smoothed signal.

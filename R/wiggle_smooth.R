@@ -3,7 +3,18 @@
 #' This function allows you to smooth wiggle data using a sliding window.
 #' @param wiggleData As a list of the 16 chr wiggle data (output of readall_tab). No default.
 #' @param chrNumber A number representing the chromosome to smooth. No default.
-#' @param windowSize A number representing the smoothing window size (number of bp). Defaults to 200.
+#' @param bandwidth A number representing the length of the smoothing window in bp
+#' (or the Gaussian kernel bandwith, if "useKsmooth = TRUE"). Defaults to 200.
+#' @param useKsmooth Boolean indicating choice of smoothing function:
+#' \enumerate{
+#'   \item useKsmooth = FALSE: use a simple sliding window smoother. Smoothing is performed by
+#'   sliding a window of the specified size ("bandwith" argument) over all genomic positions in
+#'   the data and replacing the position values by the middle position and the signal values by
+#'   their mean.
+#'   \item useKsmooth = TRUE: use a Gaussian Kernel Regression Smoother. Smoothing is performed
+#'   using function 'ksmooth()' from 'stats' package using the default "normal" kernel and the
+#'   specified bandwith.
+#'   Defaults to 200 bp.
 #' @return An R data frame with two columns: genome position and smoothed signal.
 #' @examples
 #' wiggle_smooth(WT, 1, 200)
@@ -11,7 +22,7 @@
 #' wiggle_smooth(WT, 16, 100)
 #' @export
 
-wiggle_smooth <- function(wiggleData, chrNumber, windowSize = 200) {
+wiggle_smooth <- function(wiggleData, chrNumber, bandwidth = 200, useKsmooth = FALSE) {
   # Check reference genome
   chrom_S288C <- c("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
                    "XI", "XII", "XIII", "XIV", "XV", "XVI")
@@ -33,10 +44,10 @@ wiggle_smooth <- function(wiggleData, chrNumber, windowSize = 200) {
   chromData <- wiggleData[[listIndex]]
   
   data <- as.data.frame(matrix(0, ncol = 2,
-                               nrow = (floor(nrow(chromData)/windowSize)-1)))
+                               nrow = (floor(nrow(chromData)/bandwidth)-1)))
   
-  for (i in 1:(floor(nrow(chromData)/windowSize) - 1)) {
-    data[i, ] <- colMeans(chromData[(windowSize*(i - 1) + 1):(windowSize * i), ])
+  for (i in 1:(floor(nrow(chromData)/bandwidth) - 1)) {
+    data[i, ] <- colMeans(chromData[(bandwidth*(i - 1) + 1):(bandwidth * i), ])
   }
   
   colnames(data) <- c('position', 'signal')

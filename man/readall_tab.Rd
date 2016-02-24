@@ -4,19 +4,19 @@
 \alias{readall_tab}
 \title{Load wiggle data}
 \usage{
-readall_tab(fileLocation, use_readr = TRUE, progress_bar = TRUE,
-  local_copy = FALSE)
+readall_tab(fileLocation, useReadr = TRUE, progressBar = TRUE,
+  localCopy = FALSE)
 }
 \arguments{
 \item{fileLocation}{A string with the path to the folder containing the wiggle data. No default.}
 
-\item{use_readr}{Boolean indicating whether to use the much faster 'read_tsv' from
+\item{useReadr}{Boolean indicating whether to use the much faster 'read_tsv' from
 Hadley Wickham's 'readr' package instead of base R's 'read.table'. Defaults to TRUE.}
 
-\item{progress_bar}{Boolean indicating whether to display a progress bar (using R package
+\item{progressBar}{Boolean indicating whether to display a progress bar (using R package
 'pbapply'). Defaults to TRUE.}
 
-\item{local_copy}{Boolean indicating whether to create local copy of target files before reading
+\item{localCopy}{Boolean indicating whether to create local copy of target files before reading
 data. If 'TRUE' a local folder is automatically created and deleted after use. Use this argument
 to avoid reading files directly from shared locations (namely LabShare). Defaults to FALSE.}
 }
@@ -29,7 +29,7 @@ Adapted from function written by Tovah Markowitz (original function name: 'readA
 }
 \examples{
 readall_tab("/Path/to/wiggles/folder/Red1_WT_reps_SacCer3_2mis_MACS_wiggle_norm/")
-readall_tab("/Path/to/wiggles/", use_readr = TRUE, progress_bar = TRUE)
-readall_tab("/Path/to/wiggles/", use_readr = T, progress_bar = T, local_copy = T)
+readall_tab("/Path/to/wiggles/", useReadr = TRUE, progressBar = TRUE)
+readall_tab("/Path/to/wiggles/", useReadr = T, progressBar = T, localCopy = T)
 }
 

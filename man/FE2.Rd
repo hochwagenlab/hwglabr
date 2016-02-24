@@ -17,7 +17,7 @@ typically a yeast strain). No default.}
 }
 \value{
 A flat file with four columns:
-#' \enumerate{
+\enumerate{
   \item chr number
   \item Probe start position (bp number)
   \item Probe end position (bp number)

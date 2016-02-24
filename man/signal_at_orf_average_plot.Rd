@@ -5,8 +5,8 @@
 \title{Line plot of average signal on ORFs}
 \usage{
 signal_at_orf_average_plot(inputDataA, inputDataB, genome, yMin, yMax,
-  onScreen = TRUE, legend_Xcoord = -200, legend_Ycoord = yMax + yMax *
-  0.05, colorA = "grey50", colorB = "orange", smoothBandwidth = 0)
+  onScreen = TRUE, legendXcoord = -200, legendYcoord = yMax + yMax * 0.05,
+  colorA = "grey50", colorB = "orange", smoothBandwidth = 0)
 }
 \arguments{
 \item{inputDataA}{A data frame of average signal on ORFs +/- 1/2 the length of the ORF:
@@ -24,10 +24,10 @@ of the plot only. No default.}
 \item{onScreen}{Boolean indicating plots should be returned to the screen (onScreen = TRUE)
 or written to .png files (onScreen = FALSE). Defaults to TRUE.}
 
-\item{legend_Xcoord}{A number representing the X coordinate to locate legend.
+\item{legendXcoord}{A number representing the X coordinate to locate legend.
 Defaults to minimum X (left-aligned).}
 
-\item{legend_Ycoord}{A number representing the Y coordinate to locate legend.
+\item{legendYcoord}{A number representing the Y coordinate to locate legend.
 Defaults to maximum Y (top-aligned).}
 
 \item{colorA}{Optional R color for sample A. Defaults to 'grey50'.}
@@ -62,8 +62,8 @@ over all regions genome-wide.
 signal_at_orf_average_plot(WT_orf_S288C_mean_signal, genome = 'S288C')
 
 signal_at_orf_average_plot(WT_orf_mean_signal, dot1_orf_mean_signal, genome = 'SK1',
-                           yMax = 3, onScreen = FALSE, legend_Xcoord = -500,
-                           legend_Ycoord = 1, colorA = 'red', colorB = 'green',
+                           yMax = 3, onScreen = FALSE, legendXcoord = -500,
+                           legendYcoord = 1, colorA = 'red', colorB = 'green',
                            smoothBandwidth = 50)
 }
 
