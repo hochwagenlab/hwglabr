@@ -10,9 +10,9 @@
 #' Particularly useful to plot two chromosomes on the same Y scale. No default.
 #' @param color Optional R color. Defaults to 'grey50'.
 #' @param protein A string representing the ChIPped protein. No default.
-#' @param legend_Xcoord A number representing the X coordinate to locate legend.
+#' @param legendXcoord A number representing the X coordinate to locate legend.
 #' Defaults to minimum X (left-aligned).
-#' @param legend_Ycoord A number representing the Y coordinate to locate legend.
+#' @param legendYcoord A number representing the Y coordinate to locate legend.
 #' Defaults to maximum Y (top-aligned).
 #' @param onscreen Boolean indicating plots should be returned to the screen (onScreen = TRUE)
 #' or written to .png files (onScreen = FALSE). Defaults to TRUE.
@@ -23,11 +23,11 @@
 #' wiggle_plot(WT_chr3, 3, genome = 'SK1', yMax = 5, color = 'red', protein = 'Red1', onScreen = TRUE)
 #' 
 #' wiggle_plot(chrXVI, 16, genome = 'S288C', yMax = 5, color = 'black',
-#' protein = 'Rec8-HA', legend_Xcoord = 600, onScreen = FALSE)
+#' protein = 'Rec8-HA', legendXcoord = 600, onScreen = FALSE)
 #' @export
 
 wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein,
-                        legend_Xcoord = -10, legend_Ycoord = yMax, onScreen = TRUE) {
+                        legendXcoord = -10, legendYcoord = yMax, onScreen = TRUE) {
   
   ##############################################################################
   # Information based on Keeney lab genome sequence and annotation
@@ -99,7 +99,7 @@ wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein
   points(Cen[chr, 4]/1000, -2.5, pch = 19, cex = 3.0)
   mtext(c('Cen'), 1, at = Cen[chr, 4]/1000, cex = 1.5, padj = 1)
 
-  legend(legend_Xcoord, legend_Ycoord, deparse(substitute(wiggleData)),
+  legend(legendXcoord, legendYcoord, deparse(substitute(wiggleData)),
          bty = 'n', cex = 3, text.col = color)
   
   if (!onScreen) {

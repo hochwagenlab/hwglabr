@@ -4,13 +4,13 @@
 #' It takes as input either the wiggle data as list of 16 chromosome (output of 'readall_tab()')
 #' or complete genome in one data frame (for example loaded from .bed files).
 #' @param inputData As a list of the 16 chr wiggle data (output of readall_tab) or a data frame (in
-#' which case you must set 'input_dataFrame = TRUE'). No default.
-#' @param region_size Number indicating the size (in bp) of the region to calculate.
+#' which case you must set 'inputDataFrame = TRUE'). No default.
+#' @param regionSize Number indicating the size (in bp) of the region to calculate.
 #' Defaults to 1000 bp (+/- 500 bp).
 #' @param saveFile Boolean indicating whether output should be written to a .txt file (in current working
 #' directory). If 'saveFile = FALSE', output is returned to screen or an R object (if assigned).
 #' Defaults to FALSE.
-#' @param input_dataFrame Boolean indicating whether input data is a data frame. This is the case when you
+#' @param inputDataFrame Boolean indicating whether input data is a data frame. This is the case when you
 #' have data loaded from a .bed format, typically nucleosome signal, as opposed to the standard wiggle data
 #' in a list of 16 chromosomes. Defaults to FALSE.
 #' @return A local data frame (dplyr data frame) with three columns: chr (chromosome number), position
@@ -18,11 +18,11 @@
 #' @examples
 #' signal_at_conv(WT)
 #' 
-#' signal_at_conv(WT, region_size = 1500, saveFile = TRUE, input_dataFrame = FALSE)
+#' signal_at_conv(WT, regionSize = 1500, saveFile = TRUE, inputDataFrame = FALSE)
 #' @export
 
-signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
-                           input_dataFrame = FALSE) {
+signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,
+                           inputDataFrame = FALSE) {
   ptm  <- proc.time()
   
   ##############################################################################
@@ -56,8 +56,8 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
   chrom_SK1 <- c('01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
                  '11', '12', '13', '14', '15', '16')
   
-  # Handle the case 'input_dataFrame = T'
-  if (input_dataFrame) {
+  # Handle the case 'inputDataFrame = T'
+  if (inputDataFrame) {
     check_S288C <- any(inputData[, 1] == 'chrI')
     check_SK1 <- any(inputData[, 1] == 'chr01')
   } else {
@@ -86,13 +86,13 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
   # Initialize object to collect final data
   allData <- data.frame()
   
-  # Create data frame with conv region info (midpoints +/- region_size in bp)
+  # Create data frame with conv region info (midpoints +/- regionSize in bp)
   intergenicPos <- data.frame(matrix(nrow = nrow(conv), ncol = 4))
   colnames(intergenicPos) <- c('chr', 'mid', 'up', 'dwn')
   intergenicPos[, 'chr'] <- conv[, 'chr']                            # chr
   intergenicPos[, 'mid'] <- conv[, 'midpoint']                       # mid
-  intergenicPos[, 'up'] <- conv[, 'midpoint'] - (region_size / 2)    # up
-  intergenicPos[, 'dwn'] <- conv[, 'midpoint'] + (region_size / 2)   # dwn
+  intergenicPos[, 'up'] <- conv[, 'midpoint'] - (regionSize / 2)    # up
+  intergenicPos[, 'dwn'] <- conv[, 'midpoint'] + (regionSize / 2)   # dwn
   
   
   if (!requireNamespace("dplyr", quietly = TRUE)) {
@@ -106,8 +106,8 @@ signal_at_conv <- function(inputData, region_size = 1000, saveFile = FALSE,
   for(i in 1:length(chrom)) {
     chrNum <- paste0('chr', chrom[i])
     # Get ChIP data list item corresponding to chrom to analyze
-    # Either list of wiggles or dataFrame from .bed ('input_dataFrame = F / T')
-    if (input_dataFrame) {
+    # Either list of wiggles or dataFrame from .bed ('inputDataFrame = F / T')
+    if (inputDataFrame) {
       chromData <- inputData[inputData[, 1] == chrom[i], ]
     } else {
       # Get index of ChIP data list item corresponding to chrom to analyze

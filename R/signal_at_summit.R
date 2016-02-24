@@ -10,7 +10,7 @@
 #' @param bedData A data frame of bed data to extract signal around. No default.
 #' @param extension Number indicating the number of bases around the summit or midpoints.
 #' Value will be added both upstream and downstream. Default is 1000 bp.
-#' @param only_complete Many wiggle files are missing data at random positions across the
+#' @param onlyComplete Many wiggle files are missing data at random positions across the
 #' genome. Boolean indicates if you want to only keep regions where every base is 
 #' included within the wiggle file. Default is TRUE.
 #' @return An R (dplyr) data frame with four columms: chromosome name, position (relative 
@@ -18,7 +18,7 @@
 #' @examples
 #' summit_plot(WT,red1_summit_bed)
 #'
-#' summit_plot(WT, S288Ccen, extension=2e4, only_complete=FALSE)
+#' summit_plot(WT, S288Ccen, extension=2e4, onlyComplete=FALSE)
 #' @export
 
 # library(hwglabr)
@@ -32,7 +32,7 @@
 # want to include ability to plot around midpoints of bed_file as well before giving to Luis
 # also gff?
 
-signal_at_summit <- function(inputData, bedData, extension = 1000, only_complete = TRUE) {
+signal_at_summit <- function(inputData, bedData, extension = 1000, onlyComplete = TRUE) {
 ptm <- proc.time()
 
 if (!requireNamespace("dplyr", quietly = TRUE)) {
@@ -144,7 +144,7 @@ for (i in 1:length(chrom_nums)) {
 		} else {
 			b <- max( which( wiggle_data_chrom[,1] <= summit_range_chrom[j,4]) )
 		}
-		if (only_complete) {
+		if (onlyComplete) {
 			if ( (b-a) == (2 * extension) ) {
 				count <- count + 1
 				tmp <- wiggle_data_chrom[a:b,]

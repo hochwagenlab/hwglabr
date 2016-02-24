@@ -19,9 +19,9 @@
 #' @param yMax Optional number to be used as the max Y scale value in the plot.
 #' @param onScreen Boolean indicating plots should be returned to the screen (onScreen = TRUE)
 #' or written to .png files (onScreen = FALSE). Defaults to TRUE.
-#' @param legend_Xcoord A number representing the X coordinate to locate legend.
+#' @param legendXcoord A number representing the X coordinate to locate legend.
 #' Defaults to minimum X (left-aligned).
-#' @param legend_Ycoord A number representing the Y coordinate to locate legend.
+#' @param legendYcoord A number representing the Y coordinate to locate legend.
 #' Defaults to maximum Y (top-aligned).
 #' @param colorA Optional R color for sample A. Defaults to 'grey50'.
 #' @param colorB Optional R color for sample B. Defaults to 'green'.
@@ -31,14 +31,14 @@
 #' signal_at_conv_average_plot(WT_conv_mean_signal, genome = 'S288C')
 #' 
 #' signal_at_conv_average_plot(WT_conv_mean_signal, dot1_conv_mean_signal, genome = 'SK1',
-#'                             yMax = 3, onScreen = FALSE, legend_Xcoord = -500,
-#'                             legend_Ycoord = 1, colorA = 'red', colorB = 'green')
+#'                             yMax = 3, onScreen = FALSE, legendXcoord = -500,
+#'                             legendYcoord = 1, colorA = 'red', colorB = 'green')
 #' @export
 
 signal_at_conv_average_plot <- function(inputDataA, inputDataB, genome,
                                         yMax, onScreen = TRUE,
-                                        legend_Xcoord = xMin + xMin * 0.2,
-                                        legend_Ycoord = yMax + yMax * 0.05,
+                                        legendXcoord = xMin + xMin * 0.2,
+                                        legendYcoord = yMax + yMax * 0.05,
                                         colorA = 'grey50', colorB = 'orange') {
   
   # Make sure the input is the 16x2 data frame returned by chr_cov
@@ -107,10 +107,10 @@ signal_at_conv_average_plot <- function(inputDataA, inputDataB, genome,
   }
   
   if (missing(inputDataB)) {
-    legend(legend_Xcoord, legend_Ycoord, deparse(substitute(inputDataA)),
+    legend(legendXcoord, legendYcoord, deparse(substitute(inputDataA)),
            bty = 'n', cex = 2.5, text.col = colorA)
   } else {
-    legend(legend_Xcoord, legend_Ycoord,
+    legend(legendXcoord, legendYcoord,
            c(deparse(substitute(inputDataA)), deparse(substitute(inputDataB))),
            bty = 'n', cex = 2.5, text.col = c(colorA, colorB))
   }
