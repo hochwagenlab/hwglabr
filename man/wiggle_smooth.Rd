@@ -12,7 +12,19 @@ wiggle_smooth(wiggleData, chrNumber, bandwidth = 200, useKsmooth = FALSE)
 \item{chrNumber}{A number representing the chromosome to smooth. No default.}
 
 \item{bandwidth}{A number representing the length of the smoothing window in bp
-(or the Gaussian kernel bandwith, if "useKsmooth = TRUE"). Defaults to 200.}
+(or the Gaussian kernel bandwith, if \code{useKsmooth = TRUE}). Defaults to 200.}
+
+\item{useKsmooth}{Boolean indicating choice of smoothing function:
+\enumerate{
+  \item \code{useKsmooth = FALSE}: use a simple sliding window smoother. Smoothing is performed by
+  sliding a window of the specified size (\code{bandwidth} argument) over all genomic positions in
+  the data and replacing the position values by the middle position and the signal values by
+  their mean.
+  \item \code{useKsmooth = TRUE}: use a Gaussian Kernel Regression Smoother. Smoothing is performed
+  using function \code{ksmooth()} from 'stats' package using the default \code{normal} kernel and the
+  specified bandwith.
+  }
+  Defaults to \code{FALSE}.}
 }
 \value{
 An R data frame with two columns: genome position and smoothed signal.

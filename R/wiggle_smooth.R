@@ -4,17 +4,18 @@
 #' @param wiggleData As a list of the 16 chr wiggle data (output of readall_tab). No default.
 #' @param chrNumber A number representing the chromosome to smooth. No default.
 #' @param bandwidth A number representing the length of the smoothing window in bp
-#' (or the Gaussian kernel bandwith, if "useKsmooth = TRUE"). Defaults to 200.
+#' (or the Gaussian kernel bandwith, if \code{useKsmooth = TRUE}). Defaults to 200.
 #' @param useKsmooth Boolean indicating choice of smoothing function:
 #' \enumerate{
-#'   \item useKsmooth = FALSE: use a simple sliding window smoother. Smoothing is performed by
-#'   sliding a window of the specified size ("bandwith" argument) over all genomic positions in
+#'   \item \code{useKsmooth = FALSE}: use a simple sliding window smoother. Smoothing is performed by
+#'   sliding a window of the specified size (\code{bandwidth} argument) over all genomic positions in
 #'   the data and replacing the position values by the middle position and the signal values by
 #'   their mean.
-#'   \item useKsmooth = TRUE: use a Gaussian Kernel Regression Smoother. Smoothing is performed
-#'   using function 'ksmooth()' from 'stats' package using the default "normal" kernel and the
+#'   \item \code{useKsmooth = TRUE}: use a Gaussian Kernel Regression Smoother. Smoothing is performed
+#'   using function \code{ksmooth()} from 'stats' package using the default \code{normal} kernel and the
 #'   specified bandwith.
-#'   Defaults to 200 bp.
+#'   }
+#'   Defaults to \code{FALSE}.
 #' @return An R data frame with two columns: genome position and smoothed signal.
 #' @examples
 #' wiggle_smooth(WT, 1, 200)
@@ -43,12 +44,19 @@ wiggle_smooth <- function(wiggleData, chrNumber, bandwidth = 200, useKsmooth = F
   listIndex <- grep(paste0(chrNumber, '.'), names(wiggleData), fixed = TRUE)
   chromData <- wiggleData[[listIndex]]
   
-  data <- as.data.frame(matrix(0, ncol = 2,
-                               nrow = (floor(nrow(chromData)/bandwidth)-1)))
-  
-  for (i in 1:(floor(nrow(chromData)/bandwidth) - 1)) {
-    data[i, ] <- colMeans(chromData[(bandwidth*(i - 1) + 1):(bandwidth * i), ])
+  if (!useKsmooth) {
+    data <- as.data.frame(matrix(0, ncol = 2,
+                                 nrow = (floor(nrow(chromData)/bandwidth)-1)))
+    
+    for (i in 1:(floor(nrow(chromData)/bandwidth) - 1)) {
+      data[i, ] <- colMeans(chromData[(bandwidth*(i - 1) + 1):(bandwidth * i), ])
+    }
+  } else {
+    dataList <- ksmooth(as.data.frame(chromData)[, 1], as.data.frame(chromData)[, 2],
+                        bandwidth = bandwidth)
+    data <- cbind(dataList[[1]], dataList[[2]])
   }
+  
   
   colnames(data) <- c('position', 'signal')
   return (data)
