@@ -5,7 +5,7 @@
 #' scales them all to the same value: 2 kb. This means that for two example genes with lengths of
 #' 500 bp and 2 kb, flanking regions of 250 bp and 1 kb, respectively, will be colleted up and
 #' downstream. Both genes will then be scaled to 1 kb and all four flanking regions to 500 bp.
-#' The function takes as input the wiggle data as a list of 16 chromosomes
+#' The function takes as input the wiggle data as a list of 16 chromosomes.
 #' (output of \code{readall_tab()}).
 #' @param inputData As a list of the 16 chr wiggle data (output of \code{readall_tab()}). No default.
 #' @param gff Optional dataframe of the gff providing the ORF cordinates. Must be provided if
@@ -14,7 +14,7 @@
 #' @param gffFile Optional string indicating path to the gff file providing the ORF cordinates. Must be
 #' provided if \code{gff} is not. No default.
 #' @param saveFile Boolean indicating whether output should be written to a .txt file (in current working
-#' directory). If \code{saveFile = FALSE'}, output is returned to screen or an R object (if assigned).
+#' directory). If \code{saveFile = FALSE}, output is returned to screen or an R object (if assigned).
 #' Defaults to FALSE.
 #' @return A local data frame with four columns: chr (chromosome number), position (normalized genome
 #' between 0 and 2000 bp), signal (ChIP signal) and gene (systematic gene name).

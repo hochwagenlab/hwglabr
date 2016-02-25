@@ -17,7 +17,7 @@ load your selected gff file.}
 provided if \code{gff} is not. No default.}
 
 \item{saveFile}{Boolean indicating whether output should be written to a .txt file (in current working
-directory). If \code{saveFile = FALSE'}, output is returned to screen or an R object (if assigned).
+directory). If \code{saveFile = FALSE}, output is returned to screen or an R object (if assigned).
 Defaults to FALSE.}
 }
 \value{
@@ -30,7 +30,7 @@ signal over each ORF plus both flanking regions (1/2 the length of the ORF on ea
 scales them all to the same value: 2 kb. This means that for two example genes with lengths of
 500 bp and 2 kb, flanking regions of 250 bp and 1 kb, respectively, will be colleted up and
 downstream. Both genes will then be scaled to 1 kb and all four flanking regions to 500 bp.
-The function takes as input the wiggle data as a list of 16 chromosomes
+The function takes as input the wiggle data as a list of 16 chromosomes.
 (output of \code{readall_tab()}).
 }
 \examples{
