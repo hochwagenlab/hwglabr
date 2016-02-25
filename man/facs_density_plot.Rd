@@ -10,10 +10,10 @@ facs_density_plot(yeastLine, gates, type)
 \item{yeastLine}{A number present in the file names corresponding to the yeast
 strain number. No default.}
 
-\item{gates}{Optional gating limits as 'c(gateLower, gateUpper)'. Defaults to no gating.}
+\item{gates}{Optional gating limits as \code{c(gateLower, gateUpper)}. Defaults to no gating.}
 
-\item{type}{A string representing the image file type, acepting either 'jpg' or 'pdf'.
-Defaults to 'jpg'.}
+\item{type}{A string representing the image file type, acepting either \code{jpg} or \code{pdf}.
+Defaults to \code{jpg}.}
 }
 \value{
 A density plot of all time points with the same yeast strain,
@@ -25,7 +25,7 @@ Written by Tovah Markowitz.
 }
 \section{Details}{
 
-The function is designed to search all .FCS files (named as "Cell YeastLine_TimePoint.fcs)
+The function is designed to search all .FCS files (named as "Cell YeastLine_TimePoint.fcs")
 for those with a particular yeast line and print a quick view of ungated FACS
 results to the screen. It also allows for the option of gating the data before
 writing the results to an image file in the working directory.
@@ -33,11 +33,9 @@ writing the results to an image file in the working directory.
 The function requires two R packages: "flowCore" and "flowViz".
 You can install the packages by running:
 
-source("http://bioconductor.org/biocLite.R")
-
-biocLite("flowCore")
-
-biocLite("flowViz")
+\code{source("http://bioconductor.org/biocLite.R")}
+\code{biocLite("flowCore")}
+\code{biocLite("flowViz")}
 
 (If the packages are missing you will see an error message with this information).
 }

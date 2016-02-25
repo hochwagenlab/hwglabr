@@ -1,18 +1,18 @@
-#' Signal between all convergent genes genomewide
+#' Signal between all convergent genes genome-wide
 #'
 #' This function allows you to pull out the ChIP signal centered on midpoints of convergent genes.
-#' It takes as input either the wiggle data as list of 16 chromosome (output of 'readall_tab()')
+#' It takes as input either the wiggle data as list of 16 chromosome (output of \code{readall_tab()})
 #' or complete genome in one data frame (for example loaded from .bed files).
-#' @param inputData As a list of the 16 chr wiggle data (output of readall_tab) or a data frame (in
-#' which case you must set 'inputDataFrame = TRUE'). No default.
+#' @param inputData As a list of the 16 chr wiggle data (output of \code{readall_tab}) or a data frame
+#' (in which case you must set \code{inputDataFrame = TRUE}). No default.
 #' @param regionSize Number indicating the size (in bp) of the region to calculate.
 #' Defaults to 1000 bp (+/- 500 bp).
 #' @param saveFile Boolean indicating whether output should be written to a .txt file (in current working
-#' directory). If 'saveFile = FALSE', output is returned to screen or an R object (if assigned).
-#' Defaults to FALSE.
+#' directory). If \code{saveFile = FALSE}, output is returned to screen or an R object (if assigned).
+#' Defaults to \code{FALSE}.
 #' @param inputDataFrame Boolean indicating whether input data is a data frame. This is the case when you
 #' have data loaded from a .bed format, typically nucleosome signal, as opposed to the standard wiggle data
-#' in a list of 16 chromosomes. Defaults to FALSE.
+#' in a list of 16 chromosomes. Defaults to \code{FALSE}.
 #' @return A local data frame (dplyr data frame) with three columns: chr (chromosome number), position
 #' (genome coordinate relative to midpoint of intergenic region) and signal (ChIP signal).
 #' @examples

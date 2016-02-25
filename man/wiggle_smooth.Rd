@@ -7,7 +7,7 @@
 wiggle_smooth(wiggleData, chrNumber, bandwidth = 200, useKsmooth = FALSE)
 }
 \arguments{
-\item{wiggleData}{As a list of the 16 chr wiggle data (output of readall_tab). No default.}
+\item{wiggleData}{As a list of the 16 chr wiggle data (output of \code{readall_tab()}). No default.}
 
 \item{chrNumber}{A number representing the chromosome to smooth. No default.}
 

@@ -7,17 +7,17 @@
 signal_at_orf(inputData, gff, gffFile, saveFile = FALSE)
 }
 \arguments{
-\item{inputData}{As a list of the 16 chr wiggle data (output of readall_tab). No default.}
+\item{inputData}{As a list of the 16 chr wiggle data (output of \code{readall_tab()}). No default.}
 
-\item{gff}{Optional dataframe of the gff providing the ORF cordinates. Must be provided if 'gffFile'
-is not. No default. Note: You can use the function 'gff_read()' in this package to load your selected
-gff file.}
+\item{gff}{Optional dataframe of the gff providing the ORF cordinates. Must be provided if
+\code{gffFile} is not. No default. Note: You can use the function \code{gff_read()} in hwglabr to
+load your selected gff file.}
 
 \item{gffFile}{Optional string indicating path to the gff file providing the ORF cordinates. Must be
-provided if 'gff' is not. No default.}
+provided if \code{gff} is not. No default.}
 
 \item{saveFile}{Boolean indicating whether output should be written to a .txt file (in current working
-directory). If 'saveFile = FALSE', output is returned to screen or an R object (if assigned).
+directory). If \code{saveFile = FALSE'}, output is returned to screen or an R object (if assigned).
 Defaults to FALSE.}
 }
 \value{
@@ -30,7 +30,8 @@ signal over each ORF plus both flanking regions (1/2 the length of the ORF on ea
 scales them all to the same value: 2 kb. This means that for two example genes with lengths of
 500 bp and 2 kb, flanking regions of 250 bp and 1 kb, respectively, will be colleted up and
 downstream. Both genes will then be scaled to 1 kb and all four flanking regions to 500 bp.
-The function takes as input the wiggle data as a list of 16 chromosomes (output of 'readall_tab()').
+The function takes as input the wiggle data as a list of 16 chromosomes
+(output of \code{readall_tab()}).
 }
 \examples{
 signal_at_orf(WT, gff = gff)

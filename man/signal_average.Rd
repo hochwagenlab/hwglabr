@@ -12,8 +12,8 @@ relative genomic position and a column named 'signal', contianing the correspond
 No default.}
 
 \item{saveFile}{Boolean indicating whether output should be written to a .txt file (in current
-working directory). If 'saveFile = FALSE', output is returned to screen or an R object (if assigned).
-Defaults to FALSE.}
+working directory). If \code{saveFile = FALSE}, output is returned to screen or an R object
+(if assigned). Defaults to \code{FALSE}.}
 }
 \value{
 An R data frame with two columns: position (relative genome coordinate) and
@@ -22,8 +22,8 @@ mean_signal (average signal at each relative coordinate).
 \description{
 Given the ChIP-seq signal on a range of relative genomic positions (e.g. between convergent genes
 or on ORFs), this function allows you to calculate the average ChIP signal by position. It takes
-as input a data frame containing the genome-wide signal, for example the output of 'signal_at_conv()'
-or 'signal_at_orf()'.
+as input a data frame containing the genome-wide signal, for example the output of
+\code{signal_at_conv()} or \code{signal_at_orf()}.
 }
 \examples{
 signal_average(WT_conv)

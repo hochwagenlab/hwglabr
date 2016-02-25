@@ -2,20 +2,21 @@
 #'
 #' This function allows you to plot wiggle data for a selected chromosome.
 #' It takes as input either the raw wiggle data (for example one element of the 16 chromosome list)
-#' or the output of 'wiggle_smooth()' (R data frame with two columns: genome position and smoothed signal).
+#' or the output of \code{wiggle_smooth()} (R data frame with two columns: genome position and
+#' smoothed signal).
 #' @param wiggleData A data frame of wiggle data with two columns: genome position and signal. No default.
-#' @param chr A number representing the chromosome of 'wiggleData'. No default.
+#' @param chr A number representing the chromosome of \code{wiggleData}. No default.
 #' @param genome A string representing the genome used for mapping. No default.
 #' @param yMax Optional number to be used as the max Y scale value in the plots.
 #' Particularly useful to plot two chromosomes on the same Y scale. No default.
-#' @param color Optional R color. Defaults to 'grey50'.
+#' @param color Optional R color. Defaults to \code{grey50}.
 #' @param protein A string representing the ChIPped protein. No default.
 #' @param legendXcoord A number representing the X coordinate to locate legend.
 #' Defaults to minimum X (left-aligned).
 #' @param legendYcoord A number representing the Y coordinate to locate legend.
 #' Defaults to maximum Y (top-aligned).
-#' @param onscreen Boolean indicating plots should be returned to the screen (onScreen = TRUE)
-#' or written to .png files (onScreen = FALSE). Defaults to TRUE.
+#' @param onscreen Boolean indicating plots should be returned to the screen (\code{onScreen = TRUE})
+#' or written to .png files (\code{onScreen = FALSE}). Defaults to \code{TRUE}.
 #' @return A line plot, either on screen or as a png file (in the working directory).
 #' @examples
 #' wiggle_plot(WT[[1]], 1, genome = 'SK1', protein = 'Red1')

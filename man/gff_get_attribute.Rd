@@ -10,10 +10,10 @@ gff_get_attribute(gffColumn, field, attrSep = ";")
 \item{gffColumn}{The column of the Gff file to parse, typically 'attributes'. No default.}
 
 \item{field}{A string representing the field with the value you want
-(formatted as 'field=value;'). No default.}
+(formatted as \code{field = value;}). No default.}
 
-\item{attrSep}{A string representing the field separator (';' in the standard
-gff format). Defaults to ';'.}
+\item{attrSep}{A string representing the field separator (\code{;} in the standard
+gff format). Defaults to \code{;}.}
 }
 \value{
 A vector containing the specified field values of the same size as the
@@ -27,7 +27,7 @@ Also posted on the Bioconductor support system \href{https://support.bioconducto
 }
 \section{Details}{
 
-Typical use of this function will include first using gff_read(),
+Typical use of this function will include first using \code{gff_read()},
 also in this package, to load gff file and then parsing the attributes field.
 See examples below.
 }

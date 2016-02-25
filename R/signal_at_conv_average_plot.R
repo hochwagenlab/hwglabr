@@ -7,25 +7,25 @@
 #' 
 #' To generate the input for this function starting from an R list of wiggle data
 #' for the 16 chromosomes you should run:
+#' 1.  \code{signal_at_conv()} to pull out the signal at every convergent gene region.
 #' 
-#' 1.  "signal_at_conv()" to pull out the signal at every convergent gene region.
-#' 
-#' 2. "signal_average()" to calculate the average signal over all regions.
+#' 2. \code{signal_average()} to calculate the average signal over all regions.
 #' @param inputDataA A data frame of average signal between convergent genes: relative
 #' position and average signal. No default.
 #' @param inputDataB Optional data in the same format for a second sample. No default.
 #' @param genome A string representing the genome used for mapping. This is used in the title
 #' of the plot only. No default.
 #' @param yMax Optional number to be used as the max Y scale value in the plot.
-#' @param onScreen Boolean indicating plots should be returned to the screen (onScreen = TRUE)
-#' or written to .png files (onScreen = FALSE). Defaults to TRUE.
+#' @param onScreen Boolean indicating plots should be returned to the screen
+#' (\code{onScreen = TRUE}) or written to .png files (\code{onScreen = FALSE}).
+#' Defaults to \code{TRUE}.
 #' @param legendXcoord A number representing the X coordinate to locate legend.
 #' Defaults to minimum X (left-aligned).
 #' @param legendYcoord A number representing the Y coordinate to locate legend.
 #' Defaults to maximum Y (top-aligned).
-#' @param colorA Optional R color for sample A. Defaults to 'grey50'.
-#' @param colorB Optional R color for sample B. Defaults to 'green'.
-#' @return A line plot of one or two samples, either on screen or as a png file
+#' @param colorA Optional R color for sample A. Defaults to \code{grey50}.
+#' @param colorB Optional R color for sample B. Defaults to \code{green}.
+#' @return A line plot of one or two samples, either on screen or as a .png file
 #' (in the working directory).
 #' @examples
 #' signal_at_conv_average_plot(WT_conv_mean_signal, genome = 'S288C')

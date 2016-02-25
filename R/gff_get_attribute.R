@@ -6,13 +6,13 @@
 #' Also posted on the Bioconductor support system \href{https://support.bioconductor.org/p/24657/}{here}.
 #' @param gffColumn The column of the Gff file to parse, typically 'attributes'. No default.
 #' @param field A string representing the field with the value you want
-#' (formatted as 'field=value;'). No default.
-#' @param attrSep A string representing the field separator (';' in the standard
-#' gff format). Defaults to ';'.
+#' (formatted as \code{field = value;}). No default.
+#' @param attrSep A string representing the field separator (\code{;} in the standard
+#' gff format). Defaults to \code{;}.
 #' @return A vector containing the specified field values of the same size as the
 #' number of features in the gff file.
 #' @section Details:
-#' Typical use of this function will include first using gff_read(),
+#' Typical use of this function will include first using \code{gff_read()},
 #' also in this package, to load gff file and then parsing the attributes field.
 #' See examples below.
 #' @examples

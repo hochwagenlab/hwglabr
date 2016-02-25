@@ -18,23 +18,24 @@ chr_coverage_plot(coverageDataA, coverageDataB, protein, genome,
 \item{genome}{A string representing the genome used for mapping. No default.}
 
 \item{meanNorm}{Boolean indicating whether average coverage should be plotted as is
-(meanNorm = FALSE) or normalized to genome-wide averages (meanNorm = TRUE). Defaults to TRUE.}
+(\code{meanNorm = FALSE}) or normalized to genome-wide averages (\code{meanNorm = TRUE}).
+Defaults to TRUE.}
 
 \item{yMax}{Optional number to be used as the max Y scale value in the plots. No default.}
 
-\item{colorA}{Optional R color for sample A. Defaults to 'grey50'.}
+\item{colorA}{Optional R color for sample A. Defaults to \code{grey50}.}
 
-\item{colorB}{Optional R color for sample B. Defaults to 'green'.}
+\item{colorB}{Optional R color for sample B. Defaults to \code{green}.}
 
-\item{onscreen}{Boolean indicating plots should be returned to the screen (onScreen = TRUE)
-or written to .png files (onScreen = FALSE). Defaults to TRUE.}
+\item{onscreen}{Boolean indicating plots should be returned to the screen (\code{onScreen = TRUE})
+or written to .png files (\code{onScreen = FALSE}). Defaults to \code{TRUE}.}
 }
 \value{
 A dot plot of one or two samples, either on screen or as a png file (in the working directory).
 }
 \description{
 This function allows you to plot average chromosome signal for one or two selected samples.
-It takes as input the output of 'chr_coverage' (16x2 R data frame).
+It takes as input the output of \code{chr_coverage()} (16x2 R data frame).
 }
 \examples{
 chr_coverage_plot(WT, rec8, protein = 'Red1', genome = 'SK1', meanNorm = TRUE, onScreen = TRUE, colorB = 'red')

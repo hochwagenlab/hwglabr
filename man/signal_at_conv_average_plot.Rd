@@ -19,8 +19,9 @@ of the plot only. No default.}
 
 \item{yMax}{Optional number to be used as the max Y scale value in the plot.}
 
-\item{onScreen}{Boolean indicating plots should be returned to the screen (onScreen = TRUE)
-or written to .png files (onScreen = FALSE). Defaults to TRUE.}
+\item{onScreen}{Boolean indicating plots should be returned to the screen
+(\code{onScreen = TRUE}) or written to .png files (\code{onScreen = FALSE}).
+Defaults to \code{TRUE}.}
 
 \item{legendXcoord}{A number representing the X coordinate to locate legend.
 Defaults to minimum X (left-aligned).}
@@ -28,12 +29,12 @@ Defaults to minimum X (left-aligned).}
 \item{legendYcoord}{A number representing the Y coordinate to locate legend.
 Defaults to maximum Y (top-aligned).}
 
-\item{colorA}{Optional R color for sample A. Defaults to 'grey50'.}
+\item{colorA}{Optional R color for sample A. Defaults to \code{grey50}.}
 
-\item{colorB}{Optional R color for sample B. Defaults to 'green'.}
+\item{colorB}{Optional R color for sample B. Defaults to \code{green}.}
 }
 \value{
-A line plot of one or two samples, either on screen or as a png file
+A line plot of one or two samples, either on screen or as a .png file
 (in the working directory).
 }
 \description{
@@ -45,10 +46,9 @@ gene regions.
 \details{
 To generate the input for this function starting from an R list of wiggle data
 for the 16 chromosomes you should run:
+1.  \code{signal_at_conv()} to pull out the signal at every convergent gene region.
 
-1.  "signal_at_conv()" to pull out the signal at every convergent gene region.
-
-2. "signal_average()" to calculate the average signal over all regions.
+2. \code{signal_average()} to calculate the average signal over all regions.
 }
 \examples{
 signal_at_conv_average_plot(WT_conv_mean_signal, genome = 'S288C')

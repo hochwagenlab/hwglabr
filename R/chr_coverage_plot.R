@@ -1,18 +1,19 @@
 #' Average chromosome signal (coverage) dot plot
 #'
 #' This function allows you to plot average chromosome signal for one or two selected samples.
-#' It takes as input the output of 'chr_coverage' (16x2 R data frame).
+#' It takes as input the output of \code{chr_coverage()} (16x2 R data frame).
 #' @param coverageDataA A 16x2 data frame of coverage: chromosome and average signal. No default.
 #' @param coverageDataB Optional 16x2 data frame of coverage: chromosome and average signal. No default.
 #' @param protein A string representing the ChIPped protein. No default.
 #' @param genome A string representing the genome used for mapping. No default.
 #' @param meanNorm Boolean indicating whether average coverage should be plotted as is
-#' (meanNorm = FALSE) or normalized to genome-wide averages (meanNorm = TRUE). Defaults to TRUE.
+#' (\code{meanNorm = FALSE}) or normalized to genome-wide averages (\code{meanNorm = TRUE}).
+#' Defaults to TRUE.
 #' @param yMax Optional number to be used as the max Y scale value in the plots. No default.
-#' @param onscreen Boolean indicating plots should be returned to the screen (onScreen = TRUE)
-#' or written to .png files (onScreen = FALSE). Defaults to TRUE.
-#' @param colorA Optional R color for sample A. Defaults to 'grey50'.
-#' @param colorB Optional R color for sample B. Defaults to 'green'.
+#' @param onscreen Boolean indicating plots should be returned to the screen (\code{onScreen = TRUE})
+#' or written to .png files (\code{onScreen = FALSE}). Defaults to \code{TRUE}.
+#' @param colorA Optional R color for sample A. Defaults to \code{grey50}.
+#' @param colorB Optional R color for sample B. Defaults to \code{green}.
 #' @return A dot plot of one or two samples, either on screen or as a png file (in the working directory).
 #' @examples
 #' chr_coverage_plot(WT, rec8, protein = 'Red1', genome = 'SK1', meanNorm = TRUE, onScreen = TRUE, colorB = 'red')

@@ -1,7 +1,7 @@
 #' Average signal per chromosome
 #'
 #' This function allows you to calculate the average signal (or coverage) per chromosome.
-#' @param wiggleData As a list of the 16 chr wiggle data (output of readall_tab). No default.
+#' @param wiggleData As a list of the 16 chr wiggle data (output of \code{readall_tab()}). No default.
 #' @return A 16x2 R data frame with two columns: chromosome number and average signal.
 #' @examples
 #' chr_coverage(WT)

@@ -6,11 +6,10 @@
 #' 
 #' To generate the input for this function starting from an R list of wiggle data
 #' for the 16 chromosomes you should run:
-#' 
-#' 1. "signal_at_orf()" to pull out the signal at every ORF and flanking regions
+#' 1. \code{signal_at_orf()} to pull out the signal at every ORF and flanking regions
 #' (1/2 the length of the ORF).
 #' 
-#' 2. "signal_average()" to calculate the average signal at each relative position
+#' 2. \code{signal_average()} to calculate the average signal at each relative position
 #' over all regions genome-wide.
 #' @param inputDataA A data frame of average signal on ORFs +/- 1/2 the length of the ORF:
 #' relative position and average signal. No default.
@@ -19,18 +18,19 @@
 #' of the plot only. No default.
 #' @param yMin Optional number to be used as the minimum Y scale value in the plot.
 #' @param yMax Optional number to be used as the maximum Y scale value in the plot.
-#' @param onScreen Boolean indicating plots should be returned to the screen (onScreen = TRUE)
-#' or written to .png files (onScreen = FALSE). Defaults to TRUE.
+#' @param onScreen Boolean indicating plots should be returned to the screen
+#' (\code{onScreen = TRUE}) or written to .png files (\code{onScreen = FALSE}).
+#' Defaults to \code{TRUE}.
 #' @param legendXcoord A number representing the X coordinate to locate legend.
 #' Defaults to minimum X (left-aligned).
 #' @param legendYcoord A number representing the Y coordinate to locate legend.
 #' Defaults to maximum Y (top-aligned).
-#' @param colorA Optional R color for sample A. Defaults to 'grey50'.
-#' @param colorB Optional R color for sample B. Defaults to 'orange'.
+#' @param colorA Optional R color for sample A. Defaults to \code{grey50}.
+#' @param colorB Optional R color for sample B. Defaults to \code{orange}.
 #' @param smoothBandwidth Optional integer as the bandwith for smoothing data (for better-looking
-#' line plots) using a Kernel Regression Smoother. Smoothing is performed using function 'ksmooth()'
-#' from 'stats' package. For info on bandwith argument and the 'ksmooth()' function in general run
-#' '?ksmooth'. Defaults to 0 (no smoothing).
+#' line plots) using a Kernel Regression Smoother. Smoothing is performed using function
+#' \code{ksmooth()} from stats package. For info on bandwith argument and the \code{ksmooth()}
+#' function in general run \code{?ksmooth}. Defaults to \code{0} (no smoothing).
 #' @return A line plot of one or two samples, either on screen or as a png file
 #' (in the working directory).
 #' @examples

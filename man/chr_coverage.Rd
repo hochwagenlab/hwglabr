@@ -7,7 +7,7 @@
 chr_coverage(wiggleData)
 }
 \arguments{
-\item{wiggleData}{As a list of the 16 chr wiggle data (output of readall_tab). No default.}
+\item{wiggleData}{As a list of the 16 chr wiggle data (output of \code{readall_tab()}). No default.}
 }
 \value{
 A 16x2 R data frame with two columns: chromosome number and average signal.

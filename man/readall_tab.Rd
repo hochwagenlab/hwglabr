@@ -10,22 +10,22 @@ readall_tab(fileLocation, useReadr = TRUE, progressBar = TRUE,
 \arguments{
 \item{fileLocation}{A string with the path to the folder containing the wiggle data. No default.}
 
-\item{useReadr}{Boolean indicating whether to use the much faster 'read_tsv' from
-Hadley Wickham's 'readr' package instead of base R's 'read.table'. Defaults to TRUE.}
+\item{useReadr}{Boolean indicating whether to use the much faster \code{read_tsv()} from
+Hadley Wickham's readr package instead of base R's \code{read.table}. Defaults to \code{TRUE}.}
 
 \item{progressBar}{Boolean indicating whether to display a progress bar (using R package
-'pbapply'). Defaults to TRUE.}
+pbapply). Defaults to \code{TRUE}.}
 
 \item{localCopy}{Boolean indicating whether to create local copy of target files before reading
-data. If 'TRUE' a local folder is automatically created and deleted after use. Use this argument
-to avoid reading files directly from shared locations (namely LabShare). Defaults to FALSE.}
+data. If \code{TRUE} a local folder is automatically created and deleted after use. Use this argument
+to avoid reading files directly from shared locations (namely LabShare). Defaults to \code{FALSE}.}
 }
 \value{
 An R list of 16 data frames, one for each chromosome.
 }
 \description{
 This function allows you to load tab-separated wiggle data.
-Adapted from function written by Tovah Markowitz (original function name: 'readAll.tab').
+Adapted from function written by Tovah Markowitz (original function name: \code{readAll.tab}).
 }
 \examples{
 readall_tab("/Path/to/wiggles/folder/Red1_WT_reps_SacCer3_2mis_MACS_wiggle_norm/")

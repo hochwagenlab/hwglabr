@@ -8,7 +8,7 @@ FE2(FileName, cy0, strain)
 }
 \arguments{
 \item{cy0}{A number representing the dye color used for the control sample
-(3 for cy3 or 5 for cy5). No default.}
+(\code{3} for cy3 or \code{5} for cy5). No default.}
 
 \item{strain}{A string representing the output file name (the sample name,
 typically a yeast strain). No default.}
@@ -23,7 +23,7 @@ A flat file with four columns:
   \item Probe end position (bp number)
   \item Log2 ratio
 }
-Load this file using base R function 'read.table('/path/to/file', header = TRUE)'.
+Load this file using base R function \code{read.table('/path/to/file', header = TRUE)}.
 }
 \description{
 This function allows you to extract Log2 ratios for all probes in a microarray.
