@@ -89,8 +89,8 @@ signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,
   # Create data frame with conv region info (midpoints +/- regionSize in bp)
   intergenicPos <- data.frame(matrix(nrow = nrow(conv), ncol = 4))
   colnames(intergenicPos) <- c('chr', 'mid', 'up', 'dwn')
-  intergenicPos[, 'chr'] <- conv[, 'chr']                            # chr
-  intergenicPos[, 'mid'] <- conv[, 'midpoint']                       # mid
+  intergenicPos[, 'chr'] <- conv[, 'chr']                           # chr
+  intergenicPos[, 'mid'] <- conv[, 'midpoint']                      # mid
   intergenicPos[, 'up'] <- conv[, 'midpoint'] - (regionSize / 2)    # up
   intergenicPos[, 'dwn'] <- conv[, 'midpoint'] + (regionSize / 2)   # dwn
   
@@ -106,9 +106,9 @@ signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,
   for(i in 1:length(chrom)) {
     chrNum <- paste0('chr', chrom[i])
     # Get ChIP data list item corresponding to chrom to analyze
-    # Either list of wiggles or dataFrame from .bed ('inputDataFrame = F / T')
+    # Either list of wiggles or dataFrame ('inputDataFrame = F / T')
     if (inputDataFrame) {
-      chromData <- inputData[inputData[, 1] == chrom[i], ]
+      chromData <- inputData[inputData[, 1] == paste0('chr', chrom[i]), ]
     } else {
       # Get index of ChIP data list item corresponding to chrom to analyze
       # Add '.' to make it unique (otherwise e.g. 'chrI' matches 'chrII' too)
