@@ -4,8 +4,8 @@
 #' or on ORFs), this function allows you to calculate the average ChIP signal by position. It takes
 #' as input a data frame containing the genome-wide signal, for example the output of
 #' \code{signal_at_conv()} or \code{signal_at_orf()}.
-#' @param inputData As a data frame containing at least a column named 'position', containing the
-#' relative genomic position and a column named 'signal', contianing the corresponding signal.
+#' @param inputData As a data frame containing at least a column named \code{position}, containing the
+#' relative genomic position and a column named \code{signal}, contianing the corresponding signal.
 #' No default.
 #' @param saveFile Boolean indicating whether output should be written to a .txt file (in current
 #' working directory). If \code{saveFile = FALSE}, output is returned to screen or an R object
@@ -36,6 +36,7 @@ signal_average <- function(inputData, saveFile = FALSE) {
                    "XI", "XII", "XIII", "XIV", "XV", "XVI")
   chrom_SK1 <- c('01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
                  '11', '12', '13', '14', '15', '16')
+  # sometimes people don't have the complete genome
   check_S288C <- any(inputData[, 1] == 'chrI')
   check_SK1 <- any(grep('chr01.', names(inputData), fixed = TRUE))
   
