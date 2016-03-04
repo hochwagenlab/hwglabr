@@ -4,7 +4,7 @@
 \alias{signal_at_summit}
 \title{Signal around all bedfile midpoints}
 \usage{
-signal_at_summit(inputData, bedData, extension = 1000, onlyComplete = TRUE)
+signal_at_summit(inputData, bedData, extension = 1000, only_complete = TRUE)
 }
 \arguments{
 \item{inputData}{A list of 16 chr wiggle data (output of readall_tab). No default.}
@@ -14,25 +14,24 @@ signal_at_summit(inputData, bedData, extension = 1000, onlyComplete = TRUE)
 \item{extension}{Number indicating the number of bases around the summit or midpoints.
 Value will be added both upstream and downstream. Default is 1000 bp.}
 
-\item{onlyComplete}{Many wiggle files are missing data at random positions across the
+\item{only_complete}{Many wiggle files are missing data at random positions across the
 genome. Boolean indicates if you want to only keep regions where every base is 
 included within the wiggle file. Default is \code{TRUE}.}
 }
 \value{
-An R (dplyr) data frame with four columms: chromosome name, position (relative 
-to midpoint), signal, and bed line number within its individual chromosome.
+An R (deplyr) data frame with four columms: chromosome name, position (relative 
+to midpoint), signal, and bed line number within its individual chromosome
 }
 \description{
 This function allows you to pull out the ChIP signal centered around summits or 
 midpoints of bedfiles if start and stop values are more than one base apart. It
 takes as input wiggle data as a list of 16 chromosomes (output of \code{readall_tab()})
-and a bedfile determining the positions to extract. Use with \code{signal_average()}
+and a bedfile determining the positions to extract. Use with \code{signal_average} 
 to calculate the mean around all midpoints.
-Function written by Tovah Markowitz.
 }
 \examples{
 summit_plot(WT,red1_summit_bed)
 
-summit_plot(WT, S288Ccen, extension=2e4, onlyComplete = FALSE)
+summit_plot(WT, S288Ccen, extension=2e4, only_complete=FALSE)
 }
 
