@@ -101,7 +101,7 @@ signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,
   }
   
   cat('Collecting signal...\n')
-  cat('(Skip any regions whose coordinates are not found in wiggle data)\n')
+  cat('(Skip any regions whose coordinates are not found in input data)\n')
 
   for(i in 1:length(chrom)) {
     chrNum <- paste0('chr', chrom[i])
