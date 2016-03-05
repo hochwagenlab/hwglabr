@@ -21,19 +21,19 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
                         progressBar = TRUE, localCopy = FALSE) {
   ptm <- proc.time()
   if (localCopy) {
-    cat('Copying data files to local folder "/temp"\n...')
-    # Check if a directory 'temp' already exists
-    if (file.exists('temp')) {
-      stop('A folder called "temp" already exists in the current working directory.\n',
+    cat('Copying data files to local folder "/readall_tab_temp"\n...')
+    # Check if a directory 'readall_tab_temp' already exists
+    if (file.exists('readall_tab_temp')) {
+      stop('A folder called "readall_tab_temp" already exists in the current working directory.\n',
            'Please remove it and repeat function call.', call. = FALSE)
     }
     # Create temporary directory in current working directory
     # and make it the destination
-    dir.create('temp')
+    dir.create('readall_tab_temp')
     # Copy the files to the new temporary directory
-    file.copy(fileLocation, 'temp', recursive = TRUE)
+    file.copy(fileLocation, 'readall_tab_temp', recursive = TRUE)
     # Update fileLocation to be the local directory
-    fileLocation <- paste0('temp/', list.files('temp'))
+    fileLocation <- paste0('readall_tab_temp/', list.files('readall_tab_temp'))
   }
   
   cat('\nReading data\n')
@@ -78,7 +78,7 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
   if (localCopy) {
     cat('Deleting local copy\n...\n')
     # Delete temporary local directory
-    unlink('temp', recursive = TRUE)
+    unlink('readall_tab_temp', recursive = TRUE)
   }
   
   # Check which reference genome was used to map seq. data
