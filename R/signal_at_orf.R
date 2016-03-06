@@ -16,8 +16,13 @@
 #' @param saveFile Boolean indicating whether output should be written to a .txt file (in current working
 #' directory). If \code{saveFile = FALSE}, output is returned to screen or an R object (if assigned).
 #' Defaults to FALSE.
-#' @return A local data frame with four columns: chr (chromosome number), position (normalized genome
-#' between 0 and 2000 bp), signal (ChIP signal) and gene (systematic gene name).
+#' @return A local data frame with four columns:
+#' \enumerate{
+#'   \item \code{chr} Chromosome number
+#'   \item \code{position} Nucleotide coordinate (in normalized total length of 2 kb)
+#'   \item \code{signal} ChIP signal
+#'   \item \code{gene} Systematic gene name
+#' }
 #' @examples
 #' signal_at_orf(WT, gff = gff)
 #' 

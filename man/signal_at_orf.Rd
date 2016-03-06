@@ -21,8 +21,13 @@ directory). If \code{saveFile = FALSE}, output is returned to screen or an R obj
 Defaults to FALSE.}
 }
 \value{
-A local data frame with four columns: chr (chromosome number), position (normalized genome
-between 0 and 2000 bp), signal (ChIP signal) and gene (systematic gene name).
+A local data frame with four columns:
+\enumerate{
+  \item \code{chr} Chromosome number
+  \item \code{position} Nucleotide coordinate (in normalized total length of 2 kb)
+  \item \code{signal} ChIP signal
+  \item \code{gene} Systematic gene name
+}
 }
 \description{
 This function allows you to pull out the ChIP signal over all ORFs in the genome. It collects the
