@@ -40,7 +40,7 @@ signal_at_orf <- function(inputData, gff, gffFile, saveFile = FALSE) {
   } else if (!(missing(gffFile) | missing(gff))) {
     stop("Two gff data sources provided.\n",
          "Please provide either a gff R data frame ('gff' argument) or the path to a gff file ('gffFile' argument), not both.\n",
-         "Jeez, make up your mind...", call. = FALSE)
+         call. = FALSE)
   } else if (missing(gff)) {
     gff <- gff_read(gffFile)
     cat('Loaded gff file...\n')
