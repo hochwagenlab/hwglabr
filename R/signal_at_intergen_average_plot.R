@@ -1,20 +1,22 @@
-#' Line plot of average signal between convergent genes
+#' Line plot of average signal on intergenic regions
 #'
-#' This function allows you to make a line plot of the ChIP signal over the average
-#' intergenic region centered on midpoints of convergent genes. It takes as input a
-#' data frame containing the average signal centered on the midpoints of convergent
-#' gene regions.
+#' This function allows you to make a line plot of the average ChIP signal on specific
+#' intergenic regions. It takes as input a data frame containing the average signal
+#' in a window of positions centered on the midpoints of a specified type of intergenic region.
 #' 
 #' To generate the input for this function starting from an R list of wiggle data
 #' for the 16 chromosomes you should run:
-#' 1.  \code{signal_at_conv()} to pull out the signal at every convergent gene region.
-#' 
-#' 2. \code{signal_average()} to calculate the average signal over all regions.
+#' \enumerate{
+#'   \item \code{signal_at_intergen()} to pull out the signal at every intergenic region.
+#'   \item \code{signal_average()} to calculate the average signal over all regions.
+#' }
 #' @param inputDataA A data frame of average signal between convergent genes: relative
 #' position and average signal. No default.
 #' @param inputDataB Optional data in the same format for a second sample. No default.
 #' @param genome A string representing the genome used for mapping. This is used in the title
 #' of the plot only. No default.
+#' @param orientation A string representing the type of intergenic region (convergent, divergent or tandem).
+#' This is used in the title of the plot only. No default.
 #' @param yMax Optional number to be used as the max Y scale value in the plot.
 #' @param onScreen Boolean indicating plots should be returned to the screen
 #' (\code{onScreen = TRUE}) or written to .png files (\code{onScreen = FALSE}).
@@ -28,14 +30,15 @@
 #' @return A line plot of one or two samples, either on screen or as a .png file
 #' (in the working directory).
 #' @examples
-#' signal_at_conv_average_plot(WT_conv_mean_signal, genome = 'S288C')
+#' signal_at_intergen_average_plot(WT_conv_mean_signal, genome = 'S288C', orientation = 'Convergent')
 #' 
-#' signal_at_conv_average_plot(WT_conv_mean_signal, dot1_conv_mean_signal, genome = 'SK1',
-#'                             yMax = 3, onScreen = FALSE, legendXcoord = -500,
-#'                             legendYcoord = 1, colorA = 'red', colorB = 'green')
+#' signal_at_intergen_average_plot(WT_div_mean_signal, dot1_conv_mean_signal, genome = 'SK1',
+#'                                 orientation = 'Div', yMax = 3, onScreen = FALSE,
+#'                                 legendXcoord = -500, legendYcoord = 1,
+#'                                 colorA = 'red', colorB = 'green')
 #' @export
 
-signal_at_conv_average_plot <- function(inputDataA, inputDataB, genome,
+signal_at_conv_average_plot <- function(inputDataA, inputDataB, genome, orientation,
                                         yMax, onScreen = TRUE,
                                         legendXcoord = xMin + xMin * 0.2,
                                         legendYcoord = yMax + yMax * 0.05,
@@ -92,7 +95,8 @@ signal_at_conv_average_plot <- function(inputDataA, inputDataB, genome,
   xMax <- dataA[[nrow(dataA), 1]]
   
   if (!onScreen) {
-    png(filename = paste0(deparse(substitute(inputDataA)), "_conv_mean", ".png"),
+    png(filename = paste0(deparse(substitute(inputDataA)), "_",
+                          orientation, "_mean", ".png"),
         width = 700, height = 650, unit = 'px')
   }
   
@@ -100,7 +104,7 @@ signal_at_conv_average_plot <- function(inputDataA, inputDataB, genome,
   plot(0, type = 'l', lwd = 5, xaxt = 'n', yaxt = 'n',
        xlim = c(xMin, xMax), ylim = c(yMin, yMax),
        xlab = "Distance from midpoints of\nintergenic regions (bp)",
-       ylab = 'Signal', main = paste0('Convergent genes\n(mapped to ', genome, ' genome)'),
+       ylab = 'Signal', main = paste0(orientation, ' genes\n(mapped to ', genome, ' genome)'),
        cex = 2, cex.main = 2, cex.axis = 2, cex.lab = 2.5, bty = "n")
   
   axis(1, at = c(xMin, 0, xMax), lab = c(-500, 0, 500),

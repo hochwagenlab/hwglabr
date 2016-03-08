@@ -97,7 +97,7 @@ signal_at_orf_average_plot <- function(inputDataA, inputDataB, genome,
   }
   
   if (!onScreen) {
-    png(filename = paste0(deparse(substitute(inputDataA)), "_conv_mean", ".png"),
+    png(filename = paste0(deparse(substitute(inputDataA)), "_orf_mean", ".png"),
         width = 700, height = 650, unit = 'px')
   }
   
