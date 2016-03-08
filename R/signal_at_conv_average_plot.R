@@ -76,7 +76,15 @@ signal_at_conv_average_plot <- function(inputDataA, inputDataB, genome,
       yMax_A <- ceiling(max(dataA[, 2]))
       yMax_B <- ceiling(max(dataB[, 2]))
       yMax <- tail(sort(c(yMax_A, yMax_B)), 1)
-    } else yMax <- ceiling(max(dataA[, 2]))
+      
+      # Get lowest of the minima of the two strains to set y axis minimum
+      yMin_A <- floor(min(dataA[, 2]))
+      yMin_B <- floor(min(dataB[, 2]))
+      yMin <- head(sort(c(yMin_A, yMin_B)), 1)
+    } else {
+      yMax <- ceiling(max(dataA[, 2]))
+      yMin <- floor(min(dataA[, 2]))
+    }
   }
   
   # Have to use double "[[]]" to extract single values from "tbl_df" dplyr objects
@@ -90,14 +98,14 @@ signal_at_conv_average_plot <- function(inputDataA, inputDataB, genome,
   
   par(mfrow = c(1, 1), mar = c(11, 12, 8, 4), mgp = c(7, 2, 0))
   plot(0, type = 'l', lwd = 5, xaxt = 'n', yaxt = 'n',
-       xlim = c(xMin, xMax), ylim = c(0, yMax),
+       xlim = c(xMin, xMax), ylim = c(yMin, yMax),
        xlab = "Distance from midpoints of\nintergenic regions (bp)",
        ylab = 'Signal', main = paste0('Convergent genes\n(mapped to ', genome, ' genome)'),
        cex = 2, cex.main = 2, cex.axis = 2, cex.lab = 2.5, bty = "n")
   
   axis(1, at = c(xMin, 0, xMax), lab = c(-500, 0, 500),
        las = 1, lwd = 4, cex.axis = 2.5, cex = 3.0)
-  axis(2, at = c(0, yMax), lwd = 4, las = 2, cex.axis = 2.5, cex = 3.0)
+  axis(2, at = c(yMin, 0, yMax), lwd = 4, las = 2, cex.axis = 2.5, cex = 3.0)
   abline(v = 0, lty = 2, lwd = 2)
   
   lines(dataA, col = colorA, lwd = 8)

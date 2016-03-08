@@ -1,9 +1,9 @@
 #' Calculate average signal by position
 #'
-#' Given the ChIP-seq signal on a range of relative genomic positions (e.g. between convergent genes
+#' Given the ChIP-seq signal on a range of relative genomic positions (e.g. at intergenic regions
 #' or on ORFs), this function allows you to calculate the average ChIP signal by position. It takes
 #' as input a data frame containing the genome-wide signal, for example the output of
-#' \code{signal_at_conv()} or \code{signal_at_orf()}.
+#' \code{signal_at_intergen()} or \code{signal_at_orf()}.
 #' @param inputData As a data frame containing at least a column named \code{position}, containing the
 #' relative genomic position and a column named \code{signal}, contianing the corresponding signal.
 #' No default.
@@ -26,8 +26,8 @@ signal_average <- function(inputData, saveFile = FALSE) {
   # Make sure the input is a data frame
   if (!is.data.frame(inputData)) {
     stop("Wrong input data - not an R data frame.\n",
-         "Please run 'signal_at_conv()' or 'signal_at_orf()' on your data first. Example:\n",
-         "WT_signal_dataframe <- signal_at_conv(WT_wiggle)\n",
+         "Please run 'signal_at_intergen()' or 'signal_at_orf()' on your data first. Example:\n",
+         "WT_signal_dataframe <- signal_at_intergen(WT_wiggle)\n",
          "WT_mean_signal <- signal_average(WT_signal_dataframe)", call. = FALSE)
     }
   
