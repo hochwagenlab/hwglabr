@@ -2,10 +2,10 @@
 % Please edit documentation in R/signal_at_intergen.R
 \name{signal_at_intergen}
 \alias{signal_at_intergen}
-\title{Genome-wide signal at intergenic regions between convergent, divergent or tandem genes.}
+\title{Genome-wide signal at intergenic regions between convergent, divergent or tandem genes}
 \usage{
 signal_at_intergen(inputData, inputDataFrame = FALSE, orientation = "conv",
-  regionSize = 1000, excludeOverlapping = FALSE, saveFile = FALSE)
+  regionSize = 1000, includeOverlapping = TRUE, saveFile = FALSE)
 }
 \arguments{
 \item{inputData}{As a list of the 16 chr wiggle data (output of \code{readall_tab}) or a data frame
@@ -19,17 +19,17 @@ orientation of the flanking genes. Accepts one of:
 \enumerate{
   \item \code{conv} Convergent genes
   \item \code{div} Divergent genes
-  \item \code{tandem} Tandem genes. All regions in output in 5' -> 3' orientation (genes on Crick
-  strand are reversed).
+  \item \code{tandem} Tandem genes. All regions in output will be in the same 5' -> 3' orientation
+  (genes on Crick strand are reversed).
 }
 Defaults to \code{conv}.}
 
 \item{regionSize}{Number indicating the size (in bp) of the region to calculate.
-Defaults to 1000 bp (+/- 500 bp).}
+Defaults to 1000 bp (midpoint +/- 500 bp).}
 
-\item{excludeOverlapping}{Boolean indicating whether intergenic regions between overlapping genes should
-be included in the analysis. If \code{excludeOverlapping = TRUE}, intergenic regions between overlapping
-genes will not be included in the analysis. Otherwise all regions are included. Defaults to \code{FALSE}.}
+\item{includeOverlapping}{Boolean indicating whether intergenic regions between overlapping genes should
+be included in the analysis. If \code{includeOverlapping = FALSE}, intergenic regions between overlapping
+genes will not be included in the analysis. Otherwise all regions are included. Defaults to \code{TRUE}.}
 
 \item{saveFile}{Boolean indicating whether output should be written to a .txt file (in current working
 directory). If \code{saveFile = FALSE}, output is returned to screen or an R object (if assigned).
@@ -55,6 +55,6 @@ or the complete genome in one data frame (for example loaded from .bed files).
 signal_at_intergen(WT, orientation = 'conv')
 
 signal_at_intergen(WT, orientation = 'div', inputDataFrame = TRUE, regionSize = 1500,
-                   excludeOverlapping = TRUE, saveFile = TRUE)
+                   includeOverlapping = FALSE, saveFile = TRUE)
 }
 

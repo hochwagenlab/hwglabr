@@ -1,4 +1,4 @@
-#' Genome-wide signal at intergenic regions between convergent, divergent or tandem genes.
+#' Genome-wide signal at intergenic regions between convergent, divergent or tandem genes
 #'
 #' This function allows you to pull out the ChIP signal over a window of positions of the selected size
 #' (defaulting to \code{regionSize = 1000}) centered on midpoints of intergenic regions between genes of
@@ -14,15 +14,15 @@
 #' \enumerate{
 #'   \item \code{conv} Convergent genes
 #'   \item \code{div} Divergent genes
-#'   \item \code{tandem} Tandem genes. All regions in output in 5' -> 3' orientation (genes on Crick
-#'   strand are reversed).
+#'   \item \code{tandem} Tandem genes. All regions in output will be in the same 5' -> 3' orientation
+#'   (genes on Crick strand are reversed).
 #' }
 #' Defaults to \code{conv}.
 #' @param regionSize Number indicating the size (in bp) of the region to calculate.
-#' Defaults to 1000 bp (+/- 500 bp).
-#' @param excludeOverlapping Boolean indicating whether intergenic regions between overlapping genes should
-#' be included in the analysis. If \code{excludeOverlapping = TRUE}, intergenic regions between overlapping
-#' genes will not be included in the analysis. Otherwise all regions are included. Defaults to \code{FALSE}.
+#' Defaults to 1000 bp (midpoint +/- 500 bp).
+#' @param includeOverlapping Boolean indicating whether intergenic regions between overlapping genes should
+#' be included in the analysis. If \code{includeOverlapping = FALSE}, intergenic regions between overlapping
+#' genes will not be included in the analysis. Otherwise all regions are included. Defaults to \code{TRUE}.
 #' @param saveFile Boolean indicating whether output should be written to a .txt file (in current working
 #' directory). If \code{saveFile = FALSE}, output is returned to screen or an R object (if assigned).
 #' Defaults to \code{FALSE}.
@@ -37,11 +37,11 @@
 #' signal_at_intergen(WT, orientation = 'conv')
 #' 
 #' signal_at_intergen(WT, orientation = 'div', inputDataFrame = TRUE, regionSize = 1500,
-#'                    excludeOverlapping = TRUE, saveFile = TRUE)
+#'                    includeOverlapping = FALSE, saveFile = TRUE)
 #' @export
 
 signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 'conv',
-                               regionSize = 1000, excludeOverlapping = FALSE,
+                               regionSize = 1000, includeOverlapping = TRUE,
                                saveFile = FALSE) {
   ptm  <- proc.time()
   
@@ -138,7 +138,7 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
   }
   
   # Drop regions between overlapping genes?
-  if (excludeOverlapping) {
+  if (!includeOverlapping) {
     cat('Dropping overlapping genes...\n')
     intergen <- intergen[intergen$dist_apart > 0, ]
   }
