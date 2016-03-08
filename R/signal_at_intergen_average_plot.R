@@ -38,11 +38,11 @@
 #'                                 colorA = 'red', colorB = 'green')
 #' @export
 
-signal_at_conv_average_plot <- function(inputDataA, inputDataB, genome, orientation,
-                                        yMax, onScreen = TRUE,
-                                        legendXcoord = xMin + xMin * 0.2,
-                                        legendYcoord = yMax + yMax * 0.05,
-                                        colorA = 'grey50', colorB = 'orange') {
+signal_at_intergen_average_plot <- function(inputDataA, inputDataB, genome, orientation,
+                                            yMax, onScreen = TRUE,
+                                            legendXcoord = xMin + xMin * 0.2,
+                                            legendYcoord = yMax + yMax * 0.05,
+                                            colorA = 'grey50', colorB = 'orange') {
   
   # Make sure the input is the 16x2 data frame returned by chr_cov
   if (!is.data.frame(inputDataA)) {
