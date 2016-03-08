@@ -1,6 +1,6 @@
 #' Line plot of average signal between convergent genes
 #'
-#' \strong{Deprecated! Use \code{\link{signal_at_intergen_average_plot()}} instead.} \cr
+#' \strong{Deprecated! Use \code{\link{signal_at_intergen_average_plot}} instead.} \cr
 #' This function allows you to make a line plot of the ChIP signal over the average
 #' intergenic region centered on midpoints of convergent genes. It takes as input a
 #' data frame containing the average signal centered on the midpoints of convergent

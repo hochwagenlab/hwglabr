@@ -27,7 +27,7 @@ A local data frame (dplyr data frame) with three columns: chr (chromosome number
 (genome coordinate relative to midpoint of intergenic region) and signal (ChIP signal).
 }
 \description{
-\strong{Deprecated! Use \code{\link{signal_at_intergen()}} instead.} \cr
+\strong{Deprecated! Use \code{\link{signal_at_intergen}} instead.} \cr
 This function allows you to pull out the ChIP signal centered on midpoints of convergent genes.
 It takes as input either the wiggle data as list of 16 chromosome (output of \code{readall_tab()})
 or complete genome in one data frame (for example loaded from .bed files).
