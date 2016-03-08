@@ -2,7 +2,7 @@
 % Please edit documentation in R/signal_at_intergen.R
 \name{signal_at_intergen}
 \alias{signal_at_intergen}
-\title{Genome-wide signal at intergenic regions between convergent, divergent or tandem genes}
+\title{Signal at intergenic regions between convergent, divergent or tandem genes genome-wide}
 \usage{
 signal_at_intergen(inputData, inputDataFrame = FALSE, orientation = "conv",
   regionSize = 1000, includeOverlapping = TRUE, saveFile = FALSE)

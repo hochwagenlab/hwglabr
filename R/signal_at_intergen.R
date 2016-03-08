@@ -1,4 +1,4 @@
-#' Genome-wide signal at intergenic regions between convergent, divergent or tandem genes
+#' Signal at intergenic regions between convergent, divergent or tandem genes genome-wide
 #'
 #' This function allows you to pull out the ChIP signal over a window of positions of the selected size
 #' (defaulting to \code{regionSize = 1000}) centered on midpoints of intergenic regions between genes of
