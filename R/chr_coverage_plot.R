@@ -10,7 +10,7 @@
 #' (\code{meanNorm = FALSE}) or normalized to genome-wide averages (\code{meanNorm = TRUE}).
 #' Defaults to TRUE.
 #' @param yMax Optional number to be used as the max Y scale value in the plots. No default.
-#' @param onscreen Boolean indicating plots should be returned to the screen (\code{onScreen = TRUE})
+#' @param onScreen Boolean indicating plots should be returned to the screen (\code{onScreen = TRUE})
 #' or written to .png files (\code{onScreen = FALSE}). Defaults to \code{TRUE}.
 #' @param colorA Optional R color for sample A. Defaults to \code{grey50}.
 #' @param colorB Optional R color for sample B. Defaults to \code{green}.
