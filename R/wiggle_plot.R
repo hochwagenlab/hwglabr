@@ -90,7 +90,7 @@ wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein
        lwd = 3, xaxt = 'n', yaxt = 'n',
        xlim = c(0, xMax),
        ylim = c(-2, yMax),
-       xlab = paste0('Chr', chr, ' position (Kb)'),
+       xlab = paste0('Position on ', Cen[chr, 'Chromosome'], ' (Kb)'),
        ylab = paste0(protein, '\nChIP/Input'),
        main = paste0('Mapped to ', genome, ' genome'), col = color,
        cex = 2, cex.main = 2, cex.axis = 2, cex.lab = 2, bty = "n")
