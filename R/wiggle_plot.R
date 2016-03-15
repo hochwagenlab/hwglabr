@@ -70,7 +70,7 @@ wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein
   data("S288Ccen")
   ##############################################################################
   
-  cat('Plotting... \n')
+  cat('\n\nPlotting... \n')
   if (genome == 'SK1') {
     Cen <- SK1cen
   } else {
