@@ -66,14 +66,14 @@ wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein
   # setwd('/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/Scripts/Rpackages/hwglabr')
   # devtools::use_data(S288Ccen, internal = FALSE)
   
-  # Load the data:
-  data("S288Ccen")
   ##############################################################################
   
   cat('\n\nPlotting... \n')
   if (genome == 'SK1') {
     Cen <- SK1cen
   } else {
+    # Load the data:
+    data("S288Ccen")
     Cen <- S288Ccen
   }
   
