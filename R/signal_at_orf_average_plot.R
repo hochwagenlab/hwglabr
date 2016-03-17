@@ -83,7 +83,7 @@ signal_at_orf_average_plot <- function(inputDataA, inputDataB, genome,
       # Get highest of the maxima of the two strains to set y axis maximum
       yMin_A <- min(dataA[, 2])
       yMin_B <- min(dataB[, 2])
-      yMin <- tail(sort(c(yMin_A, yMin_B)), 1)
+      yMin <- head(sort(c(yMin_A, yMin_B)), 1)
     } else yMin <- min(dataA[, 2])
   }
     
