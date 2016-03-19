@@ -49,7 +49,9 @@ This function allows you to pull out the ChIP signal over a window of positions 
 (defaulting to \code{regionSize = 1000}) centered on midpoints of intergenic regions between genes of
 the selected orientation: convergent, divergent or tandem.
 It takes as input either the wiggle data as list of 16 chromosome (output of \code{readall_tab()})
-or the complete genome in one data frame (for example loaded from .bed files).
+or the complete genome in one data frame (for example loaded from .bed files).\cr
+\strong{Note:} If you want to scale the intergenic regions to a constant length, you can use the function
+\code{\link{signal_at_intergen_scaled}}.
 }
 \examples{
 signal_at_intergen(WT, orientation = 'conv')
