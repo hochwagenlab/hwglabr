@@ -74,7 +74,6 @@ signal_at_orf <- function(inputData, gff, gffFile, saveFile = FALSE) {
     stop("R package 'dplyr' needed for this function to work. Please install it.\n",
          "install.packages('dplyr')", call. = FALSE)
   }
-  library(dplyr)
   
   cat('Collecting signal...\n')
   cat('(Skip genes whose start/stop coordinates are not found in wiggle data)\n')
@@ -127,16 +126,16 @@ signal_at_orf <- function(inputData, gff, gffFile, saveFile = FALSE) {
       colnames(chr) <- "chr"
       g <- as.data.frame(rep(gene, nrow(sig_gene)))
       colnames(g) <- "gene"
-      all <- bind_cols(chr, sig_gene, g)
+      all <- dplyr::bind_cols(chr, sig_gene, g)
       # To collect all genes
-      plus_sigs <- bind_rows(plus_sigs, all)
+      plus_sigs <- dplyr::bind_rows(plus_sigs, all)
       
       geneCount <- geneCount + 1
     }
     cat(paste0('... + strand: ', geneCount, ' genes (skipped ', j - geneCount, ')\n'))
     
     # To collect all chrs
-    plus_final <- bind_rows(plus_final, plus_sigs)
+    plus_final <- dplyr::bind_rows(plus_final, plus_sigs)
     
     ############################## minus strand ##################################
     # Create data frame to collect final data for all genes in chr
@@ -175,20 +174,20 @@ signal_at_orf <- function(inputData, gff, gffFile, saveFile = FALSE) {
       colnames(chr) <- "chr"
       g <- as.data.frame(rep(gene, nrow(sig_gene)))
       colnames(g) <- "gene"
-      all <- bind_cols(chr, sig_gene, g)
+      all <- dplyr::bind_cols(chr, sig_gene, g)
       # To collect all genes
-      minus_sigs <- bind_rows(minus_sigs, all)
+      minus_sigs <- dplyr::bind_rows(minus_sigs, all)
       
       geneCount <- geneCount + 1
     }
     # To collect all chrs
-    minus_final <- bind_rows(minus_final, minus_sigs)
+    minus_final <- dplyr::bind_rows(minus_final, minus_sigs)
     
     cat(paste0('... - strand: ', geneCount, ' genes (skipped ', j - geneCount, ')\n'))
   }
   
   # Merge '+' and '-' strand data
-  mergedStrands <- bind_rows(plus_final, minus_final)
+  mergedStrands <- dplyr::bind_rows(plus_final, minus_final)
   colnames(mergedStrands) <- c("chrom", "position", "signal", "gene")
   # Sort by gene and position
   mergedStrands <- mergedStrands[order(mergedStrands$gene, mergedStrands$position), ]
