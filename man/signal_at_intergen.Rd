@@ -54,7 +54,7 @@ or the complete genome in one data frame (for example loaded from .bed files).\c
 \code{\link{signal_at_intergen_scaled}}.
 }
 \examples{
-signal_at_intergen(WT, orientation = 'conv')
+signal_at_intergen(WT)
 
 signal_at_intergen(WT, orientation = 'div', inputDataFrame = TRUE, regionSize = 1500,
                    includeOverlapping = FALSE, saveFile = TRUE)
