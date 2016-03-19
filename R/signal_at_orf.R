@@ -2,10 +2,10 @@
 #'
 #' This function allows you to pull out the ChIP signal over all ORFs in the genome. It collects the
 #' signal over each ORF plus both flanking regions (1/2 the length of the ORF on each side) and
-#' scales them all to the same value: 2 kb. This means that for two example genes with lengths of
-#' 500 bp and 2 kb, flanking regions of 250 bp and 1 kb, respectively, will be colleted up and
-#' downstream. Both genes will then be scaled to 1 kb and all four flanking regions to 500 bp.
-#' The function takes as input the wiggle data as a list of 16 chromosomes.
+#' scales them all to the same value. This means that for two example genes with lengths of
+#' 500 bp and 2 kb, flanking regions of 250 bp and 1 kb, respectively, will be collected up and
+#' downstream and then both genes (with the respective flanking regions) will be scaled to the
+#' same value. The function takes as input the wiggle data as a list of 16 chromosomes.
 #' (output of \code{readall_tab()}).
 #' @param inputData As a list of the 16 chr wiggle data (output of \code{readall_tab()}). No default.
 #' @param gff Optional dataframe of the gff providing the ORF cordinates. Must be provided if
