@@ -115,7 +115,7 @@ signal_at_orf <- function(inputData, gff, gffFile, saveFile = FALSE) {
       full_leng <- end - start
       gene <- chromGff[j, 9]
       
-      # pull out red1 signal
+      # pull out signal
       sig_gene <- chromData[which(chromData[, 1] >= start & chromData[, 1] <= end), ]
       
       # normalize to 2 kb segment length
