@@ -167,7 +167,7 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
   # If looking at tandem genes we need strand info in order to orient them all
   # 5' -> 3' at the end
   if (orientation == 'tandem') {
-    intergenicPos[, 'strand'] <- intergen[, 'strand']           # strand
+    intergenicPos[, 'strand'] <- intergen[, 'strand']                   # strand
   }
   
   cat('Collecting signal...\n')
@@ -214,11 +214,11 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
       dwnPosition <- intergenicPosChr[j, 'dwn']
       # position
       position <- chromData[chromData[, 'position'] >= upPosition &
-                              chromData[, 'position'] <= dwnPosition, 'position']
+                            chromData[, 'position'] <= dwnPosition, 'position']
       position <- position - intergenicPosChr[j, 'mid']
       # signal
       signal <- chromData[chromData[, 'position'] >= upPosition &
-                            chromData[, 'position'] <= dwnPosition, 'signal']
+                          chromData[, 'position'] <= dwnPosition, 'signal']
       
       # For tandem genes in Crick strand, reverse the order of the position values
       # to have all regions oriented 5' -> 3'
