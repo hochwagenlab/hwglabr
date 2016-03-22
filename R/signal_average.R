@@ -35,6 +35,18 @@ signal_average <- function(inputData, saveFile = FALSE) {
     stop("R package 'dplyr' needed for this function to work. Please install it.\n",
          "install.packages('dplyr')", call. = FALSE)
   }
+  
+  check_S288C <- any(inputData[, 1] == 'chrI')
+  check_SK1 <- any(inputData[, 1] == 'chr01')
+  
+  # Check reference genome and load respective chromosome number vector
+  if (check_S288C) {
+    cat('Detected ref. genome - S288C\n')
+  } else if (check_SK1) {
+    print('Detected ref. genome - SK1')
+  } else stop("Did not recognize reference genome.
+              Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
+  
   library(dplyr)
   
   # Calculate averages for each relative position
