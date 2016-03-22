@@ -192,18 +192,21 @@ signal_at_orf <- function(inputData, gff, gffFile, saveFile = FALSE) {
   # Sort by gene and position
   mergedStrands <- mergedStrands[order(mergedStrands$gene, mergedStrands$position), ]
   
+  cat(paste0('Completed in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
+  
   if(saveFile) {
     cat(paste0('Saving file...\n'))
     if(check_S288C) {
       write.table(mergedStrands, paste0(deparse(substitute(inputData)),
-                                        "_S288C_ORFsignal.txt"), sep = "\t", quote = FALSE)
+                                        "_S288C_metaORF.txt"), sep = "\t", quote = FALSE)
+      cat('Done!')
     } else {
       write.table(mergedStrands, paste0(deparse(substitute(inputData)),
-                                        "_SK1_ORFsignal.txt"), sep = "\t", quote = FALSE)
+                                        "_SK1_metaORF.txt"), sep = "\t", quote = FALSE)
+      cat('Done!')
     }
   } else {
+    cat('Done!')
     return(mergedStrands)
   }
-  
-  cat(paste0('Completed in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
 }
