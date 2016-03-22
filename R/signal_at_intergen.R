@@ -249,7 +249,7 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
   cat(paste0('\nCompleted in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
   
   if(saveFile) {
-    cat(paste0('Saving file...\n'))
+    cat('Saving file...\n')
     if(check_S288C) {
       write.table(allData, paste0(deparse(substitute(inputData)), "_", orientation,
                                   "_S288C.txt"), sep = "\t", quote = FALSE)  
@@ -260,4 +260,5 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
   } else {
     return(allData)
   }
+  cat('Done!')
 }
