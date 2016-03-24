@@ -80,7 +80,7 @@ signal_at_orf_average_plot <- function(inputDataA, inputDataB, genome,
 
   if (missing(yMin)) {
     if (!missing(inputDataB)) {
-      # Get highest of the maxima of the two strains to set y axis maximum
+      # Get lowest of the minima of the two strains to set y axis minimum
       yMin_A <- min(dataA[, 2])
       yMin_B <- min(dataB[, 2])
       yMin <- head(sort(c(yMin_A, yMin_B)), 1)
@@ -103,15 +103,15 @@ signal_at_orf_average_plot <- function(inputDataA, inputDataB, genome,
   
   par(mfrow = c(1, 1), mar = c(11, 12, 8, 4), mgp = c(7, 2, 0))
   plot(0, type = 'l', lwd = 5, xaxt = 'n', yaxt = 'n',
-       xlim = c(0, 2000), ylim = c(yMin, yMax),
+       xlim = c(0, 1), ylim = c(yMin, yMax),
        xlab = "Normalized position",
        ylab = 'Signal', main = paste0('ORFs (mapped to ', genome, ' genome)'),
        cex = 2, cex.main = 2, cex.axis = 2, cex.lab = 2.5, bty = "n")
   
-  axis(1, at = c(0, 2000), lab = c('', ''),
+  axis(1, at = c(0, 1), lab = c('', ''),
        las = 1, lwd = 4, cex.axis = 2.5, cex = 3.0)
   axis(2, at = c(0, yMax), lwd = 4, las = 2, cex.axis = 2.5, cex = 3.0)
-  abline(v = c(500, 1500) , lty= 2, lwd = 2)
+  abline(v = c(250, 750) , lty= 2, lwd = 2)
   
   # Kernel regression smoother
   if (smoothBandwidth != 0) {
