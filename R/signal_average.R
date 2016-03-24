@@ -53,7 +53,7 @@ signal_average <- function(inputData, saveFile = FALSE) {
   #  summarise(mean_signal = mean(signal))
   
   mean_signal <- dplyr::summarise(dplyr::group_by(inputData, position),
-                                  mean_signal = mean(signal))
+                                  mean_signal = mean(signal, na.rm = TRUE))
   
   if(saveFile) {
     cat(paste0('Saving file...\n'))
