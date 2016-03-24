@@ -51,9 +51,8 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
   }
   
   # Check reference genome for both the input data and the gff file; make sure they match
-  chrom_S288C <- c("chrI", "chrII", "chrIII", "chrIV", "chrV", "chrVI", "chrVII",
-                   "chrVIII", "chrIX", "chrX", "chrXI", "chrXII", "chrXIII", "chrXIV",
-                   "chrXV", "chrXVI")
+  chrom_S288C <- c("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
+                   "XI", "XII", "XIII", "XIV", "XV", "XVI")
   chrom_SK1 <- c('01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
                  '11', '12', '13', '14', '15', '16')
   
