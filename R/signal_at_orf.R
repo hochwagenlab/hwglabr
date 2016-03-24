@@ -63,7 +63,7 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
   check_gff_SK1 <- any(gff[, 1] == 'chr01')
   
   if (check_S288C != check_gff_S288C) {
-    stop("The reference genome in the input data and the gff do not seem to match.\n",
+    stop("The reference genomes in the input data and the gff do not seem to match.\n",
          "Please provide data and gff for the same reference genome.\n", call. = FALSE)
   } else if (check_S288C & check_gff_S288C) {
     cat('Detected ref. genome - S288C\n')
@@ -133,7 +133,9 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
       # In order to avoid this, first build a Loess model with low span argument (alpha)
       # of the signal and then project it onto 1000 positions by using the model
       # to predict the signal
-      model <- loess(signal ~ position, sig_gene, span = 0.05)
+      model <- loess(signal ~ position, sig_gene,
+                     control = loess.control(surface = "direct"),
+                     span = loessSpan)
       signal <- predict(model, data.frame(position = seq(1, 1000, 1)), se = F)
       sig_gene <- data.frame(position = seq(1, 1000, 1), signal)
       
@@ -186,7 +188,9 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
       # In order to avoid this, first build a Loess model with low span argument (alpha)
       # of the signal and then project it onto 1000 positions by using the model
       # to predict the signal
-      model <- loess(signal ~ position, sig_gene, span = loessSpan)
+      model <- loess(signal ~ position, sig_gene,
+                     control = loess.control(surface = "direct"),
+                     span = loessSpan)
       signal <- predict(model, data.frame(position = seq(1, 1000, 1)), se = F)
       sig_gene <- data.frame(position = seq(1, 1000, 1), signal)
       
