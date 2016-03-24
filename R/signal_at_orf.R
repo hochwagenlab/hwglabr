@@ -1,10 +1,10 @@
-#' Signal at all ORFs genome-wide
+#' Signal at all ORFs genome-wide (meta ORF)
 #'
 #' This function allows you to pull out the ChIP signal over all ORFs in the genome. It collects the
 #' signal over each ORF plus both flanking regions (1/2 the length of the ORF on each side) and
-#' scales them all to the same value: 2 kb. This means that for two example genes with lengths of
+#' scales them all to the same value (1.000). This means that for two example genes with lengths of
 #' 500 bp and 2 kb, flanking regions of 250 bp and 1 kb, respectively, will be collected up and
-#' downstream. Both genes will then be scaled to 1 kb and all four flanking regions to 500 bp.
+#' downstream. Both gene lengths will then be scaled to 0.500 and all four flanking regions to 0.250.
 #' The function takes as input the wiggle data as a list of 16 chromosomes.
 #' (output of \code{readall_tab()}).
 #' @param inputData As a list of the 16 chr wiggle data (output of \code{readall_tab()}). No default.
@@ -13,6 +13,9 @@
 #' load your selected gff file.
 #' @param gffFile Optional string indicating path to the gff file providing the ORF cordinates. Must be
 #' provided if \code{gff} is not. No default.
+#' @param loessSpan Number specifying \code{span} argument for \code{loess} function (the smoothing
+#' parameter alpha). This controls the degree of smoothing of the signal over each ORF.
+#' Defaults to \code{0.05}.
 #' @param saveFile Boolean indicating whether output should be written to a .txt file (in current working
 #' directory). If \code{saveFile = FALSE}, output is returned to screen or an R object (if assigned).
 #' Defaults to FALSE.
@@ -26,10 +29,11 @@
 #' @examples
 #' signal_at_orf(WT, gff = gff)
 #' 
-#' signal_at_orf(WT, gffFile = S288C_annotation_modified.gff, saveFile = TRUE)
+#' signal_at_orf(WT, gffFile = S288C_annotation_modified.gff,
+#'               loessSpan = 0.1, saveFile = TRUE)
 #' @export
 
-signal_at_orf <- function(inputData, gff, gffFile, saveFile = FALSE) {
+signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = FALSE) {
   ptm  <- proc.time()
   
   # gff
@@ -42,7 +46,7 @@ signal_at_orf <- function(inputData, gff, gffFile, saveFile = FALSE) {
          "Please provide either a gff R data frame ('gff' argument) or the path to a gff file ('gffFile' argument), not both.\n",
          call. = FALSE)
   } else if (missing(gff)) {
-    gff <- gff_read(gffFile)
+    gff <- hwglabr::gff_read(gffFile)
     cat('Loaded gff file...\n')
   }
   
@@ -112,21 +116,30 @@ signal_at_orf <- function(inputData, gff, gffFile, saveFile = FALSE) {
       gene_leng <- chromGff[j, 5] - chromGff[j, 4]
       start <- chromGff[j, 4] - round((0.5 * gene_leng))
       end <- chromGff[j, 5] + round((0.5 * gene_leng))
-      full_leng <- end - start
+      full_leng <- (end - start) + 1
       gene <- chromGff[j, 9]
       
       # pull out signal
       sig_gene <- chromData[which(chromData[, 1] >= start & chromData[, 1] <= end), ]
       
-      # normalize to 2 kb segment length
-      sig_gene[, 1] <- sig_gene[, 1] - start
-      sig_gene[, 1] <- round(sig_gene[, 1] * (2000 / full_leng))
+      # normalize to segment length of 1000
+      sig_gene$position <- (sig_gene$position - start) + 1
+      sig_gene$position <- sig_gene$position * (1000 / full_leng)
       
-      chr <- as.data.frame(rep(paste0('chr', chrom[i]), nrow(sig_gene)))
-      colnames(chr) <- "chr"
-      g <- as.data.frame(rep(gene, nrow(sig_gene)))
-      colnames(g) <- "gene"
-      all <- dplyr::bind_cols(chr, sig_gene, g)
+      # Genes of different sizes have different numbers of positions; small genes
+      # (<1000bp) cannot produce signal values for all 1000 positions and will have gaps
+      # This means that longer genes with more signal values per each position in the
+      # sequence of 1000 positions will contribute more to the final output.
+      # In order to avoid this, first build a Loess model with low span argument (alpha)
+      # of the signal and then project it onto 1000 positions by using the model
+      # to predict the signal
+      model <- loess(signal ~ position, sig_gene, span = 0.05)
+      signal <- predict(model, data.frame(position = seq(1, 1000, 1)), se = F)
+      sig_gene <- data.frame(position = seq(1, 1000, 1), signal)
+      
+      # Make data frame for this gene
+      all <- data.frame(chr = paste0('chr', chrom[i]), sig_gene, gene)
+
       # To collect all genes
       plus_sigs <- dplyr::bind_rows(plus_sigs, all)
       
@@ -157,24 +170,32 @@ signal_at_orf <- function(inputData, gff, gffFile, saveFile = FALSE) {
       gene_leng = chromGff[j, 5] - chromGff[j, 4]
       start <- chromGff[j, 4] - round((0.5 * gene_leng))
       end <- chromGff[j, 5] + round((0.5 * gene_leng))
-      full_leng <- end - start
+      full_leng <- (end - start) + 1
       gene <- chromGff[j, 9]
       
       # Pull out red1 signal
       sig_gene <- chromData[which(chromData[, 1] >= start & chromData[, 1] <= end), ]
       
-      # Normalize to 2 kb segment length
-      sig_gene[, 1] <- sig_gene[, 1] - start
-      sig_gene[, 1] <- round(sig_gene[, 1] * (2000 / full_leng))
+      # normalize to segment length of 1000
+      sig_gene$position <- (sig_gene$position - start) + 1
+      sig_gene$position <- sig_gene$position * (1000 / full_leng)
+      # Genes of different sizes have different numbers of positions; small genes
+      # (<1000bp) cannot produce signal values for all 1000 positions and will have gaps
+      # This means that longer genes with more signal values per each position in the
+      # sequence of 1000 positions will contribute more to the final output.
+      # In order to avoid this, first build a Loess model with low span argument (alpha)
+      # of the signal and then project it onto 1000 positions by using the model
+      # to predict the signal
+      model <- loess(signal ~ position, sig_gene, span = loessSpan)
+      signal <- predict(model, data.frame(position = seq(1, 1000, 1)), se = F)
+      sig_gene <- data.frame(position = seq(1, 1000, 1), signal)
       
       # Reverse the order of the position values
-      sig_gene[, 1] <- 2000 - sig_gene[, 1]
+      sig_gene$position <- (1000 - sig_gene$position) + 1
       
-      chr <- as.data.frame(rep(paste0('chr', chrom[i]), nrow(sig_gene)))
-      colnames(chr) <- "chr"
-      g <- as.data.frame(rep(gene, nrow(sig_gene)))
-      colnames(g) <- "gene"
-      all <- dplyr::bind_cols(chr, sig_gene, g)
+      # Make data frame for this gene
+      all <- data.frame(chr = paste0('chr', chrom[i]), sig_gene, gene)
+
       # To collect all genes
       minus_sigs <- dplyr::bind_rows(minus_sigs, all)
       

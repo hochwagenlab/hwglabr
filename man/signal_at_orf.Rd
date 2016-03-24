@@ -2,9 +2,9 @@
 % Please edit documentation in R/signal_at_orf.R
 \name{signal_at_orf}
 \alias{signal_at_orf}
-\title{Signal at all ORFs genome-wide}
+\title{Signal at all ORFs genome-wide (meta ORF)}
 \usage{
-signal_at_orf(inputData, gff, gffFile, saveFile = FALSE)
+signal_at_orf(inputData, gff, gffFile, loessSpan = 0.05, saveFile = FALSE)
 }
 \arguments{
 \item{inputData}{As a list of the 16 chr wiggle data (output of \code{readall_tab()}). No default.}
@@ -15,6 +15,10 @@ load your selected gff file.}
 
 \item{gffFile}{Optional string indicating path to the gff file providing the ORF cordinates. Must be
 provided if \code{gff} is not. No default.}
+
+\item{loessSpan}{Number specifying \code{span} argument for \code{loess} function (the smoothing
+parameter alpha). This controls the degree of smoothing of the signal over each ORF.
+Defaults to \code{0.05}.}
 
 \item{saveFile}{Boolean indicating whether output should be written to a .txt file (in current working
 directory). If \code{saveFile = FALSE}, output is returned to screen or an R object (if assigned).
@@ -32,15 +36,16 @@ A local data frame with four columns:
 \description{
 This function allows you to pull out the ChIP signal over all ORFs in the genome. It collects the
 signal over each ORF plus both flanking regions (1/2 the length of the ORF on each side) and
-scales them all to the same value: 2 kb. This means that for two example genes with lengths of
+scales them all to the same value (1.000). This means that for two example genes with lengths of
 500 bp and 2 kb, flanking regions of 250 bp and 1 kb, respectively, will be collected up and
-downstream. Both genes will then be scaled to 1 kb and all four flanking regions to 500 bp.
+downstream. Both gene lengths will then be scaled to 0.500 and all four flanking regions to 0.250.
 The function takes as input the wiggle data as a list of 16 chromosomes.
 (output of \code{readall_tab()}).
 }
 \examples{
 signal_at_orf(WT, gff = gff)
 
-signal_at_orf(WT, gffFile = S288C_annotation_modified.gff, saveFile = TRUE)
+signal_at_orf(WT, gffFile = S288C_annotation_modified.gff,
+              loessSpan = 0.1, saveFile = TRUE)
 }
 
