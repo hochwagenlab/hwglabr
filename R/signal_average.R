@@ -47,12 +47,13 @@ signal_average <- function(inputData, saveFile = FALSE) {
   } else stop("Did not recognize reference genome.
               Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
   
-  library(dplyr)
-  
   # Calculate averages for each relative position
-  mean_signal <- inputData %>%
-    group_by(position) %>%
-    summarise(mean_signal = mean(signal))
+  #mean_signal <- inputData %>%
+  #  group_by(position) %>%
+  #  summarise(mean_signal = mean(signal))
+  
+  mean_signal <- dplyr::summarise(dplyr::group_by(inputData, position),
+                                  mean_signal = mean(signal))
   
   if(saveFile) {
     cat(paste0('Saving file...\n'))
