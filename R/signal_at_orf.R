@@ -14,7 +14,7 @@
 #' @param gffFile Optional string indicating path to the gff file providing the ORF cordinates. Must be
 #' provided if \code{gff} is not. No default.
 #' @param loessSpan Number specifying \code{span} argument for \code{loess} function (the smoothing
-#' parameter alpha). This controls the degree of smoothing of the signal over each ORF.
+#' parameter alpha). This controls the degree of smoothing of the signal.
 #' Defaults to \code{0.05}.
 #' @param saveFile Boolean indicating whether output should be written to a .txt file (in current working
 #' directory). If \code{saveFile = FALSE}, output is returned to screen or an R object (if assigned).
