@@ -17,7 +17,7 @@ load your selected gff file.}
 provided if \code{gff} is not. No default.}
 
 \item{loessSpan}{Number specifying \code{span} argument for \code{loess} function (the smoothing
-parameter alpha). This controls the degree of smoothing of the signal over each ORF.
+parameter alpha). This controls the degree of smoothing of the signal.
 Defaults to \code{0.05}.}
 
 \item{saveFile}{Boolean indicating whether output should be written to a .txt file (in current working
