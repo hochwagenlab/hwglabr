@@ -37,7 +37,7 @@ if (!requireNamespace("dplyr", quietly = TRUE)) {
         stop("R package 'dplyr' needed for this function to work. Please install it.\n", 
             "install.packages('dplyr')", call. = FALSE)
     }
-    library(dplyr)
+    #library(dplyr)
     
 # Check kind of numerals used in your input data (list of chromosome wiggle data)
 check_S288C <- any(grep('chrI.', names(inputData), fixed = TRUE))
@@ -155,7 +155,7 @@ for (i in 1:length(chrom_nums)) {
 					tmp[,1] <- tmp[,1] - summit_range_chrom[j,2]
 					tmp2 <- data.frame( chr=rep( chrom_nums[i], nrow(tmp) ), tmp, line=rep( j, nrow(tmp) ), 
 						stringsAsFactors=F)
-					summit_data <- bind_rows(summit_data,tmp2)
+					summit_data <- dplyr::bind_rows(summit_data,tmp2)
 				}
 			} else {
 				# make sure I didn't end up with the entire chromosome
@@ -168,7 +168,7 @@ for (i in 1:length(chrom_nums)) {
 					tmp[,1] <- tmp[,1] - summit_range_chrom[j,2]
 					tmp2 <- data.frame( chr=rep( chrom_nums[i], nrow(tmp) ), tmp, line=rep( j, nrow(tmp) ), 
 						stringsAsFactors=F)
-					summit_data <- bind_rows(summit_data,tmp2)
+					summit_data <- dplyr::bind_rows(summit_data,tmp2)
 				}
 		}
 	}
