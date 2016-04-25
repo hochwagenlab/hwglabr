@@ -39,11 +39,13 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
   # gff
   if (missing(gffFile) & missing(gff)) {
     stop("No gff data provided.\n",
-         "You must provide a lodaded gff as an R data frame ('gff' argument) or the path to a gff file to load ('gffFile' argument).",
+         "You must provide either a lodaded gff as an R data frame ('gff' argument)
+         or the path to a gff file to load ('gffFile' argument).",
          call. = FALSE)
   } else if (!(missing(gffFile) | missing(gff))) {
     stop("Two gff data sources provided.\n",
-         "Please provide either a gff R data frame ('gff' argument) or the path to a gff file ('gffFile' argument), not both.\n",
+         "Please provide either a gff R data frame ('gff' argument)
+         or the path to a gff file ('gffFile' argument), not both.\n",
          call. = FALSE)
   } else if (missing(gff)) {
     gff <- hwglabr::gff_read(gffFile)
