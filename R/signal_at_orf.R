@@ -82,7 +82,7 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
   }
   
   cat('Collecting signal...\n')
-  cat('(Skip genes whose start/stop coordinates are not found in wiggle data)\n')
+  cat('(Skip genes with missing data - coordinates and signal - in wiggle data)\n')
 
   # Create data frames to collect final data for all chrs
   plus_final <- data.frame()
@@ -123,6 +123,9 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
       
       # pull out signal
       sig_gene <- chromData[which(chromData[, 1] >= start & chromData[, 1] <= end), ]
+      
+      # Skip if there are discontinuities in the data (missing position:value pairs)
+      if(nrow(sig_gene) != full_leng) next
       
       # normalize to segment length of 1000
       sig_gene$position <- (sig_gene$position - start) + 1
@@ -179,6 +182,9 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
       
       # Pull out red1 signal
       sig_gene <- chromData[which(chromData[, 1] >= start & chromData[, 1] <= end), ]
+      
+      # Skip if there are discontinuities in the data (missing position:value pairs)
+      if(nrow(sig_gene) != full_leng) next
       
       # normalize to segment length of 1000
       sig_gene$position <- (sig_gene$position - start) + 1
