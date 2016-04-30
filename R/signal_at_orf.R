@@ -2,11 +2,18 @@
 #'
 #' This function allows you to pull out the ChIP signal over all ORFs in the genome. It collects the
 #' signal over each ORF plus both flanking regions (1/2 the length of the ORF on each side) and
-#' scales them all to the same value (1.000). This means that for two example genes with lengths of
+#' scales them all to the same value (1000). This means that for two example genes with lengths of
 #' 500 bp and 2 kb, flanking regions of 250 bp and 1 kb, respectively, will be collected up and
-#' downstream. Both gene lengths will then be scaled to 0.500 and all four flanking regions to 0.250.
+#' downstream. Both gene lengths will then be scaled to 500 and all four flanking regions to 250.
+#' After scaling, a loess model of the signal is built and used to output predictions of the signal
+#' at each position between 1 and 1000. \cr
 #' The function takes as input the wiggle data as a list of 16 chromosomes.
 #' (output of \code{readall_tab()}).
+#' \cr \cr
+#' \strong{Note:} Our wiggle data always contains gaps with missing chromosome coordinates
+#' and ChIP-seq signal. The way this function deals with that is by skipping affected genes.
+#' The number of skipped genes in each chromosome is printed to the console, as well as the
+#' final count (and percentage) of skipped genes. \cr
 #' @param inputData As a list of the 16 chr wiggle data (output of \code{readall_tab()}). No default.
 #' @param gff Optional dataframe of the gff providing the ORF cordinates. Must be provided if
 #' \code{gffFile} is not. No default. Note: You can use the function \code{gff_read()} in hwglabr to
@@ -22,8 +29,8 @@
 #' @return A local data frame with four columns:
 #' \enumerate{
 #'   \item \code{chr} Chromosome number
-#'   \item \code{position} Nucleotide coordinate (in normalized total length of 2 kb)
-#'   \item \code{signal} ChIP signal
+#'   \item \code{position} Nucleotide coordinate (in normalized total length of 1 kb)
+#'   \item \code{signal} ChIP-seq signal at each position (1 to 1000)
 #'   \item \code{gene} Systematic gene name
 #' }
 #' @examples
@@ -82,11 +89,14 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
   }
   
   cat('Collecting signal...\n')
-  cat('(Skip genes with missing data - coordinates and signal - in wiggle data)\n')
+  cat('(Skip genes with missing coordinates and signal in wiggle data)\n')
 
   # Create data frames to collect final data for all chrs
   plus_final <- data.frame()
   minus_final <- data.frame()
+  # Keep track of total and non-skipped genes, to print info at the end
+  number_genes <- 0
+  number_skipped_genes <- 0
   
   for(i in 1:length(inputData)) {
     chrNum <- paste0('chr', chrom[i])
@@ -154,6 +164,10 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
     }
     cat(paste0('... + strand: ', geneCount, ' genes (skipped ', j - geneCount, ')\n'))
     
+    # Keep track of total and non-skipped genes, to print info at the end
+    number_genes <- number_genes + j
+    number_skipped_genes <- number_skipped_genes + (j - geneCount)
+    
     # To collect all chrs
     plus_final <- dplyr::bind_rows(plus_final, plus_sigs)
     
@@ -217,6 +231,9 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
     minus_final <- dplyr::bind_rows(minus_final, minus_sigs)
     
     cat(paste0('... - strand: ', geneCount, ' genes (skipped ', j - geneCount, ')\n'))
+    # Keep track of total and non-skipped genes, to print info at the end
+    number_genes <- number_genes + j
+    number_skipped_genes <- number_skipped_genes + (j - geneCount)
   }
   
   # Merge '+' and '-' strand data
@@ -226,6 +243,13 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
   mergedStrands <- mergedStrands[order(mergedStrands$gene, mergedStrands$position), ]
   
   cat(paste0('Completed in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
+  
+  # Print info on total and non-skipped genes
+  cat('\n------\n')
+  cat(paste0('Skipped ', number_skipped_genes, ' of a total of ', number_genes,
+             " genes (", round((number_skipped_genes * 100 / number_genes), 1),
+             "%).\n"))
+  cat('------\n')
   
   if(saveFile) {
     cat(paste0('Saving file...\n'))

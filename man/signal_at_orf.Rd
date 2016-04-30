@@ -28,19 +28,26 @@ Defaults to FALSE.}
 A local data frame with four columns:
 \enumerate{
   \item \code{chr} Chromosome number
-  \item \code{position} Nucleotide coordinate (in normalized total length of 2 kb)
-  \item \code{signal} ChIP signal
+  \item \code{position} Nucleotide coordinate (in normalized total length of 1 kb)
+  \item \code{signal} ChIP-seq signal at each position (1 to 1000)
   \item \code{gene} Systematic gene name
 }
 }
 \description{
 This function allows you to pull out the ChIP signal over all ORFs in the genome. It collects the
 signal over each ORF plus both flanking regions (1/2 the length of the ORF on each side) and
-scales them all to the same value (1.000). This means that for two example genes with lengths of
+scales them all to the same value (1000). This means that for two example genes with lengths of
 500 bp and 2 kb, flanking regions of 250 bp and 1 kb, respectively, will be collected up and
-downstream. Both gene lengths will then be scaled to 0.500 and all four flanking regions to 0.250.
+downstream. Both gene lengths will then be scaled to 500 and all four flanking regions to 250.
+After scaling, a loess model of the signal is built and used to output predictions of the signal
+at each position between 1 and 1000. \cr
 The function takes as input the wiggle data as a list of 16 chromosomes.
 (output of \code{readall_tab()}).
+\cr \cr
+\strong{Note:} Our wiggle data always contains gaps with missing chromosome coordinates
+and ChIP-seq signal. The way this function deals with that is by skipping affected genes.
+The number of skipped genes in each chromosome is printed to the console, as well as the
+final count (and percentage) of skipped genes. \cr
 }
 \examples{
 signal_at_orf(WT, gff = gff)
