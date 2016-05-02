@@ -255,11 +255,13 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
     cat(paste0('Saving file...\n'))
     if(check_S288C) {
       write.table(mergedStrands, paste0(deparse(substitute(inputData)),
-                                        "_S288C_metaORF.txt"), sep = "\t", quote = FALSE)
+                                        "_S288C_metaORF.txt"), sep = "\t", quote = FALSE,
+                                        row.names = FALSE)
       cat('Done!')
     } else {
       write.table(mergedStrands, paste0(deparse(substitute(inputData)),
-                                        "_SK1_metaORF.txt"), sep = "\t", quote = FALSE)
+                                        "_SK1_metaORF.txt"), sep = "\t", quote = FALSE,
+                                        row.names = FALSE)
       cat('Done!')
     }
   } else {
