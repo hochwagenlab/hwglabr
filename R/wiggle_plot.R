@@ -15,6 +15,8 @@
 #' Defaults to minimum X (left-aligned).
 #' @param legendYcoord A number representing the Y coordinate to locate legend.
 #' Defaults to maximum Y (top-aligned).
+#' @param legendAnnotation Optional string to be used as the legend. Defaults to name of object
+#' passed to the function.
 #' @param onscreen Boolean indicating plots should be returned to the screen (\code{onScreen = TRUE})
 #' or written to .png files (\code{onScreen = FALSE}). Defaults to \code{TRUE}.
 #' @return A line plot, either on screen or as a png file (in the working directory).
@@ -28,7 +30,8 @@
 #' @export
 
 wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein,
-                        legendXcoord = -10, legendYcoord = yMax, onScreen = TRUE) {
+                        legendXcoord = -10, legendYcoord = yMax,
+                        legendAnnotation = deparse(substitute(wiggleData)), onScreen = TRUE) {
   
   ##############################################################################
   # Information based on Keeney lab genome sequence and annotation
@@ -100,7 +103,7 @@ wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein
   points(Cen[chr, 4]/1000, -2.5, pch = 19, cex = 3.0)
   mtext(c('Cen'), 1, at = Cen[chr, 4]/1000, cex = 1.5, padj = 1)
 
-  legend(legendXcoord, legendYcoord, deparse(substitute(wiggleData)),
+  legend(legendXcoord, legendYcoord, legendAnnotation,
          bty = 'n', cex = 3, text.col = color)
   
   if (!onScreen) {

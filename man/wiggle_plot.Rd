@@ -5,7 +5,8 @@
 \title{Wiggle data line plot}
 \usage{
 wiggle_plot(wiggleData, chr, genome, yMax, color = "grey50", protein,
-  legendXcoord = -10, legendYcoord = yMax, onScreen = TRUE)
+  legendXcoord = -10, legendYcoord = yMax,
+  legendAnnotation = deparse(substitute(wiggleData)), onScreen = TRUE)
 }
 \arguments{
 \item{wiggleData}{A data frame of wiggle data with two columns: genome position and signal. No default.}
@@ -26,6 +27,9 @@ Defaults to minimum X (left-aligned).}
 
 \item{legendYcoord}{A number representing the Y coordinate to locate legend.
 Defaults to maximum Y (top-aligned).}
+
+\item{legendAnnotation}{Optional string to be used as the legend. Defaults to name of object
+passed to the function.}
 
 \item{onscreen}{Boolean indicating plots should be returned to the screen (\code{onScreen = TRUE})
 or written to .png files (\code{onScreen = FALSE}). Defaults to \code{TRUE}.}
