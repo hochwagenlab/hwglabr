@@ -24,7 +24,11 @@ right and left arms of all chromosomes.
 \description{
 This function allows you to pull out the ChIP signal from all telomeres.\cr
 The function takes as input the wiggle data as a list of 16 chromosomes.
-(output of \code{readall_tab()}).
+(output of \code{readall_tab()}). \cr\cr
+\strong{Note:} The chromosome length table used in this function at the moment is
+not correct (at least for S288C). Some chromosomes have higher positions in the wiggle
+data than the length of the chromosome reported in the table. It is not off by more
+than ~100 bp, but this should still be corrected. \cr
 \cr \cr
 }
 \examples{
