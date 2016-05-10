@@ -125,12 +125,12 @@ signal_from_telomeres <- function(inputData, lengthToCollect = 100000) {
     if(!start %in% as.data.frame(chromData)[, 1]) {
       # If the specific position is not present, collect from the first position
       # after the chosen length that is present in the data
-      start <- tail(which(chromData[, 1] < start), 1)
+      start <- head(which(chromData[, 1] > start), 1)
     } else {
       start <- which(chromData[, 1] == start)
     }
     smallChrs[[paste0(chrNum, '_Rarm')]] <- chromData[start:nrow(chromData), ]
-    # Change positions to distance form telomere (start to full length)
+    # Change positions to distance from telomere (start to full length)
     end <- Cen[Cen$Chromosome == chrNum, "LenChr"]
     smallChrs[[paste0(chrNum, '_Rarm')]][, 1] <- end - smallChrs[[paste0(chrNum, '_Rarm')]][, 1]
     colnames(smallChrs[[paste0(chrNum, '_Rarm')]]) <- c('distance_to_telomere', 'signal')
@@ -168,12 +168,12 @@ signal_from_telomeres <- function(inputData, lengthToCollect = 100000) {
     if(!start %in% as.data.frame(chromData)[, 1]) {
       # If the specific position is not present, collect from the first position
       # after the chosen length that is present in the data
-      start <- tail(which(chromData[, 1] < start), 1)
+      start <- head(which(chromData[, 1] > start), 1)
     } else {
       start <- which(chromData[, 1] == start)
     }
     largeChrs[[paste0(chrNum, '_Rarm')]] <- chromData[start:nrow(chromData), ]
-    # Change positions to distance form telomere (start to full length)
+    # Change positions to distance from telomere (start to full length)
     end <- Cen[Cen$Chromosome == chrNum, "LenChr"]
     largeChrs[[paste0(chrNum, '_Rarm')]][, 1] <- end - largeChrs[[paste0(chrNum, '_Rarm')]][, 1]
     colnames(largeChrs[[paste0(chrNum, '_Rarm')]]) <- c('distance_to_telomere', 'signal')
