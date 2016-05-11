@@ -36,8 +36,8 @@ signal_average <- function(inputData, saveFile = FALSE) {
          "install.packages('dplyr')", call. = FALSE)
   }
   
-  check_S288C <- any(inputData[, 1] == 'chrI')
-  check_SK1 <- any(inputData[, 1] == 'chr01')
+  check_S288C <- any(inputData[, 1] == 'chrI' | inputData[, 1] == 'chrII')
+  check_SK1 <- any(inputData[, 1] == 'chr01' | inputData[, 1] == 'chr02')
   
   # Check reference genome and load respective chromosome number vector
   if (check_S288C) {
