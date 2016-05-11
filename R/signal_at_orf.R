@@ -88,6 +88,12 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
          "install.packages('dplyr')", call. = FALSE)
   }
   
+  cat('\nThe following types of features are present in the gff data you provided
+      (they will all be included in the analysis):\n')
+  for(i in 1:length(unique(gff[, 3]))) {
+    cat(unique(gff[, 3])[i], '\n')
+  }
+  
   cat('Collecting signal...\n')
   cat('(Skip genes with missing coordinates and signal in wiggle data)\n')
 
