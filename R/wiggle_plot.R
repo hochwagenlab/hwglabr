@@ -85,9 +85,9 @@ wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein
     png(filename = paste0(deparse(substitute(wiggleData)), "_chr", deparse(substitute(chr)),
                           ".png"), width = 1000, height = 480, unit = 'px')
   }
-  par(mfrow = c(1, 1), mar = c(8, 11, 2, 2), mgp = c(6, 2, 0))
-  xMax <- ceiling(max(wiggleData[, 1]) / 1000)
-  if (missing(yMax)) yMax <- ceiling(max(wiggleData[, 2]))
+  par(mfrow = c(1, 1), mar = c(8, 11, 2, 2), mgp = c(4, 2, 0))
+  xMax <- ceiling(max(wiggleData[, 1], na.rm = T) / 1000)
+  if (missing(yMax)) yMax <- ceiling(max(wiggleData[, 2],  na.rm = T))
   
   plot(wiggleData[, 1]/1000, wiggleData[, 2], type = 'l',
        lwd = 3, xaxt = 'n', yaxt = 'n',
@@ -96,15 +96,15 @@ wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein
        xlab = paste0('Position on ', Cen[chr, 'Chromosome'], ' (Kb)'),
        ylab = paste0(protein, '\nChIP/Input'),
        main = paste0('Mapped to ', genome, ' genome'), col = color,
-       cex = 2, cex.main = 2, cex.axis = 2, cex.lab = 2, bty = "n")
-  axis(1, at = c(0, xMax), lwd = 4, cex.axis = 2, cex = 2.5)
-  axis(2, at = c(0, yMax), lwd = 4, las = 2, cex.axis = 2, cex = 2.5)
+       bty = "n")
+  axis(1, at = c(0, xMax))
+  axis(2, at = c(0, yMax))
   
-  points(Cen[chr, 4]/1000, -2.5, pch = 19, cex = 3.0)
-  mtext(c('Cen'), 1, at = Cen[chr, 4]/1000, cex = 1.5, padj = 1)
+  points(Cen[chr, 4]/1000, -2.5, pch = 19)
+  mtext(c('Cen'), 1, at = Cen[chr, 4]/1000, padj = 1)
 
   legend(legendXcoord, legendYcoord, legendAnnotation,
-         bty = 'n', cex = 3, text.col = color)
+         bty = 'n', text.col = color)
   
   if (!onScreen) {
     dev.off()
