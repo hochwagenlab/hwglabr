@@ -6,11 +6,14 @@
 #' smoothed signal).
 #' @param wiggleData A data frame of wiggle data with two columns: genome position and signal. No default.
 #' @param chr A number representing the chromosome of \code{wiggleData}. No default.
+#' @param subset A two-dimensional vector containing positions (chromosome coordinates) to plot.
+#' Allows plotting a subset of the chromosome only. Defaults to first and last available positions
+#' (whole chromosome).
 #' @param genome A string representing the genome used for mapping. No default.
+#' @param protein A string representing the ChIPped protein. No default.
 #' @param yMax Optional number to be used as the max Y scale value in the plots.
 #' Particularly useful to plot two chromosomes on the same Y scale. No default.
 #' @param color Optional R color. Defaults to \code{grey50}.
-#' @param protein A string representing the ChIPped protein. No default.
 #' @param legendXcoord A number representing the X coordinate to locate legend.
 #' Defaults to minimum X (left-aligned).
 #' @param legendYcoord A number representing the Y coordinate to locate legend.
@@ -23,14 +26,14 @@
 #' @examples
 #' wiggle_plot(WT[[1]], 1, genome = 'SK1', protein = 'Red1')
 #' 
-#' wiggle_plot(WT_chr3, 3, genome = 'SK1', yMax = 5, color = 'red', protein = 'Red1', onScreen = TRUE)
+#' wiggle_plot(WT_chr3, 3, genome = 'SK1', protein = 'Red1', yMax = 5, color = 'red', onScreen = TRUE)
 #' 
-#' wiggle_plot(chrXVI, 16, genome = 'S288C', yMax = 5, color = 'black',
-#' protein = 'Rec8-HA', legendXcoord = 600, onScreen = FALSE)
+#' wiggle_plot(chrXVI, 16, subset = c(50000, 100000), genome = 'S288C', protein = 'Rec8-HA',
+#' yMax = 5, color = 'black', legendXcoord = 600, onScreen = FALSE)
 #' @export
 
-wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein,
-                        legendXcoord = -10, legendYcoord = yMax,
+wiggle_plot <- function(wiggleData, chr, subset = c(head(wiggleData[, 1], 1), tail(wiggleData[, 1], 1)),
+                        genome, protein, yMax, color = 'grey50', legendXcoord = -10, legendYcoord = yMax,
                         legendAnnotation = deparse(substitute(wiggleData)), onScreen = TRUE) {
   
   ##############################################################################
@@ -80,24 +83,40 @@ wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein
     Cen <- S288Ccen
   }
   
+  # Subset data (defaults to all data, i.e. no subsetting)
+  if (!subset[1] %in% floor(wiggleData[, 1]) | !subset[2] %in% floor(wiggleData[, 1])) {
+    stop("At least one of the provided chromosome coordinates doesn't seem to be",
+         " present in the wiggle data. ",
+         "Please provide alternative coordinates.", call. = FALSE)
+  }
+  start <- which(floor(wiggleData[, 1]) == subset[1])
+  end <- which(floor(wiggleData[, 1]) == subset[2])
+  if (start > end) {
+    stop("The provided 5' chromosome coordinate is higher than the 3' coordinate.",
+         call. = FALSE)
+  } else {
+    wiggleData <- wiggleData[start:end, ]
+  }
+  
   # Plot(s)  
   if (!onScreen) {
     png(filename = paste0(deparse(substitute(wiggleData)), "_chr", deparse(substitute(chr)),
                           ".png"), width = 1000, height = 480, unit = 'px')
   }
   par(mfrow = c(1, 1), mar = c(8, 11, 2, 2), mgp = c(4, 2, 0))
+  xMin <- floor(min(wiggleData[, 1], na.rm = T) / 1000)
   xMax <- ceiling(max(wiggleData[, 1], na.rm = T) / 1000)
   if (missing(yMax)) yMax <- ceiling(max(wiggleData[, 2],  na.rm = T))
   
   plot(wiggleData[, 1]/1000, wiggleData[, 2], type = 'l',
        lwd = 3, xaxt = 'n', yaxt = 'n',
-       xlim = c(0, xMax),
+       xlim = c(xMin, xMax),
        ylim = c(-2, yMax),
        xlab = paste0('Position on ', Cen[chr, 'Chromosome'], ' (Kb)'),
        ylab = paste0(protein, '\nChIP/Input'),
        main = paste0('Mapped to ', genome, ' genome'), col = color,
        bty = "n")
-  axis(1, at = c(0, xMax))
+  axis(1, at = c(xMin, xMax))
   axis(2, at = c(0, yMax))
   
   points(Cen[chr, 4]/1000, -2.5, pch = 19)
