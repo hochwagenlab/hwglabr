@@ -4,8 +4,7 @@
 \alias{wiggle_plot}
 \title{Wiggle data line plot}
 \usage{
-wiggle_plot(wiggleData, chr, subset = c(head(wiggleData[, 1], 1),
-  tail(wiggleData[, 1], 1)), genome, protein, yMax, color = "grey50",
+wiggle_plot(wiggleData, chr, genome, yMax, color = "grey50", protein,
   legendXcoord = -10, legendYcoord = yMax,
   legendAnnotation = deparse(substitute(wiggleData)), onScreen = TRUE)
 }
@@ -14,18 +13,14 @@ wiggle_plot(wiggleData, chr, subset = c(head(wiggleData[, 1], 1),
 
 \item{chr}{A number representing the chromosome of \code{wiggleData}. No default.}
 
-\item{subset}{A two-dimensional vector containing positions (chromosome coordinates) to plot.
-Allows plotting a subset of the chromosome only. Defaults to first and last available positions
-(whole chromosome).}
-
 \item{genome}{A string representing the genome used for mapping. No default.}
-
-\item{protein}{A string representing the ChIPped protein. No default.}
 
 \item{yMax}{Optional number to be used as the max Y scale value in the plots.
 Particularly useful to plot two chromosomes on the same Y scale. No default.}
 
 \item{color}{Optional R color. Defaults to \code{grey50}.}
+
+\item{protein}{A string representing the ChIPped protein. No default.}
 
 \item{legendXcoord}{A number representing the X coordinate to locate legend.
 Defaults to minimum X (left-aligned).}
@@ -51,9 +46,9 @@ smoothed signal).
 \examples{
 wiggle_plot(WT[[1]], 1, genome = 'SK1', protein = 'Red1')
 
-wiggle_plot(WT_chr3, 3, genome = 'SK1', protein = 'Red1', yMax = 5, color = 'red', onScreen = TRUE)
+wiggle_plot(WT_chr3, 3, genome = 'SK1', yMax = 5, color = 'red', protein = 'Red1', onScreen = TRUE)
 
-wiggle_plot(chrXVI, 16, subset = c(50000, 100000), genome = 'S288C', protein = 'Rec8-HA',
-yMax = 5, color = 'black', legendXcoord = 600, onScreen = FALSE)
+wiggle_plot(chrXVI, 16, genome = 'S288C', yMax = 5, color = 'black',
+protein = 'Rec8-HA', legendXcoord = 600, onScreen = FALSE)
 }
 
