@@ -4,7 +4,8 @@
 #' midpoints of bedfiles if start and stop values are more than one base apart. It
 #' takes as input wiggle data as a list of 16 chromosomes (output of \code{readall_tab()})
 #' and a bedfile determining the positions to extract. Use with \code{signal_average} 
-#' to calculate the mean around all midpoints.
+#' to calculate the mean around all midpoints. \cr
+#' Written by Tovah Markowitz.
 #' @param inputData A list of 16 chr wiggle data (output of readall_tab). No default.
 #' @param bedData A data frame of bed data to extract signal around. No default.
 #' @param extension Number indicating the number of bases around the summit or midpoints.

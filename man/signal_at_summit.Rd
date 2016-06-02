@@ -27,7 +27,8 @@ This function allows you to pull out the ChIP signal centered around summits or
 midpoints of bedfiles if start and stop values are more than one base apart. It
 takes as input wiggle data as a list of 16 chromosomes (output of \code{readall_tab()})
 and a bedfile determining the positions to extract. Use with \code{signal_average} 
-to calculate the mean around all midpoints.
+to calculate the mean around all midpoints. \cr
+Written by Tovah Markowitz.
 }
 \examples{
 summit_plot(WT,red1_summit_bed)
