@@ -5,7 +5,7 @@
 \title{Plot genes on an R wiggle plot}
 \usage{
 plot_gene_arrow(geneEnd, geneLength, orientation, minima = 400,
-  color = "black", height = 0.2, ypos = -1)
+  color = "black", height = 0.2, yPos = -1)
 }
 \arguments{
 \item{geneEnd}{A numeric position on the x-axis of the 3' end of the gene. No default.}
@@ -22,7 +22,7 @@ Dependent on the range of the x-axis. Default is 400 bp.}
 
 \item{height}{To adjust to the height of the gene bar. Default is 0.2.}
 
-\item{ypos}{To adjust the position of the gene on the y-axis. Default is -1.}
+\item{yPos}{To adjust the position of the gene on the y-axis. Default is -1.}
 }
 \description{
 This function allows you to you to add arrows representing genes to an R wiggle plot. \cr
