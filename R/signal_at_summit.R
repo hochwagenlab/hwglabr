@@ -16,9 +16,9 @@
 #' @return An R (deplyr) data frame with four columms: chromosome name, position (relative 
 #' to midpoint), signal, and bed line number within its individual chromosome
 #' @examples
-#' summit_plot(WT, red1_summit_bed)
+#' signal_at_summit(WT, red1_summit_bed)
 #'
-#' summit_plot(WT, S288Ccen, extension=2e4, onlyComplete = FALSE)
+#' signal_at_summit(WT, S288Ccen, extension=2e4, onlyComplete = FALSE)
 #' @export
 
 signal_at_summit <- function(inputData, bedData, extension = 1000, onlyComplete = TRUE) {
