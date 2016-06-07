@@ -51,10 +51,6 @@ the selected orientation: convergent, divergent or tandem.
 It takes as input either the wiggle data as list of 16 chromosome (output of \code{readall_tab()})
 or the complete genome in one data frame (for example loaded from .bed files).\cr
 }
-\details{
-\strong{Note:} If you want to scale the intergenic regions to a constant length, you can use the
-function \code{\link{signal_at_intergen_scaled}}.
-}
 \examples{
 signal_at_intergen(WT)
 
