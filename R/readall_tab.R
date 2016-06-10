@@ -41,7 +41,9 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
   filenames <- list.files(fileLocation, full = T)
   if (length(filenames) == 17) {
     filenames <- filenames[2:17]
-  }
+  } else stop('The provided "fileLocation" argument seems to be wrong: found ', length(filenames), 
+         ' files. Please provide the path to the folder containing the wiggle files.', call. = FALSE)
+  
   if (useReadr) {
     if (!requireNamespace("readr", quietly = TRUE)) {
       stop("R package 'readr' required. Please install it:\n", 
