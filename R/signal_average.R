@@ -5,7 +5,7 @@
 #' as input a data frame containing the genome-wide signal, for example the output of
 #' \code{signal_at_intergen()} or \code{signal_at_orf()}.
 #' @param inputData As a data frame containing at least a column named \code{position}, containing the
-#' relative genomic position and a column named \code{signal}, contianing the corresponding signal.
+#' relative genomic position and a column named \code{signal}, containing the corresponding signal.
 #' No default.
 #' @param saveFile Boolean indicating whether output should be written to a .txt file (in current
 #' working directory). If \code{saveFile = FALSE}, output is returned to screen or an R object
