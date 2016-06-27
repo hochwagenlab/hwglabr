@@ -33,6 +33,7 @@ Written by Tovah Markowitz.
 \examples{
 signal_at_summit(WT, red1_summit_bed)
 
+For averaging around centromeres:
 signal_at_summit(WT, S288Ccen, extension=2e4, onlyComplete = FALSE)
 }
 
