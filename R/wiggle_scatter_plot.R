@@ -32,7 +32,7 @@
 
 wiggle_scatter_plot <- function( scatter ) {
   # example scatter plot function, made as eps for use in illustrator
-  LIM <- range( c( scatter[,2], scatter[,3] ) )
+  LIM <- range( c( scatter[,2], scatter[,3] ), na.rm = T)
   
   setEPS()
   postscript( paste0( names(scatter)[2], "vs", names(scatter)[3], "scatterplot.eps") )
