@@ -12,13 +12,14 @@ wiggle_compress(inputWiggles, window)
   \item A single wiggle region/chromosome
   \item Multiple wiggle files to be directly compared/compressed. These must be
 listed as strings in the following format:
-\code{c("file1[[chr]]", "file2[[chr]]", ...)}.} \cr}
+\code{c("wiggleData1[[chr]]", "wiggleData2[[chr]]", ...)}.}}
 
 \item{window}{Size of window to be averaged across. Suggested size for
 chromosome-wide plots for presenting and publication: 200 bp. No default.}
 }
 \value{
-A R (dplyr) data frame with averaged position and value for each
+A R (dplyr) data frame with averaged position and value for each 
+wiggle. Column names are defined by input strings/variables.
 }
 \description{
 This function will compress wiggle data by averaging values across

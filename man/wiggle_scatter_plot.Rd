@@ -10,11 +10,11 @@ wiggle_scatter_plot(scatter)
 \item{scatter}{Parameter for wiggle_scatter_plot. Input should be output of 
 wiggle_scatter.}
 
-\item{file1}{Parameter of wiggle_scatter. A list of 16 chr wiggle data 
-(output of readall_tab). No default.}
+\item{wiggleData1}{Parameter of wiggle_scatter. A list of 16 chr wiggle data 
+(output of \code{readall_tab()}). No default.}
 
-\item{file2}{Parameter of wiggle_scatter. A second set of wiggle data 
-(output of readall_tab). No default.}
+\item{wiggleData2}{Parameter of wiggle_scatter. A second set of wiggle data 
+(output of \code{readall_tab()}. No default.}
 
 \item{window}{Parameter of wiggle_scatter. Size of window to be compressed.
 Default is 5000 bp.}
@@ -35,7 +35,7 @@ The two functions are used as follows:
 \enumerate{
   \item \code{wiggle_scatter()} will extract the necessary information using
   \code{wiggle_compress()} for all chromosomes
-  \item \code{wiggle_scatter_plot()} will make a simple .eps file of the results.} \cr
+  \item \code{wiggle_scatter_plot()} will make a simple .eps file of the results.}
 Written by Tovah Markowitz
 }
 \examples{

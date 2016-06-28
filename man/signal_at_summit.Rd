@@ -26,14 +26,15 @@ to midpoint), signal, and bed line number within its individual chromosome
 This function allows you to pull out the ChIP signal centered around summits or 
 midpoints of bedfiles if start and stop values are more than one base apart. It
 takes as input wiggle data as a list of 16 chromosomes (output of \code{readall_tab()})
-and a bedfile determining the positions to extract. Use with \code{signal_average} 
-to calculate the mean around all midpoints. \cr
+and a bedfile determining the positions to extract. This function can also be used to
+get signal around centromeres (see second example below). Use with \code{signal_average()} 
+to calculate the mean for every position around all midpoints. \cr
 Written by Tovah Markowitz.
 }
 \examples{
 signal_at_summit(WT, red1_summit_bed)
 
-For averaging around centromeres:
+For signal around centromeres
 signal_at_summit(WT, S288Ccen, extension=2e4, onlyComplete = FALSE)
 }
 

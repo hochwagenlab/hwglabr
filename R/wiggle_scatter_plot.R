@@ -7,12 +7,12 @@
 #' \enumerate{
 #'   \item \code{wiggle_scatter()} will extract the necessary information using
 #'   \code{wiggle_compress()} for all chromosomes
-#'   \item \code{wiggle_scatter_plot()} will make a simple .eps file of the results.} \cr
+#'   \item \code{wiggle_scatter_plot()} will make a simple .eps file of the results.}
 #' Written by Tovah Markowitz
-#' @param file1 Parameter of wiggle_scatter. A list of 16 chr wiggle data 
-#' (output of readall_tab). No default.
-#' @param file2 Parameter of wiggle_scatter. A second set of wiggle data 
-#' (output of readall_tab). No default.
+#' @param wiggleData1 Parameter of wiggle_scatter. A list of 16 chr wiggle data 
+#' (output of \code{readall_tab()}). No default.
+#' @param wiggleData2 Parameter of wiggle_scatter. A second set of wiggle data 
+#' (output of \code{readall_tab()}. No default.
 #' @param window Parameter of wiggle_scatter. Size of window to be compressed.
 #' Default is 5000 bp.
 #' @param scatter Parameter for wiggle_scatter_plot. Input should be output of 

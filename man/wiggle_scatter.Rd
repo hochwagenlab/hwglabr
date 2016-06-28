@@ -8,10 +8,10 @@ wiggle_scatter(wiggleData1, wiggleData2, window = 5000)
 }
 \arguments{
 \item{wiggleData1}{Parameter of wiggle_scatter. A list of 16 chr wiggle data 
-(output of readall_tab). No default.}
+(output of \code{readall_tab()}). No default.}
 
 \item{wiggleData2}{Parameter of wiggle_scatter. A second set of wiggle data 
-(output of readall_tab). No default.}
+(output of \code{readall_tab()}. No default.}
 
 \item{window}{Parameter of wiggle_scatter. Size of window to be compressed.
 Default is 5000 bp.}
