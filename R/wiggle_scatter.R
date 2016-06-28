@@ -13,11 +13,11 @@
 #' @param wiggleData1 Parameter of \code{wiggle_scatter()}. A list of 16 chr wiggle data 
 #' (output of \code{readall_tab()}). No default.
 #' @param wiggleData2 Parameter of \code{wiggle_scatter()}. A second set of wiggle data 
-#' (output of \code{readall_tab()}. No default.
+#' (output of \code{readall_tab()}). No default.
 #' @param window Parameter of \code{wiggle_scatter()}. Size of window to be compressed.
 #' Default is 5000 bp.
 #' @param scatter Parameter for \code{plot_scatter()}. Input should be output of 
-#' wiggle_scatter.
+#' \code{wiggle_scatter()}.
 #' @return Output of \code{wiggle_scatter()} is a large (dplyr) data frame with
 #' compressed data from all chromosomes. See \code{wiggle_compress()} for more 
 #' information. \cr
@@ -29,7 +29,6 @@
 #' 
 #' wiggle_scatter_plot(a)
 #' @export
-
 
 wiggle_scatter <- function( wiggleData1, wiggleData2, window = 5000 ) {
 

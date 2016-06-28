@@ -11,13 +11,13 @@ wiggle_scatter(wiggleData1, wiggleData2, window = 5000)
 (output of \code{readall_tab()}). No default.}
 
 \item{wiggleData2}{Parameter of \code{wiggle_scatter()}. A second set of wiggle data 
-(output of \code{readall_tab()}. No default.}
+(output of \code{readall_tab()}). No default.}
 
 \item{window}{Parameter of \code{wiggle_scatter()}. Size of window to be compressed.
 Default is 5000 bp.}
 
 \item{scatter}{Parameter for \code{plot_scatter()}. Input should be output of 
-wiggle_scatter.}
+\code{wiggle_scatter()}.}
 }
 \value{
 Output of \code{wiggle_scatter()} is a large (dplyr) data frame with
