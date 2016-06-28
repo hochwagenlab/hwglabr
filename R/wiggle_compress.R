@@ -10,8 +10,9 @@
 #' \enumerate{
 #'   \item A single wiggle region/chromosome
 #'   \item Multiple wiggle files to be directly compared/compressed. These must be
-#' listed as strings in the following format:
-#' \code{c("wiggleData1[[chr]]", "wiggleData2[[chr]]", ...)}.}
+#'   listed as strings in the following format:
+#'   \code{c("wiggleData1[[chr]]", "wiggleData2[[chr]]", ...)}.
+#' }
 #' @param window Size of window to be averaged across. Suggested size for
 #' chromosome-wide plots for presenting and publication: 200 bp. No default.
 #' @return A R (dplyr) data frame with averaged position and value for each 

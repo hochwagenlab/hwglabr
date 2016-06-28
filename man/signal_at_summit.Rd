@@ -19,7 +19,7 @@ genome. Boolean indicates if you want to only keep regions where every base is
 included within the wiggle file. Default is \code{TRUE}.}
 }
 \value{
-An R (deplyr) data frame with four columms: chromosome name, position (relative 
+An R (dplyr) data frame with four columms: chromosome name, position (relative 
 to midpoint), signal, and bed line number within its individual chromosome
 }
 \description{
@@ -34,7 +34,7 @@ Written by Tovah Markowitz.
 \examples{
 signal_at_summit(WT, red1_summit_bed)
 
-For signal around centromeres
-signal_at_summit(WT, S288Ccen, extension=2e4, onlyComplete = FALSE)
+# For signal around centromeres:
+signal_at_summit(WT, S288Ccen, extension = 2e4, onlyComplete = FALSE)
 }
 

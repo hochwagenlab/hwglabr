@@ -7,29 +7,31 @@
 #' \enumerate{
 #'   \item \code{wiggle_scatter()} will extract the necessary information using
 #'   \code{wiggle_compress()} for all chromosomes
-#'   \item \code{wiggle_scatter_plot()} will make a simple .eps file of the results.} \cr
+#'   \item \code{wiggle_scatter_plot()} will make a simple .eps file of the results.
+#' }
 #' Written by Tovah Markowitz
-#' @param wiggleData1 Parameter of wiggle_scatter. A list of 16 chr wiggle data 
+#' @param wiggleData1 Parameter of \code{wiggle_scatter()}. A list of 16 chr wiggle data 
 #' (output of \code{readall_tab()}). No default.
-#' @param wiggleData2 Parameter of wiggle_scatter. A second set of wiggle data 
+#' @param wiggleData2 Parameter of \code{wiggle_scatter()}. A second set of wiggle data 
 #' (output of \code{readall_tab()}. No default.
-#' @param window Parameter of wiggle_scatter. Size of window to be compressed.
+#' @param window Parameter of \code{wiggle_scatter()}. Size of window to be compressed.
 #' Default is 5000 bp.
-#' @param scatter Parameter for plot_scatter. Input should be output of 
+#' @param scatter Parameter for \code{plot_scatter()}. Input should be output of 
 #' wiggle_scatter.
-#' @return Output of wiggle_scatter is a large (dplyr) data frame with
+#' @return Output of \code{wiggle_scatter()} is a large (dplyr) data frame with
 #' compressed data from all chromosomes. See \code{wiggle_compress()} for more 
 #' information. \cr
-#' Output of plot_scatter is an .eps file with file name and axis names
-#' determined by columns of input data frame. The function is written so that
+#' Output of \code{wiggle_scatter_plot()} is an .eps file with file name and axis
+#' names determined by columns of input data frame. The function is written so that
 #' the x-axis and the y-axis have the same range.
 #' @examples
-#' a <- wiggle_scatter( red1, hop1, 4000 )
-#' plot_scatter( a )
+#' a <- wiggle_scatter(red1, hop1, 4000)
+#' 
+#' wiggle_scatter_plot(a)
 #' @export
 
 
-wiggle_scatter <- function( wiggleData1, wiggleData2, window=5000 ) {
+wiggle_scatter <- function( wiggleData1, wiggleData2, window = 5000 ) {
 
     # prepare the two files for wiggle_compress
     for (j in 1:16) {
