@@ -52,11 +52,12 @@ ORF. It takes as input a data frame containing the average signal over ORFs
 \details{
 To generate the input for this function starting from an R list of wiggle data
 for the 16 chromosomes you should run:
-1. \code{signal_at_orf()} to pull out the signal at every ORF and flanking regions
-(1/2 the length of the ORF).
-
-2. \code{signal_average()} to calculate the average signal at each relative position
-over all regions genome-wide.
+\enumerate{
+  \item \code{\link{signal_at_orf}} to pull out the signal at every ORF and flanking regions
+  (1/2 the length of the ORF).
+  \item \code{\link{signal_average}} to calculate the average signal at each relative position
+  over all regions genome-wide.
+}
 }
 \examples{
 signal_at_orf_average_plot(WT_orf_S288C_mean_signal, genome = 'S288C')

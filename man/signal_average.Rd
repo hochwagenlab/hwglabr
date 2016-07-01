@@ -23,7 +23,7 @@ mean_signal (average signal at each relative coordinate).
 Given the ChIP-seq signal on a range of relative genomic positions (e.g. at intergenic regions
 or on ORFs), this function allows you to calculate the average ChIP signal by position. It takes
 as input a data frame containing the genome-wide signal, for example the output of
-\code{signal_at_intergen()} or \code{signal_at_orf()}.
+\code{\link{signal_at_intergen}} or \code{\link{signal_at_orf}}.
 }
 \examples{
 signal_average(WT_conv)

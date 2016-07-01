@@ -8,15 +8,15 @@
 #' After scaling, a loess model of the signal is built and used to output predictions of the signal
 #' at each position between 1 and 1000. \cr
 #' The function takes as input the wiggle data as a list of 16 chromosomes.
-#' (output of \code{readall_tab()}).
+#' (output of \code{\link{readall_tab}}).
 #' \cr \cr
 #' \strong{Note:} Our wiggle data always contains gaps with missing chromosome coordinates
 #' and ChIP-seq signal. The way this function deals with that is by skipping affected genes.
 #' The number of skipped genes in each chromosome is printed to the console, as well as the
 #' final count (and percentage) of skipped genes. \cr
-#' @param inputData As a list of the 16 chr wiggle data (output of \code{readall_tab()}). No default.
+#' @param inputData As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}). No default.
 #' @param gff Optional dataframe of the gff providing the ORF cordinates. Must be provided if
-#' \code{gffFile} is not. No default. Note: You can use the function \code{gff_read()} in hwglabr to
+#' \code{gffFile} is not. No default. Note: You can use the function \code{\link{gff_read}} in hwglabr to
 #' load your selected gff file.
 #' @param gffFile Optional string indicating path to the gff file providing the ORF cordinates. Must be
 #' provided if \code{gff} is not. No default.

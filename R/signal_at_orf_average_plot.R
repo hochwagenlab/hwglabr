@@ -6,11 +6,12 @@
 #' 
 #' To generate the input for this function starting from an R list of wiggle data
 #' for the 16 chromosomes you should run:
-#' 1. \code{signal_at_orf()} to pull out the signal at every ORF and flanking regions
-#' (1/2 the length of the ORF).
-#' 
-#' 2. \code{signal_average()} to calculate the average signal at each relative position
-#' over all regions genome-wide.
+#' \enumerate{
+#'   \item \code{\link{signal_at_orf}} to pull out the signal at every ORF and flanking regions
+#'   (1/2 the length of the ORF).
+#'   \item \code{\link{signal_average}} to calculate the average signal at each relative position
+#'   over all regions genome-wide.
+#' }
 #' @param inputDataA A data frame of average signal on ORFs +/- 1/2 the length of the ORF:
 #' relative position and average signal. No default.
 #' @param inputDataB Optional data in the same format for a second sample. No default.

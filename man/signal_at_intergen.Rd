@@ -8,7 +8,7 @@ signal_at_intergen(inputData, inputDataFrame = FALSE, orientation = "conv",
   regionSize = 1000, includeOverlapping = TRUE, saveFile = FALSE)
 }
 \arguments{
-\item{inputData}{As a list of the 16 chr wiggle data (output of \code{readall_tab}) or a data frame
+\item{inputData}{As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}) or a data frame
 (in which case you must set \code{inputDataFrame = TRUE}). No default.}
 
 \item{inputDataFrame}{Boolean indicating whether input data is a data frame, as opposed to the
@@ -48,7 +48,7 @@ A local data frame (dplyr data frame) with four columns:
 This function allows you to pull out the ChIP signal over a window of positions of the selected size
 (defaulting to \code{regionSize = 1000}) centered on midpoints of intergenic regions between genes of
 the selected orientation: convergent, divergent or tandem.
-It takes as input either the wiggle data as list of 16 chromosome (output of \code{readall_tab()})
+It takes as input either the wiggle data as list of 16 chromosome (output of \code{\link{readall_tab}})
 or the complete genome in one data frame (for example loaded from .bed files).\cr
 }
 \examples{

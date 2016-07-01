@@ -7,9 +7,9 @@
 wiggle_correlation(Set1, Set2, method = "pearson")
 }
 \arguments{
-\item{Set1}{A list of 16 chr wiggle data (output of \code{readall_tab()})}
+\item{Set1}{A list of 16 chr wiggle data (output of \code{\link{readall_tab}})}
 
-\item{Set2}{A list of 16 chr wiggle data (output of \code{readall_tab()})}
+\item{Set2}{A list of 16 chr wiggle data (output of \code{\link{readall_tab}})}
 
 \item{method}{A character string indicating which correlation coefficient
 is to be computed (\code{method} argument to R function \code{cor()}).
@@ -22,7 +22,7 @@ with each individual correlation value.
 \description{
 This function allows you to calculate correlations between wiggle files
 for ChIP-seq, both on an individual chromosome basis and genome-wide. It
-takes as an input two lists of 16 chromosomes (output of \code{readall_tab()}).
+takes as an input two lists of 16 chromosomes (output of \code{\link{readall_tab}}).
 }
 \examples{
 wiggle_correlation(Red1WT_rep1, Red1WT_rep2)

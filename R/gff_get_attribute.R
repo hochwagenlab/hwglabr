@@ -12,7 +12,7 @@
 #' @return A vector containing the specified field values of the same size as the
 #' number of features in the gff file.
 #' @section Details:
-#' Typical use of this function will include first using \code{gff_read()},
+#' Typical use of this function will include first using \code{\link{gff_read}},
 #' also in this package, to load gff file and then parsing the attributes field.
 #' See examples below.
 #' @examples

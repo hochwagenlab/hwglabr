@@ -21,14 +21,14 @@ Default is 5000 bp.}
 }
 \value{
 Output of \code{wiggle_scatter()} is a large (dplyr) data frame with
-compressed data from all chromosomes. See \code{wiggle_compress()} for more 
+compressed data from all chromosomes. See \code{\link{wiggle_compress}} for more 
 information. \cr
-Output of \code{wiggle_scatter_plot()} is an .eps file with file name and axis
+Output of \code{\link{wiggle_scatter_plot}} is an .eps file with file name and axis
 names determined by columns of input data frame. The function is written so that
 the x-axis and the y-axis have the same range.
 }
 \description{
-This function is designed to work with function \code{wiggle_scatter_plot()} to
+This function is designed to work with function \code{\link{wiggle_scatter_plot}} to
 allow for an overall generalized comparison of two data sets.
 Great for comparing replicates, checking controls, etc.
 The two functions are used as follows:

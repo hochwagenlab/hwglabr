@@ -2,9 +2,9 @@
 #' 
 #' This function allows you to calculate correlations between wiggle files
 #' for ChIP-seq, both on an individual chromosome basis and genome-wide. It
-#' takes as an input two lists of 16 chromosomes (output of \code{readall_tab()}).
-#' @param Set1 A list of 16 chr wiggle data (output of \code{readall_tab()})
-#' @param Set2 A list of 16 chr wiggle data (output of \code{readall_tab()})
+#' takes as an input two lists of 16 chromosomes (output of \code{\link{readall_tab}}).
+#' @param Set1 A list of 16 chr wiggle data (output of \code{\link{readall_tab}})
+#' @param Set2 A list of 16 chr wiggle data (output of \code{\link{readall_tab}})
 #' @param method A character string indicating which correlation coefficient
 #' is to be computed (\code{method} argument to R function \code{cor()}).
 #' Accepts one of \code{pearson} (default), \code{kendall}, or \code{spearman}.

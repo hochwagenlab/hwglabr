@@ -3,7 +3,7 @@
 #' Given the ChIP-seq signal on a range of relative genomic positions (e.g. at intergenic regions
 #' or on ORFs), this function allows you to calculate the average ChIP signal by position. It takes
 #' as input a data frame containing the genome-wide signal, for example the output of
-#' \code{signal_at_intergen()} or \code{signal_at_orf()}.
+#' \code{\link{signal_at_intergen}} or \code{\link{signal_at_orf}}.
 #' @param inputData As a data frame containing at least a column named \code{position}, containing the
 #' relative genomic position and a column named \code{signal}, containing the corresponding signal.
 #' No default.

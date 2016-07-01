@@ -7,10 +7,10 @@
 signal_per_orf_length(inputData, gff, gffFile, saveFile = FALSE)
 }
 \arguments{
-\item{inputData}{As a list of the 16 chr wiggle data (output of \code{readall_tab()}). No default.}
+\item{inputData}{As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}). No default.}
 
 \item{gff}{Optional dataframe of the gff providing the ORF cordinates. Must be provided if
-\code{gffFile} is not. No default. Note: You can use the function \code{gff_read()} in hwglabr to
+\code{gffFile} is not. No default. Note: You can use the function \code{\link{gff_read}} in hwglabr to
 load your selected gff file.}
 
 \item{gffFile}{Optional string indicating path to the gff file providing the ORF cordinates. Must be
@@ -34,7 +34,7 @@ goes through all included features in the supplied gff data and for each one it 
 (in bp) and the mean of the signal collected from the supplied ChIP-seq data. This can then be
 used to analyse mean signal as a function of ORF length.\cr
 The function takes as input the wiggle data as a list of 16 chromosomes (output of
-\code{readall_tab()}).
+\code{\link{readall_tab}}).
 \cr \cr
 \strong{Note:} Our wiggle data always contains gaps with missing chromosome coordinates
 and ChIP-seq signal. The way this function deals with that is by skipping affected genes.

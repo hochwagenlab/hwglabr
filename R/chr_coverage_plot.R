@@ -1,7 +1,7 @@
 #' Average chromosome signal (coverage) dot plot
 #'
 #' This function allows you to plot average chromosome signal for one or two selected samples.
-#' It takes as input the output of \code{chr_coverage()} (16x2 R data frame).
+#' It takes as input the output of \code{\link{chr_coverage}} (16x2 R data frame).
 #' @param coverageDataA A 16x2 data frame of coverage: chromosome and average signal. No default.
 #' @param coverageDataB Optional 16x2 data frame of coverage: chromosome and average signal. No default.
 #' @param protein A string representing the ChIPped protein. No default.

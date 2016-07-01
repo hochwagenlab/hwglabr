@@ -35,7 +35,7 @@ A dot plot of one or two samples, either on screen or as a png file (in the work
 }
 \description{
 This function allows you to plot average chromosome signal for one or two selected samples.
-It takes as input the output of \code{chr_coverage()} (16x2 R data frame).
+It takes as input the output of \code{\link{chr_coverage}} (16x2 R data frame).
 }
 \examples{
 chr_coverage_plot(WT, rec8, protein = 'Red1', genome = 'SK1', meanNorm = TRUE, onScreen = TRUE, colorB = 'red')

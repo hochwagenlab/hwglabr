@@ -7,8 +7,8 @@
 #' To generate the input for this function starting from an R list of wiggle data
 #' for the 16 chromosomes you should run:
 #' \enumerate{
-#'   \item \code{signal_at_intergen()} to pull out the signal at every intergenic region.
-#'   \item \code{signal_average()} to calculate the average signal over all regions.
+#'   \item \code{\link{signal_at_intergen}} to pull out the signal at every intergenic region.
+#'   \item \code{\link{signal_average}} to calculate the average signal over all regions.
 #' }
 #' @param inputDataA A data frame of average signal between convergent genes: relative
 #' position and average signal. No default.

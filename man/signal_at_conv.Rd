@@ -8,7 +8,7 @@ signal_at_conv(inputData, regionSize = 1000, saveFile = FALSE,
   inputDataFrame = FALSE)
 }
 \arguments{
-\item{inputData}{As a list of the 16 chr wiggle data (output of \code{readall_tab}) or a data frame
+\item{inputData}{As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}) or a data frame
 (in which case you must set \code{inputDataFrame = TRUE}). No default.}
 
 \item{regionSize}{Number indicating the size (in bp) of the region to calculate.
@@ -29,7 +29,7 @@ A local data frame (dplyr data frame) with three columns: chr (chromosome number
 \description{
 \strong{Deprecated! Use \code{\link{signal_at_intergen}} instead.} \cr
 This function allows you to pull out the ChIP signal centered on midpoints of convergent genes.
-It takes as input either the wiggle data as list of 16 chromosome (output of \code{readall_tab()})
+It takes as input either the wiggle data as list of 16 chromosome (output of \code{\link{readall_tab}})
 or complete genome in one data frame (for example loaded from .bed files).
 }
 \examples{

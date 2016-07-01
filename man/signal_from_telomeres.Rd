@@ -7,7 +7,7 @@
 signal_from_telomeres(inputData, lengthToCollect = 1e+05)
 }
 \arguments{
-\item{inputData}{As a list of the 16 chr wiggle data (output of \code{readall_tab()}). No default.}
+\item{inputData}{As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}). No default.}
 
 \item{lengthToCollect}{Number specifying the length (in bp) of the region to collect signal for,
 starting form the telomeres. Defaults to 100000 (i.e. 100 kb).}
@@ -24,7 +24,7 @@ right and left arms of all chromosomes.
 \description{
 This function allows you to pull out the ChIP signal from all telomeres.\cr
 The function takes as input the wiggle data as a list of 16 chromosomes.
-(output of \code{readall_tab()}). \cr\cr
+(output of \code{\link{readall_tab}}). \cr\cr
 \strong{Note:} The chromosome length table used in this function at the moment is
 not correct (at least for S288C). Some chromosomes have higher positions in the wiggle
 data than the length of the chromosome reported in the table. It is not off by more

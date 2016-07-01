@@ -27,7 +27,7 @@ Also posted on the Bioconductor support system \href{https://support.bioconducto
 }
 \section{Details}{
 
-Typical use of this function will include first using \code{gff_read()},
+Typical use of this function will include first using \code{\link{gff_read}},
 also in this package, to load gff file and then parsing the attributes field.
 See examples below.
 }
