@@ -55,7 +55,7 @@
 #' A \strong{M}ulti-\strong{D}imensional \strong{S}caling plot of all samples is also
 #' saved in the output directory as a .pdf file.
 #' @examples
-#' rna_seq_analysis(pathToFiles = list('path/to/AH119-2h_featureCounts.txt, 'path/to/AH119-3h_featureCounts.txt',
+#' rna_seq_analysis(pathToFiles = list('path/to/AH119-2h_featureCounts.txt', 'path/to/AH119-3h_featureCounts.txt',
 #'                                     'path/to/AH8104-2h_featureCounts.txt', 'path/to/AH8104-3h_featureCounts.txt'),
 #'                  sampleNames = list('AH119_2h', 'AH119_3h', 'AH8104_2h', 'AH8104_3h'),
 #'                  conditionNames = list('WT_2h', 'WT_3h', 'dot1_2h', 'dot1_3h'),
@@ -64,7 +64,7 @@
 #'                                    c('WT_2h', 'WT_3h'), c('dot1_2h', 'dot1_3h')),
 #'                  outputFilePrefix = 'dot1_noReplicates')
 #'
-#' rna_seq_analysis(pathToFiles = list('path/to/AH119-A_featureCounts.txt, 'path/to/AH119-B_featureCounts.txt',
+#' rna_seq_analysis(pathToFiles = list('path/to/AH119-A_featureCounts.txt', 'path/to/AH119-B_featureCounts.txt',
 #'                                     'path/to/AH8104-A_featureCounts.txt', 'path/to/AH8104-B_featureCounts.txt'),
 #'                  sampleNames = list('AH119_A', 'AH119_B', 'AH8104_A', 'AH8104_B'),
 #'                  conditionNames = list('WT', 'WT', 'dot1', 'dot1'),
