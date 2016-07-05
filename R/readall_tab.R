@@ -38,7 +38,7 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
   
   cat('\nReading data\n')
   
-  filenames <- list.files(fileLocation, full = T)
+  filenames <- list.files(fileLocation, full.names = T)
   if (length(filenames) == 17) {
     filenames <- filenames[2:17]
   } else stop('The provided "fileLocation" argument seems to be wrong: found ', length(filenames), 

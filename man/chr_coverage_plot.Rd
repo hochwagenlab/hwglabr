@@ -31,15 +31,18 @@ or written to .png files (\code{onScreen = FALSE}). Defaults to \code{TRUE}.}
 \item{colorB}{Optional R color for sample B. Defaults to \code{green}.}
 }
 \value{
-A dot plot of one or two samples, either on screen or as a png file (in the working directory).
+A dot plot of one or two samples, either on screen or as a png file (in
+the working directory).
 }
 \description{
 This function allows you to plot average chromosome signal for one or two selected samples.
 It takes as input the output of \code{\link{chr_coverage}} (16x2 R data frame).
 }
 \examples{
-chr_coverage_plot(WT, rec8, protein = 'Red1', genome = 'SK1', meanNorm = TRUE, onScreen = TRUE, colorB = 'red')
+chr_coverage_plot(WT, rec8, protein = 'Red1', genome = 'SK1', meanNorm = TRUE,
+                  onScreen = TRUE, colorB = 'red')
 
-chr_coverage_plot(WT, dot1, protein = 'Hop1', genome = 'S288C', meanNorm = FALSE, onScreen = FALSE)
+chr_coverage_plot(WT, dot1, protein = 'Hop1', genome = 'S288C', meanNorm = FALSE,
+                  onScreen = FALSE)
 }
 

@@ -4,16 +4,16 @@
 \alias{FE2}
 \title{Microarray probe log2 ratios}
 \usage{
-FE2(FileName, cy0, strain)
+FE2(fileName, cy0, strain)
 }
 \arguments{
+\item{fileName}{A string representing the input file name. No default.}
+
 \item{cy0}{A number representing the dye color used for the control sample
 (\code{3} for cy3 or \code{5} for cy5). No default.}
 
 \item{strain}{A string representing the output file name (the sample name,
 typically a yeast strain). No default.}
-
-\item{fileName}{A string representing the input file name. No default.}
 }
 \value{
 A flat file with four columns:

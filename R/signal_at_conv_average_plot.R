@@ -98,7 +98,7 @@ signal_at_conv_average_plot <- function(inputDataA, inputDataB, genome,
   
   if (!onScreen) {
     png(filename = paste0(deparse(substitute(inputDataA)), "_conv_mean", ".png"),
-        width = 700, height = 650, unit = 'px')
+        width = 700, height = 650, units = 'px')
   }
   
   par(mfrow = c(1, 1), mar = c(11, 12, 8, 4), mgp = c(7, 2, 0))

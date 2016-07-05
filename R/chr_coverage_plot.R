@@ -14,11 +14,14 @@
 #' or written to .png files (\code{onScreen = FALSE}). Defaults to \code{TRUE}.
 #' @param colorA Optional R color for sample A. Defaults to \code{grey50}.
 #' @param colorB Optional R color for sample B. Defaults to \code{green}.
-#' @return A dot plot of one or two samples, either on screen or as a png file (in the working directory).
+#' @return A dot plot of one or two samples, either on screen or as a png file (in
+#' the working directory).
 #' @examples
-#' chr_coverage_plot(WT, rec8, protein = 'Red1', genome = 'SK1', meanNorm = TRUE, onScreen = TRUE, colorB = 'red')
+#' chr_coverage_plot(WT, rec8, protein = 'Red1', genome = 'SK1', meanNorm = TRUE,
+#'                   onScreen = TRUE, colorB = 'red')
 #' 
-#' chr_coverage_plot(WT, dot1, protein = 'Hop1', genome = 'S288C', meanNorm = FALSE, onScreen = FALSE)
+#' chr_coverage_plot(WT, dot1, protein = 'Hop1', genome = 'S288C', meanNorm = FALSE,
+#'                   onScreen = FALSE)
 #' @export
 
 chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
@@ -144,7 +147,7 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
   
   # Plot(s)  
   if (!onScreen) {
-    png(filename = "Rplot.png", width = 1000, height = 480, unit = 'px')
+    png(filename = "Rplot.png", width = 1000, height = 480, units = 'px')
   }
   
   

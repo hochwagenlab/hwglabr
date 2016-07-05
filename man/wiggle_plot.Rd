@@ -31,7 +31,7 @@ Defaults to maximum Y (top-aligned).}
 \item{legendAnnotation}{Optional string to be used as the legend. Defaults to name of object
 passed to the function.}
 
-\item{onscreen}{Boolean indicating plots should be returned to the screen (\code{onScreen = TRUE})
+\item{onScreen}{Boolean indicating plots should be returned to the screen (\code{onScreen = TRUE})
 or written to .png files (\code{onScreen = FALSE}). Defaults to \code{TRUE}.}
 }
 \value{

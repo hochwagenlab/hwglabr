@@ -22,8 +22,7 @@
 #' FE2('247a.txt', 3, '247a')
 #' @export
 
-FE2 <- function(FileName, cy0, strain)
-{
+FE2 <- function(fileName, cy0, strain) {
   # Load package "marray"
   if (!requireNamespace("marray", quietly = TRUE)) {
     stop("R package 'marray' needed for this function to work. Please install it.",
