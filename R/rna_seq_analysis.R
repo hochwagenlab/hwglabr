@@ -39,7 +39,7 @@
 #' the names of pairs of samples to test differential expression (DE) for. Must
 #' match strings in \code{conditionNames}. No default.
 #' @param outputFilePrefix Optional string to be added as prefix to output file names.
-#' Defaults to no prefix.
+#' No default.
 #' @return The output includes several tables saved as .csv files in a directory
 #' named "RNA-seq_analysis" written to the working directory:
 #' \enumerate{
@@ -83,6 +83,24 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
                              pairwiseDE, outputFilePrefix = ''){
   ptm  <- proc.time()
   
+  #----------------------------------------------------------------------------#
+  #-------------------------- Preliminary checks ------------------------------#
+  if (file.exists('RNA-seq_analysis')) {
+    stop('ERROR: A folder called "RNA-seq_analysis" already exists in the current working directory.\n',
+         'Please remove it and repeat function call.', call. = FALSE)
+  }
+  
+  if (!all(unlist(lapply(pathToFiles, file.exists)), na.rm = FALSE)) {
+    stop('ERROR: Could not open one or more featureCount files.',
+         'Please check the provided paths to the files.', call. = FALSE)
+  }
+  
+  if (!missing(pairwiseDE)) {
+    if (!all(unlist(lapply(pairwiseDE, is.element, conditionNames)), na.rm = FALSE)) {
+      stop('ERROR: strings for "pairwiseDE" must match "conditionNames".', call. = FALSE)
+    }
+  }
+  
   # Check for dplyr and edgeR (and load edgeR)
   if (!requireNamespace("dplyr", quietly = TRUE)) {
     stop("R package 'dplyr' is required. Please install it.\n",
@@ -97,13 +115,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   }
   library("edgeR")
   
-  # Create directory to save output
-  # Check if a directory with same name already exists
-  if (file.exists('RNA-seq_analysis')) {
-    stop('A folder called "RNA-seq_analysis" already exists in the current working directory.\n',
-         'Please remove it and repeat function call.', call. = FALSE)
-  }
-  # Create directory in current working directory
+  # Create directory in current working directory to save output
   dir.create('RNA-seq_analysis')
   cat('\nCreated output directory "RNA-seq_analysis"\n')
   
@@ -152,7 +164,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   print(y_filt$samples)
   
   # Save MDS plot
-  if(outputFilePrefix == ''){
+  if(missing(outputFilePrefix)){
     pdf(paste0("RNA-seq_analysis/", "MDS_plot.pdf"))
   } else{
     pdf(paste0("RNA-seq_analysis/", outputFilePrefix, "_MDS_plot.pdf"))
@@ -166,7 +178,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   rownames(cpm_edgeR) <- y_filt$genes$Gene
   
   # Write to file
-  if(outputFilePrefix == ''){
+  if(missing(outputFilePrefix)){
     write.csv(cpm_edgeR, paste0("RNA-seq_analysis/", "edgeR_cpm.csv"))
   } else {
     write.csv(cpm_edgeR, paste0("RNA-seq_analysis/", outputFilePrefix, "_edgeR_cpm.csv"))
@@ -191,7 +203,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   rownames(tpm) <- y_filt$genes$Gene
   
   # Write to file
-  if(outputFilePrefix == ''){
+  if(missing(outputFilePrefix)){
     write.csv(tpm, paste0("RNA-seq_analysis/", "tpm.csv"))
   } else {
     write.csv(tpm, paste0("RNA-seq_analysis/", outputFilePrefix, "_tpm.csv"))
@@ -218,7 +230,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
       }
       rownames(et$table) <- y_filt$genes$Gene
 
-      if(outputFilePrefix == ''){
+      if(missing(outputFilePrefix)){
         write.csv(et$table, paste0("RNA-seq_analysis/DE_", et$comparison[1], "-",
                                    et$comparison[2], ".csv"))
       } else {

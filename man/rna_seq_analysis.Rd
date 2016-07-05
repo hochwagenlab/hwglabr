@@ -23,7 +23,7 @@ the names of pairs of samples to test differential expression (DE) for. Must
 match strings in \code{conditionNames}. No default.}
 
 \item{outputFilePrefix}{Optional string to be added as prefix to output file names.
-Defaults to no prefix.}
+No default.}
 }
 \value{
 The output includes several tables saved as .csv files in a directory
