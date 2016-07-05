@@ -1,31 +1,33 @@
 #' Wrapper function to run analysis of summarized reads from RNA-seq experiment
 #'
-#' This function allows you to run a statistical analysis using Bioconductor package
-#' \href{https://bioconductor.org/packages/release/bioc/html/edgeR.html}{edgeR}
-#' for an RNA-seq experiment. Inputs are tables of summarized reads generated using
+#' This function allows you to run a statistical analysis of an RNA-seq experiment
+#' using Bioconductor package
+#' \href{https://bioconductor.org/packages/release/bioc/html/edgeR.html}{edgeR}.
+#' Inputs are tables of summarized reads generated using
 #' \href{http://bioinf.wehi.edu.au/featureCounts/}{featureCounts} (part of the lab's
 #' RNA-seq analysis pipeline running on NYU's HPC) for each sample in the experiment.
 #' The presence or absence of biological replicates is automatically inferred from the
-#' \code{conditionNames} argument: conditions aggreagate samples as replicates;
-#' if you provide as many different \code{conditionNames} as there are \code{sampleNames}
+#' \code{conditionNames} argument: conditions aggreagate samples as replicates. If
+#' you provide as many different \code{conditionNames} as there are \code{sampleNames}
 #' each sample is taken as a single condition (no replicates).
-#' The output includes tables of CPM, TPM and differential expression (DE) analysis
-#' for selected pairs of samples (see "Value" section below for more details).\cr
+#' The output includes tables of CPM, TPM and, if included, differential expression
+#' (DE) analysis for selected pairs of samples (see "Value" section below for more
+#' details).\cr
 #' \cr
 #' \strong{Running without replicates:} This function allows you to run the analysis on
-#' experiments including no replicate libraries. While the calculation of CPM and TPM
+#' experiments without replicate libraries. While the calculation of CPM and TPM
 #' has no requirement for replicates, you should obviously avoid doing DE analysis
 #' in the absence of replicates. The statistical model used by
 #' \href{https://bioconductor.org/packages/release/bioc/html/edgeR.html}{edgeR}
 #' to perform DE analysis relies on biological replicates to estimate biological
-#' variability and there is no satisfactory alternative to actual biological replication,
-#' of course. While waiting for replicates to be available, however, you can still run
-#' a preliminary DE analysis. The approach taken here relies on artificially
-#' providing an estimate of biological variation that is reasonable for RNA-seq experiments
-#' using \emph{S. cerevisiae}, as a better alternative to simply assuming that biological
-#' variability is absent. Typical values for the common BCV (squareroot-dispersion)
-#' for datasets arising from well-controlled experiments are 0.1 for data on genetically
-#' identical model organisms, so this function uses that value.
+#' variability. While there is no satisfactory alternative to actual biological replication,
+#' you can still run a preliminary DE analysis without replicates. The approach
+#' taken here relies on providing an estimate of biological variation that is reasonable
+#' for RNA-seq experiments using \emph{S. cerevisiae}. This is a better alternative
+#' to simply assuming that biological variability is absent. Typical values for
+#' the common BCV (squareroot-dispersion) for datasets arising from well-controlled
+#' experiments are 0.1 for data on genetically identical model organisms, so that
+#' value is used here.
 #' @param pathToFiles A list of strings corresponding to the full path to the featureCounts
 #' output files for all samples in the experiment. No default.
 #' @param sampleNames A list of strings corresponding to the names of all samples
@@ -33,7 +35,7 @@
 #' @param conditionNames A list of strings corresponding to the experimental groups/conditions
 #' for each sample/library. Will be the input to edgeR's \code{\link[edgeR]{DGEList}}
 #' constructor function and will define replicate groups, if any. No default.
-#' @param pairwiseDE A list of two-string vectors corresponding to the names of pairs
+#' @param pairwiseDE Optional list of two-string vectors corresponding to the names of pairs
 #' of samples to test differential expression (DE) for. Must match strings in \code{conditionNames}.
 #' No default.
 #' @param outputFilePrefix Optional string to be added as prefix to output file names.
@@ -55,8 +57,8 @@
 #' A \strong{M}ulti-\strong{D}imensional \strong{S}caling plot of all samples is also
 #' saved in the output directory as a .pdf file.
 #' @examples
-#' rna_seq_analysis(pathToFiles = list('path/to/AH119-2h_featureCounts.txt', 'path/to/AH119-3h_featureCounts.txt',
-#'                                     'path/to/AH8104-2h_featureCounts.txt', 'path/to/AH8104-3h_featureCounts.txt'),
+#' rna_seq_analysis(pathToFiles = list('AH119-2h_featureCounts.txt', 'AH119-3h_featureCounts.txt',
+#'                                     'AH8104-2h_featureCounts.txt', 'AH8104-3h_featureCounts.txt'),
 #'                  sampleNames = list('AH119_2h', 'AH119_3h', 'AH8104_2h', 'AH8104_3h'),
 #'                  conditionNames = list('WT_2h', 'WT_3h', 'dot1_2h', 'dot1_3h'),
 #'                  pairwiseDE = list(c('WT_2h', 'dot1_2h'), c('WT_3h', 'dot1_3h'),
@@ -64,8 +66,14 @@
 #'                                    c('WT_2h', 'WT_3h'), c('dot1_2h', 'dot1_3h')),
 #'                  outputFilePrefix = 'dot1_noReplicates')
 #'
-#' rna_seq_analysis(pathToFiles = list('path/to/AH119-A_featureCounts.txt', 'path/to/AH119-B_featureCounts.txt',
-#'                                     'path/to/AH8104-A_featureCounts.txt', 'path/to/AH8104-B_featureCounts.txt'),
+#'  rna_seq_analysis(pathToFiles = list('AH119-2h_featureCounts.txt', 'AH119-3h_featureCounts.txt',
+#'                                     'AH8104-2h_featureCounts.txt', 'AH8104-3h_featureCounts.txt'),
+#'                  sampleNames = list('AH119_2h', 'AH119_3h', 'AH8104_2h', 'AH8104_3h'),
+#'                  conditionNames = list('WT_2h', 'WT_3h', 'dot1_2h', 'dot1_3h'),
+#'                  outputFilePrefix = 'dot1_noReplicates')
+#'
+#' rna_seq_analysis(pathToFiles = list('AH119-A_featureCounts.txt', 'AH119-B_featureCounts.txt',
+#'                                     'AH8104-A_featureCounts.txt', 'AH8104-B_featureCounts.txt'),
 #'                  sampleNames = list('AH119_A', 'AH119_B', 'AH8104_A', 'AH8104_B'),
 #'                  conditionNames = list('WT', 'WT', 'dot1', 'dot1'),
 #'                  pairwiseDE = list(c('WT', 'dot1')))
