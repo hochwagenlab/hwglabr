@@ -35,9 +35,9 @@
 #' @param conditionNames A list of strings corresponding to the experimental groups/conditions
 #' for each sample/library. Will be the input to edgeR's \code{\link[edgeR]{DGEList}}
 #' constructor function and will define replicate groups, if any. No default.
-#' @param pairwiseDE Optional list of two-string vectors corresponding to the names of pairs
-#' of samples to test differential expression (DE) for. Must match strings in \code{conditionNames}.
-#' No default.
+#' @param pairwiseDE Optional list of two-element string vectors corresponding to
+#' the names of pairs of samples to test differential expression (DE) for. Must
+#' match strings in \code{conditionNames}. No default.
 #' @param outputFilePrefix Optional string to be added as prefix to output file names.
 #' Defaults to no prefix.
 #' @return The output includes several tables saved as .csv files in a directory

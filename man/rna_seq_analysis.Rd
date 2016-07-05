@@ -18,9 +18,9 @@ in the experiment in the same order as the files in \code{pathToFiles}. No defau
 for each sample/library. Will be the input to edgeR's \code{\link[edgeR]{DGEList}}
 constructor function and will define replicate groups, if any. No default.}
 
-\item{pairwiseDE}{Optional list of two-string vectors corresponding to the names of pairs
-of samples to test differential expression (DE) for. Must match strings in \code{conditionNames}.
-No default.}
+\item{pairwiseDE}{Optional list of two-element string vectors corresponding to
+the names of pairs of samples to test differential expression (DE) for. Must
+match strings in \code{conditionNames}. No default.}
 
 \item{outputFilePrefix}{Optional string to be added as prefix to output file names.
 Defaults to no prefix.}
