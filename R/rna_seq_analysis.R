@@ -47,8 +47,7 @@
 #'   \strong{M}illion (output of edgeR's \code{\link[edgeR]{cpm}} function). Useful
 #'   for intersample feature expression comparison (not feature length-normalized).
 #'   \item \strong{TPM:} Compositional bias and feature length-normalized \strong{T}ranscripts
-#'   \strong{P}er \strong{M}illion (output of \code{\link{rna_se_tpm}} function).
-#'   Useful for within-sample feature exrpession comparison.
+#'   \strong{P}er \strong{M}illion. Useful for within-sample feature expression comparison.
 #'   \item \strong{DE:} A \strong{D}ifferential \strong{E}xpression table for each
 #'   requested pair of samples (output of edgeR's \code{\link[edgeR]{exactTest}} function),
 #'   including log2 fold change (\code{logFC}), average log2 counts per million

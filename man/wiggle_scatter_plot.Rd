@@ -7,8 +7,8 @@
 wiggle_scatter_plot(scatter)
 }
 \arguments{
-\item{scatter}{Parameter for \code{\link{wiggle_scatter}}. Input should be output of 
-\code{wiggle_scatter()}.}
+\item{scatter}{Parameter for \code{wiggle_scatter_plot}. Input should be output of 
+\code{\link{wiggle_scatter}}.}
 
 \item{wiggleData1}{Parameter of \code{\link{wiggle_scatter}}. A list of 16 chr wiggle data 
 (output of \code{\link{readall_tab}}. No default.}
@@ -23,7 +23,7 @@ Default is 5000 bp.}
 Output of \code{\link{wiggle_scatter}} is a large (dplyr) data frame with
 compressed data from all chromosomes. See \code{\link{wiggle_compress}} for more 
 information. \cr
-Output of \code{wiggle_scatter_plot()} is an .eps file with file name and axis
+Output of \code{wiggle_scatter_plot} is an .eps file with file name and axis
 names determined by columns of input data frame. The function is written so that
 the x-axis and the y-axis have the same range.
 }
@@ -35,7 +35,7 @@ The two functions are used as follows:
 \enumerate{
   \item \code{\link{wiggle_scatter}} will extract the necessary information using
   \code{\link{wiggle_compress}} for all chromosomes
-  \item \code{wiggle_scatter_plot()} will make a simple .eps file of the results.
+  \item \code{wiggle_scatter_plot} will make a simple .eps file of the results.
 }
 Written by Tovah Markowitz
 }

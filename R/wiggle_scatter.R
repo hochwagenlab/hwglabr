@@ -5,20 +5,20 @@
 #' Great for comparing replicates, checking controls, etc.
 #' The two functions are used as follows:
 #' \enumerate{
-#'   \item \code{wiggle_scatter()} will extract the necessary information using
-#'   \code{wiggle_compress()} for all chromosomes
-#'   \item \code{wiggle_scatter_plot()} will make a simple .eps file of the results.
+#'   \item \code{wiggle_scatter} will extract the necessary information using
+#'   \code{\link{wiggle_compress}} for all chromosomes
+#'   \item \code{\link{wiggle_scatter_plot}} will make a simple .eps file of the results.
 #' }
 #' Written by Tovah Markowitz
-#' @param wiggleData1 Parameter of \code{wiggle_scatter()}. A list of 16 chr wiggle data 
-#' (output of \code{readall_tab()}). No default.
-#' @param wiggleData2 Parameter of \code{wiggle_scatter()}. A second set of wiggle data 
-#' (output of \code{readall_tab()}). No default.
-#' @param window Parameter of \code{wiggle_scatter()}. Size of window to be compressed.
+#' @param wiggleData1 Parameter of \code{wiggle_scatter}. A list of 16 chr wiggle data 
+#' (output of \code{readall_tab}). No default.
+#' @param wiggleData2 Parameter of \code{wiggle_scatter}. A second set of wiggle data 
+#' (output of \code{readall_tab}). No default.
+#' @param window Parameter of \code{wiggle_scatter}. Size of window to be compressed.
 #' Default is 5000 bp.
-#' @param scatter Parameter for \code{plot_scatter()}. Input should be output of 
-#' \code{wiggle_scatter()}.
-#' @return Output of \code{wiggle_scatter()} is a large (dplyr) data frame with
+#' @param scatter Parameter for \code{\link{wiggle_scatter_plot}}. Input should be output of 
+#' \code{wiggle_scatter}.
+#' @return Output of \code{wiggle_scatter} is a large (dplyr) data frame with
 #' compressed data from all chromosomes. See \code{\link{wiggle_compress}} for more 
 #' information. \cr
 #' Output of \code{\link{wiggle_scatter_plot}} is an .eps file with file name and axis
