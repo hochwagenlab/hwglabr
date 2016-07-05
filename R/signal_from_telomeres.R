@@ -92,7 +92,8 @@ signal_from_telomeres <- function(inputData, lengthToCollect = 100000) {
     Cen <- SK1cen
   } else {
     # Load the data:
-    data("S288Ccen")
+    #data("S288Ccen")
+    data(sysdata, envir=environment())
     Cen <- S288Ccen
   }
   

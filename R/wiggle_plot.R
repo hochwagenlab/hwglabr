@@ -76,7 +76,8 @@ wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein
     Cen <- SK1cen
   } else {
     # Load the data:
-    data("S288Ccen")
+    #data("S288Ccen")
+    data(sysdata, envir=environment())
     Cen <- S288Ccen
   }
   

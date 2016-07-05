@@ -132,7 +132,8 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
   # devtools::use_data(S288Ccen, internal = FALSE)
   
   # Load the data:
-  data("S288Ccen")
+  #data("S288Ccen")
+  data(sysdata, envir=environment())
   ##############################################################################
   
   cat('Plotting... \n')
