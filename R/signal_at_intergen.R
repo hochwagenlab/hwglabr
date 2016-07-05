@@ -72,12 +72,19 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
   # SK1_tand_midpoint_dist <- read.table(paste0(path, 'SK1_tand_midpoint_dist.txt'),
   #                                      header = TRUE, stringsAsFactors = FALSE)
   # setwd('/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/Scripts/Rpackages/hwglabr')
-  # devtools::use_data(S288C_conv_midpoint_dist, internal = FALSE)
-  # devtools::use_data(S288C_div_midpoint_dist, internal = FALSE)
-  # devtools::use_data(S288C_tand_midpoint_dist, internal = FALSE)
-  # devtools::use_data(SK1_conv_midpoint_dist, internal = FALSE)
-  # devtools::use_data(SK1_div_midpoint_dist, internal = FALSE)
-  # devtools::use_data(SK1_tand_midpoint_dist, internal = FALSE)
+  # devtools::use_data(S288C_conv_midpoint_dist,
+  #                    S288C_div_midpoint_dist,
+  #                    S288C_tand_midpoint_dist,
+  #                    SK1_conv_midpoint_dist,
+  #                    SK1_div_midpoint_dist,
+  #                    SK1_tand_midpoint_dist,
+  #                    internal = TRUE, overwrite = TRUE)
+  # devtools::use_data(S288C_conv_midpoint_dist, internal = TRUE)
+  # devtools::use_data(S288C_div_midpoint_dist, internal = TRUE)
+  # devtools::use_data(S288C_tand_midpoint_dist, internal = TRUE)
+  # devtools::use_data(SK1_conv_midpoint_dist, internal = TRUE)
+  # devtools::use_data(SK1_div_midpoint_dist, internal = TRUE)
+  # devtools::use_data(SK1_tand_midpoint_dist, internal = TRUE)
   ##############################################################################
   
   # Check reference genome and load appropriate convergent gene regions 
