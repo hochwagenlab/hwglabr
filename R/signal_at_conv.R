@@ -29,30 +29,10 @@ signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,
   cat('Note: This function is deprecated!\n',
       'From version 0.2 on it is no longer maintained. Use signal_at_intergen() instead.')
   
-  ##############################################################################
-  # Get the convergent gene region data
-  # The data is internal to the package and was generated as follows:
-  #
-  #-------------------------------- S288C genome ------------------------------#
-  # Import data file, originally generated using:
-  # "/Volumes/LabShare/Luis/LabWork/Scripts/2015.10_H3k79me3_transcription.R"
-  # path <- '/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/2015.05_dot1_rec8dot1/2015.10_H3K79me3_transcripts/'
-  # S288C_conv <- read.table(paste0(path, 'conv_midpoints_rpkm.txt'),
-  #                         header = TRUE, stringsAsFactors = FALSE)
-  # Remove info about transcription:
-  # S288C_conv <- S288C_conv[, 1:6]
-  # setwd('/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/Scripts/Rpackages/hwglabr')
-  # devtools::use_data(S288C_conv, internal = FALSE)
-  #
-  #--------------------------------- SK1 genome -------------------------------#
-  # Import data file, originally generated using:
-  # /Volumes/LabShare/Luis/LabWork/Scripts/2015.11_convMidpointsSK1.R
-  # path <- '/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/GenomeSequences/SK1/'
-  # SK1_conv <- read.table(paste0(path, 'conv_midpoints_SK1.txt'),
-  #                        header = TRUE, stringsAsFactors = FALSE)
-  # setwd('/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/Scripts/Rpackages/hwglabr')
-  # devtools::use_data(SK1_conv, internal = FALSE)
-  #
+  #----------------------------------------------------------------------------#
+  # All data loaded below is internal to the package
+  # Generated using 'data-raw/data_internal.R'; stored in 'data/sysdata.rda'
+  #----------------------------------------------------------------------------#
   
   # Check reference genome and load appropriate convergent gene regions 
   chrom_S288C <- c("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
@@ -69,17 +49,16 @@ signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,
     check_SK1 <- any(grep('chr01.', names(inputData), fixed = TRUE))
   }
   
+  # Load the data:
+  data(sysdata, envir=environment())
+  
   if (check_S288C) {
     cat('Detected ref. genome - S288C\n')
-    # Load the data:
-    data("S288C_conv")
     conv <- S288C_conv
     chrom <- chrom_S288C
     
   } else if (check_SK1) {
     print('Detected ref. genome - SK1')
-    # Load the data:
-    data("SK1_conv")
     conv <- SK1_conv
     chrom <- chrom_SK1
   } else stop("Did not recognize reference genome.

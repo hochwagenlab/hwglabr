@@ -29,19 +29,12 @@ FE2 <- function(fileName, cy0, strain) {
          call. = FALSE)
   }
   library(marray)
-  ### Generating internal data --------------------------------------------- ###
-  # Generate data from 'SK1rosetta_R64.txt', needed for the function
-  # The data is internal to the package and was generated as follows:
-  #
-  # path <- '/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/GenomeSequences/'
-  # SK1rosetta <- read.table(paste0(path, 'SK1rosetta_R64.txt'),
-  #                          header = TRUE, sep = '\t')
-  # setwd('/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/Scripts/Rpackages/hwglabr')
-  # devtools::use_data(SK1rosetta, internal = FALSE)
-  
-  # Load the internal data:
-  data("SK1rosetta")
-  ### ---------------------------------------------------------------------- ###
+  #----------------------------------------------------------------------------#
+  # All data loaded below is internal to the package
+  # Generated using 'data-raw/data_internal.R'; stored in 'data/sysdata.rda'
+  #----------------------------------------------------------------------------#
+  data(sysdata, envir=environment())
+
   plat <- SK1rosetta
   maData <- read.Agilent(fnames = FileName, name.Rf = "rMeanSignal",
                        name.Gf = "gMeanSignal", name.Rb = "rBGMeanSignal",

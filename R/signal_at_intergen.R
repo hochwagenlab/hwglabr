@@ -51,37 +51,10 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
          "install.packages('dplyr')", call. = FALSE)
   }
   
-  ##############################################################################
-  #                       Get the intergenic region data
-  #
-  # The intergenic region coordinate files were generated (by Luis and Tovah) using
-  # the scripts found at: '/Volumes/LabShare/Luis/LabWork/GenomeSequences/hwglabr/'
-  # The data is internal to the package and was included as follows:
-  # 1. Import data file
-  # path <- '/Volumes/LabShare/Luis/LabWork/GenomeSequences/hwglabr/'
-  # S288C_conv_midpoint_dist <- read.table(paste0(path, 'S288C_conv_midpoint_dist.txt'),
-  #                                        header = TRUE, stringsAsFactors = FALSE)
-  # S288C_div_midpoint_dist <- read.table(paste0(path, 'S288C_div_midpoint_dist.txt'),
-  #                                       header = TRUE, stringsAsFactors = FALSE)
-  # S288C_tand_midpoint_dist <- read.table(paste0(path, 'S288C_tand_midpoint_dist.txt'),
-  #                                        header = TRUE, stringsAsFactors = FALSE)
-  # SK1_conv_midpoint_dist <- read.table(paste0(path, 'SK1_conv_midpoint_dist.txt'),
-  #                                      header = TRUE, stringsAsFactors = FALSE)
-  # SK1_div_midpoint_dist <- read.table(paste0(path, 'SK1_div_midpoint_dist.txt'),
-  #                                     header = TRUE, stringsAsFactors = FALSE)
-  # SK1_tand_midpoint_dist <- read.table(paste0(path, 'SK1_tand_midpoint_dist.txt'),
-  #                                      header = TRUE, stringsAsFactors = FALSE)
-  # setwd('/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/Scripts/Rpackages/hwglabr')
-  # devtools::use_data(S288C_conv_midpoint_dist,
-  #                    S288C_div_midpoint_dist,
-  #                    S288C_tand_midpoint_dist,
-  #                    SK1_conv_midpoint_dist,
-  #                    SK1_div_midpoint_dist,
-  #                    SK1_tand_midpoint_dist,
-  #                    S288Ccen,
-  #                    ,
-  #                    internal = TRUE, overwrite = TRUE)
-  ##############################################################################
+  #----------------------------------------------------------------------------#
+  # All data loaded below is internal to the package
+  # Generated using 'data-raw/data_internal.R'; stored in 'data/sysdata.rda'
+  #----------------------------------------------------------------------------#
   
   # Check reference genome and load appropriate convergent gene regions 
   chrom_S288C <- c("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
