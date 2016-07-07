@@ -97,7 +97,7 @@ signal_at_intergen_average_plot <- function(inputDataA, inputDataB, genome, orie
   if (!onScreen) {
     png(filename = paste0(deparse(substitute(inputDataA)), "_",
                           orientation, "_mean", ".png"),
-        width = 700, height = 650, unit = 'px')
+        width = 700, height = 650, units = 'px')
   }
   
   par(mfrow = c(1, 1), mar = c(11, 12, 8, 4), mgp = c(7, 2, 0))
@@ -107,7 +107,7 @@ signal_at_intergen_average_plot <- function(inputDataA, inputDataB, genome, orie
        ylab = 'Signal', main = paste0(orientation, ' genes\n(mapped to ', genome, ' genome)'),
        cex = 2, cex.main = 2, cex.axis = 2, cex.lab = 2.5, bty = "n")
   
-  axis(1, at = c(xMin, 0, xMax), lab = c(-500, 0, 500),
+  axis(1, at = c(xMin, 0, xMax), labels = c(-500, 0, 500),
        las = 1, lwd = 4, cex.axis = 2.5, cex = 3.0)
   axis(2, at = c(yMin, 0, yMax), lwd = 4, las = 2, cex.axis = 2.5, cex = 3.0)
   abline(v = 0, lty = 2, lwd = 2)
