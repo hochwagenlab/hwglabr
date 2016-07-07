@@ -36,7 +36,7 @@ FE2 <- function(fileName, cy0, strain) {
   data(sysdata, envir=environment())
 
   plat <- SK1rosetta
-  maData <- read.Agilent(fnames = FileName, name.Rf = "rMeanSignal",
+  maData <- read.Agilent(fnames = fileName, name.Rf = "rMeanSignal",
                        name.Gf = "gMeanSignal", name.Rb = "rBGMeanSignal",
                        name.Gb = "gBGMeanSignal", sep = "\t")
   maNorm <- maNorm(maData,norm = "printTipLoess")
