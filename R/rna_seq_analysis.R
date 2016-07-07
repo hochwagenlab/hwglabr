@@ -79,7 +79,7 @@
 #' @export
 
 rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
-                             pairwiseDE, outputFilePrefix = ''){
+                             pairwiseDE, outputFilePrefix){
   ptm  <- proc.time()
   
   #----------------------------------------------------------------------------#
