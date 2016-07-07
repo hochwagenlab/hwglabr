@@ -15,7 +15,8 @@ Suggests:
     marray,
     pbapply,
     readr,
-    scales
+    scales,
+    edgeR
 Depends:
     R (>= 3.1.1)
 License: MIT + file LICENSE
