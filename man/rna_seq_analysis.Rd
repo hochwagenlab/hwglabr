@@ -5,7 +5,7 @@
 \title{Wrapper function to run analysis of summarized reads from RNA-seq experiment}
 \usage{
 rna_seq_analysis(pathToFiles, sampleNames, conditionNames, pairwiseDE,
-  outputFilePrefix = "")
+  outputFilePrefix)
 }
 \arguments{
 \item{pathToFiles}{A list of strings corresponding to the full path to the featureCounts
