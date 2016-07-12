@@ -20,6 +20,13 @@
 readall_tab <- function(fileLocation, useReadr = TRUE,
                         progressBar = TRUE, localCopy = FALSE) {
   ptm <- proc.time()
+  
+  # Check that path to files is correct
+  if (!file.exists(fileLocation)) {
+    stop('Cannot seem to find the files.\n',
+         'Please check that the provided path to files is correct.', call. = FALSE)
+  }
+  
   if (localCopy) {
     cat('Copying data files to local folder "/readall_tab_temp"\n...')
     # Check if a directory 'readall_tab_temp' already exists
@@ -36,7 +43,7 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
     fileLocation <- paste0('readall_tab_temp/', list.files('readall_tab_temp'))
   }
   
-  cat('\nReading data\n')
+  cat('\nReading data...\n')
   
   filenames <- list.files(fileLocation, full.names = T)
   if (length(filenames) == 17) {
