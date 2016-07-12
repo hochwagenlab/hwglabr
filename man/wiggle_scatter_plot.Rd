@@ -4,26 +4,16 @@
 \alias{wiggle_scatter_plot}
 \title{To make a scatter plot comparison of two wiggle files}
 \usage{
-wiggle_scatter_plot(scatter)
+wiggle_scatter_plot(scatter, method = "spearman")
 }
 \arguments{
-\item{scatter}{Parameter for \code{wiggle_scatter_plot}. Input should be output of 
-\code{\link{wiggle_scatter}}.}
+\item{scatter}{Input should be output of \code{\link{wiggle_scatter}}.}
 
-\item{wiggleData1}{Parameter of \code{\link{wiggle_scatter}}. A list of 16 chr wiggle data 
-(output of \code{\link{readall_tab}}. No default.}
-
-\item{wiggleData2}{Parameter of \code{\link{wiggle_scatter}}. A second set of wiggle data 
-(output of \code{readall_tab()}). No default.}
-
-\item{window}{Parameter of \code{\link{wiggle_scatter}}. Size of window to be compressed.
-Default is 5000 bp.}
+\item{method}{Method used to calculate correlation value on plot (same as for
+\code{\link{cor}} function). Defaults to "spearman".}
 }
 \value{
-Output of \code{\link{wiggle_scatter}} is a large (dplyr) data frame with
-compressed data from all chromosomes. See \code{\link{wiggle_compress}} for more 
-information. \cr
-Output of \code{wiggle_scatter_plot} is an .eps file with file name and axis
+Output is an .eps file with file name and axis
 names determined by columns of input data frame. The function is written so that
 the x-axis and the y-axis have the same range.
 }
