@@ -32,8 +32,6 @@
 #' facs_density_plot(119, c(2000000, 7500000), 'pdf')
 #' @export
 
-
-
 facs_density_plot <- function(yeastLine, gates, type) {
   
   # This piece allows the gating to be optional
@@ -87,14 +85,14 @@ facs_density_plot <- function(yeastLine, gates, type) {
   # Note: densityplot is a Lattice plot, not a standard R plot.
   
   experiment <- as(samples, "flowSet")
-  print(densityplot(~`FL1-A`, experiment, overlap = 0.8))
+  print(flowViz::densityplot(~`FL1-A`, experiment, overlap = 0.8))
   
   if (length(gates) != 0) {
     
     # To use rectangular gating to filter the data. Information on filterIds is
     # limited. Note: some smoothing also occurs with this function
-    rectGate <- rectangleGate(filterId="nonDebris","FL1-A" = gates)
-    filtered <- filter(experiment,rectGate)
+    rectGate <- flowCore::rectangleGate(filterId="nonDebris","FL1-A" = gates)
+    filtered <- flowCore::filter(experiment,rectGate)
     
     if (type == "jpg") {
       fileName <- as.character(paste(yeastLine, ".jpg", sep = ""))
@@ -115,11 +113,12 @@ facs_density_plot <- function(yeastLine, gates, type) {
     
     Xlow <- gates[1]-1000000
     Xhigh <- gates[2]+1000000
-    fitc.plot <- densityplot(~`FL1-A`, Subset(experiment, filtered), overlap = 0.8,
-                           main = list(as.character(yeastLine), fontsize = 20),
-                           xlim = c(Xlow, Xhigh),
-                           par.strip.text = list(cex = 1.5),
-                           scales = list(cex = 2))
+    fitc.plot <- flowViz::densityplot(~`FL1-A`, Subset(experiment, filtered),
+                                      overlap = 0.8, main = list(as.character(yeastLine),
+                                                                 fontsize = 20),
+                                      xlim = c(Xlow, Xhigh),
+                                      par.strip.text = list(cex = 1.5),
+                                      scales = list(cex = 2))
     
     # Step 3: Get the default settings for the feature of interest
     superpose.settings <- trellis.par.get("superpose.polygon")
