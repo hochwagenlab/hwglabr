@@ -99,7 +99,7 @@ signal_at_orf_average_plot <- function(inputDataA, inputDataB, genome,
   
   if (!onScreen) {
     png(filename = paste0(deparse(substitute(inputDataA)), "_orf_mean", ".png"),
-        width = 700, height = 650, unit = 'px')
+        width = 700, height = 650, units = 'px')
   }
   
   par(mfrow = c(1, 1), mar = c(11, 12, 8, 4), mgp = c(7, 2, 0))
@@ -109,7 +109,7 @@ signal_at_orf_average_plot <- function(inputDataA, inputDataB, genome,
        ylab = 'Signal', main = paste0('ORFs (mapped to ', genome, ' genome)'),
        cex = 2, cex.main = 2, cex.axis = 2, cex.lab = 2.5, bty = "n")
   
-  axis(1, at = c(0, 1), lab = c('', ''),
+  axis(1, at = c(0, 1), labels = c('', ''),
        las = 1, lwd = 4, cex.axis = 2.5, cex = 3.0)
   axis(2, at = c(0, yMax), lwd = 4, las = 2, cex.axis = 2.5, cex = 3.0)
   abline(v = c(250, 750) , lty= 2, lwd = 2)

@@ -50,7 +50,7 @@ wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein
   # Plot(s)  
   if (!onScreen) {
     png(filename = paste0(deparse(substitute(wiggleData)), "_chr", deparse(substitute(chr)),
-                          ".png"), width = 1000, height = 480, unit = 'px')
+                          ".png"), width = 1000, height = 480, units = 'px')
   }
   par(mfrow = c(1, 1), mar = c(8, 11, 2, 2), mgp = c(4, 2, 0))
   xMax <- ceiling(max(wiggleData[, 1], na.rm = T) / 1000)
