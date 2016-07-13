@@ -10,15 +10,16 @@ Description: Compilation of functions written and used frequently by Hochwagen
     lab members. This means mostly functions used to analyse data from ChIP-seq
     experiments: wiggle data produced by the lab's Fastq2Peak ChIP-seq  analysis
     pipeline.
+Depends:
+    flowCore,
+    flowViz
 Suggests:
     dplyr,
     marray,
     pbapply,
     readr,
     scales,
-    edgeR,
-    flowCore,
-    flowViz
+    edgeR
 Depends:
     R (>= 3.1.1)
 License: MIT + file LICENSE
