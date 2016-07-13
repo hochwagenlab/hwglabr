@@ -12,14 +12,14 @@ Description: Compilation of functions written and used frequently by Hochwagen
     pipeline.
 Depends:
     flowCore,
-    flowViz
-Suggests:
-    dplyr,
+    flowViz,
     marray,
+    edgeR
+Imports:
+    dplyr,
     pbapply,
     readr,
-    scales,
-    edgeR
+    scales
 Depends:
     R (>= 3.1.1)
 License: MIT + file LICENSE
