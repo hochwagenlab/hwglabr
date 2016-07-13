@@ -19,7 +19,7 @@
 # By: Tovah Markowitz
 # Date: 5/18/16
 
-wiggle_correlation <- function(Set1, Set2, method = 'pearson') {
+wiggle_correlation <- function(Set1, Set2, method = 'spearman') {
 	ptm <- proc.time()
 	
 	if (!requireNamespace("dplyr", quietly = TRUE)) {

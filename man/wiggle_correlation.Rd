@@ -4,7 +4,7 @@
 \alias{wiggle_correlation}
 \title{Correlation between two ChIP-seq experiments}
 \usage{
-wiggle_correlation(Set1, Set2, method = "pearson")
+wiggle_correlation(Set1, Set2, method = "spearman")
 }
 \arguments{
 \item{Set1}{A list of 16 chr wiggle data (output of \code{\link{readall_tab}})}
