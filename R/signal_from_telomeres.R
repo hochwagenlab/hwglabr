@@ -11,13 +11,19 @@
 #' @param inputData As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}). No default.
 #' @param lengthToCollect Number specifying the length (in bp) of the region to collect signal for,
 #' starting form the telomeres. Defaults to 100000 (i.e. 100 kb).
-#' @return A list with two elements:
+#' @return A list with two elements, each one is itself a list containing the collected
+#' signal separately for the right and left arms of the included chromosomes:
 #' \enumerate{
-#'   \item \code{small_chrs} Chromosomes 1, 3 and 6.
-#'   \item \code{large_chrs} Remaining chromosomes.
+#'   \item \code{small_chrs} List of data frames of collected signal for right and
+#'   left arms of chromosomes 1, 3 and 6
+#'   \item \code{large_chrs} List of data frames of collected signal for right and
+#'   left arms of remaining chromosomes
 #' }
-#' Each one of the two lists is itself a list containing the collected signal separately for the
-#' right and left arms of all chromosomes.
+#' Each data frame has two columns:
+#' \enumerate{
+#'   \item \code{distance_to_telomere} Distance to telomere in bp
+#'   \item \code{signal} ChIP signal
+#' }
 #' @examples
 #' signal_from_telomeres(WT)
 #' 
