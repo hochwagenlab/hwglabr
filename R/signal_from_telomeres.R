@@ -22,7 +22,7 @@
 #' Each data frame has two columns:
 #' \enumerate{
 #'   \item \code{distance_to_telomere} Distance to telomere in bp
-#'   \item \code{signal} ChIP signal
+#'   \item \code{signal} ChIP-seq signal
 #' }
 #' @examples
 #' signal_from_telomeres(WT)

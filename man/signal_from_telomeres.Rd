@@ -24,7 +24,7 @@ signal separately for the right and left arms of the included chromosomes:
 Each data frame has two columns:
 \enumerate{
   \item \code{distance_to_telomere} Distance to telomere in bp
-  \item \code{signal} ChIP signal
+  \item \code{signal} ChIP-seq signal
 }
 }
 \description{
