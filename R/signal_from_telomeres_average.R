@@ -41,7 +41,7 @@ signal_from_telomeres_average <- function(inputData, separateSmallAndLarge = FAL
   inputData$large_chrs <- do.call('rbind', inputData$large_chrs)
   
   if(separateSmallAndLarge){
-    cat('\nCalculation mean and SD...')
+    cat('\nCalculating mean and SD...')
     # Group by genome position and average signal
     inputData$small_chrs <- dplyr::summarise(dplyr::group_by(inputData$small_chrs,
                                                              distance_to_telomere),
@@ -57,7 +57,7 @@ signal_from_telomeres_average <- function(inputData, separateSmallAndLarge = FAL
     finalData <- do.call('rbind', inputData)
     
     # Group by genome position and average signal
-    cat('\nCalculation mean and SD...')
+    cat('\nCalculating mean and SD...')
     finalData <- dplyr::summarise(dplyr::group_by(finalData, distance_to_telomere),
                                   mean_signal = mean(signal, na.rm = TRUE),
                                   sd = sd(signal, na.rm = TRUE))
