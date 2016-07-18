@@ -7,17 +7,17 @@
 wiggle_scatter(wiggleData1, wiggleData2, window = 5000)
 }
 \arguments{
-\item{wiggleData1}{A list of 16 chr wiggle data (output of \code{readall_tab}). No default.}
+\item{wiggleData1}{A list of 16 chr wiggle data (output of \code{\link{readall_tab}}). No default.}
 
-\item{wiggleData2}{A second set of wiggle data (output of \code{readall_tab}). No default.}
+\item{wiggleData2}{A second set of wiggle data (output of \code{\link{readall_tab}}). No default.}
 
-\item{window}{Parameter of \code{wiggle_scatter}. Size of window to be compressed.
+\item{window}{Parameter of \code{\link{wiggle_scatter}}. Size of window to be compressed.
 Default is 5000 bp.}
 }
 \value{
 Output is a large (dplyr) data frame with
 compressed data from all chromosomes. See \code{\link{wiggle_compress}} for more 
-information. \cr
+information.
 }
 \description{
 This function is designed to work with function \code{\link{wiggle_scatter_plot}} to
