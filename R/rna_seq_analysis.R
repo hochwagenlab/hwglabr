@@ -1,4 +1,4 @@
-#' Wrapper function to run analysis of summarized reads from RNA-seq experiment
+#' Wrapper function to run edgeR analysis of summarized reads from RNA-seq experiment
 #'
 #' This function allows you to run a statistical analysis of an RNA-seq experiment
 #' using Bioconductor package

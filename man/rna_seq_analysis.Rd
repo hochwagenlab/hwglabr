@@ -2,7 +2,7 @@
 % Please edit documentation in R/rna_seq_analysis.R
 \name{rna_seq_analysis}
 \alias{rna_seq_analysis}
-\title{Wrapper function to run analysis of summarized reads from RNA-seq experiment}
+\title{Wrapper function to run edgeR analysis of summarized reads from RNA-seq experiment}
 \usage{
 rna_seq_analysis(pathToFiles, sampleNames, conditionNames, pairwiseDE,
   outputFilePrefix)
