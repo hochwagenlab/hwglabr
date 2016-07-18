@@ -7,7 +7,7 @@
 #' \href{http://bioinf.wehi.edu.au/featureCounts/}{featureCounts} (part of the lab's
 #' RNA-seq analysis pipeline running on NYU's HPC) for each sample in the experiment.
 #' The presence or absence of biological replicates is automatically inferred from the
-#' \code{conditionNames} argument: conditions aggreagate samples as replicates. If
+#' \code{conditionNames} argument: conditions aggregate samples as replicates. If
 #' you provide as many different \code{conditionNames} as there are \code{sampleNames}
 #' each sample is taken as a single condition (no replicates).
 #' The output includes tables of CPM, TPM and, if included, differential expression
