@@ -110,7 +110,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
     stop("Bioconductor package 'edgeR' is required. Please install it:\n", 
          "## try http:// if https:// URLs are not supported",
          "source('https://bioconductor.org/biocLite.R')",
-         "biocLite('edgeR'), call. = FALSE)", call. = FALSE)
+         "biocLite('edgeR')", call. = FALSE)
   }
   library("edgeR")
   
