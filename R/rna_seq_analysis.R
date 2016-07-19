@@ -168,12 +168,12 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   } else{
     pdf(paste0("RNA-seq_analysis/", outputFilePrefix, "_MDS_plot.pdf"))
   }
-  plotMDS(y_filt)
+  edgeR::plotMDS(y_filt)
   dev.off()
   cat('\nPlotted multi-dimensional scaling (MDS) and saved to .pdf file.\n')
   
   # Calculate CPM and write to file
-  cpm_edgeR <- cpm(y_filt)
+  cpm_edgeR <- edgeR::cpm(y_filt)
   rownames(cpm_edgeR) <- y_filt$genes$Gene
   
   # Write to file
@@ -223,9 +223,9 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
     
     for(i in 1:length(pairwiseDE)){
       if(length(unique(conditionNames)) == length(unique(sampleNames))){
-        et <-edgeR::exactTest(y_filt, pair = pairwiseDE[[i]], dispersion = bcv^2)
+        et <- edgeR::exactTest(y_filt, pair = pairwiseDE[[i]], dispersion = bcv^2)
       } else {
-        et <- exactTest(y_filt, pair = pairwiseDE[[i]])
+        et <- edgeR::exactTest(y_filt, pair = pairwiseDE[[i]])
       }
       rownames(et$table) <- y_filt$genes$Gene
 
