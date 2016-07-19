@@ -92,6 +92,10 @@ SK1rosetta <- read.table(paste0(path, 'SK1rosetta_R64.txt'),
 #------------------------------------------------------------------------------#
 #                 Add all data to package (as internal data)                   #
 #                             (as internal data)                               #
+
+# Determine the best compression for the data files
+tools::checkRdaFiles('data/')  # Suggests 'bzip2'
+
 setwd('/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/Scripts/Rpackages/hwglabr')
 devtools::use_data(S288C_conv_midpoint_dist,
                    S288C_div_midpoint_dist,
@@ -104,4 +108,4 @@ devtools::use_data(S288C_conv_midpoint_dist,
                    S288Ccen,
                    SK1cen,
                    SK1rosetta,
-                   internal = TRUE, overwrite = TRUE)
+                   internal = TRUE, overwrite = TRUE, compress = "bzip2")
