@@ -94,11 +94,12 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
   ### Plot
   #----------------------------------------------------------------------------#
   # All data loaded below is internal to the package
-  # Generated using 'data-raw/data_internal.R'; stored in 'data/sysdata.rda'
+  # Generated using 'data-raw/data_internal.R'; stored in 'R/sysdata.rda'
   #----------------------------------------------------------------------------#
   
   # Load the data:
-  data(sysdata, envir=environment())
+  #data(sysdata, envir=environment())
+  load('R/sysdata.rda')
   
   cat('Plotting... \n')
   if (genome == 'SK1') {

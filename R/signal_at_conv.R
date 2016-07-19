@@ -31,7 +31,7 @@ signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,
   
   #----------------------------------------------------------------------------#
   # All data loaded below is internal to the package
-  # Generated using 'data-raw/data_internal.R'; stored in 'data/sysdata.rda'
+  # Generated using 'data-raw/data_internal.R'; stored in 'R/sysdata.rda'
   #----------------------------------------------------------------------------#
   
   # Check reference genome and load appropriate convergent gene regions 
@@ -50,7 +50,8 @@ signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,
   }
   
   # Load the data:
-  data(sysdata, envir=environment())
+  #data(sysdata, envir=environment())
+  load('R/sysdata.rda')
   
   if (check_S288C) {
     cat('Detected ref. genome - S288C\n')

@@ -53,7 +53,7 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
   
   #----------------------------------------------------------------------------#
   # All data loaded below is internal to the package
-  # Generated using 'data-raw/data_internal.R'; stored in 'data/sysdata.rda'
+  # Generated using 'data-raw/data_internal.R'; stored in 'R/sysdata.rda'
   #----------------------------------------------------------------------------#
   
   # Check reference genome and load appropriate convergent gene regions 
@@ -82,21 +82,19 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
               Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
   
   # Load intergenic region coordinate data
+  load('R/sysdata.rda')
   if (check_S288C) {
     if (orientation == 'conv') {
       cat('Preparing convergent gene region info...\n')
-      data(sysdata, envir=environment())
       #data("S288C_conv_midpoint_dist")
       intergen <- S288C_conv_midpoint_dist
     } else if (orientation == 'div') {
       cat('Preparing divergent gene region info...\n')
       #data("S288C_div_midpoint_dist")
-      data(sysdata, envir=environment())
       intergen <- S288C_div_midpoint_dist
     } else if (orientation == 'tandem') {
       cat('Preparing tandem gene region info...\n')
       #data("S288C_tand_midpoint_dist")
-      data(sysdata, envir=environment())
       intergen <- S288C_tand_midpoint_dist
     } else stop("Did not recognize gene orientation.
                 You should use one of the three strings 'conv', 'div' or 'tandem'.")
@@ -104,17 +102,14 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
     if (orientation == 'conv') {
       cat('Preparing convergent gene region info...\n')
       #data("SK1_conv_midpoint_dist")
-      data(sysdata, envir=environment())
       intergen <- SK1_conv_midpoint_dist
     } else if (orientation == 'div') {
       cat('Preparing divergent gene region info...\n')
       #data("SK1_div_midpoint_dist")
-      data(sysdata, envir=environment())
       intergen <- SK1_div_midpoint_dist
     } else if (orientation == 'tandem') {
       cat('Preparing tandem gene region info...\n')
       #data("SK1_tand_midpoint_dist")
-      data(sysdata, envir=environment())
       intergen <- SK1_tand_midpoint_dist
     } else stop("Did not recognize gene orientation.
                 You should use one of the three strings 'conv', 'div' or 'tandem'.")

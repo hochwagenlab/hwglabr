@@ -31,9 +31,10 @@ FE2 <- function(fileName, cy0, strain) {
   library(marray)
   #----------------------------------------------------------------------------#
   # All data loaded below is internal to the package
-  # Generated using 'data-raw/data_internal.R'; stored in 'data/sysdata.rda'
+  # Generated using 'data-raw/data_internal.R'; stored in 'R/sysdata.rda'
   #----------------------------------------------------------------------------#
-  data(sysdata, envir=environment())
+  #data(sysdata, envir=environment())
+  load('R/sysdata.rda')
 
   plat <- SK1rosetta
   maData <- read.Agilent(fnames = fileName, name.Rf = "rMeanSignal",

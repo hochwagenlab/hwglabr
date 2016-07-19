@@ -38,7 +38,8 @@ wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein
   # Generated using script 'data-raw/data_internal.R'; stored in 'R/sysdata.rda'
   #----------------------------------------------------------------------------#
   # Load the data:
-  data(sysdata, envir = environment())
+  #data(sysdata, envir = environment())
+  load('R/sysdata.rda')
   
   cat('\n\nPlotting... \n')
   if (genome == 'SK1') {
