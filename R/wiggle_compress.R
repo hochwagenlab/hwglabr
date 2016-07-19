@@ -1,10 +1,12 @@
 #' Compress wiggle data
 #'
-#' This function will compress wiggle data by averaging values across
+#' This function will compress wiggle data by averaging values (including position) across
 #' non-overlapping windows. It will take any number of wiggle files, but can
 #' only handle one chromosome or chromosomal region per function call. This
 #' function assumes that all data is from the chromosome and ignores all 
-#' chromosomal information. Note: calls function compress. \cr
+#' chromosomal information. This function ignores all positions without reads mapping
+#' which may lead to slight variations in position depending on the wiggle data being used.
+#' Note: calls function compress. \cr
 #' Written by Tovah Markowitz.
 #' @param inputWiggles Will accept two types of wiggle information:
 #' \enumerate{
@@ -38,13 +40,17 @@ wiggle_compress <- function( inputWiggles, window ) {
 	   if ( is.character(inputWiggles) ) {
 	      	data <- eval( parse( text = inputWiggles ) )
 	      	names(data) <- c( "position", inputWiggles )
-	   } else {
-	     	data <- inputWiggles
+	   } else { stop("Incorrect input format. Check documentation for details.") }
+           
+	} else if ( is.data.frame(inputWiggles) ) {
+           if ( ncol(inputWiggles) == 2 ) {
+          	data <- inputWiggles
 		names(data) <- c( "position", deparse(substitute(inputWiggles)) )
-	   }
-	}
+           } else { stop("Incorrect input format. Check documentation for details.
+If this is a merged wiggle file, ensure first column is called 'position' and then run 'Compress'.") }
+        }
 
-	else {
+	else if (is.vector(inputWiggles) && is.character(inputWiggles) ) {
 	# allows unlimited number of files to compress on the same scale at the same time
 	for (i in 1:length(inputWiggles)) {
 	       	# to evaluate the strings extracted
@@ -57,7 +63,7 @@ wiggle_compress <- function( inputWiggles, window ) {
 		} else {
 		     data <- dplyr::full_join( data, tmp, by="position" )
 		}
-	}}
+	}} else { stop("Incorrect input format. Check documentation for details.") }
 
 	data <- data[ order( data$position ), ]	
 	data2 <- Compress( data, window )

@@ -23,11 +23,13 @@ A R (dplyr) data frame with averaged position and value for each
 wiggle. Column names are defined by input strings/variables.
 }
 \description{
-This function will compress wiggle data by averaging values across
+This function will compress wiggle data by averaging values (including position) across
 non-overlapping windows. It will take any number of wiggle files, but can
 only handle one chromosome or chromosomal region per function call. This
 function assumes that all data is from the chromosome and ignores all 
-chromosomal information. Note: calls function compress. \cr
+chromosomal information. This function ignores all positions without reads mapping
+which may lead to slight variations in position depending on the wiggle data being used.
+Note: calls function compress. \cr
 Written by Tovah Markowitz.
 }
 \examples{
