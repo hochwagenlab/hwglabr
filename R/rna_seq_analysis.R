@@ -223,7 +223,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
     
     for(i in 1:length(pairwiseDE)){
       if(length(unique(conditionNames)) == length(unique(sampleNames))){
-        et <- exactTest(y_filt, pair = pairwiseDE[[i]], dispersion = bcv^2)
+        et <-edgeR::exactTest(y_filt, pair = pairwiseDE[[i]], dispersion = bcv^2)
       } else {
         et <- exactTest(y_filt, pair = pairwiseDE[[i]])
       }
