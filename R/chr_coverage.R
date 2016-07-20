@@ -38,7 +38,8 @@ chr_coverage <- function(wiggleData) {
     # mean() is not working
     coverageTable[i, 2] <- mean(wiggleData[[index]][, 2], na.rm = T)
     if(is.na(mean(wiggleData[[index]][, 2]))){
-      coverageTable[i, 2] <- sum(wiggleData[[index]][, 2]) / nrow(wiggleData[[index]][, 2]) 
+      na_free_data <- wiggleData[[index]][!is.na(wiggleData[[index]][, 2]), 2]
+      coverageTable[i, 2] <- sum(na_free_data) / length(na_free_data) 
     }
   }
   colnames(coverageTable) <- c("chr", "mean_coverage")
