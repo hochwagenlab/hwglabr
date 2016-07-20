@@ -36,7 +36,7 @@ chr_coverage <- function(wiggleData) {
     # (because of dplyr's non standard evaluation: data is in tbl_df class)
     # Workaround: write out division of sum of values by their number in case
     # mean() is not working
-    coverageTable[i, 2] <- mean(wiggleData[[index]][, 2])
+    coverageTable[i, 2] <- mean(wiggleData[[index]][, 2], na.rm = T)
     if(is.na(mean(wiggleData[[index]][, 2]))){
       coverageTable[i, 2] <- sum(wiggleData[[index]][, 2]) / nrow(wiggleData[[index]][, 2]) 
     }
