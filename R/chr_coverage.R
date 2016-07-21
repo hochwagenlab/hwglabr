@@ -1,7 +1,13 @@
 #' Average signal per chromosome
 #'
 #' This function allows you to calculate the average signal (or coverage) per chromosome.
-#' @param wiggleData As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}). No default.
+#' @param wiggleData As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}).
+#' No default.
+#' @param removeCen Boolean indicating whether to remove regions around centromeres
+#' (using function \code{\link{remove_centromeres}}). Defaults to \code{FALSE}.
+#' @param cenRegionSize Number indicating the size (in bp) of the region to remove
+#' (centered on the centromere of each chromosome). Corresponds to argument \code{regionSize}
+#' of \code{\link{remove_centromeres}}. Defaults to 25000 bp.
 #' @return A 16x2 R data frame with two columns: chromosome number and average signal.
 #' @examples
 #' chr_coverage(WT)
@@ -9,7 +15,7 @@
 #' chr_coverage(rec8)
 #' @export
 
-chr_coverage <- function(wiggleData) {
+chr_coverage <- function(wiggleData, removeCen = FALSE, cenRegionSize = 25000) {
   coverageTable <- as.data.frame(matrix(0, nrow = length(wiggleData), ncol = 2))
   
   # Check reference genome 
@@ -27,6 +33,12 @@ chr_coverage <- function(wiggleData) {
     cat('Ref. genome - SK1\n(Chrs numbered using arabic numerals)')
     chrom <- chrom_SK1
   } else stop('Did not recognize reference genome.')
+  
+  # Remove centromeric region?
+  if(removeCen){
+    wiggleData <- hwglabr::remove_centromeres(wiggleData = wiggleData,
+                                              regionSize = cenRegionSize)
+  }
   
   for (i in 1:length(wiggleData)) {
     chrNum <- paste0('chr', chrom[i], '.')
