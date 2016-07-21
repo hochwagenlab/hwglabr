@@ -11,6 +11,9 @@ Description: Compilation of functions written and used frequently by Hochwagen
     experiments: wiggle data produced by the lab's Fastq2Peak ChIP-seq  analysis
     pipeline.
 Suggests:
+    flowCore,
+    flowViz,
+    marray,
     edgeR,
     dplyr,
     pbapply,
