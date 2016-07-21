@@ -24,10 +24,10 @@ remove_centromeres <- function(wiggleData, regionSize = 25000) {
   check_SK1 <- any(grep('chr01.', names(wiggleData), fixed = TRUE))
   
   if (check_S288C) {
-    cat('Ref. genome - S288C\n(Chrs numbered using roman numerals)')
+    cat('Ref. genome - S288C\n(Chrs numbered using roman numerals)\n')
     chrom <- chrom_S288C    
   } else if (check_SK1) {
-    cat('Ref. genome - SK1\n(Chrs numbered using arabic numerals)')
+    cat('Ref. genome - SK1\n(Chrs numbered using arabic numerals)\n')
     chrom <- chrom_SK1
   } else stop('Did not recognize reference genome.')
   
