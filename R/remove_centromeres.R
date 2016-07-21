@@ -37,8 +37,6 @@ remove_centromeres <- function(wiggleData, regionSize = 25000) {
   # Generated using script 'data-raw/data_internal.R'; stored in 'R/sysdata.rda'
   #----------------------------------------------------------------------------#
   # Load the centromere data:
-  load('R/sysdata.rda')
-  
   if (check_SK1) {
     Cen <- SK1cen
   } else if(check_S288C) {
