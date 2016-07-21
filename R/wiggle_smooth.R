@@ -59,5 +59,5 @@ wiggle_smooth <- function(wiggleData, chrNumber, bandwidth = 200, useKsmooth = F
   
   
   colnames(data) <- c('position', 'signal')
-  return (data)
+  return (data.frame(data))
 }
