@@ -61,9 +61,6 @@ signal_from_telomeres <- function(inputData, lengthToCollect = 100000) {
   # Generated using 'data-raw/data_internal.R'; stored in 'R/sysdata.rda'
   #----------------------------------------------------------------------------#
   # Load the data:
-  #data(sysdata, envir=environment())
-  load('R/sysdata.rda')
-  
   if (check_SK1) {
     Cen <- SK1cen
   } else {

@@ -33,14 +33,11 @@ FE2 <- function(fileName, cy0, strain) {
   # All data loaded below is internal to the package
   # Generated using 'data-raw/data_internal.R'; stored in 'R/sysdata.rda'
   #----------------------------------------------------------------------------#
-  #data(sysdata, envir=environment())
-  load('R/sysdata.rda')
-
   plat <- SK1rosetta
   maData <- read.Agilent(fnames = fileName, name.Rf = "rMeanSignal",
-                       name.Gf = "gMeanSignal", name.Rb = "rBGMeanSignal",
-                       name.Gb = "gBGMeanSignal", sep = "\t")
-  maNorm <- maNorm(maData,norm = "printTipLoess")
+                         name.Gf = "gMeanSignal", name.Rb = "rBGMeanSignal",
+                         name.Gb = "gBGMeanSignal", sep = "\t")
+  maNorm <- maNorm(maData, norm = "printTipLoess")
   if (cy0 == 5)
   {
     lr <- -maNorm@maM

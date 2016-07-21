@@ -50,9 +50,6 @@ signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,
   }
   
   # Load the data:
-  #data(sysdata, envir=environment())
-  load('R/sysdata.rda')
-  
   if (check_S288C) {
     cat('Detected ref. genome - S288C\n')
     conv <- S288C_conv

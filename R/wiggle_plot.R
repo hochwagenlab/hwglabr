@@ -33,15 +33,12 @@ wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein
                         legendXcoord = -10, legendYcoord = yMax,
                         legendAnnotation = deparse(substitute(wiggleData)), onScreen = TRUE) {
   
+  cat('\n\nPlotting... \n')
   #----------------------------------------------------------------------------#
   # All data loaded below is internal to the package
   # Generated using script 'data-raw/data_internal.R'; stored in 'R/sysdata.rda'
   #----------------------------------------------------------------------------#
   # Load the data:
-  #data(sysdata, envir = environment())
-  load('R/sysdata.rda')
-  
-  cat('\n\nPlotting... \n')
   if (genome == 'SK1') {
     Cen <- SK1cen
   } else {

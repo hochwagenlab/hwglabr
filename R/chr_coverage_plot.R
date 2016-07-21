@@ -98,9 +98,6 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
   #----------------------------------------------------------------------------#
   
   # Load the data:
-  #data(sysdata, envir=environment())
-  load('R/sysdata.rda')
-  
   cat('Plotting... \n')
   if (genome == 'SK1') {
     Cen <- SK1cen

@@ -82,7 +82,6 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
               Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
   
   # Load intergenic region coordinate data
-  load('R/sysdata.rda')
   if (check_S288C) {
     if (orientation == 'conv') {
       cat('Preparing convergent gene region info...\n')
