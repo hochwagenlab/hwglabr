@@ -47,12 +47,12 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
   if (missing(gffFile) & missing(gff)) {
     stop("No gff data provided.\n",
          "You must provide either a lodaded gff as an R data frame ('gff' argument)
-         or the path to a gff file to load ('gffFile' argument).",
+or the path to a gff file to load ('gffFile' argument).",
          call. = FALSE)
   } else if (!(missing(gffFile) | missing(gff))) {
     stop("Two gff data sources provided.\n",
          "Please provide either a gff R data frame ('gff' argument)
-         or the path to a gff file ('gffFile' argument), not both.\n",
+or the path to a gff file ('gffFile' argument), not both.\n",
          call. = FALSE)
   } else if (missing(gff)) {
     gff <- hwglabr::gff_read(gffFile)
@@ -81,7 +81,7 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
     print('Detected ref. genome - SK1')
     chrom <- chrom_SK1
   } else stop("Did not recognize reference genome.
-              Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
+Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
   
   if (!requireNamespace("dplyr", quietly = TRUE)) {
     stop("R package 'dplyr' needed for this function to work. Please install it.\n",
@@ -89,12 +89,12 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
   }
   
   cat('\nThe following types of features are present in the gff data you provided
-      (they will all be included in the analysis):\n')
+(they will all be included in the analysis):\n')
   for(i in 1:length(unique(gff[, 3]))) {
     cat(unique(gff[, 3])[i], '\n')
   }
   
-  cat('Collecting signal...\n')
+  cat('\nCollecting signal...\n')
   cat('(Skip genes with missing coordinates and signal in wiggle data)\n')
 
   # Create data frames to collect final data for all chrs
