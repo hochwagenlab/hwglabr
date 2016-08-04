@@ -137,13 +137,13 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
       full_leng <- (end - start) + 1
       gene <- chromGff[j, 9]
       
-      # pull out signal
+      # Pull out signal
       sig_gene <- chromData[which(chromData[, 1] >= start & chromData[, 1] <= end), ]
       
       # Skip if there are discontinuities in the data (missing position:value pairs)
       if(nrow(sig_gene) != full_leng) next
       
-      # normalize to segment length of 1000
+      # Normalize to segment length of 1000
       sig_gene$position <- (sig_gene$position - start) + 1
       sig_gene$position <- sig_gene$position * (1000 / full_leng)
       
@@ -200,13 +200,13 @@ signal_at_orf <- function(inputData, gff, gffFile, loessSpan = 0.05, saveFile = 
       full_leng <- (end - start) + 1
       gene <- chromGff[j, 9]
       
-      # Pull out red1 signal
+      # Pull out signal
       sig_gene <- chromData[which(chromData[, 1] >= start & chromData[, 1] <= end), ]
       
       # Skip if there are discontinuities in the data (missing position:value pairs)
       if(nrow(sig_gene) != full_leng) next
       
-      # normalize to segment length of 1000
+      # Normalize to segment length of 1000
       sig_gene$position <- (sig_gene$position - start) + 1
       sig_gene$position <- sig_gene$position * (1000 / full_leng)
       # Genes of different sizes have different numbers of positions; small genes
