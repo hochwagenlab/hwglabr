@@ -22,7 +22,7 @@ Defaults to \code{0.05}.}
 
 \item{saveFile}{Boolean indicating whether output should be written to a .txt file (in current working
 directory). If \code{saveFile = FALSE}, output is returned to screen or an R object (if assigned).
-Defaults to FALSE.}
+Defaults to \code{FALSE}.}
 }
 \value{
 A local data frame with four columns:

@@ -25,7 +25,7 @@
 #' Defaults to \code{0.05}.
 #' @param saveFile Boolean indicating whether output should be written to a .txt file (in current working
 #' directory). If \code{saveFile = FALSE}, output is returned to screen or an R object (if assigned).
-#' Defaults to FALSE.
+#' Defaults to \code{FALSE}.
 #' @return A local data frame with four columns:
 #' \enumerate{
 #'   \item \code{chr} Chromosome number
