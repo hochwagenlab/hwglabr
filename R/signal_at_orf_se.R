@@ -155,7 +155,7 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
       sig_gene <- chromData[which(chromData[, 1] >= start & chromData[, 1] <= end), 2]
       
       # Skip if there are discontinuities in the data (missing position:value pairs)
-      if(nrow(sig_gene) != full_leng) next
+      if(nrow(as.data.frame(sig_gene)) != full_leng) next
       
       # Make data frame for this gene
       all <- data.frame(chr = paste0('chr', chrom[i]), position = seq(-500, 1500, 1),
@@ -203,7 +203,7 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
       sig_gene <- chromData[which(chromData[, 1] >= start & chromData[, 1] <= end), 2]
       
       # Skip if there are discontinuities in the data (missing position:value pairs)
-      if(nrow(sig_gene) != full_leng) next
+      if(nrow(as.data.frame(sig_gene)) != full_leng) next
       
       # Make data frame for this gene (reverse the order of the positions)
       all <- data.frame(chr = paste0('chr', chrom[i]), position = seq(1500, -500, -1),
