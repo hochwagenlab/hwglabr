@@ -4,7 +4,7 @@
 \alias{chr_coverage}
 \title{Average signal per chromosome}
 \usage{
-chr_coverage(wiggleData, removeCen = FALSE, cenRegionSize = 25000)
+chr_coverage(wiggleData, removeCen = FALSE, cenRegionSize = 50000)
 }
 \arguments{
 \item{wiggleData}{As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}).
@@ -15,7 +15,7 @@ No default.}
 
 \item{cenRegionSize}{Number indicating the size (in bp) of the region to remove
 (centered on the centromere of each chromosome). Corresponds to argument \code{regionSize}
-of \code{\link{remove_centromeres}}. Defaults to 25000 bp.}
+of \code{\link{remove_centromeres}}. Defaults to 50'000 bp.}
 }
 \value{
 A 16x2 R data frame with two columns: chromosome number and average signal.

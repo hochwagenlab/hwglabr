@@ -4,13 +4,13 @@
 \alias{remove_centromeres}
 \title{Remove centromeric regions from wiggle data}
 \usage{
-remove_centromeres(wiggleData, regionSize = 25000)
+remove_centromeres(wiggleData, regionSize = 50000)
 }
 \arguments{
 \item{wiggleData}{As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}). No default.}
 
 \item{regionSize}{Number indicating the size (in bp) of the region to remove
-(centered on the centromere of each chromosome). Defaults to 25000 bp.}
+(centered on the centromere of each chromosome). Defaults to 50'000 bp.}
 }
 \value{
 A similar list of the 16 chr wiggle data after removal of the rows for

@@ -7,7 +7,7 @@
 #' (using function \code{\link{remove_centromeres}}). Defaults to \code{FALSE}.
 #' @param cenRegionSize Number indicating the size (in bp) of the region to remove
 #' (centered on the centromere of each chromosome). Corresponds to argument \code{regionSize}
-#' of \code{\link{remove_centromeres}}. Defaults to 25000 bp.
+#' of \code{\link{remove_centromeres}}. Defaults to 50'000 bp.
 #' @return A 16x2 R data frame with two columns: chromosome number and average signal.
 #' @examples
 #' chr_coverage(WT)
@@ -15,7 +15,7 @@
 #' chr_coverage(rec8)
 #' @export
 
-chr_coverage <- function(wiggleData, removeCen = FALSE, cenRegionSize = 25000) {
+chr_coverage <- function(wiggleData, removeCen = FALSE, cenRegionSize = 50000) {
   coverageTable <- as.data.frame(matrix(0, nrow = length(wiggleData), ncol = 2))
   
   # Check reference genome 

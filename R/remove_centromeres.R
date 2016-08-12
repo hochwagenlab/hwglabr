@@ -5,7 +5,7 @@
 #' mutants (show a strong enrichment around the centromeres).
 #' @param wiggleData As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}). No default.
 #' @param regionSize Number indicating the size (in bp) of the region to remove
-#' (centered on the centromere of each chromosome). Defaults to 25000 bp.
+#' (centered on the centromere of each chromosome). Defaults to 50'000 bp.
 #' @return A similar list of the 16 chr wiggle data after removal of the rows for
 #' the centromeric regions (both positions and signal) in each chromosome data frame.
 #' @examples
@@ -14,7 +14,7 @@
 #' remove_centromeres(rec8, regionSize = 30000)
 #' @export
 
-remove_centromeres <- function(wiggleData, regionSize = 25000) {
+remove_centromeres <- function(wiggleData, regionSize = 50000) {
   # Check reference genome 
   chrom_S288C <- c("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
                    "XI", "XII", "XIII", "XIV", "XV", "XVI")
