@@ -25,7 +25,7 @@
 #' taken here relies on providing an estimate of biological variation that is reasonable
 #' for RNA-seq experiments using \emph{S. cerevisiae}. This is a better alternative
 #' to simply assuming that biological variability is absent. Typical values for
-#' the common BCV (squareroot-dispersion) for datasets arising from well-controlled
+#' the common BCV (square root-dispersion) for datasets arising from well-controlled
 #' experiments are 0.1 for data on genetically identical model organisms, so that
 #' value is used here.
 #' @param pathToFiles A list of strings corresponding to the full path to the featureCounts
