@@ -242,13 +242,13 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
     cat(paste0('Saving file...\n'))
     if(check_S288C) {
       write.table(mergedStrands, paste0(deparse(substitute(inputData)),
-                                        "_S288C_ORF", limit, ".txt"), sep = "\t", quote = FALSE,
-                  row.names = FALSE)
+                                        "_S288C_ORF", limit, ".txt"), sep = "\t",
+                  quote = FALSE, row.names = FALSE)
       cat('Done!')
     } else {
       write.table(mergedStrands, paste0(deparse(substitute(inputData)),
-                                        "_SK1_ORF", limit, ".txt"), sep = "\t", quote = FALSE,
-                  row.names = FALSE)
+                                        "_SK1_ORF", limit, ".txt"), sep = "\t",
+                  quote = FALSE, row.names = FALSE)
       cat('Done!')
     }
   } else {

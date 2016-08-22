@@ -225,11 +225,13 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
     cat('Saving file...\n')
     if(check_S288C) {
       write.table(allData, paste0(deparse(substitute(inputData)), "_", orientation,
-                                  "_S288C.txt"), sep = "\t", quote = FALSE)
+                                  "_S288C.txt"), sep = "\t",
+                  row.names = FALSE, quote = FALSE)
       cat('Done!')
     } else {
       write.table(allData, paste0(deparse(substitute(inputData)), "_", orientation,
-                                  "_SK1.txt"), sep = "\t", quote = FALSE)
+                                  "_SK1.txt"), sep = "\t",
+                  row.names = FALSE, quote = FALSE)
       cat('Done!')
     }
   } else {

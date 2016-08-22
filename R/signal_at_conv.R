@@ -153,10 +153,12 @@ signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,
     cat(paste0('Saving file...\n'))
     if(check_S288C) {
       write.table(allData, paste0(deparse(substitute(inputData)),
-                                  "_S288C_conv.txt"), sep = "\t", quote = FALSE)  
+                                  "_S288C_conv.txt"), sep = "\t",
+                  row.names = FALSE, quote = FALSE)  
     } else {
       write.table(allData, paste0(deparse(substitute(inputData)),
-                                  "_SK1_conv.txt"), sep = "\t", quote = FALSE)
+                                  "_SK1_conv.txt"), sep = "\t",
+                  row.names = F, quote = FALSE)
     }
   } else {
     return(allData)

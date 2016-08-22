@@ -178,9 +178,10 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   
   # Write to file
   if(missing(outputFilePrefix)){
-    write.csv(cpm_edgeR, paste0("RNA-seq_analysis/", "edgeR_cpm.csv"))
+    write.csv(cpm_edgeR, paste0("RNA-seq_analysis/", "edgeR_cpm.csv"), row.names = F)
   } else {
-    write.csv(cpm_edgeR, paste0("RNA-seq_analysis/", outputFilePrefix, "_edgeR_cpm.csv"))
+    write.csv(cpm_edgeR, paste0("RNA-seq_analysis/", outputFilePrefix, "_edgeR_cpm.csv"),
+              row.names = F)
   }
   cat('Calculated CPM and saved to file.\n')
   
@@ -203,9 +204,9 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   
   # Write to file
   if(missing(outputFilePrefix)){
-    write.csv(tpm, paste0("RNA-seq_analysis/", "tpm.csv"))
+    write.csv(tpm, paste0("RNA-seq_analysis/", "tpm.csv"), row.names = F)
   } else {
-    write.csv(tpm, paste0("RNA-seq_analysis/", outputFilePrefix, "_tpm.csv"))
+    write.csv(tpm, paste0("RNA-seq_analysis/", outputFilePrefix, "_tpm.csv"), row.names = F)
   }
   cat('Calculated TPM and saved to file.\n')
   
@@ -231,10 +232,11 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
 
       if(missing(outputFilePrefix)){
         write.csv(et$table, paste0("RNA-seq_analysis/DE_", et$comparison[1], "-",
-                                   et$comparison[2], ".csv"))
+                                   et$comparison[2], ".csv"), row.names = F)
       } else {
         write.csv(et$table, paste0("RNA-seq_analysis/", outputFilePrefix, "_DE_",
-                                   et$comparison[1], "-", et$comparison[2], ".csv"))
+                                   et$comparison[1], "-", et$comparison[2], ".csv"),
+                  row.names = F)
       }
       cat(et$comparison[1], "vs", et$comparison[2],
           "saved to file.\n")

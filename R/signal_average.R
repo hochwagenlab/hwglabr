@@ -59,10 +59,12 @@ signal_average <- function(inputData, saveFile = FALSE) {
     cat(paste0('Saving file...\n'))
     if(check_S288C) {
       write.table(mean_signal, paste0(deparse(substitute(inputData)),
-                                  "_S288C_mean.txt"), sep = "\t", quote = FALSE)  
+                                  "_S288C_mean.txt"), sep = "\t",
+                  quote = FALSE, row.names = FALSE)
     } else {
       write.table(mean_signal, paste0(deparse(substitute(inputData)),
-                                  "_SK1_mean.txt"), sep = "\t", quote = FALSE)
+                                  "_SK1_mean.txt"), sep = "\t",
+                  quote = FALSE, row.names = FALSE)
     }
   } else {
     return(mean_signal)
