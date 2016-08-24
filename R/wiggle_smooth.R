@@ -61,21 +61,21 @@ wiggle_smooth <- function(wiggleData, chrNumber, bandwidth = 200, useKsmooth = F
   } else if(element_from_list_of_16){ # Was a selected element from the list (e.g. [1]) provided?
     chromData <- wiggleData[[1]]
     if(!missing(chrNumber)){
-      cat('\nNote: You provided a chromosome number, but data for a specific
+      message('\nNote: You provided a chromosome number, but data for a specific
           chromosome only. The chromosome number (', chrNumber, ') will be ignored!\n')
     }
     } else if(df_from_list_of_16 | !is.list(wiggleData)){
       # Was a selected df extracted from the list (e.g. [[1]]) or a df provided?
       chromData <- wiggleData
       if(!missing(chrNumber)){
-        cat('\nNote: You provided a chromosome number, but data for a specific
+        message('\nNote: You provided a chromosome number, but data for a specific
             chromosome only. The chromosome number (', chrNumber, ') will be ignored!\n')
       }
       } else stop('Could not recognize data. Please check that you provided either a list
 of 16 data frames (one per chromosome) and a "chrNumber" or a list element or data frame
 for a selected chromosome.')
   
-  cat("\nSmoothing data...")
+  message("\nSmoothing data...")
   
   if (!useKsmooth) {
     data <- as.data.frame(matrix(0, ncol = 2,
@@ -91,6 +91,6 @@ for a selected chromosome.')
   }
   
   colnames(data) <- c('position', 'signal')
-  cat("\nDone!")
+  message("\nDone!")
   return (data.frame(data))
 }
