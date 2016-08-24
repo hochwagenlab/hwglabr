@@ -2,9 +2,9 @@
 #'
 #' This function allows you to smooth wiggle data using a sliding window.
 #' @param wiggleData As a list of the 16 chr wiggle data (output of \code{readall_tab()}). No default.
-#' @param chrNumber A number representing the chromosome to smooth. No default.
-#' @param bandwidth A number representing the length of the smoothing window in bp
-#' (or the Gaussian kernel bandwith, if \code{useKsmooth = TRUE}). Defaults to 200.
+#' @param chrNumber An integer representing the chromosome to smooth. No default.
+#' @param bandwidth An integer representing the length of the smoothing window in bp
+#' (or the Gaussian kernel bandwith, if \code{useKsmooth = TRUE}). Defaults to \code{200}.
 #' @param useKsmooth Boolean indicating choice of smoothing function:
 #' \enumerate{
 #'   \item \code{useKsmooth = FALSE}: use a simple sliding window smoother. Smoothing is performed by
