@@ -1,8 +1,18 @@
 #' Sliding window smooth of wiggle data
 #'
 #' This function allows you to smooth wiggle data using a sliding window.
-#' @param wiggleData As a list of the 16 chr wiggle data (output of \code{readall_tab()}). No default.
-#' @param chrNumber An integer representing the chromosome to smooth. No default.
+#' @param wiggleData Accepts input in one of the following formats:
+#' \enumerate{
+#'   \item An R list of the 16 chromosome wiggle data (output of \code{readall_tab()}).
+#'   \item An element of an R list of the form described in the first item above.
+#'   Can be extracted with either '[]' or '[[]]'.
+#'   \item An R data frame in the same format as the individual chromosome data
+#'   frames composing the list described in the first item above.
+#'   }
+#'   No default.
+#' @param chrNumber An integer representing the chromosome to smooth. Will be ignored
+#' in case the provided \code{wiggleData} is not a list of data for the 16 chromosomes.
+#' No default.
 #' @param bandwidth An integer representing the length of the smoothing window in bp
 #' (or the Gaussian kernel bandwith, if \code{useKsmooth = TRUE}). Defaults to \code{200}.
 #' @param useKsmooth Boolean indicating choice of smoothing function:
@@ -20,29 +30,52 @@
 #' @examples
 #' wiggle_smooth(WT, 1, 200)
 #' 
-#' wiggle_smooth(WT, 16, 100)
+#' wiggle_smooth(rec8, 16, 100)
+#' 
+#' wiggle_smooth(WT[[5]], bandwidth = 1000)
+#' 
+#' wiggle_smooth(WT[[9]], bandwidth = 1000, useKsmooth = T)
 #' @export
 
 wiggle_smooth <- function(wiggleData, chrNumber, bandwidth = 200, useKsmooth = FALSE) {
-  # Check reference genome
+  # List of chr numbers for both S288c and SK1
   chrom_S288C <- c("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
                    "XI", "XII", "XIII", "XIV", "XV", "XVI")
   chrom_SK1 <- c('01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
                  '11', '12', '13', '14', '15', '16')
   
-  check_S288C <- any(grep('chrI.', names(wiggleData), fixed = TRUE))
-  check_SK1 <- any(grep('chr01.', names(wiggleData), fixed = TRUE))
+  # Get data, while checking if input is list of chromosomes or one chromosome table
+  list_of_16 <- is.list(wiggleData) & !is.data.frame(wiggleData) & length(wiggleData) == 16
+  element_from_list_of_16 <- is.list(wiggleData) & !is.data.frame(wiggleData) & length(wiggleData) == 1
+  df_from_list_of_16 <- is.list(wiggleData) & is.data.frame(wiggleData)
+  if(list_of_16){ # Was a list of 16 chrs provided?
+    if(any(grep('chrI.', names(wiggleData), fixed = TRUE))){
+      listIndex <- grep(paste0('chr', chrom_S288C[chrNumber], '.'),
+                        names(wiggleData), fixed = TRUE)
+      chromData <- wiggleData[[listIndex]] 
+    } else if(any(grep('chr01.', names(wiggleData), fixed = TRUE))){
+      listIndex <- grep(paste0('chr', chrom_SK1[chrNumber], '.'),
+                        names(wiggleData), fixed = TRUE)
+      chromData <- wiggleData[[listIndex]] 
+    }
+  } else if(element_from_list_of_16){ # Was a selected element from the list (e.g. [1]) provided?
+    chromData <- wiggleData[[1]]
+    if(!missing(chrNumber)){
+      cat('\nNote: You provided a chromosome number, but data for a specific
+          chromosome only. The chromosome number (', chrNumber, ') will be ignored!\n')
+    }
+    } else if(df_from_list_of_16 | !is.list(wiggleData)){
+      # Was a selected df extracted from the list (e.g. [[1]]) or a df provided?
+      chromData <- wiggleData
+      if(!missing(chrNumber)){
+        cat('\nNote: You provided a chromosome number, but data for a specific
+            chromosome only. The chromosome number (', chrNumber, ') will be ignored!\n')
+      }
+      } else stop('Could not recognize data. Please check that you provided either a list
+of 16 data frames (one per chromosome) and a "chrNumber" or a list element or data frame
+for a selected chromosome.')
   
-  if (check_S288C) {
-    chrNumber <- paste0('chr', chrom_S288C[chrNumber])
-    cat("Smoothing ", chrNumber, ' - mapped to S288C\n(Chrs numbered using roman numerals)\n')
-  } else if (check_SK1) {
-    chrNumber <- paste0('chr', chrom_SK1[chrNumber])
-    cat("Smoothing ", chrNumber, ' - mapped to SK1\n(Chrs numbered using arabic numerals)\n')
-  } else stop('Did not recognize reference genome.')
-  
-  listIndex <- grep(paste0(chrNumber, '.'), names(wiggleData), fixed = TRUE)
-  chromData <- wiggleData[[listIndex]]
+  cat("\nSmoothing data...")
   
   if (!useKsmooth) {
     data <- as.data.frame(matrix(0, ncol = 2,
@@ -57,7 +90,7 @@ wiggle_smooth <- function(wiggleData, chrNumber, bandwidth = 200, useKsmooth = F
     data <- cbind(dataList[[1]], dataList[[2]])
   }
   
-  
   colnames(data) <- c('position', 'signal')
+  cat("\nDone!")
   return (data.frame(data))
 }

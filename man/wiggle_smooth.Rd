@@ -7,9 +7,19 @@
 wiggle_smooth(wiggleData, chrNumber, bandwidth = 200, useKsmooth = FALSE)
 }
 \arguments{
-\item{wiggleData}{As a list of the 16 chr wiggle data (output of \code{readall_tab()}). No default.}
+\item{wiggleData}{Accepts input in one of the following formats:
+\enumerate{
+  \item An R list of the 16 chromosome wiggle data (output of \code{readall_tab()}).
+  \item An element of an R list of the form described in the first item above.
+  Can be extracted with either '[]' or '[[]]'.
+  \item An R data frame in the same format as the individual chromosome data
+  frames composing the list described in the first item above.
+  }
+  No default.}
 
-\item{chrNumber}{An integer representing the chromosome to smooth. No default.}
+\item{chrNumber}{An integer representing the chromosome to smooth. Will be ignored
+in case the provided \code{wiggleData} is not a list of data for the 16 chromosomes.
+No default.}
 
 \item{bandwidth}{An integer representing the length of the smoothing window in bp
 (or the Gaussian kernel bandwith, if \code{useKsmooth = TRUE}). Defaults to \code{200}.}
@@ -35,6 +45,10 @@ This function allows you to smooth wiggle data using a sliding window.
 \examples{
 wiggle_smooth(WT, 1, 200)
 
-wiggle_smooth(WT, 16, 100)
+wiggle_smooth(rec8, 16, 100)
+
+wiggle_smooth(WT[[5]], bandwidth = 1000)
+
+wiggle_smooth(WT[[9]], bandwidth = 1000, useKsmooth = T)
 }
 
