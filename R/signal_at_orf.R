@@ -56,7 +56,7 @@ or the path to a gff file ('gffFile' argument), not both.\n",
          call. = FALSE)
   } else if (missing(gff)) {
     gff <- hwglabr::gff_read(gffFile)
-    cat('Loaded gff file...\n')
+    message('Loaded gff file...\n')
   }
   
   # Check reference genome for both the input data and the gff file; make sure they match
@@ -75,7 +75,7 @@ or the path to a gff file ('gffFile' argument), not both.\n",
     stop("The reference genomes in the input data and the gff do not seem to match.\n",
          "Please provide data and gff for the same reference genome.\n", call. = FALSE)
   } else if (check_S288C & check_gff_S288C) {
-    cat('Detected ref. genome - S288C\n')
+    message('Detected ref. genome - S288C\n')
     chrom <- chrom_S288C
   } else if (check_SK1 & check_gff_SK1) {
     print('Detected ref. genome - SK1')
@@ -88,14 +88,14 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
          "install.packages('dplyr')", call. = FALSE)
   }
   
-  cat('\nThe following types of features are present in the gff data you provided
+  message('\nThe following types of features are present in the gff data you provided
 (they will all be included in the analysis):\n')
   for(i in 1:length(unique(gff[, 3]))) {
-    cat(unique(gff[, 3])[i], '\n')
+    message(unique(gff[, 3])[i], '\n')
   }
   
-  cat('\nCollecting signal...\n')
-  cat('(Skip genes with missing coordinates and signal in wiggle data)\n')
+  message('\nCollecting signal...')
+  message('(Skip genes with missing coordinates and signal in wiggle data)\n')
 
   # Create data frames to collect final data for all chrs
   plus_final <- data.frame()
@@ -106,7 +106,7 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
   
   for(i in 1:length(inputData)) {
     chrNum <- paste0('chr', chrom[i])
-    cat(paste0(chrNum, ':\n'))
+    message(paste0(chrNum, ':'))
     
     # Index of ChIP data list item corresponding to chrom to analyze
     # Add '.' to make it unique (otherwise e.g. 'chrI' matches 'chrII' too)
@@ -168,7 +168,7 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
       
       geneCount <- geneCount + 1
     }
-    cat(paste0('... + strand: ', geneCount, ' genes (skipped ', j - geneCount, ')\n'))
+    message(paste0('... + strand: ', geneCount, ' genes (skipped ', j - geneCount, ')\n'))
     
     # Keep track of total and non-skipped genes, to print info at the end
     number_genes <- number_genes + j
@@ -236,7 +236,7 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
     # To collect all chrs
     minus_final <- dplyr::bind_rows(minus_final, minus_sigs)
     
-    cat(paste0('... - strand: ', geneCount, ' genes (skipped ', j - geneCount, ')\n'))
+    message(paste0('... - strand: ', geneCount, ' genes (skipped ', j - geneCount, ')\n'))
     # Keep track of total and non-skipped genes, to print info at the end
     number_genes <- number_genes + j
     number_skipped_genes <- number_skipped_genes + (j - geneCount)
@@ -248,30 +248,30 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
   # Sort by gene and position
   mergedStrands <- mergedStrands[order(mergedStrands$gene, mergedStrands$position), ]
   
-  cat(paste0('Completed in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
+  message(paste0('Completed in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
   
   # Print info on total and non-skipped genes
-  cat('\n------\n')
-  cat(paste0('Skipped ', number_skipped_genes, ' of a total of ', number_genes,
+  message('------')
+  message(paste0('Skipped ', number_skipped_genes, ' of a total of ', number_genes,
              " genes (", round((number_skipped_genes * 100 / number_genes), 1),
-             "%).\n"))
-  cat('------\n')
+             "%)."))
+  message('------')
   
   if(saveFile) {
-    cat(paste0('Saving file...\n'))
+    message(paste0('Saving file...\n'))
     if(check_S288C) {
       write.table(mergedStrands, paste0(deparse(substitute(inputData)),
                                         "_S288C_metaORF.txt"), sep = "\t", quote = FALSE,
                                         row.names = FALSE)
-      cat('Done!')
+      message('Done!')
     } else {
       write.table(mergedStrands, paste0(deparse(substitute(inputData)),
                                         "_SK1_metaORF.txt"), sep = "\t", quote = FALSE,
                                         row.names = FALSE)
-      cat('Done!')
+      message('Done!')
     }
   } else {
-    cat('Done!')
+    message('Done!')
     return(mergedStrands)
   }
 }

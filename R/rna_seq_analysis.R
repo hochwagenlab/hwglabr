@@ -116,7 +116,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   
   # Create directory in current working directory to save output
   dir.create('RNA-seq_analysis')
-  cat('\nCreated output directory "RNA-seq_analysis"\n')
+  message('Created output directory "RNA-seq_analysis"\n')
   
   #----------------------------------------------------------------------------#
   #----------------------- Generate DGEList object ----------------------------#
@@ -134,7 +134,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
                       group = unlist(conditionNames),
                       genes = data.frame(Gene = counts$Geneid,
                                          Length = counts$Length))
-  cat('\nCreated DGEList object:\n')
+  message('Created DGEList object:\n')
   print(y$samples[, 1:2])
   
   #----------------------------------------------------------------------------#
@@ -142,7 +142,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   # Filter out genes with low counts (low or no expression) based on CPMs,
   # in order to account for differences in library depth
   # Use a low threshold (cpm of 0.5)
-  cat('\nFiltering out features with counts below threshold (cpm < 0.5):\n')
+  message('Filtering out features with counts below threshold (cpm < 0.5):\n')
   # If there are no replicates, keep all genes expressed in at least one sample
   # If there are replicates, keep all genes expressed in at least two samples
   if(length(unique(conditionNames)) == length(unique(sampleNames))){
@@ -153,13 +153,13 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
     y_filt <- y[keep, , keep.lib.sizes = FALSE]
   }
   
-  cat(nrow(y_filt$counts), 'features kept of an original total of', nrow(y$counts))
+  message(nrow(y_filt$counts), 'features kept of an original total of', nrow(y$counts))
   dropped <- round((nrow(y$counts) - nrow(y_filt$counts)) / nrow(y$counts) * 100, 1)
-  cat(' (', dropped, '% filtered out).\n', sep = '')
+  message(' (', dropped, '% filtered out).\n', sep = '')
   
   # Calculate normalization factors to scale the raw library sizes
   y_filt <- calcNormFactors(y_filt)
-  cat('\nCalculated normalization factors using trimmed mean of M-values (TMM) method:\n')
+  message('Calculated normalization factors using trimmed mean of M-values (TMM) method:\n')
   print(y_filt$samples)
   
   # Save MDS plot
@@ -170,7 +170,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   }
   edgeR::plotMDS(y_filt)
   dev.off()
-  cat('\nPlotted multi-dimensional scaling (MDS) and saved to .pdf file.\n')
+  message('Plotted multi-dimensional scaling (MDS) and saved to .pdf file.\n')
   
   # Calculate CPM and write to file
   cpm_edgeR <- edgeR::cpm(y_filt)
@@ -183,7 +183,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
     write.csv(cpm_edgeR, paste0("RNA-seq_analysis/", outputFilePrefix, "_edgeR_cpm.csv"),
               row.names = F)
   }
-  cat('Calculated CPM and saved to file.\n')
+  message('Calculated CPM and saved to file.\n')
   
   # Calculate TPM
   # Write tpm function
@@ -208,17 +208,17 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   } else {
     write.csv(tpm, paste0("RNA-seq_analysis/", outputFilePrefix, "_tpm.csv"), row.names = F)
   }
-  cat('Calculated TPM and saved to file.\n')
+  message('Calculated TPM and saved to file.\n')
   
   #----------------------------------------------------------------------------#
   #----------------------------- DE analysis ----------------------------------#
   # Run if not missing
   if(!missing(pairwiseDE)){
     if(length(unique(conditionNames)) == length(unique(sampleNames))){
-      cat('\nPerforming DE analysis (without replicates!):\n')
+      message('\nPerforming DE analysis (without replicates!):\n')
       bcv <- 0.1
     } else {
-      cat('\nPerforming DE analysis with replicates:\n')
+      message('\nPerforming DE analysis with replicates:\n')
       y_filt <- estimateDisp(y_filt)
     }
     
@@ -238,11 +238,11 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
                                    et$comparison[1], "-", et$comparison[2], ".csv"),
                   row.names = F)
       }
-      cat(et$comparison[1], "vs", et$comparison[2],
+      message(et$comparison[1], "vs", et$comparison[2],
           "saved to file.\n")
     }
   }
   
-  cat("\n... ... ...\n(Output files are in directory \"RNA-seq_analysis\").\n")
-  cat("Completed in", round((proc.time()[3] - ptm[3]), 1), "sec.")
+  message("... ... ...\n(Output files are in directory \"RNA-seq_analysis\").\n")
+  message("Completed in", round((proc.time()[3] - ptm[3]), 1), "sec.")
 }

@@ -71,7 +71,7 @@ signal_at_intergen_average_plot <- function(inputDataA, inputDataB, genome, orie
   }
   
   ### Plot
-  cat('Plotting... \n')
+  message('Plotting... \n')
   
   if (missing(yMax)) {
     if (!missing(inputDataB)) {

@@ -14,7 +14,7 @@
 #' @export
 
 gff_read <- function(gffFile, nRows = -1) {
-  cat("Reading ", gffFile, ": ", sep = "")
+  message("Reading ", gffFile, ": ", sep = "")
   gff = read.table(gffFile, sep = "\t", as.is = TRUE, quote = "",
                    header = FALSE, comment.char = "#", nrows = nRows,
                    colClasses = c("character", "character", "character",
@@ -22,8 +22,8 @@ gff_read <- function(gffFile, nRows = -1) {
                                   "character", "character"))
   colnames(gff) = c("seqname", "source", "feature", "start", "end", "score",
                     "strand", "frame", "attributes")
-  cat("found", nrow(gff), "rows with classes:",
-      paste(sapply(gff, class), collapse=", "), "\n")
+  message("Found", nrow(gff), "rows with classes: ",
+           paste(sapply(gff, class), collapse=", "))
   stopifnot(!any(is.na(gff$start)), !any(is.na(gff$end)))
   return(gff)
 }

@@ -41,7 +41,7 @@ signal_average <- function(inputData, saveFile = FALSE) {
   
   # Check reference genome and load respective chromosome number vector
   if (check_S288C) {
-    cat('Detected ref. genome - S288C\n')
+    message('Detected ref. genome - S288C\n')
   } else if (check_SK1) {
     print('Detected ref. genome - SK1')
   } else stop("Did not recognize reference genome.
@@ -56,7 +56,7 @@ signal_average <- function(inputData, saveFile = FALSE) {
                                   mean_signal = mean(signal, na.rm = TRUE))
   
   if(saveFile) {
-    cat(paste0('Saving file...\n'))
+    message(paste0('Saving file...'))
     if(check_S288C) {
       write.table(mean_signal, paste0(deparse(substitute(inputData)),
                                   "_S288C_mean.txt"), sep = "\t",
@@ -69,5 +69,5 @@ signal_average <- function(inputData, saveFile = FALSE) {
   } else {
     return(mean_signal)
   }
-  cat(paste0('Completed in ', round((proc.time()[3] - ptm[3]), 1), ' sec.\n'))
+  message(paste0('Completed in ', round((proc.time()[3] - ptm[3]), 1), ' sec.'))
 }

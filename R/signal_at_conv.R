@@ -26,7 +26,7 @@ signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,
                            inputDataFrame = FALSE) {
   ptm  <- proc.time()
   
-  cat('Note: This function is deprecated!\n',
+  message('Note: This function is deprecated!\n',
       'From version 0.2 on it is no longer maintained. Use signal_at_intergen() instead.')
   
   #----------------------------------------------------------------------------#
@@ -51,7 +51,7 @@ signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,
   
   # Load the data:
   if (check_S288C) {
-    cat('Detected ref. genome - S288C\n')
+    message('Detected ref. genome - S288C\n')
     conv <- S288C_conv
     chrom <- chrom_S288C
     
@@ -62,7 +62,7 @@ signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,
   } else stop("Did not recognize reference genome.
               Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
   
-  cat('Preparing convergent gene region info...\n')
+  message('Preparing convergent gene region info...\n')
   
   # Initialize object to collect final data
   allData <- data.frame()
@@ -81,8 +81,8 @@ signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,
          "install.packages('dplyr')", call. = FALSE)
   }
   
-  cat('Collecting signal...\n')
-  cat('(Skip any regions whose coordinates are not found in input data)\n')
+  message('Collecting signal...\n')
+  message('(Skip any regions whose coordinates are not found in input data)\n')
 
   for(i in 1:length(chrom)) {
     chrNum <- paste0('chr', chrom[i])
@@ -107,7 +107,7 @@ signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,
     convGeneCount <- 0
     for(j in 1:nrow(intergenicPosChr)) {
       if(j == 1) {
-        cat(paste0(chrNum, ':\n'))
+        message(paste0(chrNum, ':\n'))
       }
       
       # Skip if gene coordinates not in ChIPseq data
@@ -138,7 +138,7 @@ signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,
     }
 
     # Print number of skipped regions
-    cat(paste0('... ', convGeneCount,
+    message(paste0('... ', convGeneCount,
                ' intergenic regions (skipped ', j - convGeneCount, ')\n'))
 
     colnames(finalChromData) <- c('chr', 'position', 'signal')
@@ -147,10 +147,10 @@ signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,
     allData <- dplyr::bind_rows(allData, finalChromData)
   }
   
-  cat(paste0('\nCompleted in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
+  message(paste0('\nCompleted in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
   
   if(saveFile) {
-    cat(paste0('Saving file...\n'))
+    message(paste0('Saving file...\n'))
     if(check_S288C) {
       write.table(allData, paste0(deparse(substitute(inputData)),
                                   "_S288C_conv.txt"), sep = "\t",

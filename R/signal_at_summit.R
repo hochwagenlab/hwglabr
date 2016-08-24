@@ -164,9 +164,9 @@ signal_at_summit <- function(inputData, bedData, extension = 1000, onlyComplete 
         }
       }
     }
-    cat(paste0(count," summits mapped\n"))
+    message(paste0(count," summits mapped"))
   }
-  cat(paste0("Completed in ", round((proc.time()[3] - ptm[3])/60, 2), " min.\n"))
+  message(paste0("Completed in ", round((proc.time()[3] - ptm[3])/60, 2), " min.\n"))
   
   return(summit_data)
 }

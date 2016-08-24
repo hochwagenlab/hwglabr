@@ -73,7 +73,7 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
   
   # Check reference genome and load respective chromosome number vector
   if (check_S288C) {
-    cat('Detected ref. genome - S288C\n')
+    message('Detected ref. genome - S288C\n')
     chrom <- chrom_S288C
   } else if (check_SK1) {
     print('Detected ref. genome - SK1')
@@ -84,30 +84,30 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
   # Load intergenic region coordinate data
   if (check_S288C) {
     if (orientation == 'conv') {
-      cat('Preparing convergent gene region info...\n')
+      message('Preparing convergent gene region info...\n')
       #data("S288C_conv_midpoint_dist")
       intergen <- S288C_conv_midpoint_dist
     } else if (orientation == 'div') {
-      cat('Preparing divergent gene region info...\n')
+      message('Preparing divergent gene region info...\n')
       #data("S288C_div_midpoint_dist")
       intergen <- S288C_div_midpoint_dist
     } else if (orientation == 'tandem') {
-      cat('Preparing tandem gene region info...\n')
+      message('Preparing tandem gene region info...\n')
       #data("S288C_tand_midpoint_dist")
       intergen <- S288C_tand_midpoint_dist
     } else stop("Did not recognize gene orientation.
                 You should use one of the three strings 'conv', 'div' or 'tandem'.")
   } else if (check_SK1) {
     if (orientation == 'conv') {
-      cat('Preparing convergent gene region info...\n')
+      message('Preparing convergent gene region info...\n')
       #data("SK1_conv_midpoint_dist")
       intergen <- SK1_conv_midpoint_dist
     } else if (orientation == 'div') {
-      cat('Preparing divergent gene region info...\n')
+      message('Preparing divergent gene region info...\n')
       #data("SK1_div_midpoint_dist")
       intergen <- SK1_div_midpoint_dist
     } else if (orientation == 'tandem') {
-      cat('Preparing tandem gene region info...\n')
+      message('Preparing tandem gene region info...\n')
       #data("SK1_tand_midpoint_dist")
       intergen <- SK1_tand_midpoint_dist
     } else stop("Did not recognize gene orientation.
@@ -116,7 +116,7 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
   
   # Drop regions between overlapping genes?
   if (!includeOverlapping) {
-    cat('Dropping overlapping genes...\n')
+    message('Dropping overlapping genes...\n')
     intergen <- intergen[intergen$dist_apart > 0, ]
   }
   
@@ -143,8 +143,8 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
     intergenicPos[, 'strand'] <- intergen[, 'strand']                   # strand
   }
   
-  cat('Collecting signal...\n')
-  cat('(Skip any regions whose coordinates are not found in input data)\n\n')
+  message('Collecting signal...\n')
+  message('(Skip any regions whose coordinates are not found in input data)\n\n')
 
   for(i in 1:length(chrom)) {
     chrNum <- paste0('chr', chrom[i])
@@ -169,7 +169,7 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
     intergenGeneCount <- 0
     for(j in 1:nrow(intergenicPosChr)) {
       if(j == 1) {
-        cat(paste0(chrNum, ':\n'))
+        message(paste0(chrNum, ':'))
       }
       
       # Skip if gene coordinates not in ChIPseq data
@@ -209,8 +209,8 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
     }
 
     # Print number of skipped regions
-    cat(paste0('... ', intergenGeneCount,
-               ' intergenic regions (skipped ', j - intergenGeneCount, ')\n'))
+    message(paste0('... ', intergenGeneCount,
+                   ' intergenic regions (skipped ', j - intergenGeneCount, ')\n'))
 
     colnames(finalChromData) <- c('chr', 'position', 'signal', 'dist_apart')
     # Trim out NAs
@@ -219,23 +219,23 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
     allData <- dplyr::bind_rows(allData, finalChromData)
   }
   
-  cat(paste0('\nCompleted in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
+  message(paste0('\nCompleted in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
   
   if(saveFile) {
-    cat('Saving file...\n')
+    message('Saving file...\n')
     if(check_S288C) {
       write.table(allData, paste0(deparse(substitute(inputData)), "_", orientation,
                                   "_S288C.txt"), sep = "\t",
                   row.names = FALSE, quote = FALSE)
-      cat('Done!')
+      message('Done!')
     } else {
       write.table(allData, paste0(deparse(substitute(inputData)), "_", orientation,
                                   "_SK1.txt"), sep = "\t",
                   row.names = FALSE, quote = FALSE)
-      cat('Done!')
+      message('Done!')
     }
   } else {
-    cat('Done!')
+    message('Done!')
     return(allData)
   }
 }

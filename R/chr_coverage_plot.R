@@ -67,14 +67,14 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
   if (meanNorm) {
     ### Calculate coverage/chr relative to whole-genome average coverage
     # (i.e., normalize to whole-genome average)
-    cat('Normalizing coverage/chr to genome average for',
+    message('Normalizing coverage/chr to genome average for',
         deparse(substitute(coverageDataA)), '\n')
     dataA <- as.data.frame(matrix(data = NA, nrow = 16, ncol = 2))
     dataA[, 1]  <-  coverageDataA[, 1]
     dataA[, 2]  <-  coverageDataA[, 2] / mean(coverageDataA[, 2])
     
     if (!missing(coverageDataB)) {
-      cat('Normalizing coverage/chr to genome average for',
+      message('Normalizing coverage/chr to genome average for',
           deparse(substitute(coverageDataB)), '\n')
       dataB <- as.data.frame(matrix(data = NA, nrow = 16, ncol = 2))
       dataB[, 1]  <-  coverageDataB[, 1]
@@ -98,7 +98,7 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
   #----------------------------------------------------------------------------#
   
   # Load the data:
-  cat('Plotting... \n')
+  message('Plotting... \n')
   if (genome == 'SK1') {
     Cen <- SK1cen
   } else {
@@ -163,5 +163,5 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
   
   if (!onScreen) dev.off()
   
-  cat('... Completed in ', round((proc.time()[3] - ptm[3]), 2), ' sec.')
+  message('... Completed in ', round((proc.time()[3] - ptm[3]), 2), ' sec.')
 }

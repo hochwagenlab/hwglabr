@@ -77,7 +77,7 @@ signal_at_orf_average_plot <- function(inputDataA, inputDataB, genome,
   }
   
   ### Plot
-  cat('Plotting... \n')
+  message('Plotting...')
 
   if (missing(yMin)) {
     if (!missing(inputDataB)) {

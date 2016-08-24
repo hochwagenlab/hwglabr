@@ -56,7 +56,7 @@ signal_at_orf_se <- function(inputData, gff, gffFile, limit = 'start',
          call. = FALSE)
   } else if (missing(gff)) {
     gff <- hwglabr::gff_read(gffFile)
-    cat('Loaded gff file...\n')
+    message('Loaded gff file...')
   }
   
   # Check reference genome for both the input data and the gff file; make sure they match
@@ -75,10 +75,10 @@ signal_at_orf_se <- function(inputData, gff, gffFile, limit = 'start',
     stop("The reference genomes in the input data and the gff do not seem to match.\n",
          "Please provide data and gff for the same reference genome.\n", call. = FALSE)
   } else if (check_S288C & check_gff_S288C) {
-    cat('Detected ref. genome - S288C\n')
+    message('Detected ref. genome - S288C')
     chrom <- chrom_S288C
   } else if (check_SK1 & check_gff_SK1) {
-    cat('Detected ref. genome - SK1')
+    message('Detected ref. genome - SK1')
     chrom <- chrom_SK1
   } else stop("Did not recognize reference genome.
 Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
@@ -88,25 +88,25 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
          "install.packages('dplyr')", call. = FALSE)
   }
   
-  cat('\nThe following types of features are present in the gff data you provided
-      (they will all be included in the analysis):\n')
+  message('\nThe following types of features are present in the gff data you provided
+      (they will all be included in the analysis):')
   
   for(i in 1:length(unique(gff[, 3]))) {
-    cat(unique(gff[, 3])[i], '\n')
+    message(unique(gff[, 3])[i])
   }
   
-  cat('\nCollecting signal...\n')
-  cat('(Skip genes with missing coordinates and signal in wiggle data)\n')
+  message('\nCollecting signal...')
+  message('(Skip genes with missing coordinates and signal in wiggle data)\n')
   
   # Do you want ORF start or end?
   if (limit == 'start'){
     watson_ref_pos <- 4
     crick_ref_pos <- 5
-    cat('Collecting signal around ORF', limit) 
+    message('Collecting signal around ORF', limit) 
   } else if (limit == 'end'){
     watson_ref_pos <- 5
     crick_ref_pos <- 4
-    cat('Collecting signal around ORF', limit)
+    message('Collecting signal around ORF', limit)
   } else stop("The limit argument accepts one of the strings 'start' and 'end'.\n",
               "Please chose either ORF 'start' or 'end' position.",
               call. = FALSE)
@@ -120,7 +120,7 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
   
   for(i in 1:length(inputData)) {
     chrNum <- paste0('chr', chrom[i])
-    cat(paste0(chrNum, ':\n'))
+    message(paste0(chrNum, ':\n'))
     
     # Index of ChIP data list item corresponding to chrom to analyze
     # Add '.' to make it unique (otherwise e.g. 'chrI' matches 'chrII' too)
@@ -166,7 +166,7 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
       geneCount <- geneCount + 1
     }
     
-    cat(paste0('... + strand: ', geneCount, ' genes (skipped ', j - geneCount, ')\n'))
+    message(paste0('... + strand: ', geneCount, ' genes (skipped ', j - geneCount, ')\n'))
     
     # Keep track of total and non-skipped genes, to print info at the end
     number_genes <- number_genes + j
@@ -217,7 +217,7 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
     # To collect all chrs
     minus_final <- dplyr::bind_rows(minus_final, minus_sigs)
     
-    cat(paste0('... - strand: ', geneCount, ' genes (skipped ', j - geneCount, ')\n'))
+    message(paste0('... - strand: ', geneCount, ' genes (skipped ', j - geneCount, ')\n'))
     # Keep track of total and non-skipped genes, to print info at the end
     number_genes <- number_genes + j
     number_skipped_genes <- number_skipped_genes + (j - geneCount)
@@ -229,30 +229,30 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
   # Sort by gene and position
   mergedStrands <- mergedStrands[order(mergedStrands$gene, mergedStrands$position), ]
   
-  cat(paste0('Completed in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
+  message(paste0('Completed in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
   
   # Print info on total and non-skipped genes
-  cat('\n------\n')
-  cat(paste0('Skipped ', number_skipped_genes, ' of a total of ', number_genes,
+  message('------')
+  message(paste0('Skipped ', number_skipped_genes, ' of a total of ', number_genes,
              " genes (", round((number_skipped_genes * 100 / number_genes), 1),
-             "%).\n"))
-  cat('------\n')
+             "%)."))
+  message('------')
   
   if(saveFile) {
-    cat(paste0('Saving file...\n'))
+    message(paste0('Saving file...\n'))
     if(check_S288C) {
       write.table(mergedStrands, paste0(deparse(substitute(inputData)),
                                         "_S288C_ORF", limit, ".txt"), sep = "\t",
                   quote = FALSE, row.names = FALSE)
-      cat('Done!')
+      message('Done!')
     } else {
       write.table(mergedStrands, paste0(deparse(substitute(inputData)),
                                         "_SK1_ORF", limit, ".txt"), sep = "\t",
                   quote = FALSE, row.names = FALSE)
-      cat('Done!')
+      message('Done!')
     }
   } else {
-    cat('Done!')
+    message('Done!')
     return(mergedStrands)
   }
 }

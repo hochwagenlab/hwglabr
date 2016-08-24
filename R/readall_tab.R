@@ -28,7 +28,7 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
   }
   
   if (localCopy) {
-    cat('Copying data files to local folder "/readall_tab_temp"\n...')
+    message('Copying data files to local folder "/readall_tab_temp"\n...')
     # Check if a directory 'readall_tab_temp' already exists
     if (file.exists('readall_tab_temp')) {
       stop('A folder called "readall_tab_temp" already exists in the current working directory.\n',
@@ -43,7 +43,7 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
     fileLocation <- paste0('readall_tab_temp/', list.files('readall_tab_temp'))
   }
   
-  cat('\nReading data...\n')
+  message('\nReading data...\n')
   
   filenames <- list.files(fileLocation, full.names = T)
   if (length(filenames) == 17) {
@@ -85,7 +85,7 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
   }
   
   if (localCopy) {
-    cat('Deleting local copy\n...\n')
+    message('Deleting local copy\n...\n')
     # Delete temporary local directory
     unlink('readall_tab_temp', recursive = TRUE)
   }
@@ -95,13 +95,13 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
   check_S288C <- any(grep("chrI.", names(alldata), fixed = TRUE))
   check_SK1 <- any(grep("chr01.", names(alldata), fixed = TRUE))
   if (check_S288C) {
-    cat("Detected ref. genome - S288C\n(Chrs numbered using roman numerals)")
+    message("Detected ref. genome - S288C\n(Chrs numbered using roman numerals)")
   }
   else if (check_SK1) {
-    cat("\nDetected ref. genome - SK1\n(Chrs numbered using arabic numerals)")
+    message("Detected ref. genome - SK1\n(Chrs numbered using arabic numerals)")
   }
   else stop("Did not recognize reference genome.")
   
-  cat("\n...\nCompleted in ", round((proc.time()[3] - ptm[3]), 1), " sec.")
+  message("\n...\nCompleted in ", round((proc.time()[3] - ptm[3]), 1), " sec.")
   return(alldata)
 }

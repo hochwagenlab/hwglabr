@@ -33,7 +33,7 @@ wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein
                         legendXcoord = -10, legendYcoord = yMax,
                         legendAnnotation = deparse(substitute(wiggleData)), onScreen = TRUE) {
   
-  cat('\n\nPlotting... \n')
+  message('\nPlotting...')
   #----------------------------------------------------------------------------#
   # All data loaded below is internal to the package
   # Generated using script 'data-raw/data_internal.R'; stored in 'R/sysdata.rda'

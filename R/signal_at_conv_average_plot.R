@@ -42,7 +42,7 @@ signal_at_conv_average_plot <- function(inputDataA, inputDataB, genome,
                                         legendYcoord = yMax + yMax * 0.05,
                                         colorA = 'grey50', colorB = 'orange') {
   
-  cat('Note: This function is deprecated!\n',
+  message('Note: This function is deprecated!\n',
       'From version 0.2 on it is no longer maintained. 
       Use signal_at_intergen_average_plot() instead.')
   
@@ -73,7 +73,7 @@ signal_at_conv_average_plot <- function(inputDataA, inputDataB, genome,
   }
   
   ### Plot
-  cat('Plotting... \n')
+  message('Plotting... \n')
   
   if (missing(yMax)) {
     if (!missing(inputDataB)) {

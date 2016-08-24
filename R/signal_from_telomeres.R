@@ -44,10 +44,10 @@ signal_from_telomeres <- function(inputData, lengthToCollect = 100000) {
   check_SK1 <- any(grep('chr01.', names(inputData), fixed = TRUE))
   
   if (check_S288C) {
-    cat('Ref. genome - S288C\n(Chrs numbered using roman numerals)\n')
+    message('Ref. genome - S288C\n(Chrs numbered using roman numerals)\n')
     chrom <- chrom_S288C
   } else if (check_SK1) {
-    cat('Ref. genome - SK1\n(Chrs numbered using arabic numerals)\n')
+    message('Ref. genome - SK1\n(Chrs numbered using arabic numerals)\n')
     chrom <- chrom_SK1
   } else stop('Did not recognize reference genome.')
  
@@ -67,17 +67,17 @@ signal_from_telomeres <- function(inputData, lengthToCollect = 100000) {
     Cen <- S288Ccen
   }
   
-  cat('Collecting signal...\n')
+  message('Collecting signal...\n')
   
   #----------------------------------------------------------------------------#
   #------------------------- Small chrs: I, III, VI ---------------------------#
   smallChrs <- list()
   chrom_small <- chrom[c(1, 3, 6)]
   
-  cat(paste0('\nSmall chrs: '))
+  message(paste0('\nSmall chrs: '))
   for(i in 1:length(chrom_small)) {
     chrNum <- paste0('chr', chrom_small[i])
-    cat(paste0(chrNum, ' '))
+    message(paste0(chrNum, ' '))
     
     # Index of ChIP data list item corresponding to chrom to analyze
     # Add '.' to make it unique (otherwise e.g. 'chrI' matches 'chrII' too)
@@ -117,10 +117,10 @@ signal_from_telomeres <- function(inputData, lengthToCollect = 100000) {
   largeChrs <- list()
   chrom_large <- chrom[-c(1, 3, 6)]
   
-  cat(paste0('\nLarge chrs: '))
+  message(paste0('\nLarge chrs: '))
   for(i in 1:length(chrom_large)) {
     chrNum <- paste0('chr', chrom_large[i])
-    cat(paste0(chrNum, ' '))
+    message(paste0(chrNum, ' '))
     
     # Index of ChIP data list item corresponding to chrom to analyze
     # Add '.' to make it unique (otherwise e.g. 'chrI' matches 'chrII' too)
@@ -155,7 +155,7 @@ signal_from_telomeres <- function(inputData, lengthToCollect = 100000) {
   }
   
   finalList <- list('small_chrs' = smallChrs, 'large_chrs' = largeChrs)
-  cat(paste0('\n\nCompleted in ', round((proc.time()[3] - ptm[3]), 2), ' sec.\n'))
+  message(paste0('\n\nCompleted in ', round((proc.time()[3] - ptm[3]), 2), ' sec.\n'))
   
   return(finalList)
 }

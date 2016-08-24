@@ -48,8 +48,8 @@ wiggle_correlation <- function(Set1, Set2, method = 'spearman') {
 	tmp <- unlist( strsplit( unlist( strsplit(names(Set1), split=".wig") ) ,split="_") )
 	names(correlation) <- c(tmp[ grepl("chr",tmp) ], "all")
 	
-	cat(paste0("Completed in ", round((proc.time()[3] - ptm[3])/60, 
-        2), " min.\n"))
+	message(paste0("Completed in ", round((proc.time()[3] - ptm[3])/60, 
+        2), " min."))
         
     return(correlation)
 }
