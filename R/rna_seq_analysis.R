@@ -160,7 +160,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   # Calculate normalization factors to scale the raw library sizes
   y_filt <- calcNormFactors(y_filt)
   message('Calculated normalization factors using trimmed mean of M-values (TMM) method:\n')
-  print(y_filt$samples)
+  message(y_filt$samples)
   
   # Save MDS plot
   if(missing(outputFilePrefix)){
