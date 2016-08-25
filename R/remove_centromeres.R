@@ -1,7 +1,7 @@
 #' Remove centromeric regions from wiggle data
 #'
 #' This function allows you to remove the region containing the centromere in each
-#' chromosome. The original motivation was to analyse Red1 ChIP-seq data in rec8∆
+#' chromosome. The original motivation was to analyse Red1 ChIP-seq data in rec8
 #' mutants (show a strong enrichment around the centromeres).
 #' @param wiggleData As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}). No default.
 #' @param regionSize Number indicating the size (in bp) of the region to remove

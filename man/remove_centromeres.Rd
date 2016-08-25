@@ -18,7 +18,7 @@ the centromeric regions (both positions and signal) in each chromosome data fram
 }
 \description{
 This function allows you to remove the region containing the centromere in each
-chromosome. The original motivation was to analyse Red1 ChIP-seq data in rec8∆
+chromosome. The original motivation was to analyse Red1 ChIP-seq data in rec8
 mutants (show a strong enrichment around the centromeres).
 }
 \examples{
