@@ -128,11 +128,10 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, genome,
     if(missing(yMax)) yMax <- ceiling(max(dataA[, 2]))
   }
   
-  #par(mfrow = c(1, 1), mar = c(8, 12, 4, 2), mgp = c(6, 2, 0))
-  par(mar = c(5, 6, 4, 2))
+  par(mar = c(5, 5, 4, 2))
   plot(lengths[ordered, 2]/1000, dataA[ordered, 2],
        xaxt = "n", yaxt = "n", xlim = c(0, 1550), ylim = c(-0.5, yMax),
-       xlab = "Chromosome size (kb)", ylab = 'ChIP-seq\nsignal/Input',
+       xlab = "Chromosome size (kb)", ylab = 'ChIP-seq signal/Input',
        main = paste0('Mean signal per chromosome\nrelative to chromosome size'),
        col = colorA, pch = 19, cex = 1, cex.main = 1, cex.axis = 1, cex.lab = 1, bty = "n")
   axis(side = 1, at = c(0, 500, 1000, 1500), lwd = 1, cex.axis = 1, cex.lab = 1)
