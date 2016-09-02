@@ -129,7 +129,7 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, genome,
   }
   
   #par(mfrow = c(1, 1), mar = c(8, 12, 4, 2), mgp = c(6, 2, 0))
-  par(mfrow = c(1, 1), mar = c(6, 6, 4, 2))
+  par(mar = c(5, 6, 4, 2))
   plot(lengths[ordered, 2]/1000, dataA[ordered, 2],
        xaxt = "n", yaxt = "n", xlim = c(0, 1550), ylim = c(-0.5, yMax),
        xlab = "Chromosome size (kb)", ylab = 'ChIP-seq\nsignal/Input',
