@@ -26,6 +26,6 @@ This function allows you to calculate the average signal (or coverage) per chrom
 \examples{
 chr_coverage(WT)
 
-chr_coverage(rec8)
+chr_coverage(dot1, removeCen = TRUE, cenRegionSize = 50000)
 }
 
