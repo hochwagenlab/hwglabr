@@ -4,7 +4,6 @@
 #' It takes as input the output of \code{\link{chr_coverage}} (16x2 R data frame).
 #' @param coverageDataA A 16x2 data frame of coverage: chromosome and average signal. No default.
 #' @param coverageDataB Optional 16x2 data frame of coverage: chromosome and average signal. No default.
-#' @param protein A string representing the ChIPped protein. No default.
 #' @param genome A string representing the genome used for mapping. No default.
 #' @param meanNorm Boolean indicating whether average coverage should be plotted as is
 #' (\code{meanNorm = FALSE}) or normalized to genome-wide averages (\code{meanNorm = TRUE}).
@@ -19,14 +18,14 @@
 #' @return A dot plot of one or two samples, either on screen or as a .pdf file (in
 #' the working directory).
 #' @examples
-#' chr_coverage_plot(WT, rec8, protein = 'Red1', genome = 'SK1', meanNorm = TRUE,
+#' chr_coverage_plot(WT, rec8, genome = 'SK1', meanNorm = TRUE,
 #'                   onScreen = TRUE, colorB = 'red')
 #' 
-#' chr_coverage_plot(WT, dot1, protein = 'Hop1', genome = 'S288C', meanNorm = FALSE,
+#' chr_coverage_plot(WT, dot1, genome = 'S288C', meanNorm = FALSE,
 #'                   onScreen = FALSE)
 #' @export
 
-chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
+chr_coverage_plot <- function(coverageDataA, coverageDataB,
                               meanNorm = TRUE, yMax, onScreen = TRUE, fileName,
                               colorA = 'grey50', colorB = 'green') {
   ptm <- proc.time()
@@ -36,15 +35,15 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
     stop("Wrong input data - not an R data frame.\n",
          "Please run 'chr_coverage' on your data first. Example:\n",
          "WT_cov_dataframe <- chr_coverage(WT_wiggle)\n",
-         "chr_coverage_plot(WT_cov_dataframe, protein = 'Red1', genome = 'SK1',
-         meanNorm = TRUE, onScreen = TRUE)", call. = FALSE)
+         "chr_coverage_plot(WT_cov_dataframe, meanNorm = TRUE, onScreen = TRUE)",
+         call. = FALSE)
   } else {
     if (nrow(coverageDataA) != 16) {
       stop("Wrong input data dimensions.\n",
            "Please run 'chr_coverage' on your data first. Example:\n",
            "WT_cov_dataframe <- chr_coverage(WT_wiggle)\n",
-           "chr_coverage_plot(WT_cov_dataframe, protein = 'Red1', genome = 'SK1',
-           meanNorm = TRUE, onScreen = TRUE)", call. = FALSE)
+           "chr_coverage_plot(WT_cov_dataframe, meanNorm = TRUE, onScreen = TRUE)",
+           call. = FALSE)
     }
   }
   
@@ -53,14 +52,14 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
       stop(deparse(substitute(coverageDataB)), " is of wrong format - not an R data frame.\n",
            "Please run 'chr_coverage' on your data first. Example:\n",
            "WT_cov_dataframe <- chr_coverage(WT_wiggle)\n",
-           "chr_coverage_plot(WT_cov_dataframe, protein = 'Red1', genome = 'SK1',
+           "chr_coverage_plot(WT_cov_dataframe, genome = 'SK1',
            meanNorm = TRUE, onScreen = TRUE)", call. = FALSE)
     } else {
       if (nrow(coverageDataB) != 16) {
         stop(deparse(substitute(coverageDataB)), " has wrong dimensions.\n",
              "Please run 'chr_coverage' on your data first. Example:\n",
              "WT_cov_dataframe <- chr_coverage(WT_wiggle)\n",
-             "chr_coverage_plot(WT_cov_dataframe, protein = 'Red1', genome = 'SK1',
+             "chr_coverage_plot(WT_cov_dataframe, genome = 'SK1',
              meanNorm = TRUE, onScreen = TRUE)", call. = FALSE)
       }
     }
@@ -130,19 +129,12 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
     if(missing(yMax)) yMax <- ceiling(max(dataA[, 2]))
   }
   
-  # Load package to use data point transparency
-  if (!requireNamespace("scales", quietly = TRUE)) {
-    stop("R package 'scales' needed for this function to work. Please install it.\n",
-         "install.packages('scales')", call. = FALSE)
-  }
-  
   par(mfrow = c(1, 1), mar = c(8, 12, 4, 2), mgp = c(6, 2, 0))
   plot(lengths[ordered, 2]/1000, dataA[ordered, 2],
        xaxt = "n", yaxt = "n", xlim = c(0, 1550), ylim = c(-0.5, yMax),
-       xlab = "Chromosome size (kb)", ylab = paste0(protein, '\nChIP/Input'),
+       xlab = "Chromosome size (kb)", ylab = 'ChIP-seq\nsignal/Input',
        main = paste0('Mean signal per chromosome relative to chromosome size'),
-       col = scales::alpha(colorA, 0.7), pch = 19,
-       cex = 3, cex.main = 2, cex.axis = 2, cex.lab = 2, bty = "n")
+       col = colorA, pch = 19, cex = 3, cex.main = 2, cex.axis = 2, cex.lab = 2, bty = "n")
   axis(side = 1, at = c(0, 500, 1000, 1500), lwd = 4, cex.axis = 2, cex.lab = 2)
   axis(side = 2, at = c(0, 1, yMax), lwd = 4, cex.axis = 2, cex.lab = 2, las = 2)
   if (meanNorm) {
@@ -151,7 +143,7 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
   
   if (!missing(coverageDataB)) {
     points(lengths[ordered, 2]/1000, dataB[ordered, 2],
-           col = scales::alpha(colorB, 0.7), pch = 19, cex = 3)
+           col = colorB, pch = 19, cex = 3)
   }
   
   if (missing(coverageDataB)) {

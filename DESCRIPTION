@@ -17,8 +17,7 @@ Suggests:
     edgeR,
     dplyr,
     pbapply,
-    readr,
-    scales
+    readr
 Depends:
     R (>= 3.1.1)
 License: MIT + file LICENSE
