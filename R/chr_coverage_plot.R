@@ -11,10 +11,12 @@
 #' Defaults to TRUE.
 #' @param yMax Optional number to be used as the max Y scale value in the plots. No default.
 #' @param onScreen Boolean indicating plots should be returned to the screen (\code{onScreen = TRUE})
-#' or written to .png files (\code{onScreen = FALSE}). Defaults to \code{TRUE}.
+#' or written to .pdf files (\code{onScreen = FALSE}). Defaults to \code{TRUE}.
+#' @param fileName A string to name the output .pdf file in case (\code{onScreen = FALSE}).
+#' No default.
 #' @param colorA Optional R color for sample A. Defaults to \code{grey50}.
 #' @param colorB Optional R color for sample B. Defaults to \code{green}.
-#' @return A dot plot of one or two samples, either on screen or as a png file (in
+#' @return A dot plot of one or two samples, either on screen or as a .pdf file (in
 #' the working directory).
 #' @examples
 #' chr_coverage_plot(WT, rec8, protein = 'Red1', genome = 'SK1', meanNorm = TRUE,
@@ -25,7 +27,7 @@
 #' @export
 
 chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
-                              meanNorm = TRUE, yMax, onScreen = TRUE,
+                              meanNorm = TRUE, yMax, onScreen = TRUE, fileName,
                               colorA = 'grey50', colorB = 'green') {
   ptm <- proc.time()
   
@@ -67,14 +69,14 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
   if (meanNorm) {
     ### Calculate coverage/chr relative to whole-genome average coverage
     # (i.e., normalize to whole-genome average)
-    message('Normalizing coverage/chr to genome average for',
+    message('Normalizing coverage/chr to genome average for ',
         deparse(substitute(coverageDataA)), '\n')
     dataA <- as.data.frame(matrix(data = NA, nrow = 16, ncol = 2))
     dataA[, 1]  <-  coverageDataA[, 1]
     dataA[, 2]  <-  coverageDataA[, 2] / mean(coverageDataA[, 2])
     
     if (!missing(coverageDataB)) {
-      message('Normalizing coverage/chr to genome average for',
+      message('Normalizing coverage/chr to genome average for ',
           deparse(substitute(coverageDataB)), '\n')
       dataB <- as.data.frame(matrix(data = NA, nrow = 16, ncol = 2))
       dataB[, 1]  <-  coverageDataB[, 1]
@@ -108,9 +110,11 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
   lengths <- Cen[, c('Chromosome', 'LenChr')]
   ordered <- order(lengths[, 2])
   
-  # Plot(s)  
+  # Plot(s)
   if (!onScreen) {
-    png(filename = "Rplot.png", width = 1000, height = 480, units = 'px')
+    #pdf(file = paste0(fileName, '_sizeBias.pdf'), width = 1000, height = 480, units = 'px')
+    pdf(file = paste0(fileName
+                      ))
   }
   
   
@@ -136,7 +140,7 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, protein, genome,
   plot(lengths[ordered, 2]/1000, dataA[ordered, 2],
        xaxt = "n", yaxt = "n", xlim = c(0, 1550), ylim = c(-0.5, yMax),
        xlab = "Chromosome size (kb)", ylab = paste0(protein, '\nChIP/Input'),
-       main = paste0('Mapped to ', genome, ' genome'),
+       main = paste0('Mean signal per chromosome relative to chromosome size'),
        col = scales::alpha(colorA, 0.7), pch = 19,
        cex = 3, cex.main = 2, cex.axis = 2, cex.lab = 2, bty = "n")
   axis(side = 1, at = c(0, 500, 1000, 1500), lwd = 4, cex.axis = 2, cex.lab = 2)

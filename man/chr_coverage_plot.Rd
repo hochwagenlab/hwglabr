@@ -5,7 +5,7 @@
 \title{Average chromosome signal (coverage) dot plot}
 \usage{
 chr_coverage_plot(coverageDataA, coverageDataB, protein, genome,
-  meanNorm = TRUE, yMax, onScreen = TRUE, colorA = "grey50",
+  meanNorm = TRUE, yMax, onScreen = TRUE, fileName, colorA = "grey50",
   colorB = "green")
 }
 \arguments{
@@ -24,14 +24,17 @@ Defaults to TRUE.}
 \item{yMax}{Optional number to be used as the max Y scale value in the plots. No default.}
 
 \item{onScreen}{Boolean indicating plots should be returned to the screen (\code{onScreen = TRUE})
-or written to .png files (\code{onScreen = FALSE}). Defaults to \code{TRUE}.}
+or written to .pdf files (\code{onScreen = FALSE}). Defaults to \code{TRUE}.}
+
+\item{fileName}{A string to name the output .pdf file in case (\code{onScreen = FALSE}).
+No default.}
 
 \item{colorA}{Optional R color for sample A. Defaults to \code{grey50}.}
 
 \item{colorB}{Optional R color for sample B. Defaults to \code{green}.}
 }
 \value{
-A dot plot of one or two samples, either on screen or as a png file (in
+A dot plot of one or two samples, either on screen or as a .pdf file (in
 the working directory).
 }
 \description{
