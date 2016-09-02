@@ -4,16 +4,13 @@
 \alias{chr_coverage_plot}
 \title{Average chromosome signal (coverage) dot plot}
 \usage{
-chr_coverage_plot(coverageDataA, coverageDataB, protein, genome,
-  meanNorm = TRUE, yMax, onScreen = TRUE, fileName, colorA = "grey50",
-  colorB = "green")
+chr_coverage_plot(coverageDataA, coverageDataB, genome, meanNorm = TRUE, yMax,
+  onScreen = TRUE, fileName, colorA = "grey50", colorB = "green")
 }
 \arguments{
 \item{coverageDataA}{A 16x2 data frame of coverage: chromosome and average signal. No default.}
 
 \item{coverageDataB}{Optional 16x2 data frame of coverage: chromosome and average signal. No default.}
-
-\item{protein}{A string representing the ChIPped protein. No default.}
 
 \item{genome}{A string representing the genome used for mapping. No default.}
 
@@ -42,10 +39,10 @@ This function allows you to plot average chromosome signal for one or two select
 It takes as input the output of \code{\link{chr_coverage}} (16x2 R data frame).
 }
 \examples{
-chr_coverage_plot(WT, rec8, protein = 'Red1', genome = 'SK1', meanNorm = TRUE,
+chr_coverage_plot(WT, rec8, genome = 'SK1', meanNorm = TRUE,
                   onScreen = TRUE, colorB = 'red')
 
-chr_coverage_plot(WT, dot1, protein = 'Hop1', genome = 'S288C', meanNorm = FALSE,
+chr_coverage_plot(WT, dot1, genome = 'S288C', meanNorm = FALSE,
                   onScreen = FALSE)
 }
 

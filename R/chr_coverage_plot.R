@@ -25,7 +25,7 @@
 #'                   onScreen = FALSE)
 #' @export
 
-chr_coverage_plot <- function(coverageDataA, coverageDataB,
+chr_coverage_plot <- function(coverageDataA, coverageDataB, genome,
                               meanNorm = TRUE, yMax, onScreen = TRUE, fileName,
                               colorA = 'grey50', colorB = 'green') {
   ptm <- proc.time()
@@ -112,8 +112,7 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB,
   # Plot(s)
   if (!onScreen) {
     #pdf(file = paste0(fileName, '_sizeBias.pdf'), width = 1000, height = 480, units = 'px')
-    pdf(file = paste0(fileName
-                      ))
+    pdf(file = paste0(fileName), width = 5, height = 5)
   }
   
   
@@ -129,31 +128,32 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB,
     if(missing(yMax)) yMax <- ceiling(max(dataA[, 2]))
   }
   
-  par(mfrow = c(1, 1), mar = c(8, 12, 4, 2), mgp = c(6, 2, 0))
+  #par(mfrow = c(1, 1), mar = c(8, 12, 4, 2), mgp = c(6, 2, 0))
+  par(mfrow = c(1, 1), mar = c(6, 6, 4, 2))
   plot(lengths[ordered, 2]/1000, dataA[ordered, 2],
        xaxt = "n", yaxt = "n", xlim = c(0, 1550), ylim = c(-0.5, yMax),
        xlab = "Chromosome size (kb)", ylab = 'ChIP-seq\nsignal/Input',
-       main = paste0('Mean signal per chromosome relative to chromosome size'),
-       col = colorA, pch = 19, cex = 3, cex.main = 2, cex.axis = 2, cex.lab = 2, bty = "n")
-  axis(side = 1, at = c(0, 500, 1000, 1500), lwd = 4, cex.axis = 2, cex.lab = 2)
-  axis(side = 2, at = c(0, 1, yMax), lwd = 4, cex.axis = 2, cex.lab = 2, las = 2)
+       main = paste0('Mean signal per chromosome\nrelative to chromosome size'),
+       col = colorA, pch = 19, cex = 1, cex.main = 1, cex.axis = 1, cex.lab = 1, bty = "n")
+  axis(side = 1, at = c(0, 500, 1000, 1500), lwd = 1, cex.axis = 1, cex.lab = 1)
+  axis(side = 2, at = c(0, 1, yMax), lwd = 1, cex.axis = 1, cex.lab = 1, las = 1)
   if (meanNorm) {
-    abline(h = 1, lty = 3, lwd = 2)
+    abline(h = 1, lty = 3, lwd = 1)
   }
   
   if (!missing(coverageDataB)) {
     points(lengths[ordered, 2]/1000, dataB[ordered, 2],
-           col = colorB, pch = 19, cex = 3)
+           col = colorB, pch = 19, cex = 1)
   }
   
   if (missing(coverageDataB)) {
     legend(600, yMax, deparse(substitute(coverageDataA)), pch = 19,
-           bty = 'n', pt.cex = 2, cex = 1.5,
+           bty = 'n', pt.cex = 1, cex = 1,
            col = colorA, text.col = colorA)
   } else {
     legend(600, yMax,
            c(deparse(substitute(coverageDataA)), deparse(substitute(coverageDataB))),
-           pch = 19, bty = 'n', pt.cex = 2, cex = 1.5,
+           pch = 19, bty = 'n', pt.cex = 1, cex = 1,
            col = c(colorA, colorB), text.col = c(colorA, colorB))
   }
   
