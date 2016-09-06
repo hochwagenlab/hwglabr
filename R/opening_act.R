@@ -73,9 +73,11 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   message('... Chromosome size bias:')
   suppressMessages(output <- hwglabr::chr_coverage(wiggleData))
 
-  suppressMessages(hwglabr::chr_coverage_plot(output, genome = refGenome, onScreen = FALSE,
-                                              fileName = paste0(destination, output_dir, '/',
-                                                                output_dir, '_sizeBias.pdf')))
+  suppressMessages(
+    hwglabr::chr_coverage_plot(output, genome = refGenome, onScreen = FALSE,
+                               fileName = paste0(destination, output_dir, '/',
+                                                 output_dir, '_sizeBias.pdf'))
+  )
   
   message('Saved plot ', paste0(output_dir, '_sizeBias.pdf'))
   
@@ -96,12 +98,14 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   cenBed <- data.frame(cen$Chromosome, cen$Mid, cen$Mid + 1, stringsAsFactors=F)
   
   # calculate average around centromere
-  wiggle_cen_avg <- signal_average( signal_at_summit(wiggleData, cenBed, 50000,
-                                                     onlyComplete=F) )
+  suppressMessages(
+    wiggle_cen_avg <- signal_average( signal_at_summit(wiggleData, cenBed, 50000,
+                                                       onlyComplete=F) )
+  )
   
   # plot results
   fileName <- paste0(destination, output_dir, '/', output_dir, '_signalAtCen.pdf')
-  pdf(file = paste0(fileName), width = 5, height = 5)
+  pdf(file = paste0(fileName), width = 6, height = 4)
   
   YLIM <- range(wiggle_cen_avg$mean_signal)
   if( YLIM[[2]] < 2) { YLIM[2] <- 2 }
@@ -124,7 +128,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
 
   
   
-  
+  message()
   message('------------------')
   message('All plots saved to ', paste0(destination, output_dir))
   message('------------------')
