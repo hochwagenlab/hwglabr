@@ -43,6 +43,6 @@ chr_coverage_plot(WT, rec8, genome = 'SK1', meanNorm = TRUE,
                   onScreen = TRUE, colorB = 'red')
 
 chr_coverage_plot(WT, dot1, genome = 'S288C', meanNorm = FALSE,
-                  onScreen = FALSE)
+                  onScreen = FALSE, fileName='chr_coverage_WT_and_dot1.pdf')
 }
 
