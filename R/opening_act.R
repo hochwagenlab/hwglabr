@@ -86,12 +86,14 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   
   # convert S288Ccen or SK1cen into bed file
   if (check_S288C) {
-    cenBed <- data.frame(S288Ccen$Chromosome, S288Ccen$Mid, S288Ccen$Mid + 1,
-                         stringsAsFactors=F)
+    cen <- S288Ccen
+    
   } else if (check_SK1) {
-    cenBed <- data.frame(SK1cen$Chromosome, SK1cen$Mid, SK1cen$Mid + 1,
-                         stringsAsFactors=F)
+    cen <- SK1cen
+
   } else stop("Did not recognize reference genome.")
+  
+  cenBed <- data.frame(cen$Chromosome, cen$Mid, cen$Mid + 1, stringsAsFactors=F)
   
   # calculate average around centromere
   wiggle_cen_avg <- signal_average( signal_at_summit(wiggleData, cenBed, 50000,
