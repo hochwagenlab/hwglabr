@@ -68,9 +68,6 @@ signal_at_rDNA <- function(inputData, saveFile = FALSE) {
   
   # Get subset of data corresponding to rDNA +/- 40 kb
   rDNA_signal <- inputData[start:end, ]
-  
-  
-  rDNA_signal <- inputData[[chr12]][start:end, ]
   colnames(rDNA_signal) <- c('position_on_chr12', 'signal')
 
   
