@@ -83,7 +83,8 @@ signal_at_rDNA <- function(inputData, saveFile = FALSE) {
                   row.names = FALSE)
       message('Done!')
     } else {
-      write.table(rDNA_signal, paste0(deparse(substitute(inputData)), "_S288C_signalAtrDNA.txt"),
+      write.table(rDNA_signal,
+                  paste0(deparse(substitute(inputData)), "_S288C_signalAtrDNA.txt"),
                   sep = "\t", quote = FALSE,
                   row.names = FALSE)
       message('Done!')
