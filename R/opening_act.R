@@ -105,14 +105,14 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   
   # plot results
   fileName <- paste0(destination, output_dir, '/', output_dir, '_signalAtCen.pdf')
-  pdf(file = paste0(fileName), width = 6, height = 4)
+  pdf(file = paste0(fileName), width = 8, height = 4)
   
   YLIM <- range(wiggle_cen_avg$mean_signal)
   if( YLIM[[2]] < 2) { YLIM[2] <- 2 }
   plot(wiggle_cen_avg$position/1000, wiggle_cen_avg$mean_signal, type="l",
        ylim=YLIM, xlab="Distance around Centromere (kb)", ylab="Signal", 
-       lwd=3, cex.axis=1.5, las=1, col="darkorange", cex.lab=1.5,
-       main=paste0("Signal around centromeres: ", refGenome), cex.main=1.5)
+       lwd=1, cex.axis=1, las=1, col="darkorange", cex.lab=1,
+       main=paste0("Signal around centromeres: ", refGenome), cex.main=1)
   
   dev.off()
   message('Saved plot ', paste0(output_dir, '_signalAtCen.pdf'))
@@ -120,7 +120,32 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   #----------------------------------------------------------------------------#
   # Signal at rDNA
   message('... Signal flanking rDNA:')
+  suppressMessages(rDNA <- signal_at_rDNA(wiggleData, saveFile = F))
+  colnames(rDNA) <- c('position', 'signal')
   
+  # plot results
+  fileName <- paste0(destination, output_dir, '/', output_dir, '_signalAtrDNA.pdf')
+  pdf(file = paste0(fileName), width = 8, height = 4)
+  
+  if (check_S288C) {
+    start <- 451575
+    end <- 468931
+  } else {
+    start <- 433029
+    end <- 451212
+  }
+  
+  plot(rDNA$position/1000, rDNA$signal, type="l",
+       xlab="Position on chr 12 (kb)", ylab="Signal", 
+       lwd=1, cex.axis=1, las=1, col='black', cex.lab=1,
+       main=paste0("Signal around rDNA: ", refGenome), cex.main=1)
+  # Add labels for rDNA
+  axis(1, at = c(start / 1000, end / 1000),
+       labels = c('rDNA >', '< rDNA'),
+       col = 'red', lwd = 3)
+  
+  dev.off()
+  message('Saved plot ', paste0(output_dir, '_signalAtrDNA.pdf'))
   
   #----------------------------------------------------------------------------#
   # Meta ORF
