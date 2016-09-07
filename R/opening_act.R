@@ -14,6 +14,9 @@
 #' analysis pipeline (with a date) and the read mapping conditions (see examples below).
 #' The function asks the user to check that the provided "sampleID" matches the required
 #' format before proceeding with the analysis. No default.
+#' @param userInput Boolean indicating whther to ask user to confirm that the format of
+#' the \code{sampleID} argument is correct. Defaults to \code{TRUE}.
+#' No default.
 #' @return A new folder in ".../LabShare/HTGenomics/Opening_act/" containing several
 #' plots as .pdf files.
 #' @examples
@@ -21,19 +24,23 @@
 #' opening_act(set1_wiggle_data, "set1", "Red1", "AH8584b-16032016-sacCer3-2mis")
 #' @export
 
-opening_act <- function(wiggleData, relevantGenotype, chipTarget, sampleID) {
+opening_act <- function(wiggleData, relevantGenotype, chipTarget, sampleID,
+                        userInput = TRUE) {
   ptm <- proc.time()
   
-  # Ask user to make sure they provided a valid ID for the data set
-  title <- paste0('The "sampleID" argument will be used to name the final output folder.
+  if(userInput){
+    # Ask user to make sure they provided a valid ID for the data set
+    title <- paste0('The "sampleID" argument will be used to name the final output folder.
 It should identify the yeast strain, date, and read mapping conditions, as in:
 "AH119C-040114-sacCer3-2mis".\n
 You provided the string "', sampleID, '" as the sampleID. Is this correct?')
-  choices = c('No, let me change that.', 'Yes, continue analysis!')
-  answer <- menu(choices, graphics = FALSE, title)
-  
-  if(answer == 0 | answer == 1){
-    stop('You chose to stop the function.', call. = FALSE)
+    choices = c('No, let me change that.',
+                'Yes, continue analysis!')
+    answer <- menu(choices, graphics = FALSE, title)
+    
+    if(answer == 0 | answer == 1){
+      stop('You chose to stop the function.', call. = FALSE)
+    }
   }
   
   # Check which reference genome was used to map seq. data

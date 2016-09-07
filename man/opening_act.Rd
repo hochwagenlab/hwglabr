@@ -4,7 +4,8 @@
 \alias{opening_act}
 \title{Standard analysis of HT genomics experiments}
 \usage{
-opening_act(wiggleData, relevantGenotype, chipTarget, sampleID)
+opening_act(wiggleData, relevantGenotype, chipTarget, sampleID,
+  userInput = TRUE)
 }
 \arguments{
 \item{wiggleData}{As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}).
@@ -20,6 +21,10 @@ No default.}
 analysis pipeline (with a date) and the read mapping conditions (see examples below).
 The function asks the user to check that the provided "sampleID" matches the required
 format before proceeding with the analysis. No default.}
+
+\item{userInput}{Boolean indicating whther to ask user to confirm that the format of
+the \code{sampleID} argument is correct. Defaults to \code{TRUE}.
+No default.}
 }
 \value{
 A new folder in ".../LabShare/HTGenomics/Opening_act/" containing several
