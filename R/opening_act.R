@@ -14,8 +14,8 @@
 #' analysis pipeline (with a date) and the read mapping conditions (see examples below).
 #' The function asks the user to check that the provided "sampleID" matches the required
 #' format before proceeding with the analysis. No default.
-#' @param userInput Boolean indicating whther to ask user to confirm that the format of
-#' the \code{sampleID} argument is correct. Defaults to \code{TRUE}.
+#' @param userInput Boolean indicating whether to ask user to check the format of the
+#' \code{sampleID} argument. Defaults to \code{TRUE}.
 #' No default.
 #' @return A new folder in ".../LabShare/HTGenomics/Opening_act/" containing several
 #' plots as .pdf files.

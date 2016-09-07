@@ -22,8 +22,8 @@ analysis pipeline (with a date) and the read mapping conditions (see examples be
 The function asks the user to check that the provided "sampleID" matches the required
 format before proceeding with the analysis. No default.}
 
-\item{userInput}{Boolean indicating whther to ask user to confirm that the format of
-the \code{sampleID} argument is correct. Defaults to \code{TRUE}.
+\item{userInput}{Boolean indicating whether to ask user to check the format of the
+\code{sampleID} argument. Defaults to \code{TRUE}.
 No default.}
 }
 \value{
