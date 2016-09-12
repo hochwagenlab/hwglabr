@@ -62,12 +62,12 @@ signal_at_summit <- function(inputData, bedData, extension = 1000, onlyComplete 
   
   # ensure bedData uses the same reference genome as wiggle file
   if (check_S288C) {
-    cat ("Wiggle data is S288C.\n")
+    message ("Wiggle data is S288C.")
     if ( !( any( grepl("I",bedData[,1]) ) ) ) {
       stop ("bedData and wiggle_data do not use the same reference genome.")
     } else {  chrom_nums <- chrom_S288C }
   } else if (check_SK1) {
-    cat ("Wiggle data is SK1.\n")
+    message ("Wiggle data is SK1.")
     if ( !( any(grepl("0", bedData[,1])) ) ) {
       stop ("bedData and wiggle_data do not use the same reference genome.")
     } else { chrom_nums <- chrom_SK1 }
@@ -123,7 +123,7 @@ signal_at_summit <- function(inputData, bedData, extension = 1000, onlyComplete 
       next
     } else {
       summit_range_chrom <- summit_range[summit_range[, 'chr'] == chrom_nums[i], ]
-      cat (paste0(chrom_nums[i], ":\t", nrow(summit_range_chrom), " summits,\t"))
+      message (paste0(chrom_nums[i], ":\t", nrow(summit_range_chrom), " summits,\t"))
       count = 0
       for (j in 1:nrow(summit_range_chrom)) {
         # find start position or closest thing
