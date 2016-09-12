@@ -32,9 +32,11 @@ to calculate the mean for every position around all midpoints. \cr
 Written by Tovah Markowitz.
 }
 \examples{
+\dontrun{
 signal_at_summit(WT, red1_summit_bed)
 
 # For signal around centromeres:
 signal_at_summit(WT, S288Ccen, extension = 2e4, onlyComplete = FALSE)
+}
 }
 

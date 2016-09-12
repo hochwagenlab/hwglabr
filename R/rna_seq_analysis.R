@@ -56,6 +56,7 @@
 #' A \strong{M}ulti-\strong{D}imensional \strong{S}caling plot of all samples is also
 #' saved in the output directory as a .pdf file.
 #' @examples
+#' \dontrun{
 #' rna_seq_analysis(pathToFiles = list('AH119-2h_featureCounts.txt', 'AH119-3h_featureCounts.txt',
 #'                                     'AH8104-2h_featureCounts.txt', 'AH8104-3h_featureCounts.txt'),
 #'                  sampleNames = list('AH119_2h', 'AH119_3h', 'AH8104_2h', 'AH8104_3h'),
@@ -76,6 +77,7 @@
 #'                  sampleNames = list('AH119_A', 'AH119_B', 'AH8104_A', 'AH8104_B'),
 #'                  conditionNames = list('WT', 'WT', 'dot1', 'dot1'),
 #'                  pairwiseDE = list(c('WT', 'dot1')))
+#' }
 #' @export
 
 rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,

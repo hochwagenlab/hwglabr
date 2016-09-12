@@ -29,11 +29,13 @@
 #' @return A line plot of one or two samples, either on screen or as a .png file
 #' (in the working directory).
 #' @examples
+#' \dontrun{
 #' signal_at_conv_average_plot(WT_conv_mean_signal, genome = 'S288C')
 #' 
 #' signal_at_conv_average_plot(WT_conv_mean_signal, dot1_conv_mean_signal, genome = 'SK1',
 #'                             yMax = 3, onScreen = FALSE, legendXcoord = -500,
 #'                             legendYcoord = 1, colorA = 'red', colorB = 'green')
+#' }
 #' @export
 
 signal_at_conv_average_plot <- function(inputDataA, inputDataB, genome,

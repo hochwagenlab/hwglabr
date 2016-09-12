@@ -46,8 +46,10 @@ If the number of the yeast line is found anywhere else in the name of any of
 the files in the working directory, this function WILL NOT work.
 }
 \examples{
+\dontrun{
 facs_density_plot(119)
 
 facs_density_plot(119, c(2000000, 7500000), 'pdf')
+}
 }
 

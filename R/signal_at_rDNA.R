@@ -15,9 +15,11 @@
 #'   \item \code{gene} Systematic gene name
 #' }
 #' @examples
+#' \dontrun{
 #' signal_at_rDNA(WT)
 #' 
 #' signal_at_rDNA(WT, saveFile = TRUE)
+#' }
 #' @export
 
 signal_at_rDNA <- function(inputData, saveFile = FALSE) {

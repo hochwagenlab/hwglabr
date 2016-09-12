@@ -52,9 +52,11 @@ The number of skipped genes in each chromosome is printed to the console, as wel
 final count (and percentage) of skipped genes. \cr
 }
 \examples{
+\dontrun{
 signal_at_orf_se(WT, gff = gff)
 
 signal_at_orf_se(WT, gffFile = S288C_annotation_modified.gff, limit = 'end',
                  upstrExt = 1500, downstrExt = 500, saveFile = TRUE)
+}
 }
 

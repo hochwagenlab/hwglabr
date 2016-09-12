@@ -25,8 +25,10 @@ for ChIP-seq, both on an individual chromosome basis and genome-wide. It
 takes as an input two lists of 16 chromosomes (output of \code{\link{readall_tab}}).
 }
 \examples{
+\dontrun{
 wiggle_correlation(Red1WT_rep1, Red1WT_rep2)
 
 wiggle_correlation(Red1WT_rep1, Red1WT_rep2, method = "spearman")
+}
 }
 

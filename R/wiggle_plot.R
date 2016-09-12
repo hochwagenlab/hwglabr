@@ -21,12 +21,14 @@
 #' or written to .png files (\code{onScreen = FALSE}). Defaults to \code{TRUE}.
 #' @return A line plot, either on screen or as a png file (in the working directory).
 #' @examples
+#' \dontrun{
 #' wiggle_plot(WT[[1]], 1, genome = 'SK1', protein = 'Red1')
 #' 
 #' wiggle_plot(WT_chr3, 3, genome = 'SK1', yMax = 5, color = 'red', protein = 'Red1', onScreen = TRUE)
 #' 
 #' wiggle_plot(chrXVI, 16, genome = 'S288C', yMax = 5, color = 'black',
-#' protein = 'Rec8-HA', legendXcoord = 600, onScreen = FALSE)
+#'             protein = 'Rec8-HA', legendXcoord = 600, onScreen = FALSE)
+#' }
 #' @export
 
 wiggle_plot <- function(wiggleData, chr, genome, yMax, color = 'grey50', protein,

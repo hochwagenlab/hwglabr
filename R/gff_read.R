@@ -10,7 +10,9 @@
 #' @return Gff as data frame with appropriate column names and column data set to the
 #' correct class.
 #' @examples
+#' \dontrun{
 #' gff_read(s288C_annotation_R64_modified.gff)
+#' }
 #' @export
 
 gff_read <- function(gffFile, nRows = -1) {

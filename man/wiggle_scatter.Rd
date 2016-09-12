@@ -32,8 +32,10 @@ The two functions are used as follows:
 Written by Tovah Markowitz
 }
 \examples{
+\dontrun{
 a <- wiggle_scatter(red1, hop1, 4000)
 
 wiggle_scatter_plot(a)
+}
 }
 

@@ -38,8 +38,10 @@ than ~100 bp, but this should still be corrected. \cr
 \cr \cr
 }
 \examples{
+\dontrun{
 signal_from_telomeres(WT)
 
 signal_from_telomeres(WT, lengthToCollect = 50000)
+}
 }
 

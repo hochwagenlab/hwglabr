@@ -35,8 +35,10 @@ distance to telomere) either for all chromosomes together or in two separate gro
 for small (chrs 1, 3, and 6) and large chromosomes (all remaining chromosomes).\cr\cr
 }
 \examples{
+\dontrun{
 signal_from_telomeres_average(WT_signal)
 
 signal_from_telomeres_average(signalFromTelomeres, separateSmallAndLarge = TRUE)
+}
 }
 

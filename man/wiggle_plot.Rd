@@ -44,11 +44,13 @@ or the output of \code{wiggle_smooth()} (R data frame with two columns: genome p
 smoothed signal).
 }
 \examples{
+\dontrun{
 wiggle_plot(WT[[1]], 1, genome = 'SK1', protein = 'Red1')
 
 wiggle_plot(WT_chr3, 3, genome = 'SK1', yMax = 5, color = 'red', protein = 'Red1', onScreen = TRUE)
 
 wiggle_plot(chrXVI, 16, genome = 'S288C', yMax = 5, color = 'black',
-protein = 'Rec8-HA', legendXcoord = 600, onScreen = FALSE)
+            protein = 'Rec8-HA', legendXcoord = 600, onScreen = FALSE)
+}
 }
 

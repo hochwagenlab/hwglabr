@@ -20,9 +20,11 @@
 #' @return A R (dplyr) data frame with averaged position and value for each 
 #' wiggle. Column names are defined by input strings/variables.
 #' @examples
+#' \dontrun{
 #' wiggle_compress( red1[[6]], 200 )
 #'
 #' wiggle_compress( c( "red1[[6]]", "hop1[[6]]", "smc4[[6]]" ), 200 )
+#' }
 #' @export
  
 wiggle_compress <- function( inputWiggles, window ) {

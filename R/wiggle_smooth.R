@@ -28,6 +28,7 @@
 #'   Defaults to \code{FALSE}.
 #' @return An R data frame with two columns: genome position and smoothed signal.
 #' @examples
+#' \dontrun{
 #' wiggle_smooth(WT, 1, 200)
 #' 
 #' wiggle_smooth(rec8, 16, 100)
@@ -35,6 +36,7 @@
 #' wiggle_smooth(WT[[5]], bandwidth = 1000)
 #' 
 #' wiggle_smooth(WT[[9]], bandwidth = 1000, useKsmooth = T)
+#' }
 #' @export
 
 wiggle_smooth <- function(wiggleData, chrNumber, bandwidth = 200, useKsmooth = FALSE) {

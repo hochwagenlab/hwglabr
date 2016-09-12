@@ -43,6 +43,7 @@ An R data frame with two columns: genome position and smoothed signal.
 This function allows you to smooth wiggle data using a sliding window.
 }
 \examples{
+\dontrun{
 wiggle_smooth(WT, 1, 200)
 
 wiggle_smooth(rec8, 16, 100)
@@ -50,5 +51,6 @@ wiggle_smooth(rec8, 16, 100)
 wiggle_smooth(WT[[5]], bandwidth = 1000)
 
 wiggle_smooth(WT[[9]], bandwidth = 1000, useKsmooth = T)
+}
 }
 

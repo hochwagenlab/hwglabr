@@ -35,10 +35,12 @@
 #'   \item \code{dist_apart} Distance between the two genes (negative value for overlapping genes)
 #' }
 #' @examples
+#' \dontrun{
 #' signal_at_intergen(WT)
 #' 
 #' signal_at_intergen(WT, orientation = 'div', inputDataFrame = TRUE, regionSize = 1500,
 #'                    includeOverlapping = FALSE, saveFile = TRUE)
+#' }
 #' @export
 
 signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 'conv',

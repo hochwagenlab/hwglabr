@@ -22,9 +22,11 @@
 #'   \item \code{large_chrs} Data frame of remaining chromosomes
 #' }
 #' @examples
+#' \dontrun{
 #' signal_from_telomeres_average(WT_signal)
 #' 
 #' signal_from_telomeres_average(signalFromTelomeres, separateSmallAndLarge = TRUE)
+#' }
 #' @export
 
 signal_from_telomeres_average <- function(inputData, separateSmallAndLarge = FALSE){

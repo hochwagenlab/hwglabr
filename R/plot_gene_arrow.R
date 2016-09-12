@@ -13,8 +13,10 @@
 #' @param height To adjust to the height of the gene bar. Default is 0.2.
 #' @param yPos To adjust the position of the gene on the y-axis. Default is -1. 
 #' @examples
+#' \dontrun{
 #' plot_gene_arrow(Red1_end, Red1_end-Red1_start, 1)
 #' plot_gene_arrow(672823, 672823-670340, 1)
+#' }
 #' @export
 
 plot_gene_arrow <- function(geneEnd, geneLength, orientation, minima = 400,

@@ -24,8 +24,10 @@ A 16x2 R data frame with two columns: chromosome number and average signal.
 This function allows you to calculate the average signal (or coverage) per chromosome.
 }
 \examples{
+\dontrun{
 chr_coverage(WT)
 
 chr_coverage(dot1, removeCen = TRUE, cenRegionSize = 50000)
+}
 }
 

@@ -27,9 +27,11 @@
 #' @return A density plot of all time points with the same yeast strain,
 #' either on screen or as a file (in the working directory).
 #' @examples
+#' \dontrun{
 #' facs_density_plot(119)
 #' 
 #' facs_density_plot(119, c(2000000, 7500000), 'pdf')
+#' }
 #' @export
 
 facs_density_plot <- function(yeastLine, gates, type) {

@@ -60,11 +60,13 @@ for the 16 chromosomes you should run:
 }
 }
 \examples{
+\dontrun{
 signal_at_orf_average_plot(WT_orf_S288C_mean_signal, genome = 'S288C')
 
 signal_at_orf_average_plot(WT_orf_mean_signal, dot1_orf_mean_signal, genome = 'SK1',
                            yMax = 3, onScreen = FALSE, legendXcoord = -500,
                            legendYcoord = 1, colorA = 'red', colorB = 'green',
                            smoothBandwidth = 50)
+}
 }
 

@@ -9,9 +9,11 @@
 #' @return A similar list of the 16 chr wiggle data after removal of the rows for
 #' the centromeric regions (both positions and signal) in each chromosome data frame.
 #' @examples
+#' \dontrun{
 #' remove_centromeres(rec8)
 #' 
 #' remove_centromeres(rec8, regionSize = 30000)
+#' }
 #' @export
 
 remove_centromeres <- function(wiggleData, regionSize = 50000) {

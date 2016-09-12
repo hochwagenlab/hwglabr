@@ -10,9 +10,11 @@
 #' of \code{\link{remove_centromeres}}. Defaults to 50'000 bp.
 #' @return A 16x2 R data frame with two columns: chromosome number and average signal.
 #' @examples
+#' \dontrun{
 #' chr_coverage(WT)
 #' 
 #' chr_coverage(dot1, removeCen = TRUE, cenRegionSize = 50000)
+#' }
 #' @export
 
 chr_coverage <- function(wiggleData, removeCen = FALSE, cenRegionSize = 50000) {

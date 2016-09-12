@@ -11,9 +11,11 @@
 #' @return A vector with 17 values with names indicating the chromosome associated
 #' with each individual correlation value.
 #' @examples
+#' \dontrun{
 #' wiggle_correlation(Red1WT_rep1, Red1WT_rep2)
 #' 
 #' wiggle_correlation(Red1WT_rep1, Red1WT_rep2, method = "spearman")
+#' }
 #' @export
 
 # By: Tovah Markowitz

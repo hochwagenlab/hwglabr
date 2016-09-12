@@ -18,9 +18,11 @@
 #' compressed data from all chromosomes. See \code{\link{wiggle_compress}} for more 
 #' information.
 #' @examples
+#' \dontrun{
 #' a <- wiggle_scatter(red1, hop1, 4000)
 #' 
 #' wiggle_scatter_plot(a)
+#' }
 #' @export
 
 wiggle_scatter <- function( wiggleData1, wiggleData2, window = 5000 ) {

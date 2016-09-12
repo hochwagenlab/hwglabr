@@ -26,10 +26,12 @@ as input a data frame containing the genome-wide signal, for example the output 
 \code{\link{signal_at_intergen}} or \code{\link{signal_at_orf}}.
 }
 \examples{
+\dontrun{
 signal_average(WT_conv)
 
 signal_average(WT_S288C_ORFsignal)
 
 signal_average(WT_conv, saveFile = TRUE)
+}
 }
 

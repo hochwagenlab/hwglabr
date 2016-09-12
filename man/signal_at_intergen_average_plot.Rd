@@ -54,11 +54,13 @@ for the 16 chromosomes you should run:
 }
 }
 \examples{
+\dontrun{
 signal_at_intergen_average_plot(WT_conv_mean_signal, genome = 'S288C', orientation = 'Convergent')
 
 signal_at_intergen_average_plot(WT_div_mean_signal, dot1_conv_mean_signal, genome = 'SK1',
                                 orientation = 'Div', yMax = 3, onScreen = FALSE,
                                 legendXcoord = -500, legendYcoord = 1,
                                 colorA = 'red', colorB = 'green')
+}
 }
 

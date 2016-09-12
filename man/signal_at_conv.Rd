@@ -33,8 +33,10 @@ It takes as input either the wiggle data as list of 16 chromosome (output of \co
 or complete genome in one data frame (for example loaded from .bed files).
 }
 \examples{
+\dontrun{
 signal_at_conv(WT)
 
 signal_at_conv(WT, regionSize = 1500, saveFile = TRUE, inputDataFrame = FALSE)
+}
 }
 

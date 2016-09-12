@@ -17,9 +17,11 @@
 #' }
 #' Load this file using base R function \code{read.table('/path/to/file', header = TRUE)}.
 #' @examples
+#' \dontrun{
 #' FE2('GSM873122.txt', 3, 'wt_Rec8_1_Cy3')
 #' 
 #' FE2('247a.txt', 3, '247a')
+#' }
 #' @export
 
 FE2 <- function(fileName, cy0, strain) {

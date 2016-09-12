@@ -52,9 +52,11 @@ It takes as input either the wiggle data as list of 16 chromosome (output of \co
 or the complete genome in one data frame (for example loaded from .bed files).\cr
 }
 \examples{
+\dontrun{
 signal_at_intergen(WT)
 
 signal_at_intergen(WT, orientation = 'div', inputDataFrame = TRUE, regionSize = 1500,
                    includeOverlapping = FALSE, saveFile = TRUE)
+}
 }
 

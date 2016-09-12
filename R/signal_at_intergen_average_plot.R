@@ -30,12 +30,14 @@
 #' @return A line plot of one or two samples, either on screen or as a .png file
 #' (in the working directory).
 #' @examples
+#' \dontrun{
 #' signal_at_intergen_average_plot(WT_conv_mean_signal, genome = 'S288C', orientation = 'Convergent')
 #' 
 #' signal_at_intergen_average_plot(WT_div_mean_signal, dot1_conv_mean_signal, genome = 'SK1',
 #'                                 orientation = 'Div', yMax = 3, onScreen = FALSE,
 #'                                 legendXcoord = -500, legendYcoord = 1,
 #'                                 colorA = 'red', colorB = 'green')
+#' }
 #' @export
 
 signal_at_intergen_average_plot <- function(inputDataA, inputDataB, genome, orientation,

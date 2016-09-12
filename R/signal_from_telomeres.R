@@ -25,9 +25,11 @@
 #'   \item \code{signal} ChIP-seq signal
 #' }
 #' @examples
+#' \dontrun{
 #' signal_from_telomeres(WT)
 #' 
 #' signal_from_telomeres(WT, lengthToCollect = 50000)
+#' }
 #' @export
 
 

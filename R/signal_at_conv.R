@@ -17,9 +17,11 @@
 #' @return A local data frame (dplyr data frame) with three columns: chr (chromosome number), position
 #' (genome coordinate relative to midpoint of intergenic region) and signal (ChIP signal).
 #' @examples
+#' \dontrun{
 #' signal_at_conv(WT)
 #' 
 #' signal_at_conv(WT, regionSize = 1500, saveFile = TRUE, inputDataFrame = FALSE)
+#' }
 #' @export
 
 signal_at_conv <- function(inputData, regionSize = 1000, saveFile = FALSE,

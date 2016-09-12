@@ -22,8 +22,10 @@ chromosome. The original motivation was to analyse Red1 ChIP-seq data in rec8
 mutants (show a strong enrichment around the centromeres).
 }
 \examples{
+\dontrun{
 remove_centromeres(rec8)
 
 remove_centromeres(rec8, regionSize = 30000)
+}
 }
 

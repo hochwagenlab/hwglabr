@@ -12,9 +12,11 @@
 #' to avoid reading files directly from shared locations (namely LabShare). Defaults to \code{FALSE}.
 #' @return An R list of 16 data frames, one for each chromosome.
 #' @examples
+#' \dontrun{
 #' readall_tab("/Path/to/wiggles/folder/Red1_WT_reps_SacCer3_2mis_MACS_wiggle_norm/")
 #' readall_tab("/Path/to/wiggles/", useReadr = TRUE, progressBar = TRUE)
 #' readall_tab("/Path/to/wiggles/", useReadr = T, progressBar = T, localCopy = T)
+#' }
 #' @export
 
 readall_tab <- function(fileLocation, useReadr = TRUE,

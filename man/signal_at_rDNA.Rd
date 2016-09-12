@@ -28,8 +28,10 @@ chromosome 12. The function takes as input the wiggle data as a list of 16 chrom
 (output of \code{\link{readall_tab}}).\cr
 }
 \examples{
+\dontrun{
 signal_at_rDNA(WT)
 
 signal_at_rDNA(WT, saveFile = TRUE)
+}
 }
 

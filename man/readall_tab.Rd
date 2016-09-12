@@ -28,8 +28,10 @@ This function allows you to load tab-separated wiggle data.
 Adapted from function written by Tovah Markowitz (original function name: \code{readAll.tab}).
 }
 \examples{
+\dontrun{
 readall_tab("/Path/to/wiggles/folder/Red1_WT_reps_SacCer3_2mis_MACS_wiggle_norm/")
 readall_tab("/Path/to/wiggles/", useReadr = TRUE, progressBar = TRUE)
 readall_tab("/Path/to/wiggles/", useReadr = T, progressBar = T, localCopy = T)
+}
 }
 

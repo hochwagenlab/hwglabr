@@ -73,6 +73,7 @@ experiments are 0.1 for data on genetically identical model organisms, so that
 value is used here.
 }
 \examples{
+\dontrun{
 rna_seq_analysis(pathToFiles = list('AH119-2h_featureCounts.txt', 'AH119-3h_featureCounts.txt',
                                     'AH8104-2h_featureCounts.txt', 'AH8104-3h_featureCounts.txt'),
                  sampleNames = list('AH119_2h', 'AH119_3h', 'AH8104_2h', 'AH8104_3h'),
@@ -93,5 +94,6 @@ rna_seq_analysis(pathToFiles = list('AH119-A_featureCounts.txt', 'AH119-B_featur
                  sampleNames = list('AH119_A', 'AH119_B', 'AH8104_A', 'AH8104_B'),
                  conditionNames = list('WT', 'WT', 'dot1', 'dot1'),
                  pairwiseDE = list(c('WT', 'dot1')))
+}
 }
 

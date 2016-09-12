@@ -16,11 +16,13 @@
 #' also in this package, to load gff file and then parsing the attributes field.
 #' See examples below.
 #' @examples
+#' \dontrun{
 #' gff_read(s288C_annotation_R64_modified.gff)
 #' 
 #' gff_get_attribute(gff$attributes, 'Name')
 #' 
 #' gff_get_attribute(gff$attributes, 'ID')
+#' }
 #' @export
 
 gff_get_attribute <- function(gffColumn, field, attrSep = ";") {

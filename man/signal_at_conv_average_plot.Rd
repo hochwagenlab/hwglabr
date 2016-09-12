@@ -52,10 +52,12 @@ for the 16 chromosomes you should run:
 2. \code{signal_average()} to calculate the average signal over all regions.
 }
 \examples{
+\dontrun{
 signal_at_conv_average_plot(WT_conv_mean_signal, genome = 'S288C')
 
 signal_at_conv_average_plot(WT_conv_mean_signal, dot1_conv_mean_signal, genome = 'SK1',
                             yMax = 3, onScreen = FALSE, legendXcoord = -500,
                             legendYcoord = 1, colorA = 'red', colorB = 'green')
+}
 }
 

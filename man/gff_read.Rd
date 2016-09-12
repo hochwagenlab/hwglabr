@@ -23,6 +23,8 @@ Adapted from function in the \href{https://bioconductor.org/packages/release/dat
 Also posted on the Bioconductor support system \href{https://support.bioconductor.org/p/24657/}{here}.
 }
 \examples{
+\dontrun{
 gff_read(s288C_annotation_R64_modified.gff)
+}
 }
 

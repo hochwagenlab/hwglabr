@@ -31,8 +31,10 @@ It takes as input the raw txt files found in the lab's microarray database
 (at 'Labshare/HTGenomics/Microarray_database/arrays') or downloaded from GEO.
 }
 \examples{
+\dontrun{
 FE2('GSM873122.txt', 3, 'wt_Rec8_1_Cy3')
 
 FE2('247a.txt', 3, '247a')
+}
 }
 

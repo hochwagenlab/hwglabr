@@ -27,9 +27,11 @@
 #' }
 #' \strong{Note:} Skipped genes are included in the output with 'NA' for \code{mean_signal}.
 #' @examples
+#' \dontrun{
 #' signal_per_orf_length(WT, gff = gff)
 #' 
 #' signal_per_orf_length(WT, gffFile = S288C_annotation_modified.gff, saveFile = TRUE)
+#' }
 #' @export
 
 signal_per_orf_length <- function(inputData, gff, gffFile, saveFile = FALSE) {

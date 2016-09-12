@@ -20,9 +20,11 @@
 #' @return A new folder in ".../LabShare/HTGenomics/Opening_act/" containing several
 #' plots as .pdf files.
 #' @examples
+#' \dontrun{
 #' opening_act(wiggleData=WT, relevantGenotype="WT", chipTarget="Red1", sampleID="AH119C-040114-sacCer3-2mis")
 #' opening_act(set1_wiggle_data, "set1", "Red1", "AH8584b-16032016-sacCer3-2mis")
 #' opening_act(rec8, "rec8", "Red1", "AH8115b-24042015-SacCer3-2mis", userInput=FALSE)
+#' }
 #' @export
 
 opening_act <- function(wiggleData, relevantGenotype, chipTarget, sampleID,

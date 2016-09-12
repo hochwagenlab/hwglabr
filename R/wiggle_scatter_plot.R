@@ -17,9 +17,11 @@
 #' names determined by columns of input data frame. The function is written so that
 #' the x-axis and the y-axis have the same range.
 #' @examples
+#' \dontrun{
 #' a <- wiggle_scatter(red1, hop1, 4000)
 #' 
 #' wiggle_scatter_plot(a)
+#' }
 #' @export
 
 wiggle_scatter_plot <- function( scatter, method = "spearman" ) {

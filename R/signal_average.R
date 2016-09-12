@@ -13,11 +13,13 @@
 #' @return An R data frame with two columns: position (relative genome coordinate) and
 #' mean_signal (average signal at each relative coordinate).
 #' @examples
+#' \dontrun{
 #' signal_average(WT_conv)
 #' 
 #' signal_average(WT_S288C_ORFsignal)
 #' 
 #' signal_average(WT_conv, saveFile = TRUE)
+#' }
 #' @export
 
 signal_average <- function(inputData, saveFile = FALSE) {

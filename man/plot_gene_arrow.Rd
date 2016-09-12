@@ -29,7 +29,9 @@ This function allows you to you to add arrows representing genes to an R wiggle 
 Written by Tovah Markowitz.
 }
 \examples{
+\dontrun{
 plot_gene_arrow(Red1_end, Red1_end-Red1_start, 1)
 plot_gene_arrow(672823, 672823-670340, 1)
+}
 }
 
