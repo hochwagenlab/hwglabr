@@ -43,7 +43,7 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
     fileLocation <- paste0('readall_tab_temp/', list.files('readall_tab_temp'))
   }
   
-  message('\nReading data...\n')
+  message('Reading data...')
   
   filenames <- list.files(fileLocation, full.names = T)
   if (length(filenames) == 17) {
@@ -85,7 +85,7 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
   }
   
   if (localCopy) {
-    message('Deleting local copy\n...\n')
+    message('Deleting local copy\n...')
     # Delete temporary local directory
     unlink('readall_tab_temp', recursive = TRUE)
   }
