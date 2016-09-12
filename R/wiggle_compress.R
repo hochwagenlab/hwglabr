@@ -26,7 +26,7 @@
 #' @export
  
 wiggle_compress <- function( inputWiggles, window ) {
-	message( "Compressing ", length(inputWiggles), " wiggle files...") )
+	message( "Compressing ", length(inputWiggles), " wiggle files...")
 	ptm <- proc.time()
 
 	if (!requireNamespace("dplyr", quietly = TRUE)) {
