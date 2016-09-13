@@ -105,10 +105,10 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   suppressMessages(
     hwglabr::chr_coverage_plot(output, genome = refGenome, onScreen = FALSE,
                                fileName = paste0(destination, output_dir, '/',
-                                                 output_dir, '_sizeBias.pdf'))
+                                                 output_dir, '_chrSizeBias.pdf'))
   )
   
-  message('Saved plot ', paste0(output_dir, '_sizeBias.pdf'))
+  message('Saved plot ', paste0(output_dir, '_chrSizeBias.pdf'))
   
   
   #----------------------------------------------------------------------------#
@@ -185,7 +185,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   
   #----------------------------------------------------------------------------#
   # Jonna's
-  message('... Signal at :')
+  message('... Signal at ???:')
   
   
   #----------------------------------------------------------------------------#
