@@ -114,7 +114,7 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, genome,
   # Plot(s)
   if (!onScreen) {
     #pdf(file = paste0(fileName, '_sizeBias.pdf'), width = 1000, height = 480, units = 'px')
-    pdf(file = paste0(fileName), width = 5, height = 5)
+    pdf(file = paste0(fileName), width = 4, height = 4)
   }
   
   

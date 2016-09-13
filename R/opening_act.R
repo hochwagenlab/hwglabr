@@ -134,7 +134,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   
   # plot results
   fileName <- paste0(destination, output_dir, '/', output_dir, '_signalAtCen.pdf')
-  pdf(file = paste0(fileName), width = 8, height = 4)
+  pdf(file = paste0(fileName), width = 6, height = 3)
   
   YLIM <- range(wiggle_cen_avg$mean_signal)
   if( YLIM[[2]] < 2) { YLIM[2] <- 2 }
@@ -167,10 +167,11 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   plot(rDNA$position/1000, rDNA$signal, type="l",
        xlab="Position on chr 12 (kb)", ylab="Signal", 
        lwd=1, cex.axis=1, las=1, col='black', cex.lab=1,
-       main=paste0("Signal around rDNA: ", refGenome), cex.main=1)
+       main=paste0("Signal around rDNA: ", refGenome,
+                   '\n(rNDA position marked in red)'), cex.main=1)
   # Add labels for rDNA
-  axis(1, side=3, at = c(start / 1000, end / 1000),
-       labels = c('rDNA >', '< rDNA'),
+  axis(1, at = c(start / 1000, end / 1000),
+       labels = c('', ''),
        col = 'red', lwd = 3)
   
   dev.off()
