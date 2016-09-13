@@ -5,7 +5,7 @@
 \title{Standard analysis of HT genomics experiments}
 \usage{
 opening_act(wiggleData, relevantGenotype, chipTarget, sampleID,
-  userInput = TRUE)
+  userInput = TRUE, runMetaORF = TRUE)
 }
 \arguments{
 \item{wiggleData}{As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}).
@@ -14,8 +14,7 @@ No default.}
 \item{relevantGenotype}{String indicating the relevant strain mutations. Just use "WT"
 if there are no relevant mutations. No default.}
 
-\item{chipTarget}{String indicating the ChIP target protein. No default.
-No default.}
+\item{chipTarget}{String indicating the ChIP target protein. No default.}
 
 \item{sampleID}{String indicating the sample ID, including the ID used in the
 analysis pipeline (with a date) and the read mapping conditions (see examples below).
@@ -23,8 +22,11 @@ The function asks the user to check that the provided "sampleID" matches the req
 format before proceeding with the analysis. No default.}
 
 \item{userInput}{Boolean indicating whether to ask user to check the format of the
-\code{sampleID} argument. Defaults to \code{TRUE}.
-No default.}
+\code{sampleID} argument. Defaults to \code{TRUE}.}
+
+\item{runMetaORF}{Boolean indicating whether to run the meta ORF analysis. This analysis
+typically takes about 30 minutes to run, so it may be useful to exclude it.
+Defaults to \code{TRUE}.}
 }
 \value{
 A new folder in ".../LabShare/HTGenomics/Opening_act/" containing several
