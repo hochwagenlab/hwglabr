@@ -216,5 +216,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   elapsed_time <- round((proc.time()[3] - ptm[3]), 1)
   if(elapsed_time < 60){
     message('\n...\nCompleted in ', elapsed_time, ' sec.')
-  } else message('\n...\nCompleted in ', elapsed_time, ' min.')
+  } else if(elapsed_time >= 60 & elapsed_time < 3600){
+    message('\n...\nCompleted in ', elapsed_time / 60, ' min.') 
+  } else message('\n...\nCompleted in ', elapsed_time / 60 / 60, ' h.')
 }
