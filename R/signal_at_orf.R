@@ -90,7 +90,7 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
          "install.packages('dplyr')", call. = FALSE)
   }
   
-  message('\nThe following types of features are present in the gff data you provided
+  message('The following types of features are present in the gff data you provided
 (they will all be included in the analysis):')
   for(i in 1:length(unique(gff[, 3]))) {
     message(unique(gff[, 3])[i])
