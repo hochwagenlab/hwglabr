@@ -87,10 +87,19 @@ path <- '/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/GenomeSequences/'
 SK1rosetta <- read.table(paste0(path, 'SK1rosetta_R64.txt'),
                          header = TRUE, sep = '\t')
 
+#------------------------------------------------------------------------------#
+#                                GFF files                                     #
+#               Used by opening_act() to run aignal_at_orf()                   #
+s288C_gff <- '/Volumes/LabShare/GenomeSequences/s288C_annotation_R64_modified.gff'
+SK1_gff <- '/Volumes/LabShare/GenomeSequences/SK1_MvO_V1___GENOME/SK1_annotation/SK1_annotation_modified_v2.gff'
+s288C_gff <- hwglabr::gff_read(s288C_gff)
+# Further parse attributes field to get gene ID only
+SK1_gff <- hwglabr::gff_read(SK1_gff)
+SK1_gff$attributes <- hwglabr::gff_get_attribute(SK1_gff$attributes, 'ID')
 
 #------------------------------------------------------------------------------#
 #------------------------------------------------------------------------------#
-#                 Add all data to package (as internal data)                   #
+#                           Add all data to package                            #
 #                             (as internal data)                               #
 
 # Determine the best compression for the data files
@@ -108,4 +117,6 @@ devtools::use_data(S288C_conv_midpoint_dist,
                    S288Ccen,
                    SK1cen,
                    SK1rosetta,
+                   s288C_gff,
+                   SK1_gff,
                    internal = TRUE, overwrite = TRUE, compress = "bzip2")
