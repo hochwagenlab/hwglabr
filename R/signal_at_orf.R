@@ -58,7 +58,7 @@ or the path to a gff file ('gffFile' argument), not both.\n",
          call. = FALSE)
   } else if (missing(gff)) {
     gff <- hwglabr::gff_read(gffFile)
-    message('Loaded gff file...\n')
+    message('Loaded gff file...')
   }
   
   # Check reference genome for both the input data and the gff file; make sure they match
@@ -77,7 +77,7 @@ or the path to a gff file ('gffFile' argument), not both.\n",
     stop("The reference genomes in the input data and the gff do not seem to match.\n",
          "Please provide data and gff for the same reference genome.\n", call. = FALSE)
   } else if (check_S288C & check_gff_S288C) {
-    message('Detected ref. genome - S288C\n')
+    message('Detected ref. genome - S288C')
     chrom <- chrom_S288C
   } else if (check_SK1 & check_gff_SK1) {
     print('Detected ref. genome - SK1')
@@ -91,13 +91,13 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
   }
   
   message('\nThe following types of features are present in the gff data you provided
-(they will all be included in the analysis):\n')
+(they will all be included in the analysis):')
   for(i in 1:length(unique(gff[, 3]))) {
-    message(unique(gff[, 3])[i], '\n')
+    message(unique(gff[, 3])[i])
   }
   
   message('\nCollecting signal...')
-  message('(Skip genes with missing coordinates and signal in wiggle data)\n')
+  message('(Skip genes with missing coordinates and signal in wiggle data)')
 
   # Create data frames to collect final data for all chrs
   plus_final <- data.frame()
@@ -170,7 +170,7 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
       
       geneCount <- geneCount + 1
     }
-    message(paste0('... + strand: ', geneCount, ' genes (skipped ', j - geneCount, ')\n'))
+    message(paste0('... + strand: ', geneCount, ' genes (skipped ', j - geneCount, ')'))
     
     # Keep track of total and non-skipped genes, to print info at the end
     number_genes <- number_genes + j
@@ -250,7 +250,7 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
   # Sort by gene and position
   mergedStrands <- mergedStrands[order(mergedStrands$gene, mergedStrands$position), ]
   
-  message(paste0('Completed in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
+  message(paste0('Completed in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.'))
   
   # Print info on total and non-skipped genes
   message('------')
@@ -260,7 +260,7 @@ Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
   message('------')
   
   if(saveFile) {
-    message(paste0('Saving file...\n'))
+    message(paste0('Saving file...'))
     if(check_S288C) {
       write.table(mergedStrands, paste0(deparse(substitute(inputData)),
                                         "_S288C_metaORF.txt"), sep = "\t", quote = FALSE,
