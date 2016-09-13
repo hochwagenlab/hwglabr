@@ -159,9 +159,22 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   message('Saved plot ', paste0(output_dir, '_signalAtrDNA.pdf'))
   
   #----------------------------------------------------------------------------#
+  # Signal from telomeres
+  message('... Signal at sub-telomeric regions:')
+  
+  
+  
+  #----------------------------------------------------------------------------#
+  # Jonna's
+  message('... Signal at :')
+  
+  
+  #----------------------------------------------------------------------------#
   # Meta ORF
   message('... Signal at meta ORF analysis:')
 
+  
+  
   
   
   message()
