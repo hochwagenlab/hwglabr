@@ -53,14 +53,31 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   if (check_S288C) {
     refGenome <- 'S288c'
     message("Detected ref. genome - S288c (Chrs numbered using roman numerals)")
+    
+    if(exists('s288C_gff')){
+      gff_file <- s288C_gff
+    } else {
+      stop('Cannot load data. Please load the package before running:
+           library(hwglabr)', call. = FALSE)
+    }
   }
   else if (check_SK1) {
     refGenome <- 'SK1'
     message("Detected ref. genome - SK1 (Chrs numbered using arabic numerals)")
+    
+    if(exists('SK1_gff')){
+      gff_file <- SK1_gff
+    } else {
+      stop('Cannot load data. Please load the package before running:
+           library(hwglabr)', call. = FALSE)
+    }
   }
   else stop("Did not recognize reference genome.
             Please make sure chromosome numbers follow the standard format.",
             call. = FALSE)
+  
+  # Check that gff data (for signal_at_orf) can be loaded
+  
   
   
   destination <- "/Volumes/LabShare/HTGenomics/Opening_act/"
@@ -172,10 +189,26 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   #----------------------------------------------------------------------------#
   # Meta ORF
   message('... Signal at meta ORF analysis:')
-
+  meta_orf <- hwglabr::signal_at_orf(wiggleData, gff = gff_file, saveFile = F)
+  meta_orf <- hwglabr::signal_average(meta_orf, saveFile = F)
   
+  # plot results
+  fileName <- paste0(destination, output_dir, '/', output_dir, '_signalAtORF.pdf')
+  pdf(file = paste0(fileName), width = 8, height = 4)
   
+  plot(meta_orf, type = 'l', xaxt = 'n', yaxt = 'n',
+       xlim = c(0, 1000), lwd = 4, col = 'orange',
+       xlab = "Normalized position",
+       ylab = 'Signal', main = paste0('Signal at meta ORF'),
+       bty = "n")
   
+  axis(1, at = c(0, 250, 750, 1000), labels = c('', 'start', 'stop', ''), las = 1)
+  axis(2, las = 2)
+  abline(v = c(250, 750), lty= 2)
+  dev.off()
+  message('Saved plot ', paste0(output_dir, '_signalAtORF.pdf'))
+  
+  #----------------------------------------------------------------------------#
   
   message()
   message('------------------')
