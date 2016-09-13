@@ -9,14 +9,15 @@
 #' @param relevantGenotype String indicating the relevant strain mutations. Just use "WT"
 #' if there are no relevant mutations. No default.
 #' @param chipTarget String indicating the ChIP target protein. No default.
-#' No default.
 #' @param sampleID String indicating the sample ID, including the ID used in the
 #' analysis pipeline (with a date) and the read mapping conditions (see examples below).
 #' The function asks the user to check that the provided "sampleID" matches the required
 #' format before proceeding with the analysis. No default.
 #' @param userInput Boolean indicating whether to ask user to check the format of the
 #' \code{sampleID} argument. Defaults to \code{TRUE}.
-#' No default.
+#' @param runMetaORF Boolean indicating whether to run the meta ORF analysis. This analysis
+#' typically takes about 30 minutes to run, so it may be useful to exclude it.
+#' Defaults to \code{TRUE}.
 #' @return A new folder in ".../LabShare/HTGenomics/Opening_act/" containing several
 #' plots as .pdf files.
 #' @examples
@@ -29,7 +30,7 @@
 #' @export
 
 opening_act <- function(wiggleData, relevantGenotype, chipTarget, sampleID,
-                        userInput = TRUE) {
+                        userInput = TRUE, runMetaORF = TRUE) {
   ptm <- proc.time()
   
   if(userInput){
@@ -188,23 +189,25 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   
   #----------------------------------------------------------------------------#
   # Meta ORF
-  message('... Signal at meta ORF analysis:')
-  meta_orf <- hwglabr::signal_at_orf(wiggleData, gff = gff_file, saveFile = F)
-  suppressMessages(meta_orf <- hwglabr::signal_average(meta_orf, saveFile = F))
-  
-  # plot results
-  fileName <- paste0(destination, output_dir, '/', output_dir, '_signalAtORF.pdf')
-  pdf(file = paste0(fileName), width = 4, height = 3)
-       
-  plot(meta_orf, type = 'l', xaxt = 'n', yaxt = 'n',
-       xlim = c(0, 1000), lwd = 4, col = 'orange',
-       xlab = "Scaled ORF",
-       ylab = 'Signal', main = paste0('Signal at meta ORF'), bty = "n")
-  axis(1, at = c(0, 250, 750, 1000), labels = c('', 'start', 'stop', ''), las = 1)
-  axis(2, las = 2)
-  abline(v = c(250, 750), lty= 2)
-  dev.off()
-  message('Saved plot ', paste0(output_dir, '_signalAtORF.pdf'))
+  if(runMetaORF){
+    message('... Signal at meta ORF analysis:')
+    meta_orf <- hwglabr::signal_at_orf(wiggleData, gff = gff_file, saveFile = F)
+    suppressMessages(meta_orf <- hwglabr::signal_average(meta_orf, saveFile = F))
+    
+    # plot results
+    fileName <- paste0(destination, output_dir, '/', output_dir, '_signalAtORF.pdf')
+    pdf(file = paste0(fileName), width = 4, height = 3)
+    
+    plot(meta_orf, type = 'l', xaxt = 'n', yaxt = 'n',
+         xlim = c(0, 1000), lwd = 4, col = 'orange',
+         xlab = "Scaled ORF",
+         ylab = 'Signal', main = paste0('Signal at meta ORF'), bty = "n")
+    axis(1, at = c(0, 250, 750, 1000), labels = c('', 'start', 'stop', ''), las = 1)
+    axis(2, las = 2)
+    abline(v = c(250, 750), lty= 2)
+    dev.off()
+    message('Saved plot ', paste0(output_dir, '_signalAtORF.pdf')) 
+  }
   
   #----------------------------------------------------------------------------#
   
