@@ -147,11 +147,11 @@ chr_coverage_plot <- function(coverageDataA, coverageDataB, genome,
            col = colorB, pch = 19, cex = 1)
   }
   
-  if (missing(coverageDataB)) {
-    legend(600, yMax, deparse(substitute(coverageDataA)), pch = 19,
-           bty = 'n', pt.cex = 1, cex = 1,
-           col = colorA, text.col = colorA)
-  } else {
+  #if (missing(coverageDataB)) {
+  #  legend(600, yMax, deparse(substitute(coverageDataA)), pch = 19,
+  #         bty = 'n', pt.cex = 1, cex = 1,
+  #         col = colorA, text.col = colorA)
+  if (!missing(coverageDataB)) {
     legend(600, yMax,
            c(deparse(substitute(coverageDataA)), deparse(substitute(coverageDataB))),
            pch = 19, bty = 'n', pt.cex = 1, cex = 1,
