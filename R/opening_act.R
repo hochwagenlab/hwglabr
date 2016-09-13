@@ -153,7 +153,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   
   # plot results
   fileName <- paste0(destination, output_dir, '/', output_dir, '_signalAtrDNA.pdf')
-  pdf(file = paste0(fileName), width = 8, height = 4)
+  pdf(file = paste0(fileName), width = 6, height = 3)
   
   if (check_S288C) {
     start <- 451575
@@ -168,7 +168,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
        lwd=1, cex.axis=1, las=1, col='black', cex.lab=1,
        main=paste0("Signal around rDNA: ", refGenome), cex.main=1)
   # Add labels for rDNA
-  axis(1, at = c(start / 1000, end / 1000),
+  axis(1, side=3, at = c(start / 1000, end / 1000),
        labels = c('rDNA >', '< rDNA'),
        col = 'red', lwd = 3)
   
@@ -190,18 +190,16 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   # Meta ORF
   message('... Signal at meta ORF analysis:')
   meta_orf <- hwglabr::signal_at_orf(wiggleData, gff = gff_file, saveFile = F)
-  meta_orf <- hwglabr::signal_average(meta_orf, saveFile = F)
+  suppressMessages(meta_orf <- hwglabr::signal_average(meta_orf, saveFile = F))
   
   # plot results
   fileName <- paste0(destination, output_dir, '/', output_dir, '_signalAtORF.pdf')
-  pdf(file = paste0(fileName), width = 8, height = 4)
-  
+  pdf(file = paste0(fileName), width = 4, height = 3)
+       
   plot(meta_orf, type = 'l', xaxt = 'n', yaxt = 'n',
        xlim = c(0, 1000), lwd = 4, col = 'orange',
-       xlab = "Normalized position",
-       ylab = 'Signal', main = paste0('Signal at meta ORF'),
-       bty = "n")
-  
+       xlab = "Scaled ORF",
+       ylab = 'Signal', main = paste0('Signal at meta ORF'), bty = "n")
   axis(1, at = c(0, 250, 750, 1000), labels = c('', 'start', 'stop', ''), las = 1)
   axis(2, las = 2)
   abline(v = c(250, 750), lty= 2)
