@@ -113,7 +113,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   
   
   #----------------------------------------------------------------------------#
-  # Signal at centromere
+  # Signal at centromere (Tovah)
   message('... Signal at centromeres:')
   
   # convert S288Ccen or SK1cen into bed file
@@ -179,7 +179,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   message('Saved plot ', paste0(output_dir, '_signalAtrDNA.pdf'))
   
   #----------------------------------------------------------------------------#
-  # Signal from telomeres
+  # Signal from telomeres (Viji)
   message('... Signal at sub-telomeric regions:')
   
   # Call signal_from_telomeres() function
@@ -221,9 +221,94 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   message('Saved plot ', paste0(output_dir, '_signalAtTelomeres.pdf')) 
   
   #----------------------------------------------------------------------------#
-  # Jonna's
-  message('... Signal at ???:')
+  # Signal around DSDs by DSB hotspot hotness (Jonna)
+  message('... Signal at DSBs by hotspot hotness:')
   
+  Spo11_DSBs$V1 <- as.character(Spo11_DSBs$V1)
+  # Order by signal to make 8 groups based on hotspot hotness
+  sporder <- Spo11_DSBs[order(Spo11_DSBs$V4),]
+  
+  spo1 <- sporder[1:450,]
+  spo2 <- sporder[451:900,]
+  spo3 <- sporder[901:1350,]
+  spo4 <- sporder[1351:1800,]
+  spo5 <- sporder[1801:2250,]
+  spo6 <- sporder[2251:2700,]
+  spo7 <- sporder[2701:3150,]
+  spo8 <- sporder[3151:3599,]
+  
+  data <- list(spo1, spo2, spo3, spo4, spo5, spo6, spo7, spo8)
+  
+  suppressMessages(data <- lapply(data, function(x) signal_at_summit(chip, x, 1000)))
+  suppressMessages(data <- lapply(data, signal_average))
+  
+  min_data <- sapply(data, function(x) min(x[, 2]))
+  max_data <- sapply(data, function(x) max(x[, 2]))
+  
+  colors <- c("lightblue1", "cadetblue1", "deepskyblue", "deepskyblue3",
+              "royalblue", "blue", "blue4", "black")
+  
+  
+  fileName <- paste0(destination, output_dir, '/', output_dir, '_signalAtDSBhotspots.pdf')
+  pdf(file = paste0(fileName), width = 6, height = 5)
+  
+  plot(0, type="l", lwd=3, xlim = c(-1000, 1000), ylab="ChIP-seq signal",
+       ylim=c(min(min_data), max(max_data)),
+       xlab="Distance from Hotspot Midpoints (bp)")
+  
+  for(i in 1:length(data)){
+    lines(data[[i]], lwd=3, col=colors[i])
+  }
+  
+  legend("topright", lty=c(1,1), lwd=3, title="Hotspot strength",
+         legend=c("weakest", "", "", "", "", "", "", "hottest"),
+         bg = "white", col=colors)
+  dev.off()
+  
+  message('Saved plot ', paste0(output_dir, '_signalAtDSBhotspots.pdf'))
+  
+  
+  #----------------------------------------------------------------------------#
+  # Signal at axis binding sites (Jonna)
+  message('... Signal at Axis binding sites:')
+  
+  Red1_summits <- Red1_summits[, c(1, 2, 3, 5)]
+  Red1_summits[, 1] <- as.character(Red1_summits[,1])
+  # Order by signal to make groups based on binding level
+  axisorder <- Red1_summits[order(Red1_summits[,4]), ]
+  n <- nrow(Red1_summits)/4
+  
+  axis1 <- axisorder[1:round(n),]
+  axis2 <- axisorder[(round(n)+1):round(2*n),]
+  axis3 <- axisorder[(round(2*n)+1):round(3*n),]
+  axis4 <- axisorder[(round(3*n)+1):round(4*n),]
+  
+  data <- list(axis1, axis2, axis3, axis4)
+  suppressMessages(data <- lapply(data, function(x) signal_at_summit(chip, x, 1000)))
+  suppressMessages(data <- lapply(data, signal_average))
+  
+  min_data <- sapply(data, function(x) min(x[, 2]))
+  max_data <- sapply(data, function(x) max(x[, 2]))
+  
+  colors <- c("darkolivegreen3", "green3", "darkgreen", "black")
+  
+  
+  fileName <- paste0(destination, output_dir, '/', output_dir, '_signalAtAxisSites.pdf')
+  pdf(file = paste0(fileName), width = 6, height = 5)
+  
+  plot(0, type="l", lwd=3, ylab="ChIP-seq signal", xlim = c(-1000, 1000),
+       ylim=c(min(min_data), max(max_data)),
+       xlab="Distance from Axis Midpoints (bp)",
+       main = "Signal around axis sites\n(Red1 peaks in WT)")
+  
+  for(i in 1:length(data)){
+    lines(data[[i]], lwd=3, col=colors[i])
+  }
+  
+  legend("topright", lty=c(1, 1), lwd=3, title="Axis binding",
+         legend=c("least", "", "", "most"), bg='white', col=colors)
+  dev.off()
+    
   
   #----------------------------------------------------------------------------#
   # Meta ORF
