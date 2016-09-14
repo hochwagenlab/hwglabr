@@ -240,7 +240,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
     
     data <- list(spo1, spo2, spo3, spo4, spo5, spo6, spo7, spo8)
     
-    message('       Computing signal around DSB hotspots; this takes a few minutes...')
+    message('    Computing signal around DSB hotspots; this takes a few minutes...')
     suppressMessages(data <- lapply(data, function(x) signal_at_summit(wiggleData, x, 1000)))
     suppressMessages(data <- lapply(data, signal_average))
     
@@ -289,7 +289,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
     axis4 <- axisorder[(round(3*n)+1):round(4*n),]
     
     data <- list(axis1, axis2, axis3, axis4)
-    message('       Computing signal around axis binding sites; this takes a few minutes...')
+    message('    Computing signal around axis binding sites; this takes a few minutes...')
     suppressMessages(data <- lapply(data, function(x) signal_at_summit(wiggleData, x, 1000)))
     suppressMessages(data <- lapply(data, signal_average))
     
