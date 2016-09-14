@@ -345,6 +345,6 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   if(elapsed_time < 60){
     message('\n...\nCompleted in ', elapsed_time, ' sec.')
   } else if(elapsed_time >= 60 & elapsed_time < 3600){
-    message('\n...\nCompleted in ', elapsed_time / 60, ' min.') 
-  } else message('\n...\nCompleted in ', elapsed_time / 60 / 60, ' h.')
+    message('\n...\nCompleted in ', round(elapsed_time / 60, 1), ' min.') 
+  } else message('\n...\nCompleted in ', round(elapsed_time / 60 / 60, 1), ' h.')
 }
