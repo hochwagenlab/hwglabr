@@ -145,7 +145,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
        main=paste0("Signal around centromeres: ", refGenome), cex.main=1)
   
   dev.off()
-  message('Saved plot ', paste0(output_dir, '_signalAtCen.pdf'))
+  message('    Saved plot ', paste0(output_dir, '_signalAtCen.pdf'))
   
   #----------------------------------------------------------------------------#
   # Signal at rDNA
@@ -176,7 +176,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
        col = 'red', lwd = 3)
   
   dev.off()
-  message('Saved plot ', paste0(output_dir, '_signalAtrDNA.pdf'))
+  message('    Saved plot ', paste0(output_dir, '_signalAtrDNA.pdf'))
   
   #----------------------------------------------------------------------------#
   # Signal from telomeres (Viji)
@@ -218,7 +218,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
        xlab="Distance from telomeres (Kb)", ylab = "Average Enrichment" )
   abline(h = 0, lty=3, lwd=1.5)
   dev.off()
-  message('Saved plot ', paste0(output_dir, '_signalAtTelomeres.pdf')) 
+  message('    Saved plot ', paste0(output_dir, '_signalAtTelomeres.pdf')) 
   
   #----------------------------------------------------------------------------#
   # Signal around DSDs by DSB hotspot hotness (Jonna)
@@ -239,7 +239,8 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   
   data <- list(spo1, spo2, spo3, spo4, spo5, spo6, spo7, spo8)
   
-  suppressMessages(data <- lapply(data, function(x) signal_at_summit(chip, x, 1000)))
+  message('       Computing signal around DSB hotspots; this takes a few minutes...')
+  suppressMessages(data <- lapply(data, function(x) signal_at_summit(wiggleData, x, 1000)))
   suppressMessages(data <- lapply(data, signal_average))
   
   min_data <- sapply(data, function(x) min(x[, 2]))
@@ -265,7 +266,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
          bg = "white", col=colors)
   dev.off()
   
-  message('Saved plot ', paste0(output_dir, '_signalAtDSBhotspots.pdf'))
+  message('    Saved plot ', paste0(output_dir, '_signalAtDSBhotspots.pdf'))
   
   
   #----------------------------------------------------------------------------#
@@ -284,7 +285,8 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   axis4 <- axisorder[(round(3*n)+1):round(4*n),]
   
   data <- list(axis1, axis2, axis3, axis4)
-  suppressMessages(data <- lapply(data, function(x) signal_at_summit(chip, x, 1000)))
+  message('       Computing signal around axis binding sites; this takes a few minutes...')
+  suppressMessages(data <- lapply(data, function(x) signal_at_summit(wiggleData, x, 1000)))
   suppressMessages(data <- lapply(data, signal_average))
   
   min_data <- sapply(data, function(x) min(x[, 2]))
@@ -329,7 +331,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
     axis(2, las = 2)
     abline(v = c(250, 750), lty= 2)
     dev.off()
-    message('Saved plot ', paste0(output_dir, '_signalAtORF.pdf')) 
+    message('    Saved plot ', paste0(output_dir, '_signalAtORF.pdf')) 
   }
   
   #----------------------------------------------------------------------------#
