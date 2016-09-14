@@ -181,7 +181,43 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   # Signal from telomeres
   message('... Signal at sub-telomeric regions:')
   
+  # Call signal_from_telomeres() function
+  suppressMessages(sample_telo <- hwglabr::signal_from_telomeres(wiggleData,
+                                                                 lengthToCollect=120000))
   
+  # Combine data from large and small chromosomes
+  data <- dplyr::summarise(dplyr::group_by(do.call('rbind', c(sample_telo$small_chrs,
+                                                              sample_telo$large_chrs)),
+                                           distance_to_telomere),
+                           mean_signal=mean(signal, na.rm = TRUE))
+  
+  # Calculate genome of average of the ChIP signal
+  sums <- vector(length=16)
+  counts <- vector(length=16)
+  for (i in c(1:16)) {
+    sums[i] <- sum(wiggleData[[i]][,2]) 
+    counts[i] <- nrow(wiggleData[[i]])
+  }
+  wiggleDataGenomeAvg <- sum(sums)/sum(counts)
+  
+  # Subtract genome average signal from each datapoint to normalize to genome average
+  data$mean_signal <- data$mean_signal - wiggleDataGenomeAvg
+  
+  # Smooth data over 25kb regions?
+  data <- ksmooth(data$distance_to_telomere, data$mean_signal, bandwidth = 25000)
+  averageSubtelomericSignal <- data.frame('distance_from_telomere' = data[[1]],
+                                          'signal' = data[[2]])
+  
+  # Plot results
+  fileName <- paste0(destination, output_dir, '/', output_dir, '_signalAtTelomeres.pdf')
+  pdf(file = paste0(fileName), width = 6, height = 4)
+  
+  plot(averageSubtelomericSignal$distance_from_telomere / 1000,
+       averageSubtelomericSignal$signal, type="l", lwd=2, col='plum4',
+       xlab="Distance from telomeres (Kb)", ylab = "Average Enrichment" )
+  abline(h = 0, lty=3, lwd=1.5)
+  dev.off()
+  message('Saved plot ', paste0(output_dir, '_signalAtTelomeres.pdf')) 
   
   #----------------------------------------------------------------------------#
   # Jonna's
