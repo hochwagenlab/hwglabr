@@ -34,7 +34,7 @@ SK1_conv <- read.table(paste0(path, 'conv_midpoints_SK1.txt'),
 # The intergenic region coordinate files were generated (by Luis and Tovah) using
 # the scripts found at: '/Volumes/LabShare/Luis/LabWork/GenomeSequences/hwglabr/'
 # 1. Import data file
-path <- '/Volumes/LabShare/Luis/LabWork/GenomeSequences/hwglabr/'
+path <- '/Volumes/LabShare/GenomeSequences/hwglabr/'
 S288C_conv_midpoint_dist <- read.table(paste0(path, 'S288C_conv_midpoint_dist.txt'),
                                        header = TRUE, stringsAsFactors = FALSE)
 S288C_div_midpoint_dist <- read.table(paste0(path, 'S288C_div_midpoint_dist.txt'),
@@ -89,7 +89,7 @@ SK1rosetta <- read.table(paste0(path, 'SK1rosetta_R64.txt'),
 
 #------------------------------------------------------------------------------#
 #                                GFF files                                     #
-#               Used by opening_act() to run aignal_at_orf()                   #
+#               Used by opening_act() to run signal_at_orf()                   #
 s288C_gff <- '/Volumes/LabShare/GenomeSequences/s288C_annotation_R64_modified.gff'
 SK1_gff <- '/Volumes/LabShare/GenomeSequences/SK1_MvO_V1___GENOME/SK1_annotation/SK1_annotation_modified_v2.gff'
 s288C_gff <- hwglabr::gff_read(s288C_gff)
@@ -98,12 +98,41 @@ SK1_gff <- hwglabr::gff_read(SK1_gff)
 SK1_gff$attributes <- hwglabr::gff_get_attribute(SK1_gff$attributes, 'ID')
 
 #------------------------------------------------------------------------------#
+#                            Spo11 DSB hotspots                                #
+#                           Used by opening_act()                              #
+
+# For details of data generation see:
+# "Volumes/LabShare/HTGenomics/HiSeqOutputs/2015-08-21_Thacker2014_Spo11Hotspots/Creating_spo11_SacCer3_Pan2011_WT1_fixedbedgraph.R"
+# Source of data: nature13120-s2_SacCer2.xls from Thacker 2014 paper.
+# Convert to bed file. Run through UCSC liftover
+# (https://genome.ucsc.edu/cgi-bin/hgLiftOver) to convert from SacCer2 to SacCer3
+# Realign liftover bed information and WT1 column from XLS file to make the bedgraph.
+file <- '/Volumes/LabShare/GenomeSequences/hwglabr/spo11_SacCer3_Pan2011hotspot_WT1_fixed.bedgraph'
+Spo11_DSBs <- read.table(file)
+
+
+#------------------------------------------------------------------------------#
+#                            Red1 summits in WT                                #
+#                           Used by opening_act()                              #
+
+### On HPC:
+# qsub -v CHIP="AH119B-053013_TGACCA_L008_R1_001.fastq",INPUT="AH119A-053013_CGATGT_L008_R1_001.fastq",TAGC="AH119B-053013",TAGI="AH119A-053013",GEN="SacCer3",PEAK=F,BDG=F ~/Pipeline/MACS2_pipeline_v2.sh
+# qsub -v CHIP="AH119C-040114_GTCCGC_L001_R1_001.fastq",INPUT="AH119A-040114_CCGTCC_L001_R1_001.fastq",TAGC="AH119C-040114",TAGI="AH119A-040114",GEN="SacCer3",PEAK=F,BDG=F ~/Pipeline/MACS2_pipeline_v2.sh
+# qsub -v CHIP="AH119B-053013-SacCer3-2mis-PM.sam:AH119C-040114-SacCer3-2mis-PM.sam",INPUT="AH119A-053013-SacCer3-2mis-PM.sam:AH119A-040114-SacCer3-2mis-PM.sam",REP="AH119BC",BDG=F ~/Pipeline/MACS2_pipeline_v2.sh
+# In R: [remove summits with Q-values(-log10) below 20]
+# bed <- read.table("AH119BC-SacCer3-2mis-PM-reps-M5_summits.bed")
+# Q20<- bed[which(bed[,5]>=20),]
+# write.table(Q20,file="AH119BC-SacCer3-2mis-PM-reps-M5_Q20_summits.bed",quote=F,sep="\t",row.names=F,col.names=F)
+file <- '/Volumes/LabShare/GenomeSequences/hwglabr/AH119BC-SacCer3-2mis-PM-reps-M5_Q20_summits.bed'
+Red1_summits <- read.table(file)
+
+#------------------------------------------------------------------------------#
 #------------------------------------------------------------------------------#
 #                           Add all data to package                            #
 #                             (as internal data)                               #
 
 # Determine the best compression for the data files
-tools::checkRdaFiles('data/')  # Suggests 'bzip2'
+tools::checkRdaFiles('R/')  # Suggests 'bzip2'
 
 setwd('/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/Scripts/Rpackages/hwglabr')
 devtools::use_data(S288C_conv_midpoint_dist,
@@ -119,4 +148,6 @@ devtools::use_data(S288C_conv_midpoint_dist,
                    SK1rosetta,
                    s288C_gff,
                    SK1_gff,
+                   Spo11_DSBs,
+                   Red1_summits,
                    internal = TRUE, overwrite = TRUE, compress = "bzip2")
