@@ -11,8 +11,8 @@ opening_act(wiggleData, relevantGenotype, chipTarget, sampleID,
 \item{wiggleData}{As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}).
 No default.}
 
-\item{relevantGenotype}{String indicating the relevant strain mutations. Just use "WT"
-if there are no relevant mutations. No default.}
+\item{relevantGenotype}{String indicating the relevant strain mutations. Just use "WT",
+for example, if there are no relevant mutations. No default.}
 
 \item{chipTarget}{String indicating the ChIP target protein. No default.}
 

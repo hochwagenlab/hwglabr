@@ -6,8 +6,8 @@
 #' ".../LabShare/HTGenomics/Opening_act/".
 #' @param wiggleData As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}).
 #' No default.
-#' @param relevantGenotype String indicating the relevant strain mutations. Just use "WT"
-#' if there are no relevant mutations. No default.
+#' @param relevantGenotype String indicating the relevant strain mutations. Just use "WT",
+#' for example, if there are no relevant mutations. No default.
 #' @param chipTarget String indicating the ChIP target protein. No default.
 #' @param sampleID String indicating the sample ID, including the ID used in the
 #' analysis pipeline (with a date) and the read mapping conditions (see examples below).
