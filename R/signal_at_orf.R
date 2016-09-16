@@ -14,18 +14,19 @@
 #' and ChIP-seq signal. The way this function deals with that is by skipping affected genes.
 #' The number of skipped genes in each chromosome is printed to the console, as well as the
 #' final count (and percentage) of skipped genes. \cr
-#' @param inputData As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}). No default.
+#' @param inputData As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}).
+#' No default.
 #' @param gff Optional dataframe of the gff providing the ORF cordinates. Must be provided if
-#' \code{gffFile} is not. No default. Note: You can use the function \code{\link{gff_read}} in hwglabr to
-#' load your selected gff file.
-#' @param gffFile Optional string indicating path to the gff file providing the ORF cordinates. Must be
-#' provided if \code{gff} is not. No default.
+#' \code{gffFile} is not. No default. Note: You can use the function \code{\link{gff_read}} in
+#' hwglabr to load your selected gff file.
+#' @param gffFile Optional string indicating path to the gff file providing the ORF cordinates.
+#' Must be provided if \code{gff} is not. No default.
 #' @param loessSpan Number specifying \code{span} argument for \code{loess} function (the smoothing
 #' parameter alpha). This controls the degree of smoothing of the signal.
 #' Defaults to \code{0.05}.
-#' @param saveFile Boolean indicating whether output should be written to a .txt file (in current working
-#' directory). If \code{saveFile = FALSE}, output is returned to screen or an R object (if assigned).
-#' Defaults to \code{FALSE}.
+#' @param saveFile Boolean indicating whether output should be written to a .txt file (in current
+#' working directory). If \code{saveFile = FALSE}, output is returned to screen or an
+#' R object (if assigned). Defaults to \code{FALSE}.
 #' @return A local data frame with four columns:
 #' \enumerate{
 #'   \item \code{chr} Chromosome number
