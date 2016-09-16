@@ -29,14 +29,32 @@ typically takes about 30 minutes to run, so it may be useful to exclude it.
 Defaults to \code{TRUE}.}
 }
 \value{
-A new folder in ".../LabShare/HTGenomics/Opening_act/" containing several
-plots as .pdf files.
+A new folder in ".../LabShare/HTGenomics/Opening_act/" containing output plots
+(as .pdf files) of the following analysis:
+\enumerate{
+  \item \strong{Chromosome size bias}
+  \item \strong{Signal at centromeres}
+  \item \strong{Signal flanking rDNA}
+  \item \strong{Signal at sub-telomeric regions} (data mapped to S288c reference genome only)
+  \item \strong{Signal at DSB hotspots} (data mapped to S288c reference genome only)
+  \item \strong{Signal at axis binding sites} (data mapped to S288c reference genome only)
+  \item \strong{Signal at meta ORF}
+}
 }
 \description{
 This function will run the lab's standard analysis of HT genomics experiments for which
 tab-separated wiggle data is generated. It will call different functions in the package
 to produce several .pdf files of analysis plots, written to a new folder in
 ".../LabShare/HTGenomics/Opening_act/".
+\cr \cr
+\strong{Note:} When running on data aligned to the SK1 genome three of the plots are
+not produced: signal at sub-telomeric regions, signal at DSB hotspots and signal at
+axis binding sites. The reason for skipping the sub-telomeric signal analysis is the
+fact that the SK1 genome annotation contains inconsistencies at sub-telomeric regions.
+The reason for skipping the other two analysis is the fact that the reference data for
+DSB hotspots and Red1 binding sites were not available for SK1 at the time of writing
+this function. It is probably redundant to run this (long!) analysis for both genomes
+anyway, and using data mapped to the S288c reference genome should be preferred.\cr
 }
 \examples{
 \dontrun{

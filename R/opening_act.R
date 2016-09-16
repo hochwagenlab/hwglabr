@@ -4,6 +4,15 @@
 #' tab-separated wiggle data is generated. It will call different functions in the package
 #' to produce several .pdf files of analysis plots, written to a new folder in
 #' ".../LabShare/HTGenomics/Opening_act/".
+#' \cr \cr
+#' \strong{Note:} When running on data aligned to the SK1 genome three of the plots are
+#' not produced: signal at sub-telomeric regions, signal at DSB hotspots and signal at
+#' axis binding sites. The reason for skipping the sub-telomeric signal analysis is the
+#' fact that the SK1 genome annotation contains inconsistencies at sub-telomeric regions.
+#' The reason for skipping the other two analysis is the fact that the reference data for
+#' DSB hotspots and Red1 binding sites were not available for SK1 at the time of writing
+#' this function. It is probably redundant to run this (long!) analysis for both genomes
+#' anyway, and using data mapped to the S288c reference genome should be preferred.\cr
 #' @param wiggleData As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}).
 #' No default.
 #' @param relevantGenotype String indicating the relevant strain mutations. Just use "WT",
@@ -18,8 +27,17 @@
 #' @param runMetaORF Boolean indicating whether to run the meta ORF analysis. This analysis
 #' typically takes about 30 minutes to run, so it may be useful to exclude it.
 #' Defaults to \code{TRUE}.
-#' @return A new folder in ".../LabShare/HTGenomics/Opening_act/" containing several
-#' plots as .pdf files.
+#' @return A new folder in ".../LabShare/HTGenomics/Opening_act/" containing output plots
+#' (as .pdf files) of the following analysis:
+#' \enumerate{
+#'   \item \strong{Chromosome size bias}
+#'   \item \strong{Signal at centromeres}
+#'   \item \strong{Signal flanking rDNA}
+#'   \item \strong{Signal at sub-telomeric regions} (data mapped to S288c reference genome only)
+#'   \item \strong{Signal at DSB hotspots} (data mapped to S288c reference genome only)
+#'   \item \strong{Signal at axis binding sites} (data mapped to S288c reference genome only)
+#'   \item \strong{Signal at meta ORF}
+#' }
 #' @examples
 #' \dontrun{
 #' opening_act(wiggleData=WT, relevantGenotype="WT", chipTarget="Red1",
@@ -180,45 +198,50 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   
   #----------------------------------------------------------------------------#
   # Signal from telomeres (Viji)
-  message('... Signal at sub-telomeric regions:')
-  
-  # Call signal_from_telomeres() function
-  suppressMessages(sample_telo <- hwglabr::signal_from_telomeres(wiggleData,
-                                                                 lengthToCollect=120000))
-  
-  # Combine data from large and small chromosomes
-  data <- dplyr::summarise(dplyr::group_by(do.call('rbind', c(sample_telo$small_chrs,
-                                                              sample_telo$large_chrs)),
-                                           distance_to_telomere),
-                           mean_signal=mean(signal, na.rm = TRUE))
-  
-  # Calculate genome of average of the ChIP signal
-  sums <- vector(length=16)
-  counts <- vector(length=16)
-  for (i in c(1:16)) {
-    sums[i] <- sum(wiggleData[[i]][,2]) 
-    counts[i] <- nrow(wiggleData[[i]])
+  if (check_S288C) {
+    message('... Signal at sub-telomeric regions:')
+    
+    # Call signal_from_telomeres() function
+    suppressMessages(sample_telo <- hwglabr::signal_from_telomeres(wiggleData,
+                                                                   lengthToCollect=120000))
+    
+    # Combine data from large and small chromosomes
+    data <- dplyr::summarise(dplyr::group_by(do.call('rbind', c(sample_telo$small_chrs,
+                                                                sample_telo$large_chrs)),
+                                             distance_to_telomere),
+                             mean_signal=mean(signal, na.rm = TRUE))
+    
+    # Calculate genome of average of the ChIP signal
+    sums <- vector(length=16)
+    counts <- vector(length=16)
+    for (i in c(1:16)) {
+      sums[i] <- sum(wiggleData[[i]][,2])
+      counts[i] <- nrow(wiggleData[[i]])
+    }
+    wiggleDataGenomeAvg <- sum(sums)/sum(counts)
+    
+    # Subtract genome average signal from each datapoint to normalize to genome average
+    data$mean_signal <- data$mean_signal - wiggleDataGenomeAvg
+    
+    # Smooth data over 25kb regions?
+    data <- ksmooth(data$distance_to_telomere, data$mean_signal, bandwidth = 25000)
+    averageSubtelomericSignal <- data.frame('distance_from_telomere' = data[[1]],
+                                            'signal' = data[[2]])
+    
+    # Plot results
+    fileName <- paste0(destination, output_dir, '/', output_dir, '_signalAtTelomeres.pdf')
+    pdf(file = paste0(fileName), width = 6, height = 4)
+    
+    plot(averageSubtelomericSignal$distance_from_telomere / 1000,
+         averageSubtelomericSignal$signal, type="l", lwd=2, col='plum4',
+         xlab="Distance from telomeres (Kb)", ylab = "Average Enrichment" )
+    abline(h = 0, lty=3, lwd=1.5)
+    dev.off()
+    message('    Saved plot ', paste0(output_dir, '_signalAtTelomeres.pdf'))
+  } else {
+    message('... Skip signal at sub-telomeric regions')
+    message('    (Low quality SK1 genome annotation at telomeric and sub-telomeric regions)')
   }
-  wiggleDataGenomeAvg <- sum(sums)/sum(counts)
-  
-  # Subtract genome average signal from each datapoint to normalize to genome average
-  data$mean_signal <- data$mean_signal - wiggleDataGenomeAvg
-  
-  # Smooth data over 25kb regions?
-  data <- ksmooth(data$distance_to_telomere, data$mean_signal, bandwidth = 25000)
-  averageSubtelomericSignal <- data.frame('distance_from_telomere' = data[[1]],
-                                          'signal' = data[[2]])
-  
-  # Plot results
-  fileName <- paste0(destination, output_dir, '/', output_dir, '_signalAtTelomeres.pdf')
-  pdf(file = paste0(fileName), width = 6, height = 4)
-  
-  plot(averageSubtelomericSignal$distance_from_telomere / 1000,
-       averageSubtelomericSignal$signal, type="l", lwd=2, col='plum4',
-       xlab="Distance from telomeres (Kb)", ylab = "Average Enrichment" )
-  abline(h = 0, lty=3, lwd=1.5)
-  dev.off()
-  message('    Saved plot ', paste0(output_dir, '_signalAtTelomeres.pdf')) 
   
   #----------------------------------------------------------------------------#
   # Signal around DSDs by DSB hotspot hotness (Jonna)
@@ -275,7 +298,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   #----------------------------------------------------------------------------#
   # Signal at axis binding sites (Jonna)
   if (check_S288C) {
-    message('... Signal at Axis binding sites:')
+    message('... Signal at axis binding sites:')
     
     Red1_summits <- Red1_summits[, c(1, 2, 3, 5)]
     Red1_summits[, 1] <- as.character(Red1_summits[,1])
@@ -317,7 +340,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
     message('    Saved plot ', paste0(output_dir, '_signalAtAxisSites.pdf'))
     
   } else {
-    message('... Skip signal at Axis binding sites')
+    message('... Skip signal at axis binding sites')
     message('    (binding sites only available for data mapped to S288C genome)')
   }
   
