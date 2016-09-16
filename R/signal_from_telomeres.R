@@ -3,10 +3,13 @@
 #' This function allows you to pull out the ChIP signal from all telomeres.\cr
 #' The function takes as input the wiggle data as a list of 16 chromosomes.
 #' (output of \code{\link{readall_tab}}). \cr\cr
-#' \strong{Note:} The chromosome length table used in this function at the moment is
-#' not correct (at least for S288C). Some chromosomes have higher positions in the wiggle
-#' data than the length of the chromosome reported in the table. It is not off by more
-#' than ~100 bp, but this should still be corrected. \cr
+#' \strong{Note:} Some chromosomes have higher positions in the wiggle data than the
+#' length of the chromosome reported in the table, resulting in negative position values
+#' appearing in the output data. This is a consequence of the extension transformation
+#' performed by MACS and the values are not off by more than ~100 bp.\cr
+#' \strong{Note:} The SK! genome annotation is currently not perfect and includes
+#' several inconsistencies at telomeric and sub-telomeric regions. This must be kept in
+#' mind when analying the data, as it will affect the output of this analysis.\cr
 #' \cr \cr
 #' @param inputData As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}). No default.
 #' @param lengthToCollect Number specifying the length (in bp) of the region to collect signal for,
