@@ -187,7 +187,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
        xlab="Position on chr 12 (kb)", ylab="Signal", 
        lwd=1, cex.axis=1, las=1, col='black', cex.lab=1,
        main=paste0("Signal around rDNA: ", refGenome,
-                   '\n(rNDA position marked in red)'), cex.main=1)
+                   '\n(rDNA position marked in red)'), cex.main=1)
   # Add labels for rDNA
   axis(1, at = c(start / 1000, end / 1000),
        labels = c('', ''),
