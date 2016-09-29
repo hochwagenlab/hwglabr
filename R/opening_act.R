@@ -234,7 +234,8 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
     
     plot(averageSubtelomericSignal$distance_from_telomere / 1000,
          averageSubtelomericSignal$signal, type="l", lwd=2, col='plum4',
-         xlab="Distance from telomeres (Kb)", ylab = "Average Enrichment" )
+         xlab="Distance from telomeres (Kb)", ylab = "Average Enrichment",
+         main=paste0("Signal at sub-telomeric regions: ", refGenome), cex.main=1)
     abline(h = 0, lty=3, lwd=1.5)
     dev.off()
     message('    Saved plot ', paste0(output_dir, '_signalAtTelomeres.pdf'))
