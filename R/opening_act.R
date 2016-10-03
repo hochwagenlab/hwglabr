@@ -168,30 +168,43 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   #----------------------------------------------------------------------------#
   # Signal at rDNA
   message('... Signal flanking rDNA:')
-  suppressMessages(rDNA <- signal_at_rDNA(wiggleData, saveFile = F))
+  suppressMessages(rDNA <- hwglabr::signal_at_rDNA(wiggleData, saveFile = F))
   colnames(rDNA) <- c('position', 'signal')
   
   # plot results
   fileName <- paste0(destination, output_dir, '/', output_dir, '_signalAtrDNA.pdf')
   pdf(file = paste0(fileName), width = 6, height = 3)
   
+  plot(rDNA$position/1000, rDNA$signal, type="l",
+       xlab="Position on chr 12 (kb)", ylab="Signal", 
+       lwd=1, cex.axis=1, las=1, col='black', cex.lab=1, cex.main=1)
+  
+  # A stretch present in S288C downstream of rDNA is absent in SK1 (the strain we use)
+  # Add label for that (from end of rDNA until about bp 490'500)
+  if (check_S288C) {
+    start <- 468931
+    end <- 490500
+    axis(1, at = c(start / 1000, end / 1000),
+         labels = c('', ''),
+         col = 'blue', lwd = 3)
+  }
+  
+  # Add labels for rDNA
   if (check_S288C) {
     start <- 451575
     end <- 468931
+    title(paste0("Signal around rDNA: ", refGenome, '\n(rDNA position marked in red;',
+                 '\nregion absent form SK1 genome marked in blue)'))
   } else {
     start <- 433029
     end <- 451212
+    title(paste0("Signal around rDNA: ", refGenome, '\n(rDNA position marked in red)'))
   }
   
-  plot(rDNA$position/1000, rDNA$signal, type="l",
-       xlab="Position on chr 12 (kb)", ylab="Signal", 
-       lwd=1, cex.axis=1, las=1, col='black', cex.lab=1,
-       main=paste0("Signal around rDNA: ", refGenome,
-                   '\n(rDNA position marked in red)'), cex.main=1)
-  # Add labels for rDNA
   axis(1, at = c(start / 1000, end / 1000),
        labels = c('', ''),
        col = 'red', lwd = 3)
+      
   
   dev.off()
   message('    Saved plot ', paste0(output_dir, '_signalAtrDNA.pdf'))

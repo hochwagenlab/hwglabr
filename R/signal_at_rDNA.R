@@ -50,7 +50,10 @@ signal_at_rDNA <- function(inputData, saveFile = FALSE) {
   # Collect signal +/- 40 kb flanking rDNA and get index of list element containing chr12
   if (check_S288C) {
     start <- 451575 - 40000
-    end <- 468931 + 40000
+    # A stretch present in S288C downstream of rDNA is absent in SK1 (the strain we use)
+    # Adapt coordinates accordingly (until about bp 490'500)
+    #end <- 468931 + 40000
+    end <- 490500 + 40000
     chr12 <- grep('chrXII.', names(inputData), fixed = TRUE)
   } else {
     start <- 433029 - 40000
