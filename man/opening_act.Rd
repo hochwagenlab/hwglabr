@@ -2,7 +2,7 @@
 % Please edit documentation in R/opening_act.R
 \name{opening_act}
 \alias{opening_act}
-\title{Standard analysis of HT genomics experiments}
+\title{Standard analysis of ChIP-seq experiments}
 \usage{
 opening_act(wiggleData, relevantGenotype, chipTarget, sampleID,
   userInput = TRUE, runMetaORF = TRUE)
@@ -42,7 +42,7 @@ A new folder in ".../LabShare/HTGenomics/Opening_act/" containing output plots
 }
 }
 \description{
-This function will run the lab's standard analysis of HT genomics experiments for which
+This function will run the lab's standard analysis of ChIP-seq experiments, for which
 tab-separated wiggle data is generated. It will call different functions in the package
 to produce several .pdf files of analysis plots, written to a new folder in
 ".../LabShare/HTGenomics/Opening_act/".

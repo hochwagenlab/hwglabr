@@ -1,6 +1,6 @@
-#' Standard analysis of HT genomics experiments
+#' Standard analysis of ChIP-seq experiments
 #'
-#' This function will run the lab's standard analysis of HT genomics experiments for which
+#' This function will run the lab's standard analysis of ChIP-seq experiments, for which
 #' tab-separated wiggle data is generated. It will call different functions in the package
 #' to produce several .pdf files of analysis plots, written to a new folder in
 #' ".../LabShare/HTGenomics/Opening_act/".
