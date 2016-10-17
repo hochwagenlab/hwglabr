@@ -1,4 +1,4 @@
-[![Travis-CI Build Status](https://travis-ci.org/luisvalesilva/hwglabr.svg?branch=master)](https://travis-ci.org/luisvalesilva/hwglabr)
+[![Travis-CI Build Status](https://travis-ci.org/hochwagenlab/hwglabr.svg?branch=master)](https://travis-ci.org/hochwagenlab/hwglabr)
 
 # hwglabr
 ### Hochwagen lab R package
