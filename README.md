@@ -15,13 +15,13 @@ install.packages("devtools")
 
 Once you have `devtools` you can install and load `hwglabr`:
 ``` r
-devtools::install_github("luisvalesilva/hwglabr")
+devtools::install_github("hochwagenlab/hwglabr")
 library(hwglabr)
 ```
 
 #### Documentation
 
-Use the package GitHub [repo](https://github.com/luisvalesilva/hwglabr) and the
+Use the package GitHub [repo](https://github.com/hochwagenlab/hwglabr) and the
 [documentation website](http://www.nyu.edu/projects/hochwagen/hwglabr_docs/).
 Function documentation is accessible within R in the standard way, by typing one of the following:
 
