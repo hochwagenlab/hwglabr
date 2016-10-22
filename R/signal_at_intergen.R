@@ -18,6 +18,7 @@
 #'   \item \code{tandem} Tandem genes. All regions in output will be in the same 5' -> 3' orientation
 #'   (genes on Crick strand are reversed).
 #' }
+#' Abbreviated arguments (down to as short as the first letter only) are accepted.
 #' Defaults to \code{conv}.
 #' @param regionSize Number indicating the size (in bp) of the region to calculate.
 #' Defaults to 1000 bp (midpoint +/- 500 bp).
@@ -43,7 +44,8 @@
 #' }
 #' @export
 
-signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 'conv',
+signal_at_intergen <- function(inputData, inputDataFrame = FALSE,
+                               orientation = c('conv', 'div', 'tandem'),
                                regionSize = 1000, includeOverlapping = TRUE,
                                saveFile = FALSE) {
   ptm  <- proc.time()
@@ -75,7 +77,7 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
   
   # Check reference genome and load respective chromosome number vector
   if (check_S288C) {
-    message('Detected ref. genome - S288C\n')
+    message('Detected ref. genome - S288C')
     chrom <- chrom_S288C
   } else if (check_SK1) {
     print('Detected ref. genome - SK1')
@@ -83,33 +85,35 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
   } else stop("Did not recognize reference genome.
               Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
   
+  orientation <- match.arg(orientation)
+  
   # Load intergenic region coordinate data
   if (check_S288C) {
     if (orientation == 'conv') {
-      message('Preparing convergent gene region info...\n')
+      message('Preparing convergent gene region info...')
       #data("S288C_conv_midpoint_dist")
       intergen <- S288C_conv_midpoint_dist
     } else if (orientation == 'div') {
-      message('Preparing divergent gene region info...\n')
+      message('Preparing divergent gene region info...')
       #data("S288C_div_midpoint_dist")
       intergen <- S288C_div_midpoint_dist
     } else if (orientation == 'tandem') {
-      message('Preparing tandem gene region info...\n')
+      message('Preparing tandem gene region info...')
       #data("S288C_tand_midpoint_dist")
       intergen <- S288C_tand_midpoint_dist
     } else stop("Did not recognize gene orientation.
                 You should use one of the three strings 'conv', 'div' or 'tandem'.")
   } else if (check_SK1) {
     if (orientation == 'conv') {
-      message('Preparing convergent gene region info...\n')
+      message('Preparing convergent gene region info...')
       #data("SK1_conv_midpoint_dist")
       intergen <- SK1_conv_midpoint_dist
     } else if (orientation == 'div') {
-      message('Preparing divergent gene region info...\n')
+      message('Preparing divergent gene region info...')
       #data("SK1_div_midpoint_dist")
       intergen <- SK1_div_midpoint_dist
     } else if (orientation == 'tandem') {
-      message('Preparing tandem gene region info...\n')
+      message('Preparing tandem gene region info...')
       #data("SK1_tand_midpoint_dist")
       intergen <- SK1_tand_midpoint_dist
     } else stop("Did not recognize gene orientation.
@@ -118,7 +122,7 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
   
   # Drop regions between overlapping genes?
   if (!includeOverlapping) {
-    message('Dropping overlapping genes...\n')
+    message('Dropping overlapping genes...')
     intergen <- intergen[intergen$dist_apart > 0, ]
   }
   
@@ -145,8 +149,8 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
     intergenicPos[, 'strand'] <- intergen[, 'strand']                   # strand
   }
   
-  message('Collecting signal...\n')
-  message('(Skip any regions whose coordinates are not found in input data)\n\n')
+  message('Collecting signal...')
+  message('(Skip any regions whose coordinates are not found in input data)\n')
 
   for(i in 1:length(chrom)) {
     chrNum <- paste0('chr', chrom[i])
@@ -212,7 +216,7 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
 
     # Print number of skipped regions
     message(paste0('... ', intergenGeneCount,
-                   ' intergenic regions (skipped ', j - intergenGeneCount, ')\n'))
+                   ' intergenic regions (skipped ', j - intergenGeneCount, ')'))
 
     colnames(finalChromData) <- c('chr', 'position', 'signal', 'dist_apart')
     # Trim out NAs
@@ -224,7 +228,7 @@ signal_at_intergen <- function(inputData, inputDataFrame = FALSE, orientation = 
   message(paste0('\nCompleted in ', round((proc.time()[3] - ptm[3]) / 60, 2), ' min.\n'))
   
   if(saveFile) {
-    message('Saving file...\n')
+    message('Saving file...')
     if(check_S288C) {
       write.table(allData, paste0(deparse(substitute(inputData)), "_", orientation,
                                   "_S288C.txt"), sep = "\t",

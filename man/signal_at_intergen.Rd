@@ -4,8 +4,9 @@
 \alias{signal_at_intergen}
 \title{Signal at intergenic regions between convergent, divergent or tandem genes genome-wide}
 \usage{
-signal_at_intergen(inputData, inputDataFrame = FALSE, orientation = "conv",
-  regionSize = 1000, includeOverlapping = TRUE, saveFile = FALSE)
+signal_at_intergen(inputData, inputDataFrame = FALSE,
+  orientation = c("conv", "div", "tandem"), regionSize = 1000,
+  includeOverlapping = TRUE, saveFile = FALSE)
 }
 \arguments{
 \item{inputData}{As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}) or a data frame
@@ -22,6 +23,7 @@ orientation of the flanking genes. Accepts one of:
   \item \code{tandem} Tandem genes. All regions in output will be in the same 5' -> 3' orientation
   (genes on Crick strand are reversed).
 }
+Abbreviated arguments (down to as short as the first letter only) are accepted.
 Defaults to \code{conv}.}
 
 \item{regionSize}{Number indicating the size (in bp) of the region to calculate.
