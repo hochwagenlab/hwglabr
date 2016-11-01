@@ -39,9 +39,9 @@ This function allows you to pull out the ChIP signal over all ORFs in the genome
 signal over each ORF plus both flanking regions (1/2 the length of the ORF on each side) and
 scales them all to the same value (1000). This means that for two example genes with lengths of
 500 bp and 2 kb, flanking regions of 250 bp and 1 kb, respectively, will be collected up and
-downstream. Both gene lengths will then be scaled to 500 and all four flanking regions to 250.
-After scaling, a loess model of the signal is built and used to output predictions of the signal
-at each position between 1 and 1000. \cr
+downstream. The whole region is then rescaled to a length of 1000, corresponding to a gene length
+of 500 plus 250 for each flanking region. After scaling, a loess model of the signal is built and
+used to output predictions of the signal at each position between 1 and 1000. \cr
 The function takes as input the wiggle data as a list of 16 chromosomes.
 (output of \code{\link{readall_tab}}).
 \cr \cr
