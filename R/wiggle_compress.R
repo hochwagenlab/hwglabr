@@ -106,7 +106,7 @@ Compress <- function ( Data, window ) {
 	   }
 
 	   # for progress bar
-	   Sys.sleep(0.1)
+	   #Sys.sleep(0.1)
 	   setTxtProgressBar( pb, i )
 	}
 
