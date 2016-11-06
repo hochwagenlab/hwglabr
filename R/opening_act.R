@@ -224,7 +224,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
                                              distance_to_telomere),
                              mean_signal=mean(signal, na.rm = TRUE))
     
-    # Calculate genome of average of the ChIP signal
+    # Calculate genome average of the ChIP signal
     sums <- vector(length=16)
     counts <- vector(length=16)
     for (i in c(1:16)) {
