@@ -70,8 +70,12 @@ If this is a merged wiggle file, ensure first column is called 'position' and th
 	data <- data[ order( data$position ), ]	
 	data2 <- Compress( data, window )
 	
-	message(paste0("Completed in ", round((proc.time()[3] - ptm[3])/60, 
-        2), " min."))
+	elapsed_time <- proc.time()[3] - ptm[3])
+	if(elapsed_time < 60){
+	  message(paste0("Completed in ", round(elapsed_time, 1), " sec."))
+	}else{
+	  message(paste0("Completed in ", round(elapsed_time/60, 2), " min."))
+	}
 
 	return(data2)
 }
