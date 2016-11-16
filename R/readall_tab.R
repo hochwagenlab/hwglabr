@@ -63,12 +63,14 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
         stop("R package 'pbapply' required. Please install it:\n", 
              "install.packages('pbapply')", call. = FALSE)
       }
-      alldata <- pbapply::pblapply(filenames, readr::read_tsv, skip = 2,
-                                   col_names = FALSE, progress = FALSE)
+      # Supress messages in order to suppress readr's printed col specs
+      suppressMessages(alldata <- pbapply::pblapply(filenames, readr::read_tsv, skip = 2,
+                                                    col_names = FALSE, progress = FALSE))
     }
     else {
-      alldata <- lapply(filenames, readr::read_tsv, skip = 2,
-                        col_names = FALSE, progress = FALSE)
+      # Supress messages in order to suppress readr's printed col specs
+      suppressMessages(alldata <- lapply(filenames, readr::read_tsv, skip = 2,
+                                         col_names = FALSE, progress = FALSE))
     }
   }
   else {
