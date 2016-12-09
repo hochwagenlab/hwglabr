@@ -15,8 +15,7 @@ A decimal value of type numeric.
 }
 \description{
 Given the ChIP-seq wiggle data as a list of 16 chromosomes (output of
-\code{\link{readall_tab}}), this function allows calculates the genome-wide signal
-average.
+\code{\link{readall_tab}}), this function calculates the genome-wide signal average.
 }
 \examples{
 \dontrun{

@@ -1,8 +1,7 @@
 #' Calculate genome-wide signal average in wiggle data
 #'
 #' Given the ChIP-seq wiggle data as a list of 16 chromosomes (output of
-#' \code{\link{readall_tab}}), this function allows calculates the genome-wide signal
-#' average.
+#' \code{\link{readall_tab}}), this function calculates the genome-wide signal average.
 #' @param inputData As a list of the 16 chr wiggle data (output of
 #' \code{\link{readall_tab}}). No default.
 #' @return A decimal value of type numeric.
