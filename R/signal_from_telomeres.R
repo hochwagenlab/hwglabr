@@ -7,7 +7,7 @@
 #' length of the chromosome reported in the table, resulting in negative position values
 #' appearing in the output data. This is a consequence of the extension transformation
 #' performed by MACS and the values are not off by more than ~100 bp.\cr
-#' \strong{Note:} The SK! genome annotation is currently not perfect and includes
+#' \strong{Note:} The SK1 genome annotation is currently not perfect and includes
 #' several inconsistencies at telomeric and sub-telomeric regions. This must be kept in
 #' mind when analying the data, as it will affect the output of this analysis.\cr
 #' \cr \cr
