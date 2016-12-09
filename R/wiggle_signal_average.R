@@ -32,9 +32,9 @@ wiggle_signal_average <- function(inputData) {
   } else stop("Did not recognize reference genome.
               Check that chromosome numbers are in the usual format, e.g. 'chrI' or 'chr01'.")
   
-  mean_signal <- sum(sapply(inputData, function(x) sum(x[, 2]))) / sum(sapply(inputData, nrow))
   message('Calculating genome-wide average signal')
-  message('Done!')
+  mean_signal <- sum(sapply(inputData, function(x) sum(x[, 2]))) / sum(sapply(inputData, nrow))
   
+  message('Done!')
   return(mean_signal)
 }
