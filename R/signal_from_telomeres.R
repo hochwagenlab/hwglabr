@@ -111,8 +111,9 @@ signal_from_telomeres <- function(inputData, lengthToCollect = 100000) {
     }
     smallChrs[[paste0(chrNum, '_Rarm')]] <- chromData[start:nrow(chromData), ]
     # Change positions to distance from telomere (start to full length)
+    # Add 1 to make 1-indexed (like the left arm)
     end <- Cen[Cen$Chromosome == chrNum, "LenChr"]
-    smallChrs[[paste0(chrNum, '_Rarm')]][, 1] <- end - smallChrs[[paste0(chrNum, '_Rarm')]][, 1]
+    smallChrs[[paste0(chrNum, '_Rarm')]][, 1] <- end - smallChrs[[paste0(chrNum, '_Rarm')]][, 1] + 1
     colnames(smallChrs[[paste0(chrNum, '_Rarm')]]) <- c('distance_to_telomere', 'signal')
   }
   
@@ -154,8 +155,9 @@ signal_from_telomeres <- function(inputData, lengthToCollect = 100000) {
     }
     largeChrs[[paste0(chrNum, '_Rarm')]] <- chromData[start:nrow(chromData), ]
     # Change positions to distance from telomere (start to full length)
+    # Add 1 to make 1-indexed (like the left arm)
     end <- Cen[Cen$Chromosome == chrNum, "LenChr"]
-    largeChrs[[paste0(chrNum, '_Rarm')]][, 1] <- end - largeChrs[[paste0(chrNum, '_Rarm')]][, 1]
+    largeChrs[[paste0(chrNum, '_Rarm')]][, 1] <- end - largeChrs[[paste0(chrNum, '_Rarm')]][, 1] + 1
     colnames(largeChrs[[paste0(chrNum, '_Rarm')]]) <- c('distance_to_telomere', 'signal')
   }
   
