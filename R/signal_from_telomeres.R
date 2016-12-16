@@ -6,10 +6,14 @@
 #' \strong{Note:} The SK1 genome annotation is currently not perfect and includes
 #' several inconsistencies at telomeric and sub-telomeric regions. This must be kept in
 #' mind when analying the data, as it will affect the output of this analysis.\cr
-#' \strong{Note:} Likely as a consequence of the stated in the previous note, some
-#' chromosomes have higher positions in the wiggle data than the length of the
-#' chromosome reported in the table, resulting in negative position values appearing
-#' in the output data. The values are typically not off by more than ~100 bp.\cr
+#' \strong{Note:} The fact that some sub-telomeric sequences are incomplete in the
+#' SK1 genome means that in some cases we have ChIP-seq data mapping all the way to
+#' the very end of the available sequence. This, together with the read extension performed
+#' by MACS, leads to some chromosomes having higher positions in the wiggle data than
+#' the annotated length of the chromosome, resulting in negative position values appearing
+#' in the output data. The values are typically not off by more than 150 bp, but
+#' analyses focusing on sub-telomeric regions should only use data mapped to the
+#' S288c reference genome.\cr
 #' \cr \cr
 #' @param inputData As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}). No default.
 #' @param lengthToCollect Number specifying the length (in bp) of the region to collect signal for,
