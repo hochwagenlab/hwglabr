@@ -114,7 +114,6 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
          "source('https://bioconductor.org/biocLite.R')",
          "biocLite('edgeR')", call. = FALSE)
   }
-  library("edgeR")
   
   # Create directory in current working directory to save output
   dir.create('RNA-seq_analysis')
@@ -170,7 +169,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   } else{
     pdf(paste0("RNA-seq_analysis/", outputFilePrefix, "_MDS_plot.pdf"))
   }
-  edgeR::plotMDS(y_filt)
+  limma::plotMDS(y_filt)
   dev.off()
   message('Plotted multi-dimensional scaling (MDS) and saved to .pdf file.\n')
   
