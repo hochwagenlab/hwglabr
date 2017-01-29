@@ -179,10 +179,10 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   
   # Write to file
   if(missing(outputFilePrefix)){
-    write.csv(cpm_edgeR, paste0("RNA-seq_analysis/", "edgeR_cpm.csv"), row.names = F)
+    write.csv(cpm_edgeR, paste0("RNA-seq_analysis/", "edgeR_cpm.csv"), row.names = T)
   } else {
     write.csv(cpm_edgeR, paste0("RNA-seq_analysis/", outputFilePrefix, "_edgeR_cpm.csv"),
-              row.names = F)
+              row.names = T)
   }
   message('Calculated CPM and saved to file.\n')
   
@@ -205,9 +205,9 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   
   # Write to file
   if(missing(outputFilePrefix)){
-    write.csv(tpm, paste0("RNA-seq_analysis/", "tpm.csv"), row.names = F)
+    write.csv(tpm, paste0("RNA-seq_analysis/", "tpm.csv"), row.names = T)
   } else {
-    write.csv(tpm, paste0("RNA-seq_analysis/", outputFilePrefix, "_tpm.csv"), row.names = F)
+    write.csv(tpm, paste0("RNA-seq_analysis/", outputFilePrefix, "_tpm.csv"), row.names = T)
   }
   message('Calculated TPM and saved to file.\n')
   
