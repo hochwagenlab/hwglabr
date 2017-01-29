@@ -233,11 +233,11 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
 
       if(missing(outputFilePrefix)){
         write.csv(et$table, paste0("RNA-seq_analysis/DE_", et$comparison[1], "-",
-                                   et$comparison[2], ".csv"), row.names = F)
+                                   et$comparison[2], ".csv"), row.names = T)
       } else {
         write.csv(et$table, paste0("RNA-seq_analysis/", outputFilePrefix, "_DE_",
                                    et$comparison[1], "-", et$comparison[2], ".csv"),
-                  row.names = F)
+                  row.names = T)
       }
       message(et$comparison[1], "vs", et$comparison[2],
           "saved to file.\n")
