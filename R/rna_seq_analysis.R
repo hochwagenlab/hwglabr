@@ -220,7 +220,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
       bcv <- 0.1
     } else {
       message('\nPerforming DE analysis with replicates:\n')
-      y_filt <- estimateDisp(y_filt)
+      y_filt <- edgeR::estimateDisp(y_filt)
     }
     
     for(i in 1:length(pairwiseDE)){
