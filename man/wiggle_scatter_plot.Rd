@@ -36,4 +36,3 @@ a <- wiggle_scatter(red1, hop1, 4000)
 wiggle_scatter_plot(a)
 }
 }
-

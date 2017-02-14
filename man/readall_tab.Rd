@@ -34,4 +34,3 @@ readall_tab("/Path/to/wiggles/", useReadr = TRUE, progressBar = TRUE)
 readall_tab("/Path/to/wiggles/", useReadr = T, progressBar = T, localCopy = T)
 }
 }
-

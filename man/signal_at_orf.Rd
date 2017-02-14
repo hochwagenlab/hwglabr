@@ -58,4 +58,3 @@ signal_at_orf(WT, gffFile = S288C_annotation_modified.gff,
               loessSpan = 0.1, saveFile = TRUE)
 }
 }
-

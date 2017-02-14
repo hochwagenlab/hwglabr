@@ -41,4 +41,3 @@ signal_from_telomeres_average(WT_signal)
 signal_from_telomeres_average(signalFromTelomeres, separateSmallAndLarge = TRUE)
 }
 }
-

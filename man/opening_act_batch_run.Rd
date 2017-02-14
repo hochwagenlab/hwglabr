@@ -50,4 +50,3 @@ opening_act_batch_run(inputDataFile="~/Desktop/inputs.csv", useReadr = FALSE,
                       runMetaORF = TRUE, userInput = FALSE)
 }
 }
-

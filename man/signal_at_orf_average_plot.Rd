@@ -69,4 +69,3 @@ signal_at_orf_average_plot(WT_orf_mean_signal, dot1_orf_mean_signal, genome = 'S
                            smoothBandwidth = 50)
 }
 }
-

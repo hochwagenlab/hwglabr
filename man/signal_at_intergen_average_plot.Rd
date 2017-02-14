@@ -63,4 +63,3 @@ signal_at_intergen_average_plot(WT_div_mean_signal, dot1_conv_mean_signal, genom
                                 colorA = 'red', colorB = 'green')
 }
 }
-

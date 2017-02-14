@@ -31,4 +31,3 @@ wiggle_correlation(Red1WT_rep1, Red1WT_rep2)
 wiggle_correlation(Red1WT_rep1, Red1WT_rep2, method = "spearman")
 }
 }
-

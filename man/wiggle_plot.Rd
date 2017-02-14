@@ -53,4 +53,3 @@ wiggle_plot(chrXVI, 16, genome = 'S288C', yMax = 5, color = 'black',
             protein = 'Rec8-HA', legendXcoord = 600, onScreen = FALSE)
 }
 }
-

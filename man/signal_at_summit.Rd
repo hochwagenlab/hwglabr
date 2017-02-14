@@ -39,4 +39,3 @@ signal_at_summit(WT, red1_summit_bed)
 signal_at_summit(WT, S288Ccen, extension = 2e4, onlyComplete = FALSE)
 }
 }
-

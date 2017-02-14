@@ -22,4 +22,3 @@ Given the ChIP-seq wiggle data as a list of 16 chromosomes (output of
 wiggle_signal_average(wt_wiggle)
 }
 }
-

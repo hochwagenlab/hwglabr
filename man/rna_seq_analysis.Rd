@@ -96,4 +96,3 @@ rna_seq_analysis(pathToFiles = list('AH119-A_featureCounts.txt', 'AH119-B_featur
                  pairwiseDE = list(c('WT', 'dot1')))
 }
 }
-

@@ -61,4 +61,3 @@ signal_at_intergen(WT, orientation = 'div', inputDataFrame = TRUE, regionSize = 
                    includeOverlapping = FALSE, saveFile = TRUE)
 }
 }
-

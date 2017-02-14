@@ -34,4 +34,3 @@ signal_average(WT_S288C_ORFsignal)
 signal_average(WT_conv, saveFile = TRUE)
 }
 }
-

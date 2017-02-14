@@ -60,4 +60,3 @@ signal_at_conv_average_plot(WT_conv_mean_signal, dot1_conv_mean_signal, genome =
                             legendYcoord = 1, colorA = 'red', colorB = 'green')
 }
 }
-

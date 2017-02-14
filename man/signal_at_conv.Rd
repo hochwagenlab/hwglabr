@@ -39,4 +39,3 @@ signal_at_conv(WT)
 signal_at_conv(WT, regionSize = 1500, saveFile = TRUE, inputDataFrame = FALSE)
 }
 }
-

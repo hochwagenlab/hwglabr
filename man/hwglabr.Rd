@@ -14,4 +14,3 @@ Even though some plotting functions are included, these are rather brittle. They
 can be used as a first pass plotting or as starter code to be adapted to the
 users' needs.
 }
-

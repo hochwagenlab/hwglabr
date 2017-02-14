@@ -30,4 +30,3 @@ chr_coverage(WT)
 chr_coverage(dot1, removeCen = TRUE, cenRegionSize = 50000)
 }
 }
-

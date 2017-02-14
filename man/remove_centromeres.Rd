@@ -28,4 +28,3 @@ remove_centromeres(rec8)
 remove_centromeres(rec8, regionSize = 30000)
 }
 }
-

@@ -53,4 +53,3 @@ wiggle_smooth(WT[[5]], bandwidth = 1000)
 wiggle_smooth(WT[[9]], bandwidth = 1000, useKsmooth = T)
 }
 }
-

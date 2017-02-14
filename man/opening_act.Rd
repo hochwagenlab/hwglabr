@@ -65,4 +65,3 @@ opening_act(rec8, "rec8", "Red1", "AH8115b-24042015-SacCer3-2mis",
             userInput=FALSE, runMetaORF=FALSE)
 }
 }
-

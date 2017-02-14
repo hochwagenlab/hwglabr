@@ -48,4 +48,3 @@ signal_per_orf_length(WT, gff = gff)
 signal_per_orf_length(WT, gffFile = S288C_annotation_modified.gff, saveFile = TRUE)
 }
 }
-
