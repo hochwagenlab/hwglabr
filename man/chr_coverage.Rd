@@ -4,11 +4,19 @@
 \alias{chr_coverage}
 \title{Average signal per chromosome}
 \usage{
-chr_coverage(wiggleData, removeCen = FALSE, cenRegionSize = 50000)
+chr_coverage(wiggleData, meanNorm = FALSE, orderChrs = FALSE,
+  removeCen = FALSE, cenRegionSize = 50000)
 }
 \arguments{
 \item{wiggleData}{As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}).
 No default.}
+
+\item{meanNorm}{Boolean indicating whether to normalize by average genome-wide
+signal. This adds two columns to output: mean-subtracted signal and mean-divided
+signal. Defaults to \code{FALSE}.}
+
+\item{orderChrs}{Boolean indicating whether to order rows by chromosome length.
+Defaults to \code{FALSE}.}
 
 \item{removeCen}{Boolean indicating whether to remove regions around centromeres
 (using function \code{\link{remove_centromeres}}). Defaults to \code{FALSE}.}
@@ -18,7 +26,13 @@ No default.}
 of \code{\link{remove_centromeres}}. Defaults to 50'000 bp.}
 }
 \value{
-A 16x2 R data frame with two columns: chromosome number and average signal.
+A 16x2 R data frame with either two or four columns:
+\enumerate{
+  \item \code{chr} Chromosome number
+  \item \code{mean_coverage} average signal
+  \item \code{mean_sub_coverage} signal minus genome-wide average (chr_signal - genome_signal)
+  \item \code{mean_div_coverage} signal divided by genome-wide average (chr_signal / genome_signal)
+}
 }
 \description{
 This function allows you to calculate the average signal (or coverage) per chromosome.
