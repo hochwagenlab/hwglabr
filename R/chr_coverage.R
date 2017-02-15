@@ -4,16 +4,17 @@
 #' @param wiggleData As a list of the 16 chr wiggle data (output of \code{\link{readall_tab}}).
 #' No default.
 #' @param meanNorm Boolean indicating whether to normalize by average genome-wide
-#' signal. This adds two columns to output: mean-subtracted signal and mean-divided
-#' signal. Defaults to \code{FALSE}.
-#' @param orderChrs Boolean indicating whether to order rows by chromosome length.
+#' signal (calculated using function \code{\link{genome_average}}). This adds two
+#' columns to output: mean-subtracted signal and mean-divided signal.
 #' Defaults to \code{FALSE}.
+#' @param orderChrs Boolean indicating whether to order rows by chromosome length 
+#' (using function \code{\link{order_chromosomes}}). Defaults to \code{FALSE}.
 #' @param removeCen Boolean indicating whether to remove regions around centromeres
 #' (using function \code{\link{remove_centromeres}}). Defaults to \code{FALSE}.
 #' @param cenRegionSize Number indicating the size (in bp) of the region to remove
 #' (centered on the centromere of each chromosome). Corresponds to argument \code{regionSize}
 #' of \code{\link{remove_centromeres}}. Defaults to 50'000 bp.
-#' @return A 16x2 R data frame with either two or four columns:
+#' @return A 16x2 or 16x4 (if \code{meanNorm=TRUE}) R data frame:
 #' \enumerate{
 #'   \item \code{chr} Chromosome number
 #'   \item \code{mean_coverage} average signal

@@ -12,11 +12,12 @@ chr_coverage(wiggleData, meanNorm = FALSE, orderChrs = FALSE,
 No default.}
 
 \item{meanNorm}{Boolean indicating whether to normalize by average genome-wide
-signal. This adds two columns to output: mean-subtracted signal and mean-divided
-signal. Defaults to \code{FALSE}.}
-
-\item{orderChrs}{Boolean indicating whether to order rows by chromosome length.
+signal (calculated using function \code{\link{genome_average}}). This adds two
+columns to output: mean-subtracted signal and mean-divided signal.
 Defaults to \code{FALSE}.}
+
+\item{orderChrs}{Boolean indicating whether to order rows by chromosome length 
+(using function \code{\link{order_chromosomes}}). Defaults to \code{FALSE}.}
 
 \item{removeCen}{Boolean indicating whether to remove regions around centromeres
 (using function \code{\link{remove_centromeres}}). Defaults to \code{FALSE}.}
@@ -26,7 +27,7 @@ Defaults to \code{FALSE}.}
 of \code{\link{remove_centromeres}}. Defaults to 50'000 bp.}
 }
 \value{
-A 16x2 R data frame with either two or four columns:
+A 16x2 or 16x4 (if \code{meanNorm=TRUE}) R data frame:
 \enumerate{
   \item \code{chr} Chromosome number
   \item \code{mean_coverage} average signal
