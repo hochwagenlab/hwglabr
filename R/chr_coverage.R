@@ -20,11 +20,14 @@
 chr_coverage <- function(wiggleData, removeCen = FALSE, cenRegionSize = 50000) {
   coverageTable <- as.data.frame(matrix(0, nrow = length(wiggleData), ncol = 2))
   
-  # Check reference genome 
-  chrom_S288C <- c("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
-                   "XI", "XII", "XIII", "XIV", "XV", "XVI")
-  chrom_SK1 <- c('01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
-                 '11', '12', '13', '14', '15', '16')
+  # Make sure the input is a list with 16 elements
+  if (!is.list(inputData) | length(inputData) != 16) {
+    stop("Wrong input data - not a list with 16 elements.\n",
+         "Please provide a list of 16 data frames, one for each of the 16 chromosomes",
+         "(the output of readall_tab).", call. = FALSE)
+  }
+  
+  # Check reference genome
   check_S288C <- any(grep('chrI.', names(wiggleData), fixed = TRUE))
   check_SK1 <- any(grep('chr01.', names(wiggleData), fixed = TRUE))
   
