@@ -26,14 +26,14 @@ remove_centromeres <- function(wiggleData, regionSize = 50000) {
   check_SK1 <- any(grep('chr01.', names(wiggleData), fixed = TRUE))
   
   if (check_S288C) {
-    message('Ref. genome - S288C\n(Chrs numbered using roman numerals)\n')
+    message('Ref. genome - S288C\n(Chrs numbered using roman numerals)')
     chrom <- chrom_S288C    
   } else if (check_SK1) {
-    message('Ref. genome - SK1\n(Chrs numbered using arabic numerals)\n')
+    message('Ref. genome - SK1\n(Chrs numbered using arabic numerals)')
     chrom <- chrom_SK1
   } else stop('Did not recognize reference genome.')
   
-  message('\nGetting centromeric locations...')
+  message('Getting centromeric locations...')
   #----------------------------------------------------------------------------#
   # All data loaded below is internal to the package
   # Generated using script 'data-raw/data_internal.R'; stored in 'R/sysdata.rda'
@@ -45,7 +45,7 @@ remove_centromeres <- function(wiggleData, regionSize = 50000) {
     Cen <- S288Ccen
   }
   
-  message('\nRemoving centromeric regions... \n')
+  message('Removing centromeric regions...')
   # Remove centromeric region data
   for (i in 1:length(wiggleData)) {
     chrNum <- paste0('chr', chrom[i], '.')
