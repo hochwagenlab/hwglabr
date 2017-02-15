@@ -17,7 +17,7 @@ genome_average <- function(inputData) {
     stop("Wrong input data - not a list with 16 elements.\n",
          "Please provide a list of 16 data frames, one for each of the 16 chromosomes",
          "(the output of readall_tab).", call. = FALSE)
-    }
+  }
   
   if (!requireNamespace("dplyr", quietly = TRUE)) {
     stop("R package 'dplyr' needed for this function to work. Please install it.\n",
