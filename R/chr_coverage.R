@@ -77,7 +77,6 @@ chr_coverage <- function(wiggleData, meanNorm=FALSE, orderChrs=FALSE,
       coverageTable[i, 3] <- coverageTable[i, 2] - gen_avrg
       coverageTable[i, 4] <- coverageTable[i, 2] / gen_avrg
     }
-    
   }
   
   if (meanNorm) {
