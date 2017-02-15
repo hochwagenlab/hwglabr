@@ -27,10 +27,12 @@ Defaults to \code{FALSE}.}
 of \code{\link{remove_centromeres}}. Defaults to 50'000 bp.}
 }
 \value{
-A 16x2 or 16x4 (if \code{meanNorm=TRUE}) R data frame:
+A 16x2 or 16x4 R data frame:
 \enumerate{
   \item \code{chr} Chromosome number
   \item \code{mean_coverage} average signal
+  
+  If \code{meanNorm=TRUE} the folowing two columns are added:
   \item \code{mean_sub_coverage} signal minus genome-wide average (chr_signal - genome_signal)
   \item \code{mean_div_coverage} signal divided by genome-wide average (chr_signal / genome_signal)
 }
