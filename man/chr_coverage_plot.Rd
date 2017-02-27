@@ -4,8 +4,8 @@
 \alias{chr_coverage_plot}
 \title{Average chromosome signal (coverage) dot plot}
 \usage{
-chr_coverage_plot(coverageDataA, coverageDataB, genome, meanNorm = TRUE, yMax,
-  onScreen = TRUE, fileName, colorA = "grey50", colorB = "green")
+chr_coverage_plot(coverageDataA, coverageDataB, genome, meanNorm = FALSE,
+  yMax, onScreen = TRUE, fileName, colorA = "grey50", colorB = "green")
 }
 \arguments{
 \item{coverageDataA}{A 16x2 data frame of coverage: chromosome and average signal. No default.}
@@ -14,9 +14,9 @@ chr_coverage_plot(coverageDataA, coverageDataB, genome, meanNorm = TRUE, yMax,
 
 \item{genome}{A string representing the genome used for mapping. No default.}
 
-\item{meanNorm}{Boolean indicating whether average coverage should be plotted as is
-(\code{meanNorm = FALSE}) or normalized to genome-wide averages (\code{meanNorm = TRUE}).
-Defaults to TRUE.}
+\item{meanNorm}{Boolean indicating whether input data are normalized to genome-wide
+averages (\code{meanNorm = TRUE}). If so, a line is added at \code{y = 1}.
+Defaults to FALSE.}
 
 \item{yMax}{Optional number to be used as the max Y scale value in the plots. No default.}
 
@@ -40,10 +40,9 @@ It takes as input the output of \code{\link{chr_coverage}} (16x2 R data frame).
 }
 \examples{
 \dontrun{
-chr_coverage_plot(WT, rec8, genome = 'SK1', meanNorm = TRUE,
-                  onScreen = TRUE, colorB = 'red')
+chr_coverage_plot(WT, rec8, genome = 'SK1', onScreen = TRUE, colorB = 'red')
 
-chr_coverage_plot(WT, dot1, genome = 'S288C', meanNorm = FALSE,
+chr_coverage_plot(WT, dot1, genome = 'S288C', meanNorm = TRUE,
                   onScreen = FALSE, fileName='chr_coverage_WT_and_dot1.pdf')
 }
 }
