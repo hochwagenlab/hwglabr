@@ -119,10 +119,11 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
   #----------------------------------------------------------------------------#
   # Chr size bias
   message('... Chromosome size bias:')
-  suppressMessages(output <- hwglabr::chr_coverage(wiggleData))
+  suppressMessages(output <- hwglabr::chr_coverage(wiggleData, meanNorm = T))
 
   suppressMessages(
-    hwglabr::chr_coverage_plot(output, genome = refGenome, onScreen = FALSE,
+    hwglabr::chr_coverage_plot(output, genome = refGenome, meanNorm = TRUE,
+                               onScreen = FALSE,
                                fileName = paste0(destination, output_dir, '/',
                                                  output_dir, '_chrSizeBias.pdf'))
   )
