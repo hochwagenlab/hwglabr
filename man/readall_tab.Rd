@@ -5,7 +5,7 @@
 \title{Load wiggle data}
 \usage{
 readall_tab(fileLocation, useReadr = TRUE, progressBar = TRUE,
-  localCopy = FALSE)
+  localCopy = FALSE, asBedGraph = FALSE)
 }
 \arguments{
 \item{fileLocation}{A string with the path to the folder containing the wiggle data. No default.}
@@ -19,9 +19,13 @@ pbapply). Defaults to \code{TRUE}.}
 \item{localCopy}{Boolean indicating whether to create local copy of target files before reading
 data. If \code{TRUE} a local folder is automatically created and deleted after use. Use this argument
 to avoid reading files directly from shared locations (namely LabShare). Defaults to \code{FALSE}.}
+
+\item{asBedGraph}{Boolean indicating whether to return the data in bedGraph-like format instead of
+R list of 16 data frames. Genomic coordinates are kept as 1-based. Defaults to \code{FALSE}.}
 }
 \value{
-An R list of 16 data frames, one for each chromosome.
+Either an R list of 16 data frames, one for each chromosome (\code{asBedGraph=FALSE})
+or a bedGraph-like data frame (\code{asBedGraph=TRUE}).
 }
 \description{
 This function allows you to load tab-separated wiggle data.
@@ -32,5 +36,6 @@ Adapted from function written by Tovah Markowitz (original function name: \code{
 readall_tab("/Path/to/wiggles/folder/Red1_WT_reps_SacCer3_2mis_MACS_wiggle_norm/")
 readall_tab("/Path/to/wiggles/", useReadr = TRUE, progressBar = TRUE)
 readall_tab("/Path/to/wiggles/", useReadr = T, progressBar = T, localCopy = T)
+#' readall_tab("/Path/to/wiggles/", asBedgraph = TRUE)
 }
 }

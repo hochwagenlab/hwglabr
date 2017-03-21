@@ -10,17 +10,22 @@
 #' @param localCopy Boolean indicating whether to create local copy of target files before reading
 #' data. If \code{TRUE} a local folder is automatically created and deleted after use. Use this argument
 #' to avoid reading files directly from shared locations (namely LabShare). Defaults to \code{FALSE}.
-#' @return An R list of 16 data frames, one for each chromosome.
+#' @param asBedGraph Boolean indicating whether to return the data in bedGraph-like format instead of
+#' R list of 16 data frames. Genomic coordinates are kept as 1-based. Defaults to \code{FALSE}.
+#' @return Either an R list of 16 data frames, one for each chromosome (\code{asBedGraph=FALSE})
+#' or a bedGraph-like data frame (\code{asBedGraph=TRUE}).
 #' @examples
 #' \dontrun{
 #' readall_tab("/Path/to/wiggles/folder/Red1_WT_reps_SacCer3_2mis_MACS_wiggle_norm/")
 #' readall_tab("/Path/to/wiggles/", useReadr = TRUE, progressBar = TRUE)
 #' readall_tab("/Path/to/wiggles/", useReadr = T, progressBar = T, localCopy = T)
+#' #' readall_tab("/Path/to/wiggles/", asBedgraph = TRUE)
 #' }
 #' @export
 
 readall_tab <- function(fileLocation, useReadr = TRUE,
-                        progressBar = TRUE, localCopy = FALSE) {
+                        progressBar = TRUE, localCopy = FALSE,
+                        asBedGraph = FALSE) {
   ptm <- proc.time()
   
   # Check that path to files is correct
@@ -106,6 +111,51 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
   }
   else stop("Did not recognize reference genome.")
   
-  message("\n...\nCompleted in ", round((proc.time()[3] - ptm[3]), 1), " sec.")
+  # Convert to bedGraph-like format
+  message('Converting to bedGraph-like...')
+  if(asBedGraph){
+    get_chr <- function(list_element_name, regex="chr[IXV]*"){
+      index <- gregexpr(regex, list_element_name)[[1]]
+      length <- attributes(index)$match.length - 1
+      return(substr(list_element_name, index[1], index + length))
+    }
+    
+    if (check_S288C) {
+      regex <- "chr[IXV]*"
+    }
+    else if (check_SK1) {
+      regex <- "chr[[:digit:]]*"
+    }
+    
+    for(i in 1:length(alldata)){
+      alldata[[i]] <- data.frame(get_chr(names(alldata)[i], regex=regex),
+                                 alldata[[i]][, 1], alldata[[i]][, 1] + 1,
+                                 alldata[[i]][, 2], row.names = NULL)
+    }
+    
+    # Collapse to df (use data.table package if available)
+    if(!requireNamespace("data.table", quietly = TRUE)){
+      message("...")
+      message("Note:")
+      message("Install package 'data.table' to significantly decrease this function's runtime.")
+      message("...")
+      alldata <- do.call('rbind', alldata)
+    } else alldata <- data.table::rbindlist(alldata)
+  }
+  
+  colnames(alldata) <- c('chr', 'start', 'end', 'score')
+  
+  elapsed_time <- proc.time()[3] - ptm[3]
+  
+  # Convert to appropriate unit
+  if (elapsed_time < 60) {
+    elapsed_time <- paste0(round(elapsed_time, 1), " sec.")
+  } else if (elapsed_time >= 60 & elapsed_time < 3600) {
+    elapsed_time <- paste0(round(elapsed_time / 60, 1), " min.")
+  } else {
+    elapsed_time <- paste0(round(elapsed_time / 60 / 60, 1), " h.")
+  }
+  
+  message("\n...\nCompleted in ", elapsed_time)
   return(alldata)
 }
