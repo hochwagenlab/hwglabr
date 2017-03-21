@@ -140,7 +140,7 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
       message("Install package 'data.table' to significantly decrease this function's runtime.")
       message("...")
       alldata <- do.call('rbind', alldata)
-    } else alldata <- data.table::rbindlist(alldata)
+    } else alldata <- as.data.frame(data.table::rbindlist(alldata))
   }
   
   colnames(alldata) <- c('chr', 'start', 'end', 'score')
