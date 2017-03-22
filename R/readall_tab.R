@@ -112,8 +112,9 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
   else stop("Did not recognize reference genome.")
   
   # Convert to bedGraph-like format
-  message('Converting to bedGraph-like...')
   if(asBedGraph){
+    message('Converting to bedGraph-like...')
+    
     get_chr <- function(list_element_name, regex="chr[IXV]*"){
       index <- gregexpr(regex, list_element_name)[[1]]
       length <- attributes(index)$match.length - 1
@@ -141,9 +142,9 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
       message("...")
       alldata <- do.call('rbind', alldata)
     } else alldata <- as.data.frame(data.table::rbindlist(alldata))
+    
+    colnames(alldata) <- c('chr', 'start', 'end', 'score')
   }
-  
-  colnames(alldata) <- c('chr', 'start', 'end', 'score')
   
   elapsed_time <- proc.time()[3] - ptm[3]
   
@@ -153,7 +154,7 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
   } else if (elapsed_time >= 60 & elapsed_time < 3600) {
     elapsed_time <- paste0(round(elapsed_time / 60, 1), " min.")
   } else {
-    elapsed_time <- paste0(round(elapsed_time / 60 / 60, 1), " h.")
+    elapsed_time <- paste0(round(elapsed_time / 60 / 60, 1), " hrs.")
   }
   
   message("\n...\nCompleted in ", elapsed_time)
