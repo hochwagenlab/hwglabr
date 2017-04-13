@@ -5,7 +5,7 @@
 \title{Batch run of \code{\link{opening_act}} function}
 \usage{
 opening_act_batch_run(inputDataFile, useReadr = TRUE, runMetaORF = TRUE,
-  userInput = TRUE)
+  userInput = FALSE)
 }
 \arguments{
 \item{inputDataFile}{String indicating path to file containing instructions.
@@ -32,7 +32,7 @@ typically takes about 30 minutes to run, so it may be useful to exclude it. Used
 argument to \code{\link{opening_act}} of the same name. Defaults to \code{TRUE}.}
 
 \item{userInput}{Boolean indicating whether to ask user to check the format of the
-provided labels. Defaults to \code{TRUE}.}
+provided labels. Defaults to \code{FALSE}.}
 }
 \value{
 The output of \code{\link{opening_act}} for each of the data sets included in the

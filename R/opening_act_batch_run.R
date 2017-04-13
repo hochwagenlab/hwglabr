@@ -26,7 +26,7 @@
 #' @return The output of \code{\link{opening_act}} for each of the data sets included in the
 #' batch. Check the documentation of \code{\link{opening_act}} for more detail.
 #' @param userInput Boolean indicating whether to ask user to check the format of the
-#' provided labels. Defaults to \code{TRUE}.
+#' provided labels. Defaults to \code{FALSE}.
 #' @examples
 #' \dontrun{
 #' opening_act_batch_run(inputDataFile="~/Desktop/inputs.csv")
@@ -36,7 +36,7 @@
 #' @export
 
 opening_act_batch_run <- function(inputDataFile, useReadr = TRUE, runMetaORF = TRUE,
-                                  userInput = TRUE){
+                                  userInput = FALSE){
   ptm <- proc.time()
   
   # Have users check the arguments file for mistakes:
