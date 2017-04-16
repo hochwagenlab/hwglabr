@@ -15,8 +15,8 @@
 #' details).\cr
 #' \cr
 #' \strong{Running without replicates:} This function allows you to run the analysis on
-#' experiments without replicate libraries. While the calculation of CPM and TPM
-#' has no requirement for replicates, you should obviously avoid doing DE analysis
+#' experiments without biological replicate libraries. While the calculation of CPM and
+#' TPM has no requirement for replicates, you should obviously avoid doing DE analysis
 #' in the absence of replicates. The statistical model used by
 #' \href{https://bioconductor.org/packages/release/bioc/html/edgeR.html}{edgeR}
 #' to perform DE analysis relies on biological replicates to estimate biological
@@ -50,10 +50,14 @@
 #'   for intersample feature expression comparison (not feature length-normalized).
 #'   \item \strong{TPM:} Compositional bias and feature length-normalized \strong{T}ranscripts
 #'   \strong{P}er \strong{M}illion. Useful for within-sample feature expression comparison.
-#'   \item \strong{DE:} A \strong{D}ifferential \strong{E}xpression table for each
-#'   requested pair of samples (output of edgeR's \code{\link[edgeR]{exactTest}} function),
-#'   including log2 fold change (\code{logFC}), average log2 counts per million
-#'   (\code{logCPM}), and two-sided p-value (\code{PValue}).
+#'   \item \strong{DE:} A \strong{D}ifferential \strong{E}xpression table comparing the first sample
+#'   to all others. Includes log2 fold change (\code{logFC}), average log2 counts per million
+#'   (\code{logCPM}), two-sided p-value (\code{PValue}) and false discovery rate (\code{FDR}).\cr
+#'   \cr\strong{Note:} Fold change differences (\code{logFC}) between samples not directly ompared
+#'   in the table can be obtained by subtracting their reported \code{logFC} (to the first sample).
+#'   For example, if the first sample is \code{sample1} and we want the \code{logFC} between
+#'   \code{sample2} and \code{sample3}, simply calculate the difference:\cr
+#'   \cr\code{logFC.sample3_vs_sample2} = \code{logFC.sample3} - \code{logFC.sample2}
 #' }
 #' A \strong{M}ulti-\strong{D}imensional \strong{S}caling plot of all samples is also
 #' saved in the output directory as a .pdf file.
