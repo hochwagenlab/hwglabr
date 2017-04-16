@@ -4,8 +4,8 @@
 \alias{rna_seq_analysis}
 \title{Wrapper function to run edgeR analysis of summarized reads from RNA-seq experiment}
 \usage{
-rna_seq_analysis(pathToFiles, sampleNames, conditionNames, pairwiseDE,
-  outputFilePrefix)
+rna_seq_analysis(pathToFiles, sampleNames, conditionNames, batchNames = NULL,
+  pairwiseDE = FALSE, outputFilePrefix)
 }
 \arguments{
 \item{pathToFiles}{A list of strings corresponding to the full path to the featureCounts
@@ -18,9 +18,12 @@ in the experiment in the same order as the files in \code{pathToFiles}. No defau
 for each sample/library. Will be the input to edgeR's \code{\link[edgeR]{DGEList}}
 constructor function and will define replicate groups, if any. No default.}
 
-\item{pairwiseDE}{Optional list of two-element string vectors corresponding to
-the names of pairs of samples to test differential expression (DE) for. Must
-match strings in \code{conditionNames}. No default.}
+\item{batchNames}{Optional list of strings corresponding to the experimental batch for each
+sample/library. Will be part of the design matrix for differential expression testing and
+will define batch groups, if any. Defaults to \code{NULL} (all samples come from the same batch).}
+
+\item{pairwiseDE}{Logical indicating whether to test differential expression (DE).
+Defaults to \code{FALSE}.}
 
 \item{outputFilePrefix}{Optional string to be added as prefix to output file names.
 No default.}
@@ -78,21 +81,19 @@ rna_seq_analysis(pathToFiles = list('AH119-2h_featureCounts.txt', 'AH119-3h_feat
                                     'AH8104-2h_featureCounts.txt', 'AH8104-3h_featureCounts.txt'),
                  sampleNames = list('AH119_2h', 'AH119_3h', 'AH8104_2h', 'AH8104_3h'),
                  conditionNames = list('WT_2h', 'WT_3h', 'dot1_2h', 'dot1_3h'),
-                 pairwiseDE = list(c('WT_2h', 'dot1_2h'), c('WT_3h', 'dot1_3h'),
-                                   c('WT_2h', 'dot1_2h'), c('WT_3h', 'dot1_3h'),
-                                   c('WT_2h', 'WT_3h'), c('dot1_2h', 'dot1_3h')),
                  outputFilePrefix = 'dot1_noReplicates')
 
- rna_seq_analysis(pathToFiles = list('AH119-2h_featureCounts.txt', 'AH119-3h_featureCounts.txt',
+rna_seq_analysis(pathToFiles = list('AH119-2h_featureCounts.txt', 'AH119-3h_featureCounts.txt',
                                     'AH8104-2h_featureCounts.txt', 'AH8104-3h_featureCounts.txt'),
                  sampleNames = list('AH119_2h', 'AH119_3h', 'AH8104_2h', 'AH8104_3h'),
                  conditionNames = list('WT_2h', 'WT_3h', 'dot1_2h', 'dot1_3h'),
-                 outputFilePrefix = 'dot1_noReplicates')
+                 pairwiseDE = TRUE, outputFilePrefix = 'dot1_noReplicates')
 
 rna_seq_analysis(pathToFiles = list('AH119-A_featureCounts.txt', 'AH119-B_featureCounts.txt',
                                     'AH8104-A_featureCounts.txt', 'AH8104-B_featureCounts.txt'),
                  sampleNames = list('AH119_A', 'AH119_B', 'AH8104_A', 'AH8104_B'),
                  conditionNames = list('WT', 'WT', 'dot1', 'dot1'),
-                 pairwiseDE = list(c('WT', 'dot1')))
+                 batchNames = list('batch1', 'batch1', 'batch2', 'batch2')
+                 pairwiseDE = TRUE)
 }
 }

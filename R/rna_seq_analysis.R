@@ -35,9 +35,11 @@
 #' @param conditionNames A list of strings corresponding to the experimental groups/conditions
 #' for each sample/library. Will be the input to edgeR's \code{\link[edgeR]{DGEList}}
 #' constructor function and will define replicate groups, if any. No default.
-#' @param pairwiseDE Optional list of two-element string vectors corresponding to
-#' the names of pairs of samples to test differential expression (DE) for. Must
-#' match strings in \code{conditionNames}. No default.
+#' @param batchNames Optional list of strings corresponding to the experimental batch for each
+#' sample/library. Will be part of the design matrix for differential expression testing and
+#' will define batch groups, if any. Defaults to \code{NULL} (all samples come from the same batch).
+#' @param pairwiseDE Logical indicating whether to test differential expression (DE).
+#' Defaults to \code{FALSE}.
 #' @param outputFilePrefix Optional string to be added as prefix to output file names.
 #' No default.
 #' @return The output includes several tables saved as .csv files in a directory
@@ -61,27 +63,25 @@
 #'                                     'AH8104-2h_featureCounts.txt', 'AH8104-3h_featureCounts.txt'),
 #'                  sampleNames = list('AH119_2h', 'AH119_3h', 'AH8104_2h', 'AH8104_3h'),
 #'                  conditionNames = list('WT_2h', 'WT_3h', 'dot1_2h', 'dot1_3h'),
-#'                  pairwiseDE = list(c('WT_2h', 'dot1_2h'), c('WT_3h', 'dot1_3h'),
-#'                                    c('WT_2h', 'dot1_2h'), c('WT_3h', 'dot1_3h'),
-#'                                    c('WT_2h', 'WT_3h'), c('dot1_2h', 'dot1_3h')),
 #'                  outputFilePrefix = 'dot1_noReplicates')
 #'
-#'  rna_seq_analysis(pathToFiles = list('AH119-2h_featureCounts.txt', 'AH119-3h_featureCounts.txt',
+#' rna_seq_analysis(pathToFiles = list('AH119-2h_featureCounts.txt', 'AH119-3h_featureCounts.txt',
 #'                                     'AH8104-2h_featureCounts.txt', 'AH8104-3h_featureCounts.txt'),
 #'                  sampleNames = list('AH119_2h', 'AH119_3h', 'AH8104_2h', 'AH8104_3h'),
 #'                  conditionNames = list('WT_2h', 'WT_3h', 'dot1_2h', 'dot1_3h'),
-#'                  outputFilePrefix = 'dot1_noReplicates')
+#'                  pairwiseDE = TRUE, outputFilePrefix = 'dot1_noReplicates')
 #'
 #' rna_seq_analysis(pathToFiles = list('AH119-A_featureCounts.txt', 'AH119-B_featureCounts.txt',
 #'                                     'AH8104-A_featureCounts.txt', 'AH8104-B_featureCounts.txt'),
 #'                  sampleNames = list('AH119_A', 'AH119_B', 'AH8104_A', 'AH8104_B'),
 #'                  conditionNames = list('WT', 'WT', 'dot1', 'dot1'),
-#'                  pairwiseDE = list(c('WT', 'dot1')))
+#'                  batchNames = list('batch1', 'batch1', 'batch2', 'batch2')
+#'                  pairwiseDE = TRUE)
 #' }
 #' @export
 
-rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
-                             pairwiseDE, outputFilePrefix){
+rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames, batchNames = NULL,
+                             pairwiseDE = FALSE, outputFilePrefix){
   ptm  <- proc.time()
   
   #----------------------------------------------------------------------------#
@@ -94,12 +94,6 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   if (!all(unlist(lapply(pathToFiles, file.exists)), na.rm = FALSE)) {
     stop('ERROR: Could not open one or more featureCount files.',
          'Please check the provided paths to the files.', call. = FALSE)
-  }
-  
-  if (!missing(pairwiseDE)) {
-    if (!all(unlist(lapply(pairwiseDE, is.element, conditionNames)), na.rm = FALSE)) {
-      stop('ERROR: strings for "pairwiseDE" must match "conditionNames".', call. = FALSE)
-    }
   }
   
   # Check for dplyr and edgeR (and load edgeR)
@@ -117,7 +111,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   
   # Create directory in current working directory to save output
   dir.create('RNA-seq_analysis')
-  message('Created output directory "RNA-seq_analysis"\n')
+  message('Created output directory "RNA-seq_analysis"')
   
   #----------------------------------------------------------------------------#
   #----------------------- Generate DGEList object ----------------------------#
@@ -135,7 +129,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
                       group = unlist(conditionNames),
                       genes = data.frame(Gene = counts$Geneid,
                                          Length = counts$Length))
-  message('Created DGEList object:\n')
+  message('Created DGEList object:')
   print(y$samples[, 1:2])
   
   #----------------------------------------------------------------------------#
@@ -143,20 +137,34 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   # Filter out genes with low counts (low or no expression) based on CPMs,
   # in order to account for differences in library depth
   # Use a low threshold (cpm of 0.5)
-  message('Filtering out features with counts below threshold (cpm < 0.5):\n')
+  message('Filtering out features with counts below threshold (cpm < 0.5):')
   # If there are no replicates, keep all genes expressed in at least one sample
   # If there are replicates, keep all genes expressed in at least two samples
-  if(length(unique(conditionNames)) == length(unique(sampleNames))){
-    keep <- rowSums(edgeR::cpm(y) > 0.5) >= 1
-    y_filt <- y[keep, , keep.lib.sizes = FALSE]
-  } else {
-    keep <- rowSums(edgeR::cpm(y) > 0.5) >= 2
-    y_filt <- y[keep, , keep.lib.sizes = FALSE]
+  # The code to filter rows in the edgeR manual no longer seems to work;
+  # try it and fallback on an alternative in case it doesn't work
+  try(
+    if(length(unique(conditionNames)) == length(unique(sampleNames))){
+      keep <- rowSums(edgeR::cpm(y) > 0.5) >= 1
+      y_filt <- y[keep, , keep.lib.sizes = FALSE]
+    } else {
+      keep <- rowSums(edgeR::cpm(y) > 0.5) >= 2
+      y_filt <- y[keep, , keep.lib.sizes = FALSE]
+    },
+  silent = T)
+ 
+  if(!exists('y_filt')){
+    y_filt <- y
+    y_filt$counts <- y$counts[keep, ]
+    y_filt$genes <- y$genes[keep, ]
   }
   
-  message(nrow(y_filt$counts), 'features kept of an original total of', nrow(y$counts))
+  # Calculate updated lib sizes (differences should be minimal):
+  y_filt$samples$lib.size <- colSums(y_filt$counts)
+   
+  message(nrow(y_filt$counts), ' features kept of an original total of ',
+          nrow(y$counts))
   dropped <- round((nrow(y$counts) - nrow(y_filt$counts)) / nrow(y$counts) * 100, 1)
-  message(' (', dropped, '% filtered out).\n', sep = '')
+  message(' (', dropped, '% filtered out)')
   
   # Calculate normalization factors to scale the raw library sizes
   y_filt <- edgeR::calcNormFactors(y_filt)
@@ -171,7 +179,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   }
   limma::plotMDS(y_filt)
   dev.off()
-  message('Plotted multi-dimensional scaling (MDS) and saved to .pdf file.\n')
+  message('Plotted multi-dimensional scaling (MDS) and saved to .pdf file.')
   
   # Calculate CPM and write to file
   cpm_edgeR <- edgeR::cpm(y_filt)
@@ -184,7 +192,7 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
     write.csv(cpm_edgeR, paste0("RNA-seq_analysis/", outputFilePrefix, "_edgeR_cpm.csv"),
               row.names = T)
   }
-  message('Calculated CPM and saved to file.\n')
+  message('Calculated CPM and saved to file.')
   
   # Calculate TPM
   # Write tpm function
@@ -198,7 +206,6 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   
   tpm <- calcTPM(y_filt, gene.length = y_filt$genes$Length)
   
-  
   ### Write TPMs to file
   # Prep table
   rownames(tpm) <- y_filt$genes$Gene
@@ -209,41 +216,77 @@ rna_seq_analysis <- function(pathToFiles, sampleNames, conditionNames,
   } else {
     write.csv(tpm, paste0("RNA-seq_analysis/", outputFilePrefix, "_tpm.csv"), row.names = T)
   }
-  message('Calculated TPM and saved to file.\n')
+  message('Calculated TPM and saved to file.')
   
   #----------------------------------------------------------------------------#
   #----------------------------- DE analysis ----------------------------------#
   # Run if not missing
-  if(!missing(pairwiseDE)){
-    if(length(unique(conditionNames)) == length(unique(sampleNames))){
-      message('\nPerforming DE analysis (without replicates!):\n')
-      bcv <- 0.1
-    } else {
-      message('\nPerforming DE analysis with replicates:\n')
-      y_filt <- edgeR::estimateDisp(y_filt)
-    }
+  if(pairwiseDE){
+    de <- de_analysis(DGEListObject=y_filt, sampleNames, conditionNames,
+                      batchNames, outputFilePrefix)
     
-    for(i in 1:length(pairwiseDE)){
-      if(length(unique(conditionNames)) == length(unique(sampleNames))){
-        et <- edgeR::exactTest(y_filt, pair = pairwiseDE[[i]], dispersion = bcv^2)
-      } else {
-        et <- edgeR::exactTest(y_filt, pair = pairwiseDE[[i]])
-      }
-      rownames(et$table) <- y_filt$genes$Gene
-
-      if(missing(outputFilePrefix)){
-        write.csv(et$table, paste0("RNA-seq_analysis/DE_", et$comparison[1], "-",
-                                   et$comparison[2], ".csv"), row.names = T)
-      } else {
-        write.csv(et$table, paste0("RNA-seq_analysis/", outputFilePrefix, "_DE_",
-                                   et$comparison[1], "-", et$comparison[2], ".csv"),
-                  row.names = T)
-      }
-      message(et$comparison[1], "vs", et$comparison[2],
-          "saved to file.\n")
+    if(missing(outputFilePrefix)){
+      write.csv(de$table, paste0("RNA-seq_analysis/", "de.csv"), row.names = T)
+    } else {
+      write.csv(de$table, paste0("RNA-seq_analysis/", outputFilePrefix, "_de.csv"),
+                row.names = T)
     }
+    message('Calculated DE and saved to file.')
   }
   
-  message("... ... ...\n(Output files are in directory \"RNA-seq_analysis\").\n")
-  message("Completed in", round((proc.time()[3] - ptm[3]), 1), "sec.")
+  message("... ... ...")
+  message("(Output files are in directory \"RNA-seq_analysis\").")
+  message("Completed in ", round((proc.time()[3] - ptm[3]), 1), "sec.")
+}
+
+
+
+### Helper function to perform differential expression analyses
+# Note: The experimental design is parametrized with a one-way layout.
+# Must not be used if this is not appropriate for the analyzed experiment
+de_analysis <- function(DGEListObject, sampleNames, conditionNames,
+                        batchNames, outputFilePrefix){
+  message('Running DE analyses:')
+  # Design matrix
+  group <- factor(unlist(conditionNames))
+  if(!is.null(batchNames)){
+    batch <- factor(unlist(batchNames))
+    design <- model.matrix(~batch+group)
+    colnames(design)[2:ncol(design)] <- c(tail(levels(batch), -1),
+                                          tail(levels(group), -1))
+  } else {
+    design <- model.matrix(~group)
+    colnames(design)[2:ncol(design)] <- tail(levels(group), -1)
+  }
+  
+  ### Test DE:
+  # While the likelihood ratio test is a more obvious choice for inferences with
+  # GLMs, the QL F-test is preferred as it provides more robust and reliable
+  # error rate control when the number of replicates is small.
+  # glmQLFit() can only be used when there are replicates, however.
+  # In the absence of replicates, use glmFit() followed by glmLRT() (using the
+  # typical value for BCV - square root-dispersion).
+  
+  # Estimate dispersion and fit model
+  if(length(unique(conditionNames)) == length(unique(sampleNames))){
+    message('Performing DE analysis (without replicates!)')
+    bcv <- 0.1
+    fit <- edgeR::glmFit(DGEListObject, design, dispersion = bcv^2)
+    
+    startCondition <- ifelse(!is.null(batchNames),
+                             length(levels(batch)) + 1, 2)
+    de_test <- edgeR::glmLRT(fit, coef=startCondition:ncol(design))
+  } else {
+    message('\nPerforming DE analysis with replicates:\n')
+    y_filt <- edgeR::estimateDisp(DGEListObject, design, robust=TRUE)
+    message('Estimated common dispersion: ', y_filt$common.dispersion)
+    fit <- edgeR::glmQLFit(y_filt, design)
+    startCondition <- ifelse(!is.null(batchNames),
+                             length(levels(batch)) + 1, 2)
+    de_test <- edgeR::glmQLFTest(fit, coef=startCondition:ncol(design))
+  }
+  
+  # Get all genes (n=Inf)
+  de_test <- edgeR::topTags(de_test, n=Inf)
+  return(de_test)
 }
