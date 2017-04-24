@@ -235,7 +235,7 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
     wiggleDataGenomeAvg <- sum(sums)/sum(counts)
     
     # Subtract genome average signal from each datapoint to normalize to genome average
-    data$mean_signal <- data$mean_signal - wiggleDataGenomeAvg
+    data$mean_signal <- data$mean_signal / wiggleDataGenomeAvg
     
     # Smooth data over 25kb regions?
     data <- ksmooth(data$distance_to_telomere, data$mean_signal, bandwidth = 25000)
@@ -249,8 +249,9 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
     plot(averageSubtelomericSignal$distance_from_telomere / 1000,
          averageSubtelomericSignal$signal, type="l", lwd=2, col='plum4',
          xlab="Distance from telomeres (Kb)", ylab = "Average Enrichment",
-         main=paste0("Signal at sub-telomeric regions: ", refGenome), cex.main=1)
-    abline(h = 0, lty=3, lwd=1.5)
+         main=paste0("Signal at sub-telomeric regions: ", refGenome, "\n(mean-normalized)"),
+         cex.main=1)
+    abline(h = 1, lty=3, lwd=1.5)
     dev.off()
     message('    Saved plot ', paste0(output_dir, '_signalAtTelomeres.pdf'))
   } else {
