@@ -70,6 +70,8 @@ SK1cen <- data.frame("Chromosome" = c("chr01","chr02","chr03","chr04","chr05",
                                   687260, 1008248, 908607, 812465, 1054033,
                                   921188))
 
+SK1cen$Chromosome <- as.character(SK1cen$Chromosome)
+
 # S288C
 path <- '/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/GenomeSequences/'
 S288C_gff <- read.table(paste0(path, 'saccharomyces_cerevisiae_R64-1-1_20110208.gff'),
@@ -134,7 +136,7 @@ Red1_summits <- read.table(file)
 # Determine the best compression for the data files
 tools::checkRdaFiles('R/')  # Suggests 'bzip2'
 
-setwd('/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/Scripts/Rpackages/hwglabr')
+setwd('/Users/luis/Google_Drive_NYU/LabShare_Luis/LabWork/Code/Rpackages/hwglabr')
 devtools::use_data(S288C_conv_midpoint_dist,
                    S288C_div_midpoint_dist,
                    S288C_tand_midpoint_dist,
