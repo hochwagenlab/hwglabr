@@ -130,7 +130,7 @@ readall_tab <- function(fileLocation, useReadr = TRUE,
     
     for(i in 1:length(alldata)){
       alldata[[i]] <- data.frame(get_chr(names(alldata)[i], regex=regex),
-                                 alldata[[i]][, 1], alldata[[i]][, 1] + 1,
+                                 alldata[[i]][, 1], alldata[[i]][, 1],
                                  alldata[[i]][, 2], row.names = NULL)
     }
     
