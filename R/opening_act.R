@@ -67,6 +67,13 @@ You provided the string "', sampleID, '" as the sampleID. Is this correct?')
     }
   }
   
+  # Make sure the input is a list with 16 elements
+  if (!is.list(wiggleData) | length(wiggleData) != 16) {
+    stop("Wrong input data - not a list with 16 elements.\n",
+         "Please provide a list of 16 data frames, one for each chromosome",
+         "(output of readall_tab).", call. = FALSE)
+  }
+
   # Check which reference genome was used to map seq. data
   check_S288C <- any(grep('chrI.', names(wiggleData), fixed = TRUE))
   check_SK1 <- any(grep('chr01.', names(wiggleData), fixed = TRUE))
