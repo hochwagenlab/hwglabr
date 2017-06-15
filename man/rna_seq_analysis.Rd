@@ -97,7 +97,7 @@ rna_seq_analysis(pathToFiles = list('AH119-A_featureCounts.txt', 'AH119-B_featur
                                     'AH8104-A_featureCounts.txt', 'AH8104-B_featureCounts.txt'),
                  sampleNames = list('AH119_A', 'AH119_B', 'AH8104_A', 'AH8104_B'),
                  conditionNames = list('WT', 'WT', 'dot1', 'dot1'),
-                 batchNames = list('batch1', 'batch1', 'batch2', 'batch2')
+                 batchNames = list('batch1', 'batch2', 'batch1', 'batch2')
                  pairwiseDE = TRUE)
 }
 }
