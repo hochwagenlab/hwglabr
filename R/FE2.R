@@ -4,7 +4,7 @@
 #' It takes as input the raw txt files found in the lab's microarray database
 #' (at 'Labshare/HTGenomics/Microarray_database/arrays') or downloaded from GEO.
 #' @param fileName A string representing the input file name. No default.
-#' @param cy0 A number representing the dye color used for the control sample
+#' @param cy0 A number representing the dye color used for the experiment sample
 #' (\code{3} for cy3 or \code{5} for cy5). No default.
 #' @param strain A string representing the output file name (the sample name,
 #' typically a yeast strain). No default.
