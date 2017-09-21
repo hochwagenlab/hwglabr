@@ -22,7 +22,7 @@ library(hwglabr)
 #### Documentation
 
 Use the package GitHub [repo](https://github.com/hochwagenlab/hwglabr) and the
-[documentation website](http://www.nyu.edu/projects/hochwagen/hwglabr_docs/).
+[documentation website](https://hochwagenlab.github.io/hwglabr/).
 Function documentation is accessible within R in the standard way, by typing one of the following:
 
 ``` r
