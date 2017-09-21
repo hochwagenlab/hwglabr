@@ -12,8 +12,7 @@
 #' each sample is taken as a single condition (no replicates).
 #' The output includes tables of CPM, TPM and, if included, differential expression
 #' (DE) analysis for selected pairs of samples (see "Value" section below for more
-#' details).\cr
-#' \cr
+#' details). \cr \cr
 #' \strong{Running without replicates:} This function allows you to run the analysis on
 #' experiments without biological replicate libraries. While the calculation of CPM and
 #' TPM has no requirement for replicates, you should obviously avoid doing DE analysis
